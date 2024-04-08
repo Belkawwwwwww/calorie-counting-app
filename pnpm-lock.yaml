@@ -26,12 +26,15 @@ dependencies:
   redux:
     specifier: ^5.0.1
     version: 5.0.1
+  redux-persist:
+    specifier: ^6.0.0
+    version: 6.0.0(react@18.2.0)(redux@5.0.1)
   styled-components:
     specifier: ^6.1.8
     version: 6.1.8(react-dom@18.2.0)(react@18.2.0)
   zod:
-    specifier: 3.23.0-canary.20240407T005829
-    version: 3.23.0-canary.20240407T005829
+    specifier: 3.22.4
+    version: 3.22.4
 
 devDependencies:
   '@types/node':
@@ -2142,6 +2145,19 @@ packages:
       loose-envify: 1.4.0
     dev: false
 
+  /redux-persist@6.0.0(react@18.2.0)(redux@5.0.1):
+    resolution: {integrity: sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==}
+    peerDependencies:
+      react: '>=16'
+      redux: '>4.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      redux: 5.0.1
+    dev: false
+
   /redux-thunk@3.1.0(redux@5.0.1):
     resolution: {integrity: sha512-NW2r5T6ksUKXCabzhL9z+h206HQw/NJkcLm1GPImRQ8IzfXwRGqjVhKJGauHirT0DAuyy6hjdnMZaRoAcy0Klw==}
     peerDependencies:
@@ -2695,6 +2711,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /zod@3.23.0-canary.20240407T005829:
-    resolution: {integrity: sha512-IkO8h/5rQ4qL1dg+gQknq6Z2BTSgra0oR5W0tzr3WWymEgRbUvUAuMce+3kIch3puoy8kbrmk9WfKmndBvfNiA==}
+  /zod@3.22.4:
+    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: false
