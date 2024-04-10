@@ -1,0 +1,1 @@
+export {type UserObject , userSlice, userDataSelector} from './model'
