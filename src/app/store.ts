@@ -3,7 +3,8 @@ import {rootReducer} from "@/app/rootReducer";
 
 const setupStore = () => {
     return configureStore({
-        reducer: rootReducer, middleware: (getDefaultMiddleware) => getDefaultMiddleware({})
+        reducer: rootReducer,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware({})
     })
 }
 

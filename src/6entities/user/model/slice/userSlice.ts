@@ -1,8 +1,8 @@
-import {UserObject} from "@/6entities/user/model/type";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+// import {UserObject} from "@/6entities/user/model/type";
+import {createSlice} from "@reduxjs/toolkit";
 
 interface UserState {
-    users: UserObject | null
+    users: any | null
     isLoading: boolean
     error?: string | null;
 }
@@ -17,9 +17,9 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser(state, {payload}: PayloadAction<UserObject | null>) {
-            state.users = payload
-        }
+        // setUser(state, {payload}: PayloadAction<any | null>) {
+        //     state.users = payload
+        // }
     }
 })
 
