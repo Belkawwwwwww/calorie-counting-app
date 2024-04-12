@@ -1,6 +1,4 @@
-// import {messengers} from '@/4widgets/layouts/footer/config/messengers'
-import Link from "next/link";
-import Image from "next/image";
+// import {messengers} from '@/d - widgets/layouts/footer/config/messengers'
 export const Footer =() => {
     return (
         <footer>

@@ -1,6 +1,6 @@
 import {PropsWithChildren} from "react";
-import {Header} from "@/4widgets/layouts";
-import {Footer} from '@/4widgets/layouts'
+import {Header} from "@/d - widgets/layouts";
+import {Footer} from '@/d - widgets/layouts'
 
 export const BaseLayout = ({children}: PropsWithChildren) => {
     return (

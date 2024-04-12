@@ -1,4 +1,4 @@
-// import {UserObject} from "@/6entities/user/model/type";
+// import {UserObject} from "@/f - entities/user/model/type";
 import {createSlice} from "@reduxjs/toolkit";
 
 interface UserState {
