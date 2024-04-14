@@ -1,13 +1,11 @@
+import type {AppProps} from 'next/app'
+import {StoreProvider} from "@/app/providers/store-providers/ui/StoreProvider";
 import './styles/global.scss'
-import {Router} from "@/app/router";
-import {Providers} from "@/app/providers/providers";
 
-function App() {
+export default function App({ Component, pageProps }: AppProps) {
     return (
-        <Providers>
-            <Router/>
-        </Providers>
-    )
+        <StoreProvider>
+                <Component {...pageProps} />
+        </StoreProvider>
+    );
 }
-
-export default App
