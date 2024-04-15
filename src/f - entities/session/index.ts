@@ -1,2 +1,2 @@
 export {sessionSlice} from './modele/slice/session'
-export { isSessionSelector} from './modele/selector/session'
+export { isAuthSelector} from './modele/selector/session'
