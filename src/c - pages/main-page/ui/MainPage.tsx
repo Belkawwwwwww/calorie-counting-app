@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {FC} from 'react';
+import AuthLayout from "@/c - pages/isAuth";
 
-export const MainPage = () => {
+export const MainPage: FC = () => {
     return (
-        <div>
-            Main Page
-        </div>
+        <AuthLayout>
+                Main page
+        </AuthLayout>
+
     );
 };
+

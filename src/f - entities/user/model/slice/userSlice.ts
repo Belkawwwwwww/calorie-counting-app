@@ -3,14 +3,10 @@ import {createSlice} from "@reduxjs/toolkit";
 
 interface UserState {
     users: any | null
-    isLoading: boolean
-    error?: string | null;
 }
 
 const initialState: UserState = {
     users: null,
-    isLoading: false,
-    error: null
 }
 
 export const userSlice = createSlice({

@@ -1,7 +1,10 @@
+import AuthLayout from "@/c - pages/isAuth";
+import React from "react";
+
 export const ProfilePage = () => {
     return (
-        <div>
-            страница профиля
-        </div>
+        <AuthLayout>
+            Страница профиля
+        </AuthLayout>
     );
 };

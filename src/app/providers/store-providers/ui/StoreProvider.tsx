@@ -8,11 +8,9 @@ interface StoreProviderProps {
 
 export const StoreProvider = (props: StoreProviderProps) => {
     return (
-        // <ErrorBoundary errorComponent={#}>
         <Provider store={store}>
             {props.children}
         </Provider>
-        // </ErrorBoundary>
     )
 }
 
