@@ -60,17 +60,16 @@ const StyledLink = styled(Link)`
 
 
 export const RegisterForm: FC = () => {
-    const error = useAppSelector(state => state.user.error);
-    // const error = useAppSelector(errorUserSelector);
+    const error = useAppSelector(state => state.session.error);
+    // const error = useAppSelector(errorSessionSelector);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [passwordConfirm, setPasswordConfirm] = useState<string>("");
-
+    const [passwordConfirm, setPasswordConfirm] = useState('')
     return (
         <StyledRFContainer>
             <StyledRFForm>
                 <StyledRFTitle>
-                    Авторизация
+                    Регистрация
                 </StyledRFTitle>
                 <StyledRFInputBox>
                     {error ? (
@@ -78,7 +77,6 @@ export const RegisterForm: FC = () => {
                             {error}
                         </StyledRFError>
                     ) : null}
-                    <>
                         <StyledRFLabel htmlFor="email">Email</StyledRFLabel>
                         <InputWithRules
                             onChange={(e) => setEmail(e.target.value)}
@@ -88,9 +86,7 @@ export const RegisterForm: FC = () => {
                             type="text"
                             placeholder="Введите email"
                         />
-                    </>
-                    <>
-                        <StyledRFLabel htmlFor="email">Пароль</StyledRFLabel>
+                    <StyledRFLabel htmlFor="email">Пароль</StyledRFLabel>
                         <InputWithRules
                             onChange={(e) => setPassword(e.target.value)}
                             value={password}
@@ -99,7 +95,15 @@ export const RegisterForm: FC = () => {
                             type="password"
                             placeholder="Введите пароль"
                         />
-                    </>
+                    <StyledRFLabel htmlFor="email">Подтверждение пароля</StyledRFLabel>
+                    <InputWithRules
+                        onChange={(e) => setPasswordConfirm(e.target.value)}
+                        value={passwordConfirm}
+                        rules={/.{8,}/}
+                        text="Колличество символов должно быть больше 7"
+                        type="password"
+                        placeholder="Подвтерждение пароля"
+                    />
 
                 </StyledRFInputBox>
             </StyledRFForm>
@@ -111,8 +115,8 @@ export const RegisterForm: FC = () => {
                 <StyledPasswordRecovery>Восстановление пароля</StyledPasswordRecovery>
             </StyledRFBtn>
             <StyledRFFooter>
-                <div>Еще не зарегистрированы?</div>
-                <StyledLink href='/registration'>Регистрация</StyledLink>
+                <div>Уже есть аккаунт?</div>
+                <StyledLink href='/login'>Вход</StyledLink>
             </StyledRFFooter>
         </StyledRFContainer>
     )

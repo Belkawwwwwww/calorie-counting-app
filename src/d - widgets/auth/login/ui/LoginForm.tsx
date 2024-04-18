@@ -60,7 +60,7 @@ const StyledLink = styled(Link)`
 
 
 export const LoginForm: FC = () => {
-    const error = useAppSelector(state => state.user.error);
+    const error = useAppSelector(state => state.session.error);
     // const error = useAppSelector(errorUserSelector);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
