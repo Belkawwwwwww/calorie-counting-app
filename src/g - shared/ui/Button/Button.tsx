@@ -35,6 +35,8 @@ const StyledButton = styled.button<ButtonProps>`
       case 's':
         return '140px';
       case 'm':
+        return '232px';
+      case 'l':
         return '400px';
       default:
         return '14px';

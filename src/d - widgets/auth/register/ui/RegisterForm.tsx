@@ -4,6 +4,7 @@ import {InputWithRules} from "@/e - features/input-with-rules";
 import {Button} from "@/g - shared/ui";
 import Link from "next/link";
 import {useAppSelector} from "@/g - shared/lib/store";
+import {RouteEnum} from "@/g - shared/model/navigation";
 
 const StyledRFContainer = styled.div`
   display: flex;
@@ -41,6 +42,7 @@ const StyledRFLabel = styled.label`
   margin-top: 20px
 `
 const StyledRFBtn = styled.div`
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
 `
@@ -50,6 +52,7 @@ const StyledPasswordRecovery = styled.div`
   cursor: pointer;
 `
 const StyledRFFooter = styled.div`
+  margin-left: 10px;
   display: flex;
 `
 const StyledLink = styled(Link)`
@@ -62,9 +65,9 @@ const StyledLink = styled(Link)`
 export const RegisterForm: FC = () => {
     const error = useAppSelector(state => state.session.error);
     // const error = useAppSelector(errorSessionSelector);
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [passwordConfirm, setPasswordConfirm] = useState('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [passwordConfirm, setPasswordConfirm] = useState<string>('')
     return (
         <StyledRFContainer>
             <StyledRFForm>
@@ -108,16 +111,16 @@ export const RegisterForm: FC = () => {
                 </StyledRFInputBox>
             </StyledRFForm>
             <StyledRFBtn>
-                <Button $variant="primary" $btnWidth="s" $btnSquareSize="button--square--size-m"
+                <Button $variant="primary" $btnWidth="m" $btnSquareSize="button--square--size-m"
                         onClick={() => console.log("Clicked!")}>
-                    Войти
+                    Зарегистрироваться
                 </Button>
-                <StyledPasswordRecovery>Восстановление пароля</StyledPasswordRecovery>
+                <StyledRFFooter>
+                    <div>Уже есть аккаунт?</div>
+                    <StyledLink href={RouteEnum.LOGIN}>Вход</StyledLink>
+                </StyledRFFooter>
             </StyledRFBtn>
-            <StyledRFFooter>
-                <div>Уже есть аккаунт?</div>
-                <StyledLink href='/login'>Вход</StyledLink>
-            </StyledRFFooter>
+
         </StyledRFContainer>
     )
 }

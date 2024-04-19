@@ -4,6 +4,7 @@ import {InputWithRules} from "@/e - features/input-with-rules";
 import {Button} from "@/g - shared/ui";
 import Link from "next/link";
 import {useAppSelector} from "@/g - shared/lib/store";
+import {RouteEnum} from "@/g - shared/model/navigation";
 
 const StyledLFContainer = styled.div`
   display: flex;
@@ -41,6 +42,7 @@ const StyledLFLabel = styled.label`
   margin-top: 20px
 `
 const StyledLFBtn = styled.div`
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
 `
@@ -62,8 +64,8 @@ const StyledLink = styled(Link)`
 export const LoginForm: FC = () => {
     const error = useAppSelector(state => state.session.error);
     // const error = useAppSelector(errorUserSelector);
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
     return (
         <StyledLFContainer>
             <StyledLFForm>
@@ -110,7 +112,7 @@ export const LoginForm: FC = () => {
             </StyledLFBtn>
             <StyledLFFooter>
                 <div>Еще не зарегистрированы?</div>
-                <StyledLink href='/registration'>Регистрация</StyledLink>
+                <StyledLink href={RouteEnum.REGISTRATION}>Регистрация</StyledLink>
             </StyledLFFooter>
         </StyledLFContainer>
     )

@@ -1,16 +1,17 @@
 import {Button} from "@/g - shared/ui";
 import Link from "next/link";
+import {RouteEnum} from "@/g - shared/model/navigation";
 
 export const HomePage = () => {
 
     return (
         <>
-            <Button $btnWidth="m" $variant="primary" $btnSquareSize="button--square--size-m"
+            <Button $btnWidth="l" $variant="primary" $btnSquareSize="button--square--size-m"
                     onClick={() => console.log("Clicked!")}>
                 Create My Plane
             </Button>
-            <Link href='/login'>Авторизоваться</Link>
-            <Link href='/registration'>Регистрация</Link>
+            <Link href={RouteEnum.LOGIN}>Авторизоваться</Link>
+            <Link href={RouteEnum.REGISTRATION}>Регистрация</Link>
         </>
 
 
