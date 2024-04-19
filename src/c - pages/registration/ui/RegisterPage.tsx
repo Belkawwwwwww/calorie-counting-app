@@ -1,8 +1,9 @@
 import React from 'react';
-import {RegisterForm} from "@/d - widgets/auth/register";
+import UIFormLayout from "@/g - shared/ui/layout/formLayot";
+import {RegisterForm} from "@/e - features/Registration";
 
 export const RegisterPage = () => {
     return (
-        <RegisterForm/>
+        <UIFormLayout title="Регистрация" form={<RegisterForm/>}/>
     );
 };
