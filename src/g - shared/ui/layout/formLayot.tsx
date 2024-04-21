@@ -1,6 +1,10 @@
-import { ReactNode } from 'react';
+import {ReactNode} from 'react';
 import styled from 'styled-components';
 
+const StyledContainer = styled.div`
+  margin-top: 60px;
+  height: 100vh;
+`
 const StyledLFForm = styled.form`
     width: 450px;
 `;
@@ -10,10 +14,9 @@ const StyledLFTitle = styled.h1`
   color: #000000;
   display: block;
   margin-bottom: 22px;
-  text-align: center;
 `
 
-export default function UIFormLayout({
+export function UIFormLayout({
     header,
     form,
     title,
@@ -23,7 +26,7 @@ export default function UIFormLayout({
     title: string;
 }) {
     return (
-        <>
+        <StyledContainer>
             {header}
             <StyledLFForm>
                 <StyledLFTitle>
@@ -31,6 +34,6 @@ export default function UIFormLayout({
                 </StyledLFTitle>
                 {form}
             </StyledLFForm>
-        </>
+        </StyledContainer>
     );
 }

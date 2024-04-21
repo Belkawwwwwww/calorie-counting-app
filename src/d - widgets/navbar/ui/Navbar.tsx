@@ -4,7 +4,7 @@ import {Logo} from "@/g - shared/ui/Logo";
 import {FC} from "react";
 
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.header`
   position: relative;
   border-bottom: 1px solid #eaeff2;
   align-items: center;

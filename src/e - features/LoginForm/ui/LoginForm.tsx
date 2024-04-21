@@ -2,17 +2,17 @@ import {InputWithRules} from '@/e - features/input-with-rules';
 import {useAppSelector} from '@/g - shared/lib/store';
 import {useState} from 'react';
 import styled from 'styled-components';
-import {Button} from "@/g - shared/ui";
 import {RouteEnum} from "@/g - shared/model/navigation";
 import Link from "next/link";
+import {Button} from "@/g - shared/ui/Button";
 
 const StyledLFContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  margin-left: 100px;
-  //height: 100vh;
+  width: 450px;
+  /* height: 100vh; */
 `
 const StyledLFInputBox = styled.div`
   display: flex;
@@ -96,7 +96,5 @@ export const LoginForm = () => {
                 <StyledLink href={RouteEnum.REGISTRATION}>Регистрация</StyledLink>
             </StyledLFFooter>
         </StyledLFContainer>
-
-
     );
 };

@@ -1,9 +1,12 @@
 import React from 'react';
-import UIFormLayout from "@/g - shared/ui/layout/formLayot";
-import {RegisterForm} from "@/e - features/Registration";
+import {RegisterForm} from '@/e - features/Registration';
+import {Layout, UIFormLayout} from "@/g - shared/ui/layout";
 
 export const RegisterPage = () => {
     return (
-        <UIFormLayout title="Регистрация" form={<RegisterForm/>}/>
-    );
+        <Layout>
+            <UIFormLayout title="Регистрация" form={<RegisterForm/>}/>
+        </Layout>
+    )
+
 };

@@ -1,17 +1,16 @@
 import {FC, useState} from "react";
 import styled from "styled-components";
 import {InputWithRules} from "@/e - features/input-with-rules";
-import {Button} from "@/g - shared/ui";
 import Link from "next/link";
 import {useAppSelector} from "@/g - shared/lib/store";
 import {RouteEnum} from "@/g - shared/model/navigation";
+import {Button} from "@/g - shared/ui/Button";
 
 const StyledRFContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  margin-left: 100px;
   //height: 100vh;
 `
 
@@ -92,7 +91,6 @@ export const RegisterForm: FC = () => {
                     placeholder="Подтвердите пароль"
                     required
                 />
-
             </StyledRFInputBox>
             <StyledRFBtn>
                 <Button $variant="primary" $btnWidth="m" $btnSquareSize="button--square--size-m"
@@ -105,7 +103,6 @@ export const RegisterForm: FC = () => {
                 <div>Уже есть аккаунт?</div>
                 <StyledLink href={RouteEnum.LOGIN}>Вход</StyledLink>
             </StyledRFFooter>
-
         </StyledRFContainer>
     )
 }

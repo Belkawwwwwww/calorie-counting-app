@@ -1,4 +1,4 @@
-import React, {ButtonHTMLAttributes, ReactNode} from "react";
+import React, {ReactNode} from "react";
 
 
 export const ButtonVariants = {
@@ -21,7 +21,7 @@ export const ButtonWidth = {
 }
 export type BtnHeight = (typeof ButtonWidth) [keyof typeof ButtonWidth]
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps {
     $variant?: BtnVariants
     $btnSquareSize?: BtnSize
     $btnWidth?: BtnHeight
