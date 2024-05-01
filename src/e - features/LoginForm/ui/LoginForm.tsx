@@ -1,52 +1,52 @@
-import {InputWithRules} from '@/e - features/input-with-rules';
-import {useAppSelector} from '@/g - shared/lib/store';
-import {useState} from 'react';
+import { InputWithRules } from '@/e - features/input-with-rules';
+import { useAppSelector } from '@/g - shared/lib/store';
+import { useState } from 'react';
 import styled from 'styled-components';
-import {RouteEnum} from "@/g - shared/model/navigation";
-import Link from "next/link";
-import {Button} from "@/g - shared/ui/Button";
+import { RouteEnum } from '@/g - shared/model/navigation';
+import Link from 'next/link';
+import { Button } from '@/g - shared/ui/Button';
 
 const StyledLFContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  width: 450px;
-  /* height: 100vh; */
-`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 450px;
+    /* height: 100vh; */
+`;
 const StyledLFInputBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 `;
 const StyledLFError = styled.div`
-  color: red;
-  margin: 10px;
-  text-align: center;
+    color: red;
+    margin: 10px;
+    text-align: center;
 `;
 const StyledLFLabel = styled.label`
-  font-size: 14px;
-  color: var(--color-text1);
-  margin-top: 20px;
+    font-size: 14px;
+    color: var(--color-text1);
+    margin-top: 20px;
 `;
 const StyledLFBtn = styled.div`
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-`
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+`;
 const StyledPasswordRecovery = styled.div`
-  margin-left: 20px;
-  color: #4689e8;
-  cursor: pointer;
-`
+    margin-left: 20px;
+    color: #4689e8;
+    cursor: pointer;
+`;
 const StyledLFFooter = styled.div`
-  display: flex;
-`
+    display: flex;
+`;
 const StyledLink = styled(Link)`
-  color: #4689e8;;
-  text-decoration: none;
-  padding-left: 6px;
+    color: #4689e8;
+    text-decoration: none;
+    padding-left: 6px;
 `;
 export const LoginForm = () => {
     const error = useAppSelector((state) => state.session.error);
@@ -85,15 +85,23 @@ export const LoginForm = () => {
                 </>
             </StyledLFInputBox>
             <StyledLFBtn>
-                <Button $variant="primary" $btnWidth="s" $btnSquareSize="button--square--size-m"
-                        onClick={() => console.log("Clicked!")}>
+                <Button
+                    $variant="primary"
+                    $btnWidth="s"
+                    $btnSquareSize="button--square--size-m"
+                    onClick={() => console.log('Clicked!')}
+                >
                     Войти
                 </Button>
-                <StyledPasswordRecovery>Восстановление пароля</StyledPasswordRecovery>
+                <StyledPasswordRecovery>
+                    Восстановление пароля
+                </StyledPasswordRecovery>
             </StyledLFBtn>
             <StyledLFFooter>
                 <div>Еще не зарегистрированы?</div>
-                <StyledLink href={RouteEnum.REGISTRATION}>Регистрация</StyledLink>
+                <StyledLink href={RouteEnum.REGISTRATION}>
+                    Регистрация
+                </StyledLink>
             </StyledLFFooter>
         </StyledLFContainer>
     );
