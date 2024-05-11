@@ -16,14 +16,16 @@ export const HomePage = () => {
     return (
         <Layout>
             <StyledLFContainer>
-                <Button
-                    $btnWidth="l"
-                    $variant="primary"
-                    $btnSquareSize="button--square--size-m"
-                    onClick={() => console.log('Clicked!')}
-                >
-                    Create My Plane
-                </Button>
+            <Link href={RouteEnum.TEST} passHref>
+                    <Button
+                        $btnWidth="l"
+                        $variant="primary"
+                        $btnSquareSize="button--square--size-m"
+                    >
+                        Create My Plane
+                    </Button>
+                </Link>
+
                 <Link href={RouteEnum.LOGIN}>Авторизоваться</Link>
                 <Link href={RouteEnum.REGISTRATION}>Регистрация</Link>
             </StyledLFContainer>

@@ -1,10 +1,9 @@
-import { InputWithRules } from '@/e - features/input-with-rules';
-import { useAppSelector } from '@/g - shared/lib/store';
-import { useState } from 'react';
+import {InputWithRules} from '@/e - features/input-with-rules';
+import {useState} from 'react';
 import styled from 'styled-components';
-import { RouteEnum } from '@/g - shared/model/navigation';
+import {RouteEnum} from '@/g - shared/model/navigation';
 import Link from 'next/link';
-import { Button } from '@/g - shared/ui/Button';
+import {Button} from '@/g - shared/ui/Button';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -49,14 +48,14 @@ const StyledLink = styled(Link)`
     padding-left: 6px;
 `;
 export const LoginForm = () => {
-    const error = useAppSelector((state) => state.session.error);
+    // const error = useAppSelector((state) => state.session.error);
     // const error = useAppSelector(errorUserSelector);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     return (
         <StyledLFContainer>
             <StyledLFInputBox>
-                {error ? <StyledLFError>{error}</StyledLFError> : null}
+                {/*{error ? <StyledLFError>{error}</StyledLFError> : null}*/}
                 <>
                     <StyledLFLabel htmlFor="email">Email</StyledLFLabel>
                     <InputWithRules

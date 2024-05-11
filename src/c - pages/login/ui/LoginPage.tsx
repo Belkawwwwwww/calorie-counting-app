@@ -1,4 +1,4 @@
-import { LoginForm } from '@/e - features/LoginForm';
+import { LoginForm } from '@/d - widgets/auth/login';
 import { Layout, UIFormLayout } from '@/g - shared/ui/layout';
 
 export const LoginPage = () => {
