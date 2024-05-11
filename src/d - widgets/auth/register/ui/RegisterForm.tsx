@@ -1,10 +1,13 @@
 import {FC, useState} from "react";
+import {useForm} from 'react-hook-form';
+import {RegistrationDataSchema} from "@/f - entities/registration/model/registrationSchema";
+import {zodResolver} from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import styled from "styled-components";
 import {InputWithRules} from "@/e - features/input-with-rules";
 import Link from "next/link";
-import {useAppSelector} from "@/g - shared/lib/store";
-import {RouteEnum} from "@/g - shared/model/navigation";
 import {Button} from "@/g - shared/ui/Button";
+import {RouteEnum} from "@/g - shared/model/navigation";
 
 const StyledRFContainer = styled.div`
   display: flex;
@@ -13,7 +16,6 @@ const StyledRFContainer = styled.div`
   position: relative;
   //height: 100vh;
 `
-
 const StyledRFInputBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,21 +48,25 @@ const StyledLink = styled(Link)`
   padding-left: 6px;
 `;
 
-
 export const RegisterForm: FC = () => {
-    const error = useAppSelector(state => state.session.error);
-    // const error = useAppSelector(errorSessionSelector);
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [passwordConfirm, setPasswordConfirm] = useState<string>('')
+    const [firstName, setFirstName] = useState<string>('')
+    const [lastName, setLastName] = useState<string>('')
+    const {register, handleSubmit, formState: {errors}} = useForm<z.infer<typeof RegistrationDataSchema>>({
+        resolver: zodResolver(RegistrationDataSchema),
+    });
+
+
     return (
         <StyledRFContainer>
             <StyledRFInputBox>
-                {error ? (
-                    <StyledRFError>
-                        {error}
-                    </StyledRFError>
-                ) : null}
+                {/*{error ? (*/}
+                {/*    <StyledRFError>*/}
+                {/*        {error.message}*/}
+                {/*    </StyledRFError>*/}
+                {/*) : null}*/}
                 <StyledRFLabel htmlFor="email">Email</StyledRFLabel>
                 <InputWithRules
                     onChange={(e) => setEmail(e.target.value)}
@@ -86,9 +92,29 @@ export const RegisterForm: FC = () => {
                     onChange={(e) => setPasswordConfirm(e.target.value)}
                     value={passwordConfirm}
                     rules={/.{8,}/}
-                    text="Колличество символов должно быть больше 7"
+                    text="Количество символов должно быть больше 7"
                     type="password"
                     placeholder="Подтвердите пароль"
+                    required
+                />
+                <StyledRFLabel htmlFor="email">Ваше имя</StyledRFLabel>
+                <InputWithRules
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstName}
+                    // rules={/.{8,}/}
+                    text="null"
+                    type="text"
+                    placeholder="Введите ваше имя"
+                    required
+                />
+                <StyledRFLabel htmlFor="email">Ваша фамилия</StyledRFLabel>
+                <InputWithRules
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={lastName}
+                    // rules={/.{8,}/}
+                    text="null"
+                    type="text"
+                    placeholder="Введите вашу фамилию"
                     required
                 />
             </StyledRFInputBox>
@@ -103,6 +129,14 @@ export const RegisterForm: FC = () => {
                 <div>Уже есть аккаунт?</div>
                 <StyledLink href={RouteEnum.LOGIN}>Вход</StyledLink>
             </StyledRFFooter>
+            {/*<form>*/}
+            {/*    <label htmlFor="firstName">First Name:</label>*/}
+            {/*    <input type="text" {...register('firstName')} />*/}
+            {/*    <label htmlFor="lastName">Last Name:</label>*/}
+            {/*    <input type="text" {...register('lastName')} />*/}
+            {/*</form>*/}
         </StyledRFContainer>
+
+
     )
 }
