@@ -12,9 +12,13 @@ const StyledInput = styled.input`
   margin-top: 6px;
   margin-bottom: 8px;
 `
-export const Input: FC<IInputProps> = memo(({onChange, ...otherProps}) => {
+const StyledInputText = styled.div`
+  font-size: 14px;
+  color: red;
+`;
+export const Input: FC<IInputProps> = memo(({onChange,value,  ...otherProps}) => {
     return (
-        <StyledInput {...otherProps} onChange={onChange}/>
+        <StyledInput  onChange={onChange} value={value} {...otherProps}/>
     )
 })
 Input.displayName = 'Input'

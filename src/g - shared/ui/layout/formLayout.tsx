@@ -5,7 +5,7 @@ const StyledContainer = styled.div`
     margin-top: 60px;
     height: 100vh;
 `;
-const StyledLFForm = styled.form`
+const StyledLFForm = styled.div`
     width: 450px;
 `;
 const StyledLFTitle = styled.h1`

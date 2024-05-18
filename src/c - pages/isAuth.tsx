@@ -1,6 +1,7 @@
 import {FC, ReactNode, useEffect} from "react";
 import {useAppSelector} from "@/g - shared/lib/store";
 import {useRouter} from "next/router";
+import {RouteEnum} from "@/g - shared/model/navigation";
 
 interface AuthLayoutProps {
     children: ReactNode;
@@ -14,15 +15,14 @@ const AuthLayout: FC<AuthLayoutProps> = ({children}) => {
     // то перенаправляем пользователя на страницу входа
     useEffect(() => {
         if (!isAuth && !isPageAccessibleForGuests(router.pathname)) {
-            router.push("/").then(() => {
+            router.push(RouteEnum.LOGIN).then(() => {
                 // Обработка успешной навигации
                 console.log("Перенаправлен на главную страницу");
             }).catch((error) => {
                 // Обработка ошибки навигации
-                console.error("Ошибка перенаправления на главную страницу:", error);
+                console.error("Ошибка перенаправления на страницу авторизации:", error);
             });
 
-                // redirect('/login');
         }
     }, [isAuth, router.pathname]); // eslint-disable-line
 

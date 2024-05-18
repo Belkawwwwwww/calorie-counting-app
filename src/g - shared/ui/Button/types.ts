@@ -28,4 +28,5 @@ export interface ButtonProps {
     children?: ReactNode
     disabled?: boolean;
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+    type: string
 }

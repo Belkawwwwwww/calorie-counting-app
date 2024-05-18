@@ -21,12 +21,13 @@ export const HomePage = () => {
                         $btnWidth="l"
                         $variant="primary"
                         $btnSquareSize="button--square--size-m"
+                        type='submit'
                     >
                         Create My Plane
                     </Button>
                 </Link>
 
-                <Link href={RouteEnum.LOGIN}>Авторизоваться</Link>
+                <Link href={RouteEnum.LOGIN}>Вход</Link>
                 <Link href={RouteEnum.REGISTRATION}>Регистрация</Link>
             </StyledLFContainer>
         </Layout>

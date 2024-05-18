@@ -4,5 +4,6 @@ export enum RouteEnum {
     MAIN='/main',
     PROFILE='/profile',
     REGISTRATION='/registration',
-    TEST='/test'
+    TEST='/test',
+    USER='/user'
 }

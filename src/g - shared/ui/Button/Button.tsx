@@ -46,7 +46,7 @@ const StyledButton = styled.button<ButtonProps>`
 
 export const Button: FC<ButtonProps> = memo(({children, disabled, onClick, ...otherProps}) => {
   return (
-      <StyledButton {...otherProps} disabled={disabled} onClick={onClick}>
+      <StyledButton  disabled={disabled} onClick={onClick} {...otherProps}>
         {children}
       </StyledButton>
   );
