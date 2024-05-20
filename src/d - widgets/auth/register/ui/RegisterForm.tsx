@@ -22,6 +22,7 @@ const StyledRFInputBox = styled.div`
   flex-direction: column;
   margin-bottom: 10px;
   box-sizing: border-box;
+  
 `;
 const StyledRFError = styled.div`
   color: red;
