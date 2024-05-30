@@ -1,34 +1,16 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {RegistrationResponseSchema, RegScheme,} from '@/f - entities/auth/model/registrationSchema';
-import {AuthResponseScheme, AuthScheme,} from '@/f - entities/auth/model/authScheme';
-import Cookies from 'js-cookie';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+    RegistrationResponseSchema,
+    RegScheme,
+} from '@/f - entities/auth/model/registrationSchema';
+import {
+    AuthResponseScheme,
+    AuthScheme,
+} from '@/f - entities/auth/model/authScheme';
 
-
-export const cookieUtils = {
-    getSessionId: () => Cookies.get('sessionId'),
-    setSessionId: (Session: string) => Cookies.set('Session', Session, {expires: 365}), // срок хранения cookie 1 год
-    // removeSessionId: () => Cookies.remove('sessionId'),
-};
-const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://92.118.114.163:5001/',
-    prepareHeaders: (headers) => {
-        let Session: string | null | undefined = cookieUtils.getSessionId();
-        if (Session) {
-            headers.set('X-Session-Id', Session);
-        } else {
-            Session = headers.get('X-Session-Id');
-            if (Session) {
-                cookieUtils.setSessionId(Session);
-            }
-        }
-        return headers;
-    },
-});
-
-
-const registerAPI = createApi({
-    reducerPath: 'registration',
-    baseQuery: baseQuery,
+const API = createApi({
+    reducerPath: 'api',
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5001/' }),
     endpoints: (build) => ({
         registerUser: build.mutation<
             typeof RegistrationResponseSchema._output,
@@ -52,8 +34,17 @@ const registerAPI = createApi({
                 credentials: 'include',
             }),
         }),
+        getUser: build.query({
+            query: () => ({
+                url: 'user',
+                method: 'GET',
+                providesTags: ['User'],
+                // credentials: 'include',
+            }),
+        }),
     }),
 });
 
-export const { useRegisterUserMutation, useAuthUserMutation } = registerAPI;
-export default registerAPI;
+export const { useRegisterUserMutation, useAuthUserMutation, useGetUserQuery } =
+    API;
+export default API;

@@ -1,62 +1,64 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {useRegisterUserMutation} from '@/g - shared/api/authApi';
-import {Input} from '@/g - shared/ui/Input';
-import {Button} from '@/g - shared/ui/Button';
-import {RouteEnum} from '@/g - shared/model/navigation';
+import { useRegisterUserMutation } from '@/g - shared/api/authApi';
+import { Input } from '@/g - shared/ui/Input';
+import { Button } from '@/g - shared/ui/Button';
+import { RouteEnum } from '@/g - shared/model/navigation';
 import Link from 'next/link';
-import {useDispatch} from 'react-redux';
-import {setAuthenticated} from '@/f - entities/session/modele/slice/session';
-import {RegistrationResponseSchema, RegScheme,} from '@/f - entities/auth/model/registrationSchema';
-import {z} from 'zod';
+import {
+    RegistrationResponseSchema,
+    RegScheme,
+} from '@/f - entities/auth/model/registrationSchema';
+import { z } from 'zod';
+import { useAppDispatch } from '@/g - shared/lib/store';
+import { setAuth } from '@/f - entities/session/modele/slice/session';
 
 const StyledRFContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  //height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    //height: 100vh;
 `;
 const StyledRFInputBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-  
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    box-sizing: border-box;
 `;
 const StyledRFError = styled.div`
-  color: red;
+    color: red;
 `;
 
 const StyledRFLabel = styled.label`
-  font-size: 14px;
-  color: var(--color-text1);
-  margin-top: 10px;
+    font-size: 14px;
+    color: var(--color-text1);
+    margin-top: 10px;
 `;
 const StyledRFBtn = styled.div`
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
 `;
 
 const StyledRFFooter = styled.div`
-  margin-left: 10px;
-  display: flex;
+    margin-left: 10px;
+    display: flex;
 `;
 const StyledLink = styled(Link)`
-  color: #4689e8;
-  text-decoration: none;
-  padding-left: 6px;
+    color: #4689e8;
+    text-decoration: none;
+    padding-left: 6px;
 `;
 export const RegisterForm = () => {
-    const [registerUser, {isLoading, isError, error}] =
+    const [registerUser, { isLoading, isError, error }] =
         useRegisterUserMutation();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const [validationErrors, setValidationErrors] = useState({
         username: '',
@@ -87,8 +89,8 @@ export const RegisterForm = () => {
             const validatedResponse =
                 RegistrationResponseSchema.parse(response); // Валидация ответа сервера с помощью RegistrationResponseSchema
             console.log('Validated response:', validatedResponse);
-            dispatch(setAuthenticated(true));
-            sessionStorage.setItem('isAuth', 'true');
+            dispatch(setAuth(true));
+            // sessionStorage.setItem('isAuth', 'true');
             console.log('Регистрация прошла успешно');
         } catch (error) {
             if (error instanceof z.ZodError) {
@@ -112,8 +114,10 @@ export const RegisterForm = () => {
         <StyledRFContainer>
             <form onSubmit={handleSubmit}>
                 <StyledRFInputBox>
-                    <StyledRFLabel htmlFor="email">Email</StyledRFLabel>
+                    <StyledRFLabel htmlFor="username">Email</StyledRFLabel>
                     <Input
+                        id="username"
+                        type="username"
                         name="username"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -125,6 +129,8 @@ export const RegisterForm = () => {
                     )}
                     <StyledRFLabel htmlFor="password">Пароль</StyledRFLabel>
                     <Input
+                        type="password"
+                        id="password"
                         name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -138,6 +144,8 @@ export const RegisterForm = () => {
                         Повторите пароль
                     </StyledRFLabel>
                     <Input
+                        id="passwordConfirm"
+                        type="passwordConfirm"
                         name="passwordConfirm"
                         value={passwordConfirm}
                         onChange={(e) => setPasswordConfirm(e.target.value)}
@@ -148,8 +156,10 @@ export const RegisterForm = () => {
                         </StyledRFError>
                     )}
 
-                    <StyledRFLabel htmlFor="">Ваше имя</StyledRFLabel>
+                    <StyledRFLabel htmlFor="firstName">Ваше имя</StyledRFLabel>
                     <Input
+                        id="firstName"
+                        type="firstName"
                         name="firstName"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
@@ -160,8 +170,12 @@ export const RegisterForm = () => {
                         </StyledRFError>
                     )}
 
-                    <StyledRFLabel htmlFor="">Ваша фамилия</StyledRFLabel>
+                    <StyledRFLabel htmlFor="lastName">
+                        Ваша фамилия
+                    </StyledRFLabel>
                     <Input
+                        id="lastName"
+                        type="lastName"
                         name="lastName"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}

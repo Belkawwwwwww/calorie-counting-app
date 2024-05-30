@@ -1,1 +1,1 @@
-export {MainBlock} from './ui/MainBlock'
+export { SummaryBlock  } from './ui/SummaryBlock';

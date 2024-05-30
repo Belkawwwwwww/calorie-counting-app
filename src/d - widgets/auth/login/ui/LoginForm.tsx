@@ -1,18 +1,15 @@
-import { InputWithRules } from '@/e - features/input-with-rules';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import { RouteEnum } from '@/g - shared/model/navigation';
+import {RouteEnum} from '@/g - shared/model/navigation';
 import Link from 'next/link';
-import { Button } from '@/g - shared/ui/Button';
-import { Input } from '@/g - shared/ui/Input';
-import { useAuthUserMutation } from '@/g - shared/api/authApi';
-import {
-    AuthResponseScheme,
-    AuthScheme,
-} from '@/f - entities/auth/model/authScheme';
-import { useDispatch } from 'react-redux';
-import { setAuthenticated } from '@/f - entities/session/modele/slice/session';
-import { z } from 'zod';
+import {Button} from '@/g - shared/ui/Button';
+import {Input} from '@/g - shared/ui/Input';
+import {useAuthUserMutation} from '@/g - shared/api/authApi';
+import {AuthResponseScheme, AuthScheme,} from '@/f - entities/auth/model/authScheme';
+import {sessionSlice, setAuth,} from '@/f - entities/session/modele/slice/session';
+import {z} from 'zod';
+import {useRouter} from 'next/router';
+import {useAppDispatch} from "@/g - shared/lib/store";
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -56,20 +53,21 @@ const StyledLink = styled(Link)`
 `;
 
 export const LoginForm = () => {
-    const [authUser, { isLoading, error }] = useAuthUserMutation();
+    const [authUser] = useAuthUserMutation();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [validationErrors, setValidationErrors] = useState({
         username: '',
         password: '',
     });
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
         const formData = Object.fromEntries(form.entries());
-        console.log('Form data before validation:', formData);
+        console.log('Данные формы перед валидацией:', formData);
         try {
             setValidationErrors({
                 username: '',
@@ -78,9 +76,11 @@ export const LoginForm = () => {
             const validatedData = AuthScheme.parse(formData);
             const response = await authUser(validatedData).unwrap();
             const validatedResponse = AuthResponseScheme.parse(response);
-            console.log('Validated response:', validatedResponse);
-            dispatch(setAuthenticated(true));
-            sessionStorage.setItem('isAuth', 'true');
+            console.log('Проверенный ответ:', validatedResponse);
+            dispatch(sessionSlice.actions.setAuth(true));
+            console.log('Действие setAuthenticated:', setAuth);
+            router.push(RouteEnum.MAIN);
+
             console.log('Авторизация успешна');
         } catch (error) {
             if (error instanceof z.ZodError) {
@@ -93,9 +93,9 @@ export const LoginForm = () => {
                     {} as typeof validationErrors
                 );
                 setValidationErrors(errors);
-                console.log('Validation errors:', errors);
+                console.log('Ошибки валидации:', errors);
             } else {
-                console.error('Registration failed:', error);
+                console.error('Ошибка регистрации:', error);
             }
         }
     };
@@ -103,8 +103,10 @@ export const LoginForm = () => {
         <StyledLFContainer>
             <form onSubmit={handleSubmit}>
                 <StyledLFInputBox>
-                    <StyledLFLabel htmlFor="email">Email</StyledLFLabel>
+                    <StyledLFLabel htmlFor="username">Email</StyledLFLabel>
                     <Input
+                        id="username"
+                        type="username"
                         name="username"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -116,6 +118,8 @@ export const LoginForm = () => {
                     )}
                     <StyledLFLabel htmlFor="password">Пароль</StyledLFLabel>
                     <Input
+                        id="password"
+                        type="password"
                         name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -131,7 +135,6 @@ export const LoginForm = () => {
                         $variant="primary"
                         $btnWidth="s"
                         $btnSquareSize="button--square--size-m"
-                        onClick={() => console.log('Clicked!')}
                         type="submit"
                     >
                         Войти

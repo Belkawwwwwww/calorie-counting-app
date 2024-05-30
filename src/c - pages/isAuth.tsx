@@ -1,37 +1,60 @@
-import {FC, ReactNode, useEffect} from "react";
-import {useAppSelector} from "@/g - shared/lib/store";
-import {useRouter} from "next/router";
-import {RouteEnum} from "@/g - shared/model/navigation";
+import {FC, ReactNode, useEffect} from 'react';
+import {useAppSelector} from '@/g - shared/lib/store';
+import {useRouter} from 'next/router';
+import {RouteEnum} from '@/g - shared/model/navigation';
 
 interface AuthLayoutProps {
     children: ReactNode;
 }
 
 const AuthLayout: FC<AuthLayoutProps> = ({children}) => {
-    const isAuth = useAppSelector(state => state.session.is_authenticated);
+    const isAuth = useAppSelector((state) => state.session.is_authenticated);
     const router = useRouter();
 
-    // если пользователь не аутентиф и страница не является страницей, доступной для неавторизованных пользователей,
-    // то перенаправляем пользователя на страницу входа
     useEffect(() => {
+        // Проверяем авторизацию пользователя и доступность страницы
         if (!isAuth && !isPageAccessibleForGuests(router.pathname)) {
-            router.push(RouteEnum.LOGIN).then(() => {
-                // Обработка успешной навигации
-                console.log("Перенаправлен на главную страницу");
-            }).catch((error) => {
-                // Обработка ошибки навигации
-                console.error("Ошибка перенаправления на страницу авторизации:", error);
-            });
-
+            router
+                .push(RouteEnum.LOGIN)
+                .then(() => {
+                    console.log('Перенаправлен на страницу авторизации');
+                })
+                .catch((error) => {
+                    console.error(
+                        'Ошибка перенаправления на страницу авторизации:',
+                        error
+                    );
+                });
+        } else {
+            if (isAuth && isPageAccessibleForGuests(router.pathname)) {
+                console.log('не работает');
+                router.push(RouteEnum.MAIN).then(() => {
+                    console.log('Перенаправлен на главную страницу');
+                });
+            }
         }
-    }, [isAuth, router.pathname]); // eslint-disable-line
+
+        // Если пользователь авторизован, перенаправляем его на главную страницу
+        if (isAuth && isPageIsNotAvailableForAutorizedUsers(router.pathname)) {
+            router.push(RouteEnum.MAIN).then(() => {
+                console.log('Перенаправлен на главную страницу');
+            });
+        }
+    }, []);
 
     return <>{children}</>;
 };
+
 // Функция, которая определяет, доступна ли страница для неавторизованных пользователей
 const isPageAccessibleForGuests = (pathname: string): boolean => {
-    //страницы доступные и автор и неавториз
-    return pathname === '/login' || pathname === '/registration' || pathname === '/' || pathname === '/test';
+    // Страницы, доступные для неавторизованных пользователей
+    return pathname === RouteEnum.LOGIN || pathname === RouteEnum.REGISTRATION;
+};
+
+// Функция, которая определяет, недоступна ли страница для авторизованных пользователей
+const isPageIsNotAvailableForAutorizedUsers = (pathname: string): boolean => {
+    //страницы недосутпные для авторизованных
+    return pathname === RouteEnum.LOGIN || pathname === RouteEnum.REGISTRATION;
 };
 
 export default AuthLayout;

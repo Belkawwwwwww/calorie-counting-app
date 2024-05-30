@@ -6,4 +6,6 @@ export interface IInputProps {
     inputRef?: React.LegacyRef<HTMLInputElement>
     type?: string
     name?: string
+    id?: string
+
 }

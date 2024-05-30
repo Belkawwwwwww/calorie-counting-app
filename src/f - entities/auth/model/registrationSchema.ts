@@ -1,4 +1,4 @@
-import {z} from 'zod';
+import { z } from 'zod';
 
 export const RegistrationResponseSchema = z.object({
     data: z.object({
@@ -16,23 +16,40 @@ export const RegistrationResponseSchema = z.object({
 
 function makePasswordWithConfirm() {
     const schema = z.object({
-        password: z.string().min(7, 'Пароль должен содержать не менее 7 символов'),
-        passwordConfirm: z.string(),
+        password: z
+            .string()
+            .min(8, 'Пароль должен содержать не менее 8 символов'),
+        passwordConfirm: z
+            .string()
+            .min(8, 'Пароль должен содержать не менее 8 символов'),
     });
-    const refineTuple: [check: (data: z.infer<typeof schema>) => boolean, message: z.CustomErrorParams] = [
-        data => data.password === data.passwordConfirm,
-        {message: 'Пароли должны совпадать', path: ['passwordConfirm']},
+    const refineTuple: [
+        check: (data: z.infer<typeof schema>) => boolean,
+        message: z.CustomErrorParams,
+    ] = [
+        (data) => data.password === data.passwordConfirm,
+        { message: 'Пароли должны совпадать', path: ['passwordConfirm'] },
     ];
-    return {schema, refineTuple, errorMessage: 'Passwords must match', errorPath: 'passwordConfirm'};
+    return {
+        schema,
+        refineTuple,
+        errorMessage: 'Passwords must match',
+        errorPath: 'passwordConfirm',
+    };
 }
 
-const passwordWithConfirm = makePasswordWithConfirm()
-export const RegScheme = z.object({
-    username: z.string().email('Неверный формат email'),
-    firstName: z.string().min(2, 'Имя должно содержать не менее 2 символов'),
-    lastName: z.string().min(2, 'Фамилия должна содержать не менее 2 символов'),
-})
+const passwordWithConfirm = makePasswordWithConfirm();
+export const RegScheme = z
+    .object({
+        username: z.string().email('Неверный формат email'),
+        firstName: z
+            .string()
+            .min(2, 'Имя должно содержать не менее 2 символов'),
+        lastName: z
+            .string()
+            .min(2, 'Фамилия должна содержать не менее 2 символов'),
+    })
     .merge(passwordWithConfirm.schema)
-    .refine(...passwordWithConfirm.refineTuple)
+    .refine(...passwordWithConfirm.refineTuple);
 
 export type RegScheme = z.infer<typeof RegScheme>;
