@@ -1,16 +1,17 @@
-import { z } from 'zod';
+import {z} from 'zod';
 
 export const RegistrationResponseSchema = z.object({
+    response_status: z.number(),
     data: z.object({
         id: z.string(),
         created_at: z.string().datetime(),
         updated_at: z.string().datetime(),
-        email: z.string().email(),
-        first_name: z.string(),
-        last_name: z.string(),
-        active: z.boolean(),
-        is_blocked: z.boolean(),
-        blocked_comment: z.nullable(z.string()),
+        deleted_at: z.nullable(z.string().datetime()),
+        username: z.string().email(),
+        email_confirm: z.boolean(),
+        is_active: z.boolean(),
+        firstName: z.string(),
+        lastName: z.string(),
     }),
 });
 

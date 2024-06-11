@@ -1,23 +1,17 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {
-    RegistrationResponseSchema,
-    RegScheme,
-} from '@/f - entities/auth/model/registrationSchema';
-import {
-    AuthResponseScheme,
-    AuthScheme,
-} from '@/f - entities/auth/model/authScheme';
+import {createApi, fetchBaseQuery,} from '@reduxjs/toolkit/query/react';
+import {RegistrationResponseSchema, RegScheme,} from '@/f - entities/auth/model/registrationSchema';
+import {AuthResponseScheme, AuthScheme,} from '@/f - entities/auth/model/authScheme';
 
 const API = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5001/' }),
+    baseQuery: fetchBaseQuery({baseUrl: 'https://dev-eda.ibell.online/'}),
     endpoints: (build) => ({
         registerUser: build.mutation<
             typeof RegistrationResponseSchema._output,
             Partial<RegScheme>
         >({
             query: (body) => ({
-                url: 'user',
+                url: 'api/v1/user/register',
                 method: 'POST',
                 body,
                 credentials: 'include',
@@ -28,23 +22,27 @@ const API = createApi({
             typeof AuthScheme._input
         >({
             query: (body) => ({
-                url: 'auth',
+                url: 'api/v1/user/auth',
                 method: 'POST',
                 body,
                 credentials: 'include',
             }),
         }),
-        getUser: build.query({
+
+        fetchUserSession: build.query<typeof AuthResponseScheme._output, void>({
             query: () => ({
-                url: 'user',
+                url: 'api/v1/user/profile',
                 method: 'GET',
                 providesTags: ['User'],
-                // credentials: 'include',
+                credentials: 'include',
             }),
         }),
     }),
 });
 
-export const { useRegisterUserMutation, useAuthUserMutation, useGetUserQuery } =
-    API;
+export const {
+    useRegisterUserMutation,
+    useAuthUserMutation,
+    useFetchUserSessionQuery,
+} = API;
 export default API;

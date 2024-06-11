@@ -6,10 +6,10 @@ import {Button} from '@/g - shared/ui/Button';
 import {Input} from '@/g - shared/ui/Input';
 import {useAuthUserMutation} from '@/g - shared/api/authApi';
 import {AuthResponseScheme, AuthScheme,} from '@/f - entities/auth/model/authScheme';
-import {sessionSlice, setAuth,} from '@/f - entities/session/modele/slice/session';
+import {sessionSlice,} from '@/f - entities/session/modele/slice/session';
 import {z} from 'zod';
 import {useRouter} from 'next/router';
-import {useAppDispatch} from "@/g - shared/lib/store";
+import {useAppDispatch} from '@/g - shared/lib/store';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -53,7 +53,8 @@ const StyledLink = styled(Link)`
 `;
 
 export const LoginForm = () => {
-    const [authUser] = useAuthUserMutation();
+    const [authUser, {data: authData}] = useAuthUserMutation();
+
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [validationErrors, setValidationErrors] = useState({
@@ -76,10 +77,14 @@ export const LoginForm = () => {
             const validatedData = AuthScheme.parse(formData);
             const response = await authUser(validatedData).unwrap();
             const validatedResponse = AuthResponseScheme.parse(response);
-            console.log('Проверенный ответ:', validatedResponse);
-            dispatch(sessionSlice.actions.setAuth(true));
-            console.log('Действие setAuthenticated:', setAuth);
-            router.push(RouteEnum.MAIN);
+            if (validatedResponse) {
+                dispatch(sessionSlice.actions.setAuth(true));
+                console.log(authUser);
+                sessionStorage.setItem('session_id', validatedResponse.data.id);
+                router.push(RouteEnum.MAIN);
+            } else {
+                router.push(RouteEnum.LOGIN);
+            }
 
             console.log('Авторизация успешна');
         } catch (error) {

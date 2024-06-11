@@ -1,6 +1,6 @@
-import {FC, memo} from "react";
-import {IInputProps} from "@/g - shared/ui/Input/types";
-import styled from "styled-components";
+import {FC, memo} from 'react';
+import {IInputProps} from '@/g - shared/ui/Input/types';
+import styled from 'styled-components';
 
 const StyledInput = styled.input`
   border: 1px solid #eaeff2;
@@ -11,14 +11,16 @@ const StyledInput = styled.input`
   font-size: 17px;
   margin-top: 6px;
   margin-bottom: 8px;
-`
+`;
 const StyledInputText = styled.div`
   font-size: 14px;
   color: red;
 `;
-export const Input: FC<IInputProps> = memo(({onChange,value,  ...otherProps}) => {
-    return (
-        <StyledInput  onChange={onChange} value={value} {...otherProps}/>
-    )
-})
-Input.displayName = 'Input'
+export const Input: FC<IInputProps> = memo(
+    ({onChange, value, ...otherProps}) => {
+        return (
+            <StyledInput onChange={onChange} value={value} {...otherProps} />
+        );
+    }
+);
+Input.displayName = 'Input';

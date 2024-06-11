@@ -1,11 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface SessionState {
     is_authenticated: boolean;
+    isLoading: boolean;
 }
 
 const initialState: SessionState = {
     is_authenticated: false,
+    isLoading: true,
 };
 
 export const sessionSlice = createSlice({
@@ -14,6 +16,7 @@ export const sessionSlice = createSlice({
     reducers: {
         setAuth(state, { payload }: PayloadAction<boolean>) {
             state.is_authenticated = payload;
+            state.isLoading = false;
         },
     },
 });

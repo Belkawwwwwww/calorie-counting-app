@@ -1,7 +1,6 @@
-import {FC, memo} from "react";
-import {ButtonProps} from "@/g - shared/ui/Button/types";
-import styled from "styled-components";
-
+import {FC, memo} from 'react';
+import {ButtonProps} from '@/g - shared/ui/Button/types';
+import styled from 'styled-components';
 
 const StyledButton = styled.button<ButtonProps>`
   padding: 15px 30px;
@@ -45,13 +44,12 @@ const StyledButton = styled.button<ButtonProps>`
 `;
 
 export const Button: FC<ButtonProps> = memo(({children, disabled, onClick, ...otherProps}) => {
-  return (
-      <StyledButton  disabled={disabled} onClick={onClick} {...otherProps}>
-        {children}
-      </StyledButton>
-  );
-});
+        return (
+            <StyledButton disabled={disabled} onClick={onClick} {...otherProps}>
+                {children}
+            </StyledButton>
+        );
+    }
+);
 
 Button.displayName = 'Button';
-
-
