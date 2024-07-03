@@ -1,27 +1,13 @@
-import React, {createContext, FC, ReactNode, useContext, useState,} from 'react';
+import {createContext, ReactNode, useMemo} from 'react';
 
-interface LoaderContextType {
-    isLoading: boolean;
-    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const LoaderContext = createContext<boolean>(false);
 
-const LoaderContext = createContext<LoaderContextType | undefined>(undefined);
+export const LoaderProvider = ({children}: { children: ReactNode }) => {
+    const memoizedChildren = useMemo(() => children, [children]);
 
-export const LoaderOverlayProvider: FC<{ children: ReactNode }> = ({
-                                                                       children,
-                                                                   }) => {
-    const [isLoading, setIsLoading] = useState(false);
     return (
-        <LoaderContext.Provider value={{isLoading, setIsLoading}}>
-            {children}
+        <LoaderContext.Provider value={false}>
+            {memoizedChildren}
         </LoaderContext.Provider>
     );
-};
-
-export const useLoading = (): LoaderContextType => {
-    const context = useContext(LoaderContext);
-    if (!context) {
-        throw new Error('error');
-    }
-    return context;
 };

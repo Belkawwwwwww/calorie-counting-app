@@ -1,6 +1,5 @@
-import styled from "styled-components";
-import {Button} from "@/g - shared/ui/Button";
-import {FC} from "react";
+import styled from 'styled-components';
+import {FC} from 'react';
 
 interface QuestionComponentProps {
     title: string;
@@ -9,7 +8,6 @@ interface QuestionComponentProps {
     onAnswer: (answer: string) => void;
     onNextQuestion: () => void;
     customOption?: React.ComponentType<{ isSelected: boolean }>;
-
 }
 
 const StyledContainer = styled.div``;
@@ -43,14 +41,22 @@ const StyledOption = styled.div<{ isSelected: boolean }>`
   font-size: 18px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: ${(props) => (props.isSelected ? "#ebebeb" : "transparent")};
+  background-color: ${(props) =>
+          props.isSelected ? '#ebebeb' : 'transparent'};
 
   &:hover {
     background-color: #ebebeb;
   }
 `;
 
-export const QuestionComponent: FC<QuestionComponentProps> = ({title, options, selectedAnswer, onAnswer, onNextQuestion, customOption: CustomOption = StyledOption}) => {
+export const QuestionComponent: FC<QuestionComponentProps> = ({
+                                                                  title,
+                                                                  options,
+                                                                  selectedAnswer,
+                                                                  onAnswer,
+                                                                  onNextQuestion,
+                                                                  customOption: CustomOption = StyledOption,
+                                                              }) => {
     const handleOptionClick = (option: string) => {
         onAnswer(option);
     };
@@ -71,7 +77,7 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({title, options, s
                             </CustomOption>
                         ))}
                     </StyledOptions>
-                    {selectedAnswer !== null && (
+                    {/* {selectedAnswer !== null && (
                         <Button
                             $variant="primary"
                             $btnWidth="m"
@@ -80,7 +86,7 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({title, options, s
                         >
                             Следующий вопрос
                         </Button>
-                    )}
+                    )} */}
                 </>
             )}
         </StyledContainer>

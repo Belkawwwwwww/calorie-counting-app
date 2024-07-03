@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import { useRegisterUserMutation } from '@/g - shared/api/authApi';
-import { Input } from '@/g - shared/ui/Input';
-import { Button } from '@/g - shared/ui/Button';
-import { RouteEnum } from '@/g - shared/model/navigation';
+import {useRegisterUserMutation} from '@/f - entities/api/authApi';
+import {Input} from '@/g - shared/ui/Input';
+import {Button} from '@/g - shared/ui/Button';
+import {RouteEnum} from '@/g - shared/model/navigation';
 import Link from 'next/link';
-import {
-    RegistrationResponseSchema,
-    RegScheme,
-} from '@/f - entities/auth/model/registrationSchema';
-import { z } from 'zod';
-import { useAppDispatch } from '@/g - shared/lib/store';
-import { setAuth } from '@/f - entities/session/modele/slice/session';
+import {RegistrationResponseSchema, RegScheme,} from '@/f - entities/auth/model/registrationSchema';
+import {z} from 'zod';
+import {useAppDispatch} from '@/g - shared/lib/store';
+import {setAuth} from '@/f - entities/redux/session/modele/action/action';
+import {OpenRoute} from '@/c - pages/router-providers';
 
 const StyledRFContainer = styled.div`
     display: flex;
@@ -111,96 +109,100 @@ export const RegisterForm = () => {
     };
 
     return (
-        <StyledRFContainer>
-            <form onSubmit={handleSubmit}>
-                <StyledRFInputBox>
-                    <StyledRFLabel htmlFor="username">Email</StyledRFLabel>
-                    <Input
-                        id="username"
-                        type="username"
-                        name="username"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    {validationErrors.username && (
-                        <StyledRFError>
-                            {validationErrors.username}
-                        </StyledRFError>
-                    )}
-                    <StyledRFLabel htmlFor="password">Пароль</StyledRFLabel>
-                    <Input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    {validationErrors.password && (
-                        <StyledRFError>
-                            {validationErrors.password}
-                        </StyledRFError>
-                    )}
-                    <StyledRFLabel htmlFor="passwordConfirm">
-                        Повторите пароль
-                    </StyledRFLabel>
-                    <Input
-                        id="passwordConfirm"
-                        type="passwordConfirm"
-                        name="passwordConfirm"
-                        value={passwordConfirm}
-                        onChange={(e) => setPasswordConfirm(e.target.value)}
-                    />
-                    {validationErrors.passwordConfirm && (
-                        <StyledRFError>
-                            {validationErrors.passwordConfirm}
-                        </StyledRFError>
-                    )}
+        <OpenRoute>
+            <StyledRFContainer>
+                <form onSubmit={handleSubmit}>
+                    <StyledRFInputBox>
+                        <StyledRFLabel htmlFor="username">Email</StyledRFLabel>
+                        <Input
+                            id="username"
+                            type="username"
+                            name="username"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        {validationErrors.username && (
+                            <StyledRFError>
+                                {validationErrors.username}
+                            </StyledRFError>
+                        )}
+                        <StyledRFLabel htmlFor="password">Пароль</StyledRFLabel>
+                        <Input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        {validationErrors.password && (
+                            <StyledRFError>
+                                {validationErrors.password}
+                            </StyledRFError>
+                        )}
+                        <StyledRFLabel htmlFor="passwordConfirm">
+                            Повторите пароль
+                        </StyledRFLabel>
+                        <Input
+                            id="passwordConfirm"
+                            type="passwordConfirm"
+                            name="passwordConfirm"
+                            value={passwordConfirm}
+                            onChange={(e) => setPasswordConfirm(e.target.value)}
+                        />
+                        {validationErrors.passwordConfirm && (
+                            <StyledRFError>
+                                {validationErrors.passwordConfirm}
+                            </StyledRFError>
+                        )}
 
-                    <StyledRFLabel htmlFor="firstName">Ваше имя</StyledRFLabel>
-                    <Input
-                        id="firstName"
-                        type="firstName"
-                        name="firstName"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                    />
-                    {validationErrors.firstName && (
-                        <StyledRFError>
-                            {validationErrors.firstName}
-                        </StyledRFError>
-                    )}
+                        <StyledRFLabel htmlFor="firstName">
+                            Ваше имя
+                        </StyledRFLabel>
+                        <Input
+                            id="firstName"
+                            type="firstName"
+                            name="firstName"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                        />
+                        {validationErrors.firstName && (
+                            <StyledRFError>
+                                {validationErrors.firstName}
+                            </StyledRFError>
+                        )}
 
-                    <StyledRFLabel htmlFor="lastName">
-                        Ваша фамилия
-                    </StyledRFLabel>
-                    <Input
-                        id="lastName"
-                        type="lastName"
-                        name="lastName"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                    />
-                    {validationErrors.lastName && (
-                        <StyledRFError>
-                            {validationErrors.lastName}
-                        </StyledRFError>
-                    )}
-                </StyledRFInputBox>
-                <StyledRFBtn>
-                    <Button
-                        $variant="primary"
-                        $btnWidth="m"
-                        $btnSquareSize="button--square--size-m"
-                        type="submit"
-                    >
-                        Зарегистрироваться
-                    </Button>
-                </StyledRFBtn>
-            </form>
-            <StyledRFFooter>
-                <div>Уже есть аккаунт?</div>
-                <StyledLink href={RouteEnum.LOGIN}>Вход</StyledLink>
-            </StyledRFFooter>
-        </StyledRFContainer>
+                        <StyledRFLabel htmlFor="lastName">
+                            Ваша фамилия
+                        </StyledRFLabel>
+                        <Input
+                            id="lastName"
+                            type="lastName"
+                            name="lastName"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                        />
+                        {validationErrors.lastName && (
+                            <StyledRFError>
+                                {validationErrors.lastName}
+                            </StyledRFError>
+                        )}
+                    </StyledRFInputBox>
+                    <StyledRFBtn>
+                        <Button
+                            $variant="primary"
+                            $btnWidth="m"
+                            $btnSquareSize="button--square--size-m"
+                            type="submit"
+                        >
+                            Зарегистрироваться
+                        </Button>
+                    </StyledRFBtn>
+                </form>
+                <StyledRFFooter>
+                    <div>Уже есть аккаунт?</div>
+                    <StyledLink href={RouteEnum.LOGIN}>Вход</StyledLink>
+                </StyledRFFooter>
+            </StyledRFContainer>
+        </OpenRoute>
     );
 };

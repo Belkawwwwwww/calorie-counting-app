@@ -10,7 +10,4 @@ api - запросы на сервер
 consts - константы
 Пример слайса(модуля):
 User
-Contract
-TaskCard - (компонент) Карточка задачи, с отображением информации
-getTasksListFx({ filters }) - (effect) Подгрузка списка задач с параметрами
-getTaskByIdFx(taskId: number)- (effect) Подгрузка задачи по ID
+Session

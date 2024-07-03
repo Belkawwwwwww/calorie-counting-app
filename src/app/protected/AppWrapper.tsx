@@ -1,11 +1,12 @@
-import {setAuth} from '@/f - entities/session/modele/slice/session';
-import {useFetchUserSessionQuery} from '@/g - shared/api/authApi';
+import {useFetchUserSessionQuery} from '@/f - entities/api/authApi';
+import {setAuth} from '@/f - entities/redux/session/modele/action/action';
 import {useAppDispatch} from '@/g - shared/lib/store';
 import {FC, ReactNode, useLayoutEffect, useState} from 'react';
 
 export const AppWrapper: FC<{ children: ReactNode }> = ({children}) => {
     const {data, isLoading, error} = useFetchUserSessionQuery();
     const [isSessionChecked, setIsSessionChecked] = useState(false);
+    const userId = data?.data.id;
 
     const dispatch = useAppDispatch();
 
@@ -38,7 +39,7 @@ export const AppWrapper: FC<{ children: ReactNode }> = ({children}) => {
         } catch (error) {
             console.error('Ошибка при обработке данных:', error);
         }
-    }, [data?.response_status]);
+    }, [userId]);
 
     return isSessionChecked ? <>{children}</> : null;
 };

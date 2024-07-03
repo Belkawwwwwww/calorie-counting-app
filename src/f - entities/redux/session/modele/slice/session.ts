@@ -14,11 +14,8 @@ export const sessionSlice = createSlice({
     name: 'session',
     initialState,
     reducers: {
-        setAuth(state, { payload }: PayloadAction<boolean>) {
+        setAuth(state, {payload}: PayloadAction<boolean>) {
             state.is_authenticated = payload;
-            state.isLoading = false;
         },
     },
 });
-
-export const { setAuth } = sessionSlice.actions;

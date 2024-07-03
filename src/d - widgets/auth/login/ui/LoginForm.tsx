@@ -4,12 +4,14 @@ import {RouteEnum} from '@/g - shared/model/navigation';
 import Link from 'next/link';
 import {Button} from '@/g - shared/ui/Button';
 import {Input} from '@/g - shared/ui/Input';
-import {useAuthUserMutation} from '@/g - shared/api/authApi';
+import {useAuthUserMutation} from '@/f - entities/api/authApi';
 import {AuthResponseScheme, AuthScheme,} from '@/f - entities/auth/model/authScheme';
-import {sessionSlice,} from '@/f - entities/session/modele/slice/session';
 import {z} from 'zod';
 import {useRouter} from 'next/router';
 import {useAppDispatch} from '@/g - shared/lib/store';
+import {setAuth} from '@/f - entities/redux/session/modele/action/action';
+import {setUser} from '@/f - entities/redux/user/model/action/action';
+import {OpenRoute} from '@/c - pages/router-providers';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -77,13 +79,15 @@ export const LoginForm = () => {
             const validatedData = AuthScheme.parse(formData);
             const response = await authUser(validatedData).unwrap();
             const validatedResponse = AuthResponseScheme.parse(response);
+            const backendUser_id = response.data.id;
             if (validatedResponse) {
-                dispatch(sessionSlice.actions.setAuth(true));
+                dispatch(setAuth(true));
+                dispatch(setUser({user_id: backendUser_id}));
                 console.log(authUser);
                 sessionStorage.setItem('session_id', validatedResponse.data.id);
                 router.push(RouteEnum.MAIN);
             } else {
-                router.push(RouteEnum.LOGIN);
+                // router.push(RouteEnum.LOGIN);
             }
 
             console.log('Авторизация успешна');
@@ -105,57 +109,59 @@ export const LoginForm = () => {
         }
     };
     return (
-        <StyledLFContainer>
-            <form onSubmit={handleSubmit}>
-                <StyledLFInputBox>
-                    <StyledLFLabel htmlFor="username">Email</StyledLFLabel>
-                    <Input
-                        id="username"
-                        type="username"
-                        name="username"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    {validationErrors.username && (
-                        <StyledLFError>
-                            {validationErrors.username}
-                        </StyledLFError>
-                    )}
-                    <StyledLFLabel htmlFor="password">Пароль</StyledLFLabel>
-                    <Input
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    {validationErrors.password && (
-                        <StyledLFError>
-                            {validationErrors.password}
-                        </StyledLFError>
-                    )}
-                </StyledLFInputBox>
-                <StyledLFBtn>
-                    <Button
-                        $variant="primary"
-                        $btnWidth="s"
-                        $btnSquareSize="button--square--size-m"
-                        type="submit"
-                    >
-                        Войти
-                    </Button>
-                    <StyledPasswordRecovery>
-                        Восстановление пароля
-                    </StyledPasswordRecovery>
-                </StyledLFBtn>
-            </form>
+        <OpenRoute>
+            <StyledLFContainer>
+                <form onSubmit={handleSubmit}>
+                    <StyledLFInputBox>
+                        <StyledLFLabel htmlFor="username">Email</StyledLFLabel>
+                        <Input
+                            id="username"
+                            type="username"
+                            name="username"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        {validationErrors.username && (
+                            <StyledLFError>
+                                {validationErrors.username}
+                            </StyledLFError>
+                        )}
+                        <StyledLFLabel htmlFor="password">Пароль</StyledLFLabel>
+                        <Input
+                            id="password"
+                            type="password"
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        {validationErrors.password && (
+                            <StyledLFError>
+                                {validationErrors.password}
+                            </StyledLFError>
+                        )}
+                    </StyledLFInputBox>
+                    <StyledLFBtn>
+                        <Button
+                            $variant="primary"
+                            $btnWidth="s"
+                            $btnSquareSize="button--square--size-m"
+                            type="submit"
+                        >
+                            Войти
+                        </Button>
+                        <StyledPasswordRecovery>
+                            Восстановление пароля
+                        </StyledPasswordRecovery>
+                    </StyledLFBtn>
+                </form>
 
-            <StyledLFFooter>
-                <div>Еще не зарегистрированы?</div>
-                <StyledLink href={RouteEnum.REGISTRATION}>
-                    Регистрация
-                </StyledLink>
-            </StyledLFFooter>
-        </StyledLFContainer>
+                <StyledLFFooter>
+                    <div>Еще не зарегистрированы?</div>
+                    <StyledLink href={RouteEnum.REGISTRATION}>
+                        Регистрация
+                    </StyledLink>
+                </StyledLFFooter>
+            </StyledLFContainer>
+        </OpenRoute>
     );
 };

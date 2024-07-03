@@ -1,7 +1,7 @@
 import {FC, ReactNode, useEffect} from 'react';
 import {useAppSelector} from '@/g - shared/lib/store';
 import {useRouter} from 'next/router';
-import {isAuthSelector} from '@/f - entities/session';
+import {isAuthSelector} from '@/f - entities/redux/session';
 
 interface AuthLayoutProps {
     children: ReactNode;

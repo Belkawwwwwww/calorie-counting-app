@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {rootReducer} from '@/app/providers/store-providers/config/rootReducer';
-import registerAPI from '@/g - shared/api/authApi';
+import registerAPI from '@/f - entities/api/authApi';
 
 export const setupStore = () => {
     return configureStore({

@@ -7,5 +7,11 @@ interface StoreProviderProps {
 }
 
 export const StoreProvider = (props: StoreProviderProps) => {
-    return <Provider store={store}>{props.children}</Provider>;
+    return (
+        <Provider store={store}>
+            {/* <PersistGate loading={null} persistor={persistor}> */}
+            {props.children}
+            {/* </PersistGate> */}
+        </Provider>
+    );
 };

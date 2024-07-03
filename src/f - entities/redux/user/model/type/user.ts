@@ -1,4 +1,4 @@
-export type UserObject=  {
+export type UserObject = {
     id: number
     username: string
     gender: string
