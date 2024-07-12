@@ -56,7 +56,6 @@ const StyledLink = styled(Link)`
 
 export const LoginForm = () => {
     const [authUser] = useAuthUserMutation();
-
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [validationErrors, setValidationErrors] = useState({
