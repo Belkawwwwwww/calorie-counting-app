@@ -55,7 +55,7 @@ const StyledLink = styled(Link)`
 `;
 
 export const LoginForm = () => {
-    const [authUser, {data: authData}] = useAuthUserMutation();
+    const [authUser] = useAuthUserMutation();
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -84,10 +84,9 @@ export const LoginForm = () => {
                 dispatch(setAuth(true));
                 dispatch(setUser({user_id: backendUser_id}));
                 console.log(authUser);
-                sessionStorage.setItem('session_id', validatedResponse.data.id);
-                router.push(RouteEnum.MAIN);
+                await router.push(RouteEnum.MAIN);
             } else {
-                // router.push(RouteEnum.LOGIN);
+                await router.push(RouteEnum.LOGIN);
             }
 
             console.log('Авторизация успешна');

@@ -10,13 +10,14 @@ import {z} from 'zod';
 import {useAppDispatch} from '@/g - shared/lib/store';
 import {setAuth} from '@/f - entities/redux/session/modele/action/action';
 import {OpenRoute} from '@/c - pages/router-providers';
+import {setUser} from '@/f - entities/redux/user/model/action/action';
+import {useRouter} from 'next/router';
 
 const StyledRFContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
-    //height: 100vh;
 `;
 const StyledRFInputBox = styled.div`
     display: flex;
@@ -49,7 +50,7 @@ const StyledLink = styled(Link)`
     padding-left: 6px;
 `;
 export const RegisterForm = () => {
-    const [registerUser, { isLoading, isError, error }] =
+    const [registerUser, {isLoading}] =
         useRegisterUserMutation();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -57,6 +58,7 @@ export const RegisterForm = () => {
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const [validationErrors, setValidationErrors] = useState({
         username: '',
@@ -84,11 +86,19 @@ export const RegisterForm = () => {
             });
             const validatedData = RegScheme.parse(formData); // Валидация входных данных с помощью RegScheme
             const response = await registerUser(validatedData).unwrap();
+            const backendUser_id = response.data.id;
             const validatedResponse =
                 RegistrationResponseSchema.parse(response); // Валидация ответа сервера с помощью RegistrationResponseSchema
             console.log('Validated response:', validatedResponse);
-            dispatch(setAuth(true));
-            // sessionStorage.setItem('isAuth', 'true');
+            if (validatedResponse) {
+                dispatch(setAuth(true));
+                dispatch(setUser({user_id: backendUser_id}));
+                console.log(registerUser);
+                router.push(RouteEnum.MAIN);
+            } else {
+                router.push(RouteEnum.LOGIN);
+            }
+
             console.log('Регистрация прошла успешно');
         } catch (error) {
             if (error instanceof z.ZodError) {
