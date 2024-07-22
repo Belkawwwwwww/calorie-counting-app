@@ -1,33 +1,41 @@
 import {useFetchUserSessionQuery} from '@/f - entities/api/authApi';
 import {setAuth} from '@/f - entities/redux/session/modele/action/action';
-import {setUser} from '@/f - entities/redux/user/model/action/action';
 import {setPending} from '@/f - entities/redux/pending/modele/action/action';
 import {useAppDispatch} from '@/g - shared/lib/store';
-import {useCallback, useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
+import {setUser} from '@/f - entities/redux/user/model/action/action';
 
-export const UserSessionFetcher = () => {
+const UserSessionLoader: React.FC = () => {
     const dispatch = useAppDispatch();
-    const {data, error, isFetching} = useFetchUserSessionQuery();
-    console.log('отработал');
-
-    const fetchUserSession = useCallback(() => {
-        if (isFetching || data === undefined) {
-            dispatch(setPending(true));
-        } else {
-            dispatch(setPending(false));
-
-            if (data?.response_status === 0) {
-                dispatch(setAuth(true));
-                dispatch(setUser(data.data.id));
-            } else if (error) {
-                dispatch(setAuth(false));
-            }
-        }
-    }, [data]);
+    const {data, isSuccess, isError, isLoading} = useFetchUserSessionQuery();
+    const prevData = useRef<typeof data | null>(null);
 
     useEffect(() => {
-        fetchUserSession();
-    }, [fetchUserSession]);
+        const delayedDispatch = setTimeout(() => {
+            if (isLoading) {
+                dispatch(setPending(true));
+            } else if (isSuccess) {
+                dispatch(setPending(false));
+                if (data?.response_status === 0) {
+                    if (
+                        prevData.current === null ||
+                        JSON.stringify(prevData.current) !==
+                        JSON.stringify(data)
+                    ) {
+                        prevData.current = data;
+                        dispatch(setAuth(true));
+                        dispatch(setUser(data.data.id));
+                    }
+                } else if (isError) {
+                    dispatch(setAuth(false));
+                }
+            }
+        }, 300);
+
+        return () => clearTimeout(delayedDispatch);
+    }, [data]);
 
     return null;
 };
+
+export const MemoizedUserSessionLoader = React.memo(UserSessionLoader);

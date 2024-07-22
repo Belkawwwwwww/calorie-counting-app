@@ -12,6 +12,7 @@ import {setAuth} from '@/f - entities/redux/session/modele/action/action';
 import {OpenRoute} from '@/c - pages/router-providers';
 import {setUser} from '@/f - entities/redux/user/model/action/action';
 import {useRouter} from 'next/router';
+import {LoadingIndicator} from '@/g - shared/ui/Loader/LoadingIndicator';
 
 const StyledRFContainer = styled.div`
     display: flex;
@@ -50,8 +51,7 @@ const StyledLink = styled(Link)`
     padding-left: 6px;
 `;
 export const RegisterForm = () => {
-    const [registerUser, {isLoading}] =
-        useRegisterUserMutation();
+    const [registerUser, {isLoading}] = useRegisterUserMutation();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -67,6 +67,8 @@ export const RegisterForm = () => {
         firstName: '',
         lastName: '',
     });
+    const [authError, setAuthError] = useState('');
+
     if (isLoading) {
         return <div>Loading...</div>;
     }
@@ -75,7 +77,7 @@ export const RegisterForm = () => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
         const formData = Object.fromEntries(form.entries());
-        console.log('Form data before validation:', formData);
+        console.log('Данные формы перед валидацией:', formData);
         try {
             setValidationErrors({
                 username: '',
@@ -84,22 +86,25 @@ export const RegisterForm = () => {
                 firstName: '',
                 lastName: '',
             });
+            setAuthError('');
             const validatedData = RegScheme.parse(formData); // Валидация входных данных с помощью RegScheme
             const response = await registerUser(validatedData).unwrap();
-            const backendUser_id = response.data.id;
-            const validatedResponse =
-                RegistrationResponseSchema.parse(response); // Валидация ответа сервера с помощью RegistrationResponseSchema
-            console.log('Validated response:', validatedResponse);
-            if (validatedResponse) {
-                dispatch(setAuth(true));
-                dispatch(setUser({user_id: backendUser_id}));
-                console.log(registerUser);
-                router.push(RouteEnum.MAIN);
+            if (response.response_status === 0) {
+                const validatedResponse =
+                    RegistrationResponseSchema.parse(response);
+                const backendUser_id = response.data.id;
+                if (validatedResponse) {
+                    dispatch(setAuth(true));
+                    dispatch(setUser({user_id: backendUser_id}));
+                    console.log(registerUser);
+                    router.push(RouteEnum.MAIN);
+                    console.log('Регистрация успешна');
+                }
             } else {
-                router.push(RouteEnum.LOGIN);
+                setAuthError('Ошибка при регистрации');
+                router.push(RouteEnum.REGISTRATION);
+                console.log(response);
             }
-
-            console.log('Регистрация прошла успешно');
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const errors = error.issues.reduce(
@@ -111,9 +116,10 @@ export const RegisterForm = () => {
                     {} as typeof validationErrors
                 );
                 setValidationErrors(errors);
-                console.log('Validation errors:', errors);
+                console.log('Ошибка валидации:', errors);
             } else {
                 console.error('Registration failed:', error);
+                setAuthError('Произошла ошибка при регистрации');
             }
         }
     };
@@ -123,6 +129,9 @@ export const RegisterForm = () => {
             <StyledRFContainer>
                 <form onSubmit={handleSubmit}>
                     <StyledRFInputBox>
+                        {authError && (
+                            <StyledRFError>{authError}</StyledRFError>
+                        )}
                         <StyledRFLabel htmlFor="username">Email</StyledRFLabel>
                         <Input
                             id="username"
@@ -154,7 +163,7 @@ export const RegisterForm = () => {
                         </StyledRFLabel>
                         <Input
                             id="passwordConfirm"
-                            type="passwordConfirm"
+                            type="password"
                             name="passwordConfirm"
                             value={passwordConfirm}
                             onChange={(e) => setPasswordConfirm(e.target.value)}
@@ -201,10 +210,14 @@ export const RegisterForm = () => {
                         <Button
                             $variant="primary"
                             $btnWidth="m"
-                            $btnSquareSize="button--square--size-m"
+                            $btnSquareSize="button--square--size-l"
                             type="submit"
                         >
-                            Зарегистрироваться
+                            {isLoading ? (
+                                <LoadingIndicator/>
+                            ) : (
+                                'Зарегистрироваться'
+                            )}
                         </Button>
                     </StyledRFBtn>
                 </form>

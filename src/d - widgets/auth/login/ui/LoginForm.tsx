@@ -12,6 +12,7 @@ import {useAppDispatch} from '@/g - shared/lib/store';
 import {setAuth} from '@/f - entities/redux/session/modele/action/action';
 import {setUser} from '@/f - entities/redux/user/model/action/action';
 import {OpenRoute} from '@/c - pages/router-providers';
+import {LoadingIndicator} from '@/g - shared/ui/Loader/LoadingIndicator';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -55,15 +56,19 @@ const StyledLink = styled(Link)`
 `;
 
 export const LoginForm = () => {
-    const [authUser] = useAuthUserMutation();
+    const [authUser, {isLoading}] = useAuthUserMutation();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [validationErrors, setValidationErrors] = useState({
         username: '',
         password: '',
     });
+    const [authError, setAuthError] = useState('');
     const dispatch = useAppDispatch();
     const router = useRouter();
+    // if (isLoading) {
+    //     return <div>Loading...</div>;
+    // }
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
@@ -75,20 +80,24 @@ export const LoginForm = () => {
                 username: '',
                 password: '',
             });
+            setAuthError('');
             const validatedData = AuthScheme.parse(formData);
             const response = await authUser(validatedData).unwrap();
-            const validatedResponse = AuthResponseScheme.parse(response);
-            const backendUser_id = response.data.id;
-            if (validatedResponse) {
-                dispatch(setAuth(true));
-                dispatch(setUser({user_id: backendUser_id}));
-                console.log(authUser);
-                await router.push(RouteEnum.MAIN);
+            if (response.response_status === 0) {
+                const validatedResponse = AuthResponseScheme.parse(response);
+                const backendUser_id = response.data.id;
+                if (validatedResponse) {
+                    dispatch(setAuth(true));
+                    dispatch(setUser({user_id: backendUser_id}));
+                    console.log(authUser);
+                    await router.push(RouteEnum.MAIN);
+                    console.log('Авторизация успешна');
+                }
             } else {
+                setAuthError('Неправильный логин или пароль');
                 await router.push(RouteEnum.LOGIN);
+                console.log(response);
             }
-
-            console.log('Авторизация успешна');
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const errors = error.issues.reduce(
@@ -103,6 +112,7 @@ export const LoginForm = () => {
                 console.log('Ошибки валидации:', errors);
             } else {
                 console.error('Ошибка регистрации:', error);
+                setAuthError('Произошла ошибка при авторизации');
             }
         }
     };
@@ -111,6 +121,9 @@ export const LoginForm = () => {
             <StyledLFContainer>
                 <form onSubmit={handleSubmit}>
                     <StyledLFInputBox>
+                        {authError && (
+                            <StyledLFError>{authError}</StyledLFError>
+                        )}
                         <StyledLFLabel htmlFor="username">Email</StyledLFLabel>
                         <Input
                             id="username"
@@ -145,7 +158,7 @@ export const LoginForm = () => {
                             $btnSquareSize="button--square--size-m"
                             type="submit"
                         >
-                            Войти
+                            {isLoading ? <LoadingIndicator/> : 'Войти'}
                         </Button>
                         <StyledPasswordRecovery>
                             Восстановление пароля

@@ -25,8 +25,10 @@ const StyledButton = styled.button<ButtonProps>`
         return '14px';
       case 'button--square--size-m':
         return '16px';
+      case 'button--square--size-l':
+        return '16px';
       default:
-        return '14px';
+        return '16px';
     }
   }};
   width: ${(props) => {
@@ -43,7 +45,8 @@ const StyledButton = styled.button<ButtonProps>`
   }};
 `;
 
-export const Button: FC<ButtonProps> = memo(({children, disabled, onClick, ...otherProps}) => {
+export const Button: FC<ButtonProps> = memo(
+    ({children, disabled, onClick, ...otherProps}) => {
         return (
             <StyledButton disabled={disabled} onClick={onClick} {...otherProps}>
                 {children}

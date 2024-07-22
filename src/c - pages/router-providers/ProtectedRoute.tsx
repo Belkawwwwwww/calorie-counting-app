@@ -9,19 +9,13 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute: FC<ProtectedRouteProps> = ({children}) => {
-    // const pending = useAppSelector(isPendingSelector);
-
     const router = useRouter();
     const isAuth = useAppSelector(isAuthSelector);
-    console.log('протект');
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            // if (!isAuth && !pending) {
-            //     router.push(RouteEnum.LOGIN);
-            // }
             if (!isAuth) {
-                router.push(RouteEnum.LOGIN)
+                router.push(RouteEnum.LOGIN);
             }
         }
     }, [isAuth]);

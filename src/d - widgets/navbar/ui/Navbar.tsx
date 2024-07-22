@@ -1,9 +1,9 @@
-import { useAppSelector } from '@/g - shared/lib/store';
+import {useAppSelector} from '@/g - shared/lib/store';
 import styled from 'styled-components';
-import { Logo } from '@/g - shared/ui/Logo';
-import { FC } from 'react';
+import {Logo} from '@/g - shared/ui/Logo';
+import {FC} from 'react';
 import Link from 'next/link';
-import { RouteEnum } from '@/g - shared/model/navigation';
+import {RouteEnum} from '@/g - shared/model/navigation';
 
 const StyledHeader = styled.header`
     position: relative;
@@ -15,20 +15,26 @@ const StyledHeader = styled.header`
     padding-left: 100px;
     padding-right: 100px;
 `;
-const StyledIcons = styled.img``;
 
+const AuthLinks = styled.div`
+  /* display: flex; */
+  /* gap: 10px; */
+`;
+const StyledLinks = styled(Link)`
+  color: black;
+  text-decoration: none;
+`;
 export const Navbar: FC = () => {
     const isAuth = useAppSelector((state) => state.session.is_authenticated);
-
     return (
         <StyledHeader>
             <Logo />
             {!isAuth ? (
-                <></>
+                <AuthLinks>
+                    <StyledLinks href={RouteEnum.LOGIN}>ВХОД</StyledLinks>
+                </AuthLinks>
             ) : (
-                <Link href={RouteEnum.PROFILE}>
-                    <StyledIcons src="" alt="profile-icons" />
-                </Link>
+                <StyledLinks href={RouteEnum.PROFILE}>ПРОФИЛЬ</StyledLinks>
             )}
         </StyledHeader>
     );

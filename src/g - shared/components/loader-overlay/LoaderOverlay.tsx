@@ -1,8 +1,6 @@
-// LoaderOverlay.tsx
-import {FC, ReactNode} from 'react';
+import React, {FC, ReactNode} from 'react';
 import {useAppSelector} from '@/g - shared/lib/store';
 import {isPendingSelector} from '@/f - entities/redux/pending';
-import {UserSessionFetcher} from '@/e - features/user/UserSessionFetcher';
 import styled, {keyframes} from 'styled-components';
 
 const animloader = keyframes`
@@ -21,25 +19,25 @@ const animloader = keyframes`
 `;
 
 const StyledLoaderContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 const StyledLoader = styled.span`
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: block;
-  margin: 15px auto;
-  position: relative;
-  color: var(--color-background1);
-  box-sizing: border-box;
-  animation: ${animloader} 1s linear infinite alternate;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+    margin: 15px auto;
+    position: relative;
+    color: var(--color-background1);
+    box-sizing: border-box;
+    animation: ${animloader} 1s linear infinite alternate;
 `;
 
 interface LoaderOverlayProps {
@@ -48,25 +46,18 @@ interface LoaderOverlayProps {
 
 export const LoaderOverlay: FC<LoaderOverlayProps> = ({children}) => {
     const pending = useAppSelector(isPendingSelector);
-    console.log(pending);
-
-    const renderContent = () => {
-        if (pending) {
-            // return children;
-            return (
-                <StyledLoaderContainer>
-                    <StyledLoader></StyledLoader>
-                </StyledLoaderContainer>
-            );
-        } else {
-            return children;
-        }
-    };
 
     return (
         <>
-            {pending && <UserSessionFetcher/>}
-            {renderContent()}
+            {pending ? (
+                <StyledLoaderContainer>
+                    <StyledLoader></StyledLoader>
+                </StyledLoaderContainer>
+            ) : (
+                children
+            )}
         </>
     );
 };
+
+export const MemoizedLoader = React.memo(LoaderOverlay);
