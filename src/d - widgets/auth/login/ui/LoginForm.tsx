@@ -98,7 +98,6 @@ export const LoginForm = () => {
             } else {
                 console.error('Ошибка регистрации: authUser is null or undefined');
                 setAuthError('Произошла ошибка при авторизации');
-
             }
 
         } catch (error: unknown | z.ZodError) {

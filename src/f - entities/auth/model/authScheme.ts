@@ -10,8 +10,8 @@ export const AuthResponseScheme = z.object({
         username: z.string().email(),
         email_confirm: z.boolean(),
         is_active: z.boolean(),
-        firstName: z.string(),
-        lastName: z.string(),
+        first_name: z.string(),
+        last_name: z.string(),
     }),
 });
 
