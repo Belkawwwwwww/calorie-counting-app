@@ -1,9 +1,8 @@
-import React, {FC} from "react";
-import {QuestionComponent} from "@/g - shared/components/question-component/QuestionComponent";
-import styled from "styled-components";
-import {Button} from "@/g - shared/ui/Button";
-import {InputWithRules} from "@/e - features/input-with-rules";
-import {useInputValidation} from "@/e - features/TestQuestions/lib";
+import React, {FC} from 'react';
+import {QuestionComponent} from '@/g - shared/components/question-component/QuestionComponent';
+import styled from 'styled-components';
+import {InputWithRules} from '@/e - features/input-with-rules';
+import {useInputValidation} from '@/e - features/TestQuestions/lib';
 
 interface WeightQuestionProps {
     onAnswer: (answer: string) => void;
@@ -14,13 +13,16 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-`
+`;
 
-export const WeightQuestion: FC<WeightQuestionProps> = ({onAnswer, onNextQuestion,}) => {
+export const WeightQuestion: FC<WeightQuestionProps> = ({
+                                                            onAnswer,
+                                                            onNextQuestion,
+                                                        }) => {
     const validationRegex = /^[1-9]\d*$/;
 
-    const {inputValue, isInputValid, handleInputChange} = useInputValidation(validationRegex);
-
+    const {inputValue, isInputValid, handleInputChange} =
+        useInputValidation(validationRegex);
 
     const handleSubmit = () => {
         if (isInputValid) {
@@ -39,13 +41,15 @@ export const WeightQuestion: FC<WeightQuestionProps> = ({onAnswer, onNextQuestio
                 onNextQuestion={onNextQuestion}
             />
             <StyledContainer>
-                <InputWithRules onChange={handleInputChange}
-                                value={inputValue}
-                                rules={/^[1-9]\d*$/}
-                                placeholder="Введите рост в см"
-                                text="Введите корректное число"
-                                required/>
-                {inputValue && (
+                <InputWithRules
+                    onChange={handleInputChange}
+                    value={inputValue}
+                    rules={/^[1-9]\d*$/}
+                    placeholder="Введите рост в см"
+                    text="Введите корректное число"
+                    required
+                />
+                {/* {inputValue ? (
                     <Button
                         $variant="primary"
                         $btnWidth="m"
@@ -54,11 +58,8 @@ export const WeightQuestion: FC<WeightQuestionProps> = ({onAnswer, onNextQuestio
                     >
                         Следующий вопрос
                     </Button>
-                )}
+                ): null} */}
             </StyledContainer>
-
         </>
     );
 };
-
-

@@ -7,13 +7,14 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin: react/recommend",
-        "plugin: react/jsx-runtime",
+        "plugin:react/recommend",
+        "plugin:react/jsx-runtime",
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:import/recommended",
         "prettier"
     ],
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -21,7 +22,10 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": ["prettier"],
+    "plugins": [
+        "react",
+        "prettier"
+    ],
     "rules": {
         "prettier/prettier": "error"
     }

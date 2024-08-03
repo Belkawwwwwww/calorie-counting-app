@@ -1,9 +1,8 @@
-import React, { FC } from "react";
-import { QuestionComponent } from "@/g - shared/components/question-component/QuestionComponent";
-import styled from "styled-components";
-import { Button } from "@/g - shared/ui/Button";
-import { InputWithRules } from "@/e - features/input-with-rules";
-import {useInputValidation} from "@/e - features/TestQuestions/lib";
+import React, {FC} from 'react';
+import {QuestionComponent} from '@/g - shared/components/question-component/QuestionComponent';
+import styled from 'styled-components';
+import {InputWithRules} from '@/e - features/input-with-rules';
+import {useInputValidation} from '@/e - features/TestQuestions/lib';
 
 interface GrowthQuestionProps {
     onAnswer: (answer: string) => void;
@@ -18,9 +17,13 @@ const StyledContainer = styled.div`
   align-items: center;
 `;
 
-export const GrowthQuestion: FC<GrowthQuestionProps> = ({ onAnswer, onNextQuestion }) => {
+export const GrowthQuestion: FC<GrowthQuestionProps> = ({
+                                                            onAnswer,
+                                                            onNextQuestion,
+                                                        }) => {
     const validationRegex = /^[1-9]\d*$/;
-    const { inputValue, isInputValid, handleInputChange } = useInputValidation(validationRegex);
+    const {inputValue, isInputValid, handleInputChange} =
+        useInputValidation(validationRegex);
 
     const handleSubmit = () => {
         if (isInputValid) {
@@ -34,7 +37,8 @@ export const GrowthQuestion: FC<GrowthQuestionProps> = ({ onAnswer, onNextQuesti
             <QuestionComponent
                 title="Какой у вас рост?"
                 selectedAnswer={null}
-                onAnswer={() => { }}
+                onAnswer={() => {
+                }}
                 onNextQuestion={onNextQuestion}
             />
             <StyledContainer>
@@ -46,7 +50,7 @@ export const GrowthQuestion: FC<GrowthQuestionProps> = ({ onAnswer, onNextQuesti
                     text="Введите корректное число"
                     required
                 />
-                {inputValue && (
+                {/* {inputValue ? (
                     <Button
                         $variant="primary"
                         $btnWidth="m"
@@ -56,7 +60,7 @@ export const GrowthQuestion: FC<GrowthQuestionProps> = ({ onAnswer, onNextQuesti
                     >
                         Следующий вопрос
                     </Button>
-                )}
+                ): null} */}
             </StyledContainer>
         </>
     );

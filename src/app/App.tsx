@@ -13,7 +13,6 @@ export default function App({ Component, pageProps }: AppProps) {
             <MemoizedLoader>
                 <Navbar/>
                 <Component {...pageProps} />
-                {/*<Footer/>*/}
             </MemoizedLoader>
         </AppProviders>
     );

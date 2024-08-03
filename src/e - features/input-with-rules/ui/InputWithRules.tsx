@@ -35,7 +35,7 @@
 //     return (
 //         <>
 //             <Input value={value} onChange={onChange} inputRef={inputRef} {...others} />
-//             {!isRelative && <StyledInputText>{text}</StyledInputText>}
+//             {!isRelative ? (<StyledInputText>{text}</StyledInputText>): null}
 //         </>
 //     );
 // };

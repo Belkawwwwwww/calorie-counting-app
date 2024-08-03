@@ -102,13 +102,12 @@ export const RegisterForm = () => {
                 }
             } else {
                 setAuthError('Ошибка при регистрации');
-                router.push(RouteEnum.REGISTRATION);
                 console.log(response);
             }
-        } catch (error) {
+        } catch (error: unknown | z.ZodError) {
             if (error instanceof z.ZodError) {
                 const errors = error.issues.reduce(
-                    (acc, issue) => {
+                    (acc: typeof validationErrors, issue: z.ZodIssue) => {
                         acc[issue.path[0] as keyof typeof validationErrors] =
                             issue.message;
                         return acc;
@@ -129,9 +128,9 @@ export const RegisterForm = () => {
             <StyledRFContainer>
                 <form onSubmit={handleSubmit}>
                     <StyledRFInputBox>
-                        {authError && (
+                        {authError ? (
                             <StyledRFError>{authError}</StyledRFError>
-                        )}
+                        ) : null}
                         <StyledRFLabel htmlFor="username">Email</StyledRFLabel>
                         <Input
                             id="username"
@@ -140,11 +139,11 @@ export const RegisterForm = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        {validationErrors.username && (
+                        {validationErrors.username ? (
                             <StyledRFError>
                                 {validationErrors.username}
                             </StyledRFError>
-                        )}
+                        ) : null}
                         <StyledRFLabel htmlFor="password">Пароль</StyledRFLabel>
                         <Input
                             type="password"
@@ -153,11 +152,11 @@ export const RegisterForm = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        {validationErrors.password && (
+                        {validationErrors.password ? (
                             <StyledRFError>
                                 {validationErrors.password}
                             </StyledRFError>
-                        )}
+                        ) : null}
                         <StyledRFLabel htmlFor="passwordConfirm">
                             Повторите пароль
                         </StyledRFLabel>
@@ -168,11 +167,11 @@ export const RegisterForm = () => {
                             value={passwordConfirm}
                             onChange={(e) => setPasswordConfirm(e.target.value)}
                         />
-                        {validationErrors.passwordConfirm && (
+                        {validationErrors.passwordConfirm ? (
                             <StyledRFError>
                                 {validationErrors.passwordConfirm}
                             </StyledRFError>
-                        )}
+                        ) : null}
 
                         <StyledRFLabel htmlFor="firstName">
                             Ваше имя
@@ -184,11 +183,11 @@ export const RegisterForm = () => {
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                         />
-                        {validationErrors.firstName && (
+                        {validationErrors.firstName ? (
                             <StyledRFError>
                                 {validationErrors.firstName}
                             </StyledRFError>
-                        )}
+                        ) : null}
 
                         <StyledRFLabel htmlFor="lastName">
                             Ваша фамилия
@@ -200,11 +199,11 @@ export const RegisterForm = () => {
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                         />
-                        {validationErrors.lastName && (
+                        {validationErrors.lastName ? (
                             <StyledRFError>
                                 {validationErrors.lastName}
                             </StyledRFError>
-                        )}
+                        ) : null}
                     </StyledRFInputBox>
                     <StyledRFBtn>
                         <Button

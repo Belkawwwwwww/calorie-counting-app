@@ -1,8 +1,7 @@
-import React, {FC, useState} from "react";
-import styled from "styled-components";
-import {QuestionComponent} from "@/g - shared/components/question-component/QuestionComponent";
-import {InputWithRules} from "@/e - features/input-with-rules";
-import {Button} from "@/g - shared/ui/Button";
+import React, {FC, useState} from 'react';
+import styled from 'styled-components';
+import {QuestionComponent} from '@/g - shared/components/question-component/QuestionComponent';
+import {InputWithRules} from '@/e - features/input-with-rules';
 
 interface DateOfBirthQuestionProps {
     onAnswer: (answer: string) => void;
@@ -15,11 +14,11 @@ const StyledContainer = styled.div`
   margin: 0 auto;
 `;
 
-
 export const DateOfBirthQuestion: FC<DateOfBirthQuestionProps> = ({
-                                                                      onAnswer, onNextQuestion,
+                                                                      onAnswer,
+                                                                      onNextQuestion,
                                                                   }) => {
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState('');
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
@@ -56,7 +55,7 @@ export const DateOfBirthQuestion: FC<DateOfBirthQuestionProps> = ({
                     type="date"
                     required
                 />
-                {inputValue && (
+                {/* {inputValue ? (
                     <Button
                         $variant="primary"
                         $btnWidth="m"
@@ -65,7 +64,7 @@ export const DateOfBirthQuestion: FC<DateOfBirthQuestionProps> = ({
                     >
                         Следующий вопрос
                     </Button>
-                )}
+                ): null} */}
             </StyledContainer>
         </>
     );

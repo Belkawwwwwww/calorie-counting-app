@@ -1,18 +1,16 @@
-import React, {
-    MouseEventHandler,
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
-} from "react";
-import Portal, { createContainer } from './ModalPortal';
+import React, {MouseEventHandler, useCallback, useEffect, useRef, useState,} from 'react';
+import Portal, {createContainer} from './ModalPortal';
 
 type IModalProps = {
     title?: string;
     onClose: () => void;
     children?: React.ReactNode | React.ReactNode[];
-    footerButtons?: { name: string; onClick?: () => void; disabled?: boolean }[];
-    position?: "top" | "bottom" | "left" | "right" | "width";
+    footerButtons?: {
+        name: string;
+        onClick?: () => void;
+        disabled?: boolean;
+    }[];
+    position?: 'top' | 'bottom' | 'left' | 'right' | 'width';
     customPosition?: {
         [key: string]: string | number;
     };
@@ -21,7 +19,7 @@ type IModalProps = {
     image?: string | undefined;
     imageClassName?: string;
 };
-const MODAL_CONTAINER_ID = "modal-container-id";
+const MODAL_CONTAINER_ID = 'modal-container-id';
 export const Modal = (props: IModalProps) => {
     const {
         title,
@@ -38,10 +36,11 @@ export const Modal = (props: IModalProps) => {
     const [isMounted, setIsMounted] = useState(false);
 
     const modalStyle = {
-        top: customPosition?.top || (position === "top" ? 0 : undefined),
-        bottom: customPosition?.bottom || (position === "bottom" ? 0 : undefined),
-        left: customPosition?.left || (position === "left" ? 0 : undefined),
-        right: customPosition?.right || (position === "right" ? 0 : undefined),
+        top: customPosition?.top || (position === 'top' ? 0 : undefined),
+        bottom:
+            customPosition?.bottom || (position === 'bottom' ? 0 : undefined),
+        left: customPosition?.left || (position === 'left' ? 0 : undefined),
+        right: customPosition?.right || (position === 'right' ? 0 : undefined),
         width: width || undefined,
         height: height || undefined,
     };
@@ -60,17 +59,17 @@ export const Modal = (props: IModalProps) => {
             }
         };
         const handleEscapePress = (e: KeyboardEvent) => {
-            if (e.key === "Escape") {
+            if (e.key === 'Escape') {
                 onClose?.();
             }
         };
 
-        window.addEventListener("click", handleWrapperClick);
-        window.addEventListener("keydown", handleEscapePress);
+        window.addEventListener('click', handleWrapperClick);
+        window.addEventListener('keydown', handleEscapePress);
 
         return () => {
-            window.removeEventListener("click", handleWrapperClick);
-            window.removeEventListener("keydown", handleEscapePress);
+            window.removeEventListener('click', handleWrapperClick);
+            window.removeEventListener('keydown', handleEscapePress);
         };
     }, [onClose]);
 
@@ -81,12 +80,9 @@ export const Modal = (props: IModalProps) => {
 
     return isMounted ? (
         <Portal id={MODAL_CONTAINER_ID}>
-            <div  ref={rootRef}>
-                <div  onClick={handleClose}></div>
-                <div
-
-                    style={modalStyle}
-                >
+            <div ref={rootRef}>
+                <div onClick={handleClose}></div>
+                <div style={modalStyle}>
                     <button
                         type="button"
                         // className={styles.closeButton}
@@ -94,17 +90,17 @@ export const Modal = (props: IModalProps) => {
                     >
                         Х
                     </button>
-                    <div >
-                        {image && (
+                    <div>
+                        {image ? (
                             <img
                                 src={image}
                                 alt="Модальное окно"
                                 className={props.imageClassName}
                             />
-                        )}
-                        <p >{title}</p>
+                        ) : null}
+                        <p>{title}</p>
                     </div>
-                    <div >{children}</div>
+                    <div>{children}</div>
                     <div>
                         {footerButtons?.map((button, index) => (
                             <button

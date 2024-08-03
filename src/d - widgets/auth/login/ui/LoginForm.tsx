@@ -4,7 +4,6 @@ import {RouteEnum} from '@/g - shared/model/navigation';
 import Link from 'next/link';
 import {Button} from '@/g - shared/ui/Button';
 import {Input} from '@/g - shared/ui/Input';
-import {useAuthUserMutation} from '@/f - entities/api/authApi';
 import {AuthResponseScheme, AuthScheme,} from '@/f - entities/auth/model/authScheme';
 import {z} from 'zod';
 import {useRouter} from 'next/router';
@@ -13,6 +12,7 @@ import {setAuth} from '@/f - entities/redux/session/modele/action/action';
 import {setUser} from '@/f - entities/redux/user/model/action/action';
 import {OpenRoute} from '@/c - pages/router-providers';
 import {LoadingIndicator} from '@/g - shared/ui/Loader/LoadingIndicator';
+import {useAuthUserMutation} from "@/f - entities/api/authApi";
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -20,7 +20,6 @@ const StyledLFContainer = styled.div`
     justify-content: center;
     position: relative;
     width: 450px;
-    /* height: 100vh; */
 `;
 const StyledLFInputBox = styled.div`
     display: flex;
@@ -66,9 +65,6 @@ export const LoginForm = () => {
     const [authError, setAuthError] = useState('');
     const dispatch = useAppDispatch();
     const router = useRouter();
-    // if (isLoading) {
-    //     return <div>Loading...</div>;
-    // }
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
@@ -82,26 +78,33 @@ export const LoginForm = () => {
             });
             setAuthError('');
             const validatedData = AuthScheme.parse(formData);
-            const response = await authUser(validatedData).unwrap();
-            if (response.response_status === 0) {
-                const validatedResponse = AuthResponseScheme.parse(response);
-                const backendUser_id = response.data.id;
-                if (validatedResponse) {
-                    dispatch(setAuth(true));
-                    dispatch(setUser({user_id: backendUser_id}));
-                    console.log(authUser);
-                    await router.push(RouteEnum.MAIN);
-                    console.log('Авторизация успешна');
+            if (authUser) {
+                const response = await authUser(validatedData).unwrap();
+                if (response?.response_status === 0) {
+                    const validatedResponse = AuthResponseScheme.parse(response);
+                    const backendUser_id = response?.data?.id;
+                    if (validatedResponse) {
+                        dispatch(setAuth(true));
+                        dispatch(setUser({user_id: backendUser_id}));
+                        console.log(authUser);
+                        await router.push(RouteEnum.MAIN);
+                        console.log('Авторизация успешна');
+                    }
+                } else {
+                    setAuthError('Неправильный логин или пароль');
+                    console.log(response);
                 }
+
             } else {
-                setAuthError('Неправильный логин или пароль');
-                await router.push(RouteEnum.LOGIN);
-                console.log(response);
+                console.error('Ошибка регистрации: authUser is null or undefined');
+                setAuthError('Произошла ошибка при авторизации');
+
             }
-        } catch (error) {
+
+        } catch (error: unknown | z.ZodError) {
             if (error instanceof z.ZodError) {
                 const errors = error.issues.reduce(
-                    (acc, issue) => {
+                    (acc: typeof validationErrors, issue: z.ZodIssue) => {
                         acc[issue.path[0] as keyof typeof validationErrors] =
                             issue.message;
                         return acc;
@@ -121,42 +124,42 @@ export const LoginForm = () => {
             <StyledLFContainer>
                 <form onSubmit={handleSubmit}>
                     <StyledLFInputBox>
-                        {authError && (
+                        {authError ? (
                             <StyledLFError>{authError}</StyledLFError>
-                        )}
-                        <StyledLFLabel htmlFor="username">Email</StyledLFLabel>
+                        ) : null}
+                        <StyledLFLabel htmlFor='username'>Email</StyledLFLabel>
                         <Input
-                            id="username"
-                            type="username"
-                            name="username"
+                            id='username'
+                            type='username'
+                            name='username'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        {validationErrors.username && (
+                        {validationErrors.username ? (
                             <StyledLFError>
                                 {validationErrors.username}
                             </StyledLFError>
-                        )}
-                        <StyledLFLabel htmlFor="password">Пароль</StyledLFLabel>
+                        ) : null}
+                        <StyledLFLabel htmlFor='password'>Пароль</StyledLFLabel>
                         <Input
-                            id="password"
-                            type="password"
-                            name="password"
+                            id='password'
+                            type='password'
+                            name='password'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        {validationErrors.password && (
+                        {validationErrors.password ? (
                             <StyledLFError>
                                 {validationErrors.password}
                             </StyledLFError>
-                        )}
+                        ) : null}
                     </StyledLFInputBox>
                     <StyledLFBtn>
                         <Button
-                            $variant="primary"
-                            $btnWidth="s"
-                            $btnSquareSize="button--square--size-m"
-                            type="submit"
+                            $variant='primary'
+                            $btnWidth='s'
+                            $btnSquareSize='button--square--size-m'
+                            type='submit'
                         >
                             {isLoading ? <LoadingIndicator/> : 'Войти'}
                         </Button>

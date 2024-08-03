@@ -64,7 +64,7 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
     return (
         <StyledContainer>
             <StyledTitle>{title}</StyledTitle>
-            {options && (
+            {options ? (
                 <>
                     <StyledOptions>
                         {options.map((option) => (
@@ -77,7 +77,7 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
                             </CustomOption>
                         ))}
                     </StyledOptions>
-                    {/* {selectedAnswer !== null && (
+                    {/* {selectedAnswer !== null ?(
                         <Button
                             $variant="primary"
                             $btnWidth="m"
@@ -86,9 +86,9 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
                         >
                             Следующий вопрос
                         </Button>
-                    )} */}
+                    ): null} */}
                 </>
-            )}
+            ) : null}
         </StyledContainer>
     );
 };
