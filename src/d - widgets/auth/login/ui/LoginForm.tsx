@@ -1,18 +1,21 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {RouteEnum} from '@/g - shared/model/navigation';
+import { RouteEnum } from '@/g - shared/model/navigation';
 import Link from 'next/link';
-import {Button} from '@/g - shared/ui/Button';
-import {Input} from '@/g - shared/ui/Input';
-import {AuthResponseScheme, AuthScheme,} from '@/f - entities/auth/model/authScheme';
-import {z} from 'zod';
-import {useRouter} from 'next/router';
-import {useAppDispatch} from '@/g - shared/lib/store';
-import {setAuth} from '@/f - entities/redux/session/modele/action/action';
-import {setUser} from '@/f - entities/redux/user/model/action/action';
-import {OpenRoute} from '@/c - pages/router-providers';
-import {LoadingIndicator} from '@/g - shared/ui/Loader/LoadingIndicator';
-import {useAuthUserMutation} from "@/f - entities/api/authApi";
+import { Button } from '@/g - shared/ui/Button';
+import { Input } from '@/g - shared/ui/Input';
+import {
+    AuthResponseScheme,
+    AuthScheme,
+} from '@/f - entities/auth/model/authScheme';
+import { z } from 'zod';
+import { useRouter } from 'next/router';
+import { useAppDispatch } from '@/g - shared/lib/store';
+import { setAuth } from '@/f - entities/redux/session/modele/action/action';
+import { setUser } from '@/f - entities/redux/user/model/action/action';
+import { OpenRoute } from '@/c - pages/router-providers';
+import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
+import { useAuthUserMutation } from '@/f - entities/api/authApi';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -55,7 +58,7 @@ const StyledLink = styled(Link)`
 `;
 
 export const LoginForm = () => {
-    const [authUser, {isLoading}] = useAuthUserMutation();
+    const [authUser, { isLoading }] = useAuthUserMutation();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [validationErrors, setValidationErrors] = useState({
@@ -81,11 +84,12 @@ export const LoginForm = () => {
             if (authUser) {
                 const response = await authUser(validatedData).unwrap();
                 if (response?.response_status === 0) {
-                    const validatedResponse = AuthResponseScheme.parse(response);
+                    const validatedResponse =
+                        AuthResponseScheme.parse(response);
                     const backendUser_id = response?.data?.id;
                     if (validatedResponse) {
                         dispatch(setAuth(true));
-                        dispatch(setUser({user_id: backendUser_id}));
+                        dispatch(setUser({ user_id: backendUser_id }));
                         console.log(authUser);
                         await router.push(RouteEnum.MAIN);
                         console.log('Авторизация успешна');
@@ -94,12 +98,12 @@ export const LoginForm = () => {
                     setAuthError('Неправильный логин или пароль');
                     console.log(response);
                 }
-
             } else {
-                console.error('Ошибка регистрации: authUser is null or undefined');
+                console.error(
+                    'Ошибка регистрации: authUser is null or undefined'
+                );
                 setAuthError('Произошла ошибка при авторизации');
             }
-
         } catch (error: unknown | z.ZodError) {
             if (error instanceof z.ZodError) {
                 const errors = error.issues.reduce(
@@ -160,7 +164,7 @@ export const LoginForm = () => {
                             $btnSquareSize='button--square--size-m'
                             type='submit'
                         >
-                            {isLoading ? <LoadingIndicator/> : 'Войти'}
+                            {isLoading ? <LoadingIndicator /> : 'Войти'}
                         </Button>
                         <StyledPasswordRecovery>
                             Восстановление пароля
