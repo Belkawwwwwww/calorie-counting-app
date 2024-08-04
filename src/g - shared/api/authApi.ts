@@ -1,14 +1,20 @@
-import {createApi, fetchBaseQuery,} from '@reduxjs/toolkit/query/react';
-import {RegistrationResponseSchema, RegScheme,} from '@/f - entities/auth/model/registrationSchema';
-import {AuthResponseScheme, AuthScheme,} from '@/f - entities/auth/model/authScheme';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+    RegistrationResponseSchema,
+    RegScheme,
+} from '@/f - entities/auth/model/registrationSchema';
+import {
+    AuthResponseScheme,
+    AuthScheme,
+} from '@/f - entities/auth/model/authScheme';
 
-const API = createApi({
+const authAPI = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({baseUrl: 'https://dev-eda.ibell.online/'}),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://dev-eda.ibell.online/' }),
     endpoints: (build) => ({
         registerUser: build.mutation<
             typeof RegistrationResponseSchema._output,
-            Partial<RegScheme>
+            typeof RegScheme._input
         >({
             query: (body) => ({
                 url: 'api/v1/user/register',
@@ -44,5 +50,5 @@ export const {
     useRegisterUserMutation,
     useAuthUserMutation,
     useFetchUserSessionQuery,
-} = API;
-export default API;
+} = authAPI;
+export default authAPI;

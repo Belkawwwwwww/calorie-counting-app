@@ -15,7 +15,8 @@ import { setAuth } from '@/f - entities/redux/session/modele/action/action';
 import { setUser } from '@/f - entities/redux/user/model/action/action';
 import { OpenRoute } from '@/c - pages/router-providers';
 import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
-import { useAuthUserMutation } from '@/f - entities/api/authApi';
+import { useAuthUserMutation } from '@/g - shared/api/authApi';
+import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -126,37 +127,27 @@ export const LoginForm = () => {
         <OpenRoute>
             <StyledLFContainer>
                 <form onSubmit={handleSubmit}>
-                    <StyledLFInputBox>
-                        {authError ? (
-                            <StyledLFError>{authError}</StyledLFError>
-                        ) : null}
-                        <StyledLFLabel htmlFor='username'>Email</StyledLFLabel>
-                        <Input
-                            id='username'
-                            type='username'
-                            name='username'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        {validationErrors.username ? (
-                            <StyledLFError>
-                                {validationErrors.username}
-                            </StyledLFError>
-                        ) : null}
-                        <StyledLFLabel htmlFor='password'>Пароль</StyledLFLabel>
-                        <Input
-                            id='password'
-                            type='password'
-                            name='password'
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        {validationErrors.password ? (
-                            <StyledLFError>
-                                {validationErrors.password}
-                            </StyledLFError>
-                        ) : null}
-                    </StyledLFInputBox>
+                    {authError ? (
+                        <StyledLFError>{authError}</StyledLFError>
+                    ) : null}
+                    <InputBox
+                        label='Email'
+                        error={validationErrors.username}
+                        id='username'
+                        type='username'
+                        name='username'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <InputBox
+                        label='Пароль'
+                        error={validationErrors.password}
+                        id='password'
+                        type='password'
+                        name='password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
                     <StyledLFBtn>
                         <Button
                             $variant='primary'

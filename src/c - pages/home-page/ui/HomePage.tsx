@@ -49,7 +49,6 @@ const StyledImg = styled.div<StyledImgProps>`
   background-image: url(${(props) => props.src});
   background-size: cover;
   background-position: center;
-  /* border-radius: 10px; */
 `;
 
 interface ImageProps {

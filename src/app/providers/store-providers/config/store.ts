@@ -1,12 +1,15 @@
 import {configureStore} from '@reduxjs/toolkit';
 import {rootReducer} from '@/app/providers/store-providers/config/rootReducer';
-import registerAPI from '@/f - entities/api/authApi';
+import authAPI from '@/g - shared/api/authApi';
+import surveyAPI from '@/d - widgets/TestPage/api/surveyApi';
 
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(registerAPI.middleware),
+            getDefaultMiddleware().concat(authAPI.middleware, surveyAPI.middleware),
+        
+        
     });
 };
 

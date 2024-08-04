@@ -1,4 +1,4 @@
-import {useFetchUserSessionQuery} from '@/f - entities/api/authApi';
+import {useFetchUserSessionQuery} from '@/g - shared/api/authApi';
 import {setAuth} from '@/f - entities/redux/session/modele/action/action';
 import {setPending} from '@/f - entities/redux/pending/modele/action/action';
 import {useAppDispatch} from '@/g - shared/lib/store';
