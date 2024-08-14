@@ -24,21 +24,11 @@ const StyledRFContainer = styled.div`
     justify-content: center;
     position: relative;
 `;
-const StyledRFInputBox = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-`;
+
 const StyledRFError = styled.div`
     color: red;
 `;
 
-const StyledRFLabel = styled.label`
-    font-size: 14px;
-    color: var(--color-text1);
-    margin-top: 10px;
-`;
 const StyledRFBtn = styled.div`
     margin-bottom: 10px;
     display: flex;

@@ -7,5 +7,4 @@ export interface IInputProps {
     type?: string
     name?: string
     id?: string
-
 }

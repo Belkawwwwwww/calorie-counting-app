@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { RouteEnum } from '@/g - shared/model/navigation';
 import Link from 'next/link';
 import { Button } from '@/g - shared/ui/Button';
-import { Input } from '@/g - shared/ui/Input';
 import {
     AuthResponseScheme,
     AuthScheme,
@@ -17,6 +16,7 @@ import { OpenRoute } from '@/c - pages/router-providers';
 import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { useAuthUserMutation } from '@/g - shared/api/authApi';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
+import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -25,19 +25,8 @@ const StyledLFContainer = styled.div`
     position: relative;
     width: 450px;
 `;
-const StyledLFInputBox = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-`;
 const StyledLFError = styled.div`
     color: red;
-`;
-const StyledLFLabel = styled.label`
-    font-size: 14px;
-    color: var(--color-text1);
-    margin-top: 20px;
 `;
 const StyledLFBtn = styled.div`
     margin-bottom: 10px;
@@ -60,8 +49,11 @@ const StyledLink = styled(Link)`
 
 export const LoginForm = () => {
     const [authUser, { isLoading }] = useAuthUserMutation();
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const { inputValue: email, handleInputChange: handleEmailChange } =
+        useZodInputValidation(AuthScheme.shape.username);
+    const { inputValue: password, handleInputChange: handlePasswordChange } =
+        useZodInputValidation(AuthScheme.shape.password);
+
     const [validationErrors, setValidationErrors] = useState({
         username: '',
         password: '',
@@ -137,7 +129,7 @@ export const LoginForm = () => {
                         type='username'
                         name='username'
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleEmailChange}
                     />
                     <InputBox
                         label='Пароль'
@@ -146,7 +138,7 @@ export const LoginForm = () => {
                         type='password'
                         name='password'
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePasswordChange}
                     />
                     <StyledLFBtn>
                         <Button

@@ -1,13 +1,13 @@
-import {useFetchUserSessionQuery} from '@/g - shared/api/authApi';
-import {setAuth} from '@/f - entities/redux/session/modele/action/action';
-import {setPending} from '@/f - entities/redux/pending/modele/action/action';
-import {useAppDispatch} from '@/g - shared/lib/store';
-import React, {useEffect, useRef} from 'react';
-import {setUser} from '@/f - entities/redux/user/model/action/action';
+import { useFetchUserSessionQuery } from '@/g - shared/api/authApi';
+import { setAuth } from '@/f - entities/redux/session/modele/action/action';
+import { setPending } from '@/f - entities/redux/pending/modele/action/action';
+import { useAppDispatch } from '@/g - shared/lib/store';
+import React, { useEffect, useRef } from 'react';
+import { setUser } from '@/f - entities/redux/user/model/action/action';
 
 const UserSessionLoader: React.FC = () => {
     const dispatch = useAppDispatch();
-    const {data, isSuccess, isError, isLoading} = useFetchUserSessionQuery();
+    const { data, isSuccess, isError, isLoading } = useFetchUserSessionQuery();
     const prevData = useRef<typeof data | null>(null);
 
     useEffect(() => {
@@ -20,7 +20,7 @@ const UserSessionLoader: React.FC = () => {
                     if (
                         prevData.current === null ||
                         JSON.stringify(prevData.current) !==
-                        JSON.stringify(data)
+                            JSON.stringify(data)
                     ) {
                         prevData.current = data;
                         dispatch(setAuth(true));

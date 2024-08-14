@@ -1,97 +1,188 @@
-import React, {FC, useState} from "react";
-import {GenderQuestion} from "@/e - features/TestQuestions/ui/GenderQuestion";
-import {GoalQuestion} from "@/e - features/TestQuestions/ui/GoalQuestion";
-import {ResultsComponent} from "@/e - features/TestQuestions/ui/ResultsComponent";
-import {Layout} from "@/g - shared/ui/layout";
-import styled from "styled-components";
-import {QuestionComponent} from "@/g - shared/components/question-component/QuestionComponent";
-import {GrowthQuestion} from "@/e - features/TestQuestions/ui/GrowthQuestion";
-import {WeightQuestion} from "@/e - features/TestQuestions/ui/WeightQuestion";
-import {DateOfBirthQuestion} from "@/e - features/TestQuestions/ui/DateOfBirthQuestion";
-import {ActivityLevelQuestion} from "@/e - features/TestQuestions/ui/ActivityLevelQuestion";
+import React, { useState } from 'react';
+import { z } from 'zod';
 
-interface Question {
-    question: string;
-    options?: string[];
-}
+import { useCreateSurveyMutation } from '../api/surveyApi';
+import styled from 'styled-components';
+import { UIFormLayout } from '@/g - shared/ui/layout';
+import {
+    ActivityLevelQuestion,
+    DateOfBirthQuestion,
+    GenderQuestion,
+    GrowthQuestion,
+    TargetQuestion,
+} from '@/e - features/TestQuestions';
+import { AgeQuestion } from '@/e - features/TestQuestions/ui/AgeQuestion';
+import { WeightQuestion } from '@/e - features/TestQuestions/ui/WeightQuestion';
+import { Button } from '@/g - shared/ui/Button';
+import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
+import { dataScheme } from '../model/createSurvey';
 
 const StyledContainer = styled.div`
-  display: flex;
-  margin-top: 60px;
-  text-align: center;
-  flex-direction: column;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    flex-direction: column;
+    position: relative;
 `;
-export const Test: FC = () => {
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-    const [answers, setAnswers] = useState<string[]>([]);
+const StyledTitle = styled.h1`
+    font-weight: 200;
+    font-size: 18px;
+`;
+const StyledQuestions = styled.div`
+    display: flex;
+    justify-content: center;
+`;
 
-    const questions: Question[] = [
-        {
-            question: "Какой у вас пол?",
-        },
-        {
-            question: "Какая ваша главная цель?",
-        },
-        {
-            question: "Какой у Вас рост?",
-        },
-        {
-            question: "Какой у вас вес?",
-        },
-        {
-            question: "Укажите дату рождения",
-        },
-        {
-            question: "Насколько вы активны?",
-        },
-    ];
+export const Test: React.FC = () => {
+    const [createSurvey, { isLoading, isError, error }] =
+        useCreateSurveyMutation();
 
-    const handleAnswer = (answer: string) => {
-        setSelectedAnswer(answer);
+    const [answers, setAnswers] = useState<{
+        gender: string | null | undefined;
+        target: string | null | undefined;
+        age: number | null | undefined;
+        growth: number | null | undefined;
+        dateOfBirth: Date | null | undefined;
+        activityLevel: string | null | undefined;
+        weight: number | null | undefined;
+    }>({
+        gender: null,
+        target: null,
+        age: null,
+        growth: null,
+        dateOfBirth: null,
+        activityLevel: null,
+        weight: null,
+    });
+
+    const handleAnswer = (
+        key: keyof typeof answers,
+        value: (typeof answers)[keyof typeof answers]
+    ) => {
+        setAnswers((prevAnswers) => ({
+            ...prevAnswers,
+            [key]: value,
+        }));
     };
 
-    const handleNextQuestion = () => {
-        if (selectedAnswer !== null) {
-            const updatedAnswers = [...answers, selectedAnswer];
-            setAnswers(updatedAnswers);
-            setSelectedAnswer(null);
-            setCurrentQuestion(currentQuestion + 1);
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = new FormData(e.currentTarget);
+
+        const formData = Object.fromEntries(form.entries());
+
+        try {
+            const validatedData = dataScheme.parse(formData);
+            await createSurvey(validatedData);
+        } catch (e) {
+            if (e instanceof z.ZodError) {
+                console.error('Validation error:', e.issues);
+            } else {
+                console.error('Error creating survey:', e);
+            }
         }
     };
 
-    const questionProps = {
-        title: questions[currentQuestion]?.question || "",
-        options: questions[currentQuestion]?.options || [],
-        selectedAnswer,
-        onAnswer: handleAnswer,
-        onNextQuestion: handleNextQuestion,
-    };
-
     return (
-        <Layout>
-            <StyledContainer>
-                {currentQuestion < questions.length ? (
-                    currentQuestion === 0 ? (
-                        <GenderQuestion {...questionProps} />
-                    ) : currentQuestion === 1 ? (
-                        <GoalQuestion {...questionProps} />
-                    ) : currentQuestion === 2 ? (
-                        <GrowthQuestion {...questionProps} />
-                    ) : currentQuestion === 3 ? (
-                        <WeightQuestion {...questionProps} />
-                    ) : currentQuestion === 4 ? (
-                        <DateOfBirthQuestion {...questionProps} />
-                    ) : currentQuestion === 5 ? (
-                        <ActivityLevelQuestion {...questionProps} />
-                    ) : (
-                        <QuestionComponent {...questionProps} />
-                    )
-                ) : (
-                    <ResultsComponent answers={answers}/>
-                )}
-            </StyledContainer>
-        </Layout>
+        <StyledContainer>
+            <StyledTitle>СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН</StyledTitle>
+            <StyledQuestions>
+                <form onSubmit={handleSubmit}>
+                    <UIFormLayout
+                        content='center'
+                        title='ВАШ ПОЛ'
+                        form={
+                            <GenderQuestion
+                                selectedAnswer={answers.gender}
+                                onAnswer={(answer) =>
+                                    handleAnswer('gender', answer)
+                                }
+                            />
+                        }
+                    />
+                    <UIFormLayout
+                        content='center'
+                        title='ВАША ЦЕЛЬ'
+                        form={
+                            <TargetQuestion
+                                selectedAnswer={answers.target}
+                                onAnswer={(answer) =>
+                                    handleAnswer('target', answer)
+                                }
+                            />
+                        }
+                    />
+                    <UIFormLayout
+                        content='center'
+                        title='ВВЕДИТЕ ВАШ ВОЗРАСТ'
+                        form={
+                            <AgeQuestion
+                                onAnswer={(answer) =>
+                                    handleAnswer('age', answer)
+                                }
+                            />
+                        }
+                    />
+                    <UIFormLayout
+                        content='center'
+                        title='ВВЕДИТЕ ВАШ РОСТ'
+                        form={
+                            <GrowthQuestion
+                                onAnswer={(answer) =>
+                                    handleAnswer('growth', answer)
+                                }
+                            />
+                        }
+                    />
+                    <UIFormLayout
+                        content='center'
+                        title='ДАТА РОЖДЕНИЯ'
+                        form={
+                            <DateOfBirthQuestion
+                                onAnswer={(answer) =>
+                                    handleAnswer('growth', answer)
+                                }
+                            />
+                        }
+                    />
+                    <UIFormLayout
+                        content='center'
+                        title='НАСКОЛЬКО ВЫ АКТИВНЫ?'
+                        form={
+                            <ActivityLevelQuestion
+                                selectedAnswer={answers.activityLevel}
+                                onAnswer={(answer) =>
+                                    handleAnswer('activityLevel', answer)
+                                }
+                            />
+                        }
+                    />
+                    <UIFormLayout
+                        content='center'
+                        title='ВВЕДИТЕ ВАШЕ ВЕС'
+                        form={
+                            <WeightQuestion
+                                onAnswer={(answer) =>
+                                    handleAnswer('weight', answer)
+                                }
+                            />
+                        }
+                    />
+                    <Button
+                        $variant='primary'
+                        $btnWidth='l'
+                        $btnSquareSize='button--square--size-m'
+                        type='submit'
+                    >
+                        {isLoading ? (
+                            <LoadingIndicator />
+                        ) : (
+                            'СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН'
+                        )}
+                    </Button>
+                </form>
+            </StyledQuestions>
+        </StyledContainer>
     );
 };

@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
     CreateSurveyResponseSchema,
-    InputCreateSurveyShema,
+    dataScheme,
+    
 } from '../model/createSurvey';
 
 const surveyAPI = createApi({
@@ -10,7 +11,7 @@ const surveyAPI = createApi({
     endpoints: (build) => ({
         createSurvey: build.mutation<
             typeof CreateSurveyResponseSchema._output,
-            typeof InputCreateSurveyShema._input
+            typeof dataScheme._input
         >({
             query: (body) => ({
                 url: 'api/v1/user/survey',

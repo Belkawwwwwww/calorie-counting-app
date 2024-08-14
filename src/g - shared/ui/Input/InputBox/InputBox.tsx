@@ -4,7 +4,7 @@ import { Input } from '../Input';
 import styled from 'styled-components';
 
 interface InputBoxProps extends IInputProps {
-    label: string;
+    label?: string;
     error?: string;
     direction?: 'column' | 'row';
 }
@@ -21,6 +21,7 @@ const StyledLabel = styled.label`
     color: var(--color-text1);
     margin-top: 20px;
 `;
+
 const StyledError = styled.div`
     color: red;
 `;
@@ -31,10 +32,14 @@ export const InputBox: FC<InputBoxProps> = ({
     direction = 'column',
     ...inputProps
 }) => {
+    const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+        inputProps.onChange?.(event);
+    };
+
     return (
         <StyledInputBox direction={direction}>
             <StyledLabel htmlFor={inputProps.id}>{label}</StyledLabel>
-            <Input {...inputProps} />
+            <Input {...inputProps} onChange={handleInputChange} />
             {error ? <StyledError>{error}</StyledError> : null}
         </StyledInputBox>
     );

@@ -3,9 +3,9 @@ import { QuestionComponent } from "@/g - shared/components/question-component/Qu
 import styled from "styled-components";
 
 interface ActivityLevelQuestionProps {
-    selectedAnswer: string | null;
+    selectedAnswer?: string | null;
     onAnswer: (answer: string) => void;
-    onNextQuestion: () => void;
+    // onNextQuestion: () => void;
 }
 
 interface StyledOptionProps {
@@ -35,21 +35,18 @@ const OptionsContainer = styled.div`
 `;
 
 export const ActivityLevelQuestion: FC<ActivityLevelQuestionProps> = ({
-                                                                          onAnswer,
-                                                                          onNextQuestion,
-                                                                          selectedAnswer,
+                                                                          selectedAnswer, onAnswer
                                                                       }) => {
-    const options = ["Сидячий образ жизни", "Умеренно активный", "Активный", "Высокая активность"];
+    const options = ["SEDENTARY LIFESTYLE", "MODERATE LIFESTYLE", "ACTIVE LIFESTYLE", "HIGHLY ACTIVE LIFESTYLE"];
 
     return (
         <OptionsContainer>
             <QuestionComponent
-                title="Насколько вы активны?"
                 options={options}
-                selectedAnswer={selectedAnswer}
+                selectedAnswer={selectedAnswer ?? null}
                 onAnswer={onAnswer}
-                onNextQuestion={onNextQuestion}
-                customOption={StyledOption}
+                // onNextQuestion={onNextQuestion}
+                // customOption={StyledOption}
             />
         </OptionsContainer>
     );
