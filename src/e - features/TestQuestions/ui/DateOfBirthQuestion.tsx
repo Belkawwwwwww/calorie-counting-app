@@ -6,14 +6,14 @@ import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation'
 import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
 
 interface DateOfBirthQuestionProps {
-    onAnswer: (answer: string) => void;
+    selectedAnswer?: string | number | Date | null;
+    onAnswer: (answer: string | number | Date) => void; 
     // onNextQuestion: () => void;
-    selectedAnswer?: string | null | undefined;
 }
 
 export const DateOfBirthQuestion: FC<DateOfBirthQuestionProps> = ({
     onAnswer,
-    selectedAnswer,
+    selectedAnswer, 
 }) => {
     const { inputValue: birthday, handleInputChange } = useZodInputValidation(
         dataScheme.shape.birthday
@@ -22,6 +22,7 @@ export const DateOfBirthQuestion: FC<DateOfBirthQuestionProps> = ({
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);
+        onAnswer(value);
     };
 
     // const handleSubmit = () => {

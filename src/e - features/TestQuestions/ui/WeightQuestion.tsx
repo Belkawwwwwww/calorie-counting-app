@@ -5,14 +5,15 @@ import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation'
 import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
 
 interface WeightQuestionProps {
-    selectedAnswer?: string | null | undefined;
-    onAnswer: (answer: string) => void;
+    selectedAnswer?: string | number | Date | null;
+    onAnswer: (answer: string | number | Date) => void; 
     // onNextQuestion: () => void;
 }
 
 export const WeightQuestion: FC<WeightQuestionProps> = ({
     onAnswer,
     selectedAnswer,
+
 }) => {
     const { inputValue: weight, handleInputChange } = useZodInputValidation(
         dataScheme.shape.weight
@@ -22,6 +23,7 @@ export const WeightQuestion: FC<WeightQuestionProps> = ({
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);
+        onAnswer(value);
     };
 
     // const handleSubmit = () => {
@@ -36,7 +38,7 @@ export const WeightQuestion: FC<WeightQuestionProps> = ({
             inputValue={weight.toString()}
             onInputChange={handleWeightChange}
             onAnswer={onAnswer}
-            inputType='weight'
+            inputType='number'
             inputName='weight'
             inputId='weight'
             selectedAnswer={selectedAnswer ?? null}

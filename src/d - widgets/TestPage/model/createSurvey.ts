@@ -3,8 +3,8 @@ import { z } from 'zod';
 export const dataScheme = z.object({
     gender: z.enum(['MALE', 'FEMALE']),
     target: z.enum(['LOSE_WEIGHT', 'MAINTAIN_WEIGHT', 'GAIN_WEIGHT']),
-    age: z.number().int().positive(),
-    growth: z.number().positive(),
+    age: z.number().nonnegative().int().positive(),
+    growth: z.number().nonnegative().positive(),
     birthday: z.date(),
     activity: z.enum([
         'SEDENTARY_LIFESTYLE',
@@ -12,7 +12,7 @@ export const dataScheme = z.object({
         'ACTIVE_LIFESTYLE',
         'HIGHLY_ACTIVE_LIFESTYLE',
     ]),
-    weight: z.number().positive(),
+    weight: z.number().nonnegative().positive(),
 });
 
 export const CreateSurveyResponseSchema = z.object({

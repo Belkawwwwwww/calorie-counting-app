@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import React, { FC } from 'react';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
+import { Button } from '@/g - shared/ui/Button';
 
 interface QuestionComponentProps {
     title?: string;
     options?: string[];
-    selectedAnswer: string | null;
-    onAnswer?: (answer: string) => void;
+    selectedAnswer: string | number | Date | null;
+    onAnswer?: (answer: string | number | Date) => void;
     // onNextQuestion: () => void;
     inputValue?: string;
     inputId?: string;
@@ -54,6 +55,15 @@ const StyledOption = styled.div<{ isSelected: boolean }>`
         background-color: #ebebeb;
     }
 `;
+const StyledBtn = styled.div`
+    &:hover {
+        opacity: 1;
+    }
+    &:disabled {
+        background-color: #cccccc; // Серый цвет для отключенной кнопки
+        cursor: not-allowed;
+    }
+`;
 
 export const QuestionComponent: FC<QuestionComponentProps> = ({
     title,
@@ -71,6 +81,9 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
     const handleOptionClick = (option: string) => {
         onAnswer?.(option);
     };
+    const isNextBtnActive = options
+        ? selectedAnswer !== null
+        : inputValue !== '' && !inputError;
 
     return (
         <StyledContainer>
@@ -99,6 +112,17 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
                     onChange={(event) => onInputChange?.(event.target.value)}
                 />
             )}
+            {/* <StyledBtn>
+                <Button
+                    $variant='primary'
+                    $btnWidth='m'
+                    $btnSquareSize='button--square--size-m'
+                    type='submit'
+                    disabled={!isNextBtnActive}
+                >
+                    Следующий вопрос
+                </Button>
+            </StyledBtn> */}
         </StyledContainer>
     );
 };

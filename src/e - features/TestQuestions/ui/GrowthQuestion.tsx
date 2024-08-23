@@ -6,16 +6,16 @@ import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation'
 import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
 
 interface GrowthQuestionProps {
-    selectedAnswer?: string | null | undefined;
-    onAnswer: (answer: string) => void;
+    selectedAnswer?: string | number | Date | null;
+    onAnswer: (answer: string | number | Date) => void; 
     // onNextQuestion: () => void;
 }
 
 export const GrowthQuestion: FC<GrowthQuestionProps> = ({
     onAnswer,
     selectedAnswer,
+
 }) => {
-    // const validationRegex = /^[1-9]\d*$/;
     const { inputValue: growth, handleInputChange } = useZodInputValidation(
         dataScheme.shape.growth
     );
@@ -23,6 +23,7 @@ export const GrowthQuestion: FC<GrowthQuestionProps> = ({
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);
+        onAnswer(value);
     };
 
     // const handleSubmit = () => {
@@ -34,11 +35,11 @@ export const GrowthQuestion: FC<GrowthQuestionProps> = ({
 
     return (
         <QuestionComponent
-            inputValue={growth.toString()}
+            inputValue={growth ? growth.toString() : ''}
             onInputChange={handleGrowthChange}
             selectedAnswer={selectedAnswer ?? null}
             onAnswer={onAnswer}
-            inputType='growth'
+            inputType='number'
             inputName='growth'
             inputId='growth'
             // onNextQuestion={onNextQuestion}

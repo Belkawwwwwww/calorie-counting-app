@@ -1,3 +1,9 @@
+import { useGetUserDataQuery } from '@/d - widgets/TestPage/api/surveyApi';
+import { useFetchUserSessionQuery } from '@/g - shared/api/authApi';
+import { RouteEnum } from '@/g - shared/model/navigation';
+import { Button } from '@/g - shared/ui/Button';
+import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 const StyledUserProfile = styled.div`
@@ -21,18 +27,64 @@ const StyledUsername = styled.div`
 const StyledMain = styled.div`
     display: flex;
 `;
+const StyledBtn = styled(Link)`
+    margin: 0 auto;
+    margin-top: 20px;
+`;
 
 export const UserProfile = () => {
+    const { data: userData, error, isLoading } = useGetUserDataQuery();
+    const { data: userSessionData, isSuccess, isError } = useFetchUserSessionQuery();
+
+    if (isLoading || !userSessionData) {
+        return <LoadingIndicator />;
+    }
+
+
+    if (!userData) {
+        return <p>No user data available.</p>;
+    }
+
+    const { response_status, data } = userData;
+
+    if (response_status !== 0) {
+        console.log(userData);
+        return (
+            <StyledBtn href={RouteEnum.TEST}>
+                <Button
+                    $variant='primary'
+                    $btnWidth='l'
+                    $btnSquareSize='button--square--size-l'
+                    type='submit'
+                >
+                    СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН
+                </Button>
+            </StyledBtn>
+        );
+    }
+
+    console.log('UserData:', userData);
+    const { first_name, last_name } = userSessionData.data;
+
     return (
         <StyledUserProfile>
             <StyledAboutProfile>
                 <>фото</>
-                <StyledUsername>Алена Белокрылова</StyledUsername>
+                <StyledUsername>{first_name} {last_name}</StyledUsername>
             </StyledAboutProfile>
             <StyledMain>
-                <>27 лет</>
-                <>Набрать вес</>
-                <>ккал осталось</>
+                {userData ? (
+                    <div>
+                        <p>Gender:  {userData.data.data.gender}</p>
+                        <p>Target: {userData.data.data.target}</p>
+                        <p>Age: {userData.data.data.age}</p>
+                        <p>Growth: {userData.data.data.growth}</p>
+                        <p>Activity: {userData.data.data.activity}</p>
+                        <p>Weight: {userData.data.data.weight}</p>
+                    </div>
+                ) : (
+                    <p>No user data available.</p>
+                )}
             </StyledMain>
         </StyledUserProfile>
     );

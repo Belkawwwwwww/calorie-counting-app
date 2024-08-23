@@ -17,6 +17,7 @@ import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { useAuthUserMutation } from '@/g - shared/api/authApi';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
 import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
+import { on } from 'stream';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -115,6 +116,29 @@ export const LoginForm = () => {
             }
         }
     };
+    if (isLoading) return <LoadingIndicator />;
+    const formFields = [
+        {
+            label: 'Email',
+            error: validationErrors.username,
+            id: 'username',
+            type: 'username',
+            name: 'username',
+            value: email,
+            onChange: handleEmailChange,
+        },
+        {
+            label: 'Пароль',
+            error: validationErrors.password,
+            type: 'password',
+            id: 'password',
+            name: 'password',
+            value: password,
+            onChange: handlePasswordChange,
+        },
+    
+    ];
+
     return (
         <OpenRoute>
             <StyledLFContainer>
@@ -122,7 +146,21 @@ export const LoginForm = () => {
                     {authError ? (
                         <StyledLFError>{authError}</StyledLFError>
                     ) : null}
-                    <InputBox
+                    {formFields.map(
+                        ({label, error, id, type, name, value, onChange}) => (
+                            <InputBox
+                                key={id}
+                                label={label}
+                                error={error}
+                                id={id}
+                                type={type}
+                                name={name}
+                                value={value}
+                                onChange={onChange}
+                            />
+                        )
+                    )}
+                    {/* <InputBox
                         label='Email'
                         error={validationErrors.username}
                         id='username'
@@ -139,7 +177,7 @@ export const LoginForm = () => {
                         name='password'
                         value={password}
                         onChange={handlePasswordChange}
-                    />
+                    /> */}
                     <StyledLFBtn>
                         <Button
                             $variant='primary'

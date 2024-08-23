@@ -1,26 +1,14 @@
-// import {UserObject} from "@/f - entities/user/model/type";
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface UserState {
-    user_id: any | null;
-    gender: string;
-    target: string;
-    age: number;
-    growth: number;
-    birthday: string;
-    activity: string;
-    weight: number;
-}
 
 const initialState: UserState = {
     user_id: null,
-    gender: '',
-    target: '',
-    age: 0,
-    growth: 0,
-    birthday: '',
-    activity: '',
-    weight: 0,
+    gender: null,
+    target: null,
+    age: null,
+    growth: null,
+    birthday: null,
+    activity: null,
+    weight: null,
 };
 
 export const userSlice = createSlice({
@@ -29,6 +17,9 @@ export const userSlice = createSlice({
     reducers: {
         setUser(state, { payload }: PayloadAction<any | null>) {
             state.user_id = payload;
+        },
+        setUserDetails(state, { payload }: PayloadAction<Partial<UserState>>) {
+            Object.assign(state, payload);
         },
     },
 });

@@ -16,6 +16,10 @@ import { WeightQuestion } from '@/e - features/TestQuestions/ui/WeightQuestion';
 import { Button } from '@/g - shared/ui/Button';
 import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { dataScheme } from '../model/createSurvey';
+import { useAppDispatch } from '@/g - shared/lib/store';
+import { setUserDetails } from '@/f - entities/redux/user/model/action/action';
+import { useRouter } from 'next/router';
+import { RouteEnum } from '@/g - shared/model/navigation';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -35,24 +39,25 @@ const StyledQuestions = styled.div`
 `;
 
 export const Test: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const router = useRouter();
     const [createSurvey, { isLoading, isError, error }] =
         useCreateSurveyMutation();
-
     const [answers, setAnswers] = useState<{
-        gender: string | null | undefined;
-        target: string | null | undefined;
-        age: number | null | undefined;
-        growth: number | null | undefined;
-        dateOfBirth: Date | null | undefined;
-        activityLevel: string | null | undefined;
-        weight: number | null | undefined;
+        gender: string | null;
+        target: string | null;
+        age: number | null;
+        growth: number | null;
+        birthday: Date | null;
+        activity: string | null;
+        weight: number | null;
     }>({
         gender: null,
         target: null,
         age: null,
         growth: null,
-        dateOfBirth: null,
-        activityLevel: null,
+        birthday: null,
+        activity: null,
         weight: null,
     });
 
@@ -65,25 +70,52 @@ export const Test: React.FC = () => {
             [key]: value,
         }));
     };
+    console.log(answers);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
-
         const formData = Object.fromEntries(form.entries());
 
+        // Преобразовываем данные перед валидацией
+        const preparedData = {
+            ...answers,
+            age: Number(formData.age),
+            growth: Number(formData.growth),
+            weight: Number(formData.weight),
+            birthday: formData.birthday
+                ? new Date(formData.birthday as string)
+                : null,
+        };
+        console.log(answers);
+
         try {
-            const validatedData = dataScheme.parse(formData);
+            const validatedData = dataScheme.parse(preparedData);
             await createSurvey(validatedData);
+            const userUpdateData = {
+                gender: answers.gender,
+                target: answers.target,
+                age: Number(formData.age),
+                growth: Number(formData.growth),
+                birthday: preparedData.birthday
+                    ? preparedData.birthday.toISOString()
+                    : null,
+                activity: answers.activity,
+                weight: Number(formData.weight),
+            };
+            dispatch(setUserDetails(userUpdateData));
+            router.push(RouteEnum.PROFILE);
+            console.log(answers);
+            console.log('успешно');
         } catch (e) {
             if (e instanceof z.ZodError) {
                 console.error('Validation error:', e.issues);
+                console.log(answers);
             } else {
                 console.error('Error creating survey:', e);
             }
         }
     };
-
     return (
         <StyledContainer>
             <StyledTitle>СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН</StyledTitle>
@@ -141,7 +173,7 @@ export const Test: React.FC = () => {
                         form={
                             <DateOfBirthQuestion
                                 onAnswer={(answer) =>
-                                    handleAnswer('growth', answer)
+                                    handleAnswer('birthday', answer)
                                 }
                             />
                         }
@@ -151,9 +183,9 @@ export const Test: React.FC = () => {
                         title='НАСКОЛЬКО ВЫ АКТИВНЫ?'
                         form={
                             <ActivityLevelQuestion
-                                selectedAnswer={answers.activityLevel}
+                                selectedAnswer={answers.activity}
                                 onAnswer={(answer) =>
-                                    handleAnswer('activityLevel', answer)
+                                    handleAnswer('activity', answer)
                                 }
                             />
                         }

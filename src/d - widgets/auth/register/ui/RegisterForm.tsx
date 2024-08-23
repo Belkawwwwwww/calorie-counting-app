@@ -17,6 +17,7 @@ import { setUser } from '@/f - entities/redux/user/model/action/action';
 import { useRouter } from 'next/router';
 import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
+import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
 
 const StyledRFContainer = styled.div`
     display: flex;
@@ -112,6 +113,59 @@ export const RegisterForm = () => {
             }
         }
     };
+    if (isLoading) return <LoadingIndicator />;
+    const formFields = [
+        {
+            label: 'Email',
+            error: validationErrors.username,
+            id: 'username',
+            type: 'username',
+            name: 'username',
+            value: email,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value),
+        },
+        {
+            label: 'Пароль',
+            error: validationErrors.password,
+            type: 'password',
+            id: 'password',
+            name: 'password',
+            value: password,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                setPassword(e.target.value),
+        },
+        {
+            label: 'Повторите пароль',
+            error: validationErrors.passwordConfirm,
+            id: 'passwordConfirm',
+            type: 'password',
+            name: 'passwordConfirm',
+            value: passwordConfirm,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                setPasswordConfirm(e.target.value),
+        },
+        {
+            label: 'Ваше имя',
+            error: validationErrors.firstName,
+            id: 'firstName',
+            type: 'firstName',
+            name: 'firstName',
+            value: firstName,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                setFirstName(e.target.value),
+        },
+        {
+            label: 'Ваша фамилия',
+            error: validationErrors.lastName,
+            id: 'lastName',
+            type: 'lastName',
+            name: 'lastName',
+            value: lastName,
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                setLastName(e.target.value),
+        },
+    ];
 
     return (
         <OpenRoute>
@@ -120,51 +174,21 @@ export const RegisterForm = () => {
                     {authError ? (
                         <StyledRFError>{authError}</StyledRFError>
                     ) : null}
-                    <InputBox
-                        label='Email'
-                        error={validationErrors.username}
-                        id='username'
-                        type='username'
-                        name='username'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <InputBox
-                        label='Пароль'
-                        error={validationErrors.password}
-                        type='password'
-                        id='password'
-                        name='password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <InputBox
-                        label='Повторите пароль'
-                        error={validationErrors.passwordConfirm}
-                        id='passwordConfirm'
-                        type='password'
-                        name='passwordConfirm'
-                        value={passwordConfirm}
-                        onChange={(e) => setPasswordConfirm(e.target.value)}
-                    />
-                    <InputBox
-                        label='Ваше имя'
-                        error={validationErrors.firstName}
-                        id='firstName'
-                        type='firstName'
-                        name='firstName'
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                    />
-                    <InputBox
-                        label='Ваша фамилия'
-                        error={validationErrors.lastName}
-                        id='lastName'
-                        type='lastName'
-                        name='lastName'
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                    />
+                    {formFields.map(
+                        ({ label, error, id, type, name, value, onChange }) => (
+                            <InputBox
+                                key={id}
+                                label={label}
+                                error={error}
+                                id={id}
+                                type={type}
+                                name={name}
+                                value={value}
+                                onChange={onChange}
+                            />
+                        )
+                    )}
+
                     <StyledRFBtn>
                         <Button
                             $variant='primary'
