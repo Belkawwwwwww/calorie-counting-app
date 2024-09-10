@@ -1,9 +1,10 @@
-import {useAppSelector} from '@/g - shared/lib/store';
+import { useAppSelector } from '@/g - shared/lib/store';
 import styled from 'styled-components';
-import {Logo} from '@/g - shared/ui/Logo';
-import {FC} from 'react';
+import { Logo } from '@/g - shared/ui/Logo';
+import { FC } from 'react';
 import Link from 'next/link';
-import {RouteEnum} from '@/g - shared/model/navigation';
+import { RouteEnum } from '@/g - shared/model/navigation';
+import { useRouter } from 'next/router';
 
 const StyledHeader = styled.header`
     position: relative;
@@ -17,15 +18,22 @@ const StyledHeader = styled.header`
 `;
 
 const AuthLinks = styled.div`
-  /* display: flex; */
-  /* gap: 10px; */
+    /* display: flex; */
+    /* gap: 10px; */
 `;
 const StyledLinks = styled(Link)`
-  color: black;
-  text-decoration: none;
+    color: black;
+    text-decoration: none;
 `;
-export const Navbar: FC = () => {
+export const Navbar: FC<{ hideOnPages?: string[] }> = ({
+    hideOnPages = [],
+}) => {
     const isAuth = useAppSelector((state) => state.session.is_authenticated);
+    const router = useRouter();
+    if (hideOnPages.includes(router.pathname)) {
+        return null;
+    }
+
     return (
         <StyledHeader>
             <Logo />

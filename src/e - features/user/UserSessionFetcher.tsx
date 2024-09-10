@@ -34,7 +34,6 @@ const UserSessionLoader: React.FC = () => {
 
         return () => clearTimeout(delayedDispatch);
     }, [data]);
-    console.log(data?.data.username)
     return null;
 };
 

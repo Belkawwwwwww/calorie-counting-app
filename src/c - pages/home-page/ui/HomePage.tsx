@@ -110,7 +110,7 @@ export const HomePage = () => {
                 </StyledOpportunities>
                 <StyledBtn href={RouteEnum.TEST}>
                     <Button
-                        $variant='primary'
+                        $variant='secondary'
                         $btnWidth='l'
                         $btnSquareSize='button--square--size-l'
                         type='submit'
