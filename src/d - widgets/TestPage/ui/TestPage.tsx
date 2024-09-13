@@ -15,8 +15,6 @@ import { WeightQuestion } from '@/e - features/TestQuestions/ui/WeightQuestion';
 import { Button } from '@/g - shared/ui/Button';
 import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { dataScheme } from '../model/createSurvey';
-import { useAppDispatch } from '@/g - shared/lib/store';
-import { setUserDetails } from '@/f - entities/redux/user/model/action/action';
 import { useRouter } from 'next/router';
 import { RouteEnum } from '@/g - shared/model/navigation';
 
@@ -38,7 +36,6 @@ const StyledQuestions = styled.div`
 `;
 
 export const Test: React.FC = () => {
-    const dispatch = useAppDispatch();
     const router = useRouter();
     const [createSurvey, { isLoading, isError, error }] =
         useCreateSurveyMutation();
@@ -91,19 +88,7 @@ export const Test: React.FC = () => {
         try {
             const validatedData = dataScheme.parse(preparedData);
             await createSurvey(validatedData);
-            const userUpdateData = {
-                gender: answers.gender,
-                target: answers.target,
-                age: Number(formData.age),
-                growth: Number(formData.growth),
-                birthday: preparedData.birthday
-                    ? preparedData.birthday.toISOString()
-                    : null,
-                activity: answers.activity,
-                weight: Number(formData.weight),
-            };
-            dispatch(setUserDetails(userUpdateData));
-            router.push(RouteEnum.PROFILE);
+            router.push(RouteEnum.MAIN);
             console.log(answers);
             console.log('успешно');
         } catch (e) {
@@ -111,95 +96,86 @@ export const Test: React.FC = () => {
                 console.error('Validation error:', e.issues);
                 console.log(answers);
             } else {
-                console.error('Error creating survey:', e);
+                console.error('Ошибка:', e);
             }
         }
     };
+
+    const questions = [
+        {
+            title: 'ВАШ ПОЛ',
+            component: (
+                <GenderQuestion
+                    selectedAnswer={answers.gender}
+                    onAnswer={(answer) => handleAnswer('gender', answer)}
+                />
+            ),
+        },
+        {
+            title: 'ВАША ЦЕЛЬ',
+            component: (
+                <TargetQuestion
+                    selectedAnswer={answers.target}
+                    onAnswer={(answer) => handleAnswer('target', answer)}
+                />
+            ),
+        },
+        {
+            title: 'ВВЕДИТЕ ВАШ ВОЗРАСТ',
+            component: (
+                <AgeQuestion
+                    onAnswer={(answer) => handleAnswer('age', answer)}
+                />
+            ),
+        },
+        {
+            title: 'ВВЕДИТЕ ВАШ РОСТ',
+            component: (
+                <GrowthQuestion
+                    onAnswer={(answer) => handleAnswer('growth', answer)}
+                />
+            ),
+        },
+        {
+            title: 'ДАТА РОЖДЕНИЯ',
+            component: (
+                <DateOfBirthQuestion
+                    onAnswer={(answer) => handleAnswer('birthday', answer)}
+                />
+            ),
+        },
+        {
+            title: 'КАКОЙ У ВАС ОБРАЗ ЖИЗНИ?',
+            component: (
+                <ActivityLevelQuestion
+                    selectedAnswer={answers.activity}
+                    onAnswer={(answer) => handleAnswer('activity', answer)}
+                />
+            ),
+        },
+        {
+            title: 'ВВЕДИТЕ ВАШЕ ВЕС',
+            component: (
+                <WeightQuestion
+                    onAnswer={(answer) => handleAnswer('weight', answer)}
+                />
+            ),
+        },
+    ];
+
     return (
         <StyledContainer>
             <StyledTitle>СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН</StyledTitle>
             <StyledQuestions>
                 <form onSubmit={handleSubmit}>
-                    <UIFormLayout
-                        content='center'
-                        title='ВАШ ПОЛ'
-                        form={
-                            <GenderQuestion
-                                selectedAnswer={answers.gender}
-                                onAnswer={(answer) =>
-                                    handleAnswer('gender', answer)
-                                }
-                            />
-                        }
-                    />
-                    <UIFormLayout
-                        content='center'
-                        title='ВАША ЦЕЛЬ'
-                        form={
-                            <TargetQuestion
-                                selectedAnswer={answers.target}
-                                onAnswer={(answer) =>
-                                    handleAnswer('target', answer)
-                                }
-                            />
-                        }
-                    />
-                    <UIFormLayout
-                        content='center'
-                        title='ВВЕДИТЕ ВАШ ВОЗРАСТ'
-                        form={
-                            <AgeQuestion
-                                onAnswer={(answer) =>
-                                    handleAnswer('age', answer)
-                                }
-                            />
-                        }
-                    />
-                    <UIFormLayout
-                        content='center'
-                        title='ВВЕДИТЕ ВАШ РОСТ'
-                        form={
-                            <GrowthQuestion
-                                onAnswer={(answer) =>
-                                    handleAnswer('growth', answer)
-                                }
-                            />
-                        }
-                    />
-                    <UIFormLayout
-                        content='center'
-                        title='ДАТА РОЖДЕНИЯ'
-                        form={
-                            <DateOfBirthQuestion
-                                onAnswer={(answer) =>
-                                    handleAnswer('birthday', answer)
-                                }
-                            />
-                        }
-                    />
-                    <UIFormLayout
-                        content='center'
-                        title='НАСКОЛЬКО ВЫ АКТИВНЫ?'
-                        form={
-                            <ActivityLevelQuestion
-                                selectedAnswer={answers.activity}
-                                onAnswer={(answer) =>
-                                    handleAnswer('activity', answer)
-                                }
-                            />
-                        }
-                    />
-                    <UIFormLayout
-                        content='center'
-                        title='ВВЕДИТЕ ВАШЕ ВЕС'
-                        form={
-                            <WeightQuestion
-                                onAnswer={(answer) =>
-                                    handleAnswer('weight', answer)
-                                }
-                            />
-                        }
-                    />
+                    {questions.map((question, index) => (
+                        <UIFormLayout
+                            key={question.title}
+                            content='center'
+                            title={question.title}
+                            form={question.component}
+                        />
+                    ))}
                     <Button
                         $variant='primary'
                         $btnWidth='l'

@@ -17,10 +17,6 @@ const StyledHeader = styled.header`
     padding-right: 100px;
 `;
 
-const AuthLinks = styled.div`
-    /* display: flex; */
-    /* gap: 10px; */
-`;
 const StyledLinks = styled(Link)`
     color: black;
     text-decoration: none;
@@ -38,9 +34,7 @@ export const Navbar: FC<{ hideOnPages?: string[] }> = ({
         <StyledHeader>
             <Logo />
             {!isAuth ? (
-                <AuthLinks>
-                    <StyledLinks href={RouteEnum.LOGIN}>ВХОД</StyledLinks>
-                </AuthLinks>
+                <StyledLinks href={RouteEnum.LOGIN}>ВХОД</StyledLinks>
             ) : (
                 <StyledLinks href={RouteEnum.PROFILE}>ПРОФИЛЬ</StyledLinks>
             )}

@@ -1,30 +1,30 @@
 import React, { FC } from 'react';
 import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
+import { goalTranslations } from '@/g - shared/utils/translation';
 
 interface GoalQuestionProps {
-    selectedAnswer?: string | number | Date | null;
+    selectedAnswer?: string | null;
     onAnswer: (answer: string | number | Date) => void;
-    // onNextQuestion: () => void;
 }
 
 export const TargetQuestion: FC<GoalQuestionProps> = ({
     selectedAnswer,
     onAnswer,
 }) => {
-    const options = ['LOSE_WEIGHT', 'MAINTAIN_WEIGHT', 'GAIN_WEIGHT'];
+    const handleAnswer = (answer: string | number | Date) => {
+        const englishAnswer = Object.keys(goalTranslations).find(
+            (key) => goalTranslations[key] === answer.toString()
+        );
+        onAnswer(englishAnswer || answer.toString());
+    };
+    const options = Object.values(goalTranslations)
 
-    const targetOptions = [
-        { label: 'СБРОСИТЬ ВЕС', value: 'LOSE_WEIGHT' },
-        { label: 'ПОДДЕРЖАНИЕ ВЕС', value: 'MAINTAIN_WEIGHT' },
-        { label: 'НАБОР ВЕСА', value: 'GAIN_WEIGHT' },
-    ];
+   
     return (
         <QuestionComponent
             options={options}
-            // options={targetOptions.map((option) => option.label)}
-            selectedAnswer={selectedAnswer ?? null}
-            onAnswer={onAnswer}
-            // onNextQuestion={onNextQuestion}
+            selectedAnswer={goalTranslations[selectedAnswer as string] ?? null}
+            onAnswer={handleAnswer}
         />
     );
 };

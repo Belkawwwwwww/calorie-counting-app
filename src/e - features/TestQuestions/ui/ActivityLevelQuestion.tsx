@@ -1,41 +1,29 @@
 import React, { FC } from 'react';
 import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
+import { activityTranslations } from '@/g - shared/utils/translation';
 
 interface ActivityLevelQuestionProps {
     selectedAnswer?: string | number | Date | null;
     onAnswer: (answer: string | number | Date) => void;
-    // onNextQuestion: () => void;
 }
 
 export const ActivityLevelQuestion: FC<ActivityLevelQuestionProps> = ({
     selectedAnswer,
     onAnswer,
 }) => {
-    const options = [
-        'SEDENTARY_LIFESTYLE',
-        'MODERATE_LIFESTYLE',
-        'ACTIVE_LIFESTYLE',
-        'HIGHLY_ACTIVE_LIFESTYLE',
-    ];
-
-    // const activityOptions = [
-    //     { label: 'СИДЯЧИЙ ОБРАЗ ЖИЗНИ', value: 'SEDENTARY_LIFESTYLE' },
-    //     { label: 'УМЕРЕННЫЙ ОБРАЗ ЖИЗНИ', value: 'MODERATE_LIFESTYLE' },
-    //     { label: 'АКТИВНЫЙ ОБРАЗ ЖИЗНИ', value: 'ACTIVE_LIFESTYLE' },
-    //     {
-    //         label: 'ОЧЕНЬ АКТИВНЫЙ ОБРАЗ ЖИЗНИ',
-    //         value: 'HIGHLY_ACTIVE_LIFESTYLE',
-    //     },
-    // ];
-
+    const handleAnswer = (answer: string | number | Date) => {
+        const englishAnswer = Object.keys(activityTranslations).find(
+            (key) => activityTranslations[key] === answer.toString()
+        );
+        onAnswer(englishAnswer || answer.toString());
+    };
+    const options = Object.values(activityTranslations);
+    
     return (
         <QuestionComponent
             options={options}
-            // options={activityOptions.map((option) => option.label)}
-            selectedAnswer={selectedAnswer ?? null}
-            onAnswer={onAnswer}
-            // onNextQuestion={onNextQuestion}
-            // customOption={StyledOption}
+            selectedAnswer={activityTranslations[selectedAnswer as string] ?? null}
+            onAnswer={handleAnswer}
         />
     );
 };

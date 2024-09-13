@@ -1,16 +1,28 @@
 import { useGetUserDataQuery } from '@/d - widgets/TestPage/api/surveyApi';
 import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import styled from 'styled-components';
 interface DailyCaloriesBlockProps {
-    onCaloriesCalculated: any
+    onCaloriesCalculated: any;
 }
-export const DailyCaloriesBlock: FC<DailyCaloriesBlockProps> = ({ onCaloriesCalculated}) => {
+const StyledMainCont = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+`;
+const StyledText = styled.div`
+    font-size: 10px;
+`;
+export const DailyCaloriesBlock: FC<DailyCaloriesBlockProps> = ({
+    onCaloriesCalculated,
+}) => {
     const { data: userData, isLoading } = useGetUserDataQuery();
+    const [dailyCalories, setDailyCalories] = useState(0);
     useEffect(() => {
-        if (isLoading) {
-            const dailyCalories = calculateDailyCalories();
-
-            onCaloriesCalculated(dailyCalories);
+        if (!isLoading) {
+            const calories = calculateDailyCalories();
+            setDailyCalories(calories);
+            onCaloriesCalculated(calories);
         }
     }, [isLoading]);
 
@@ -62,14 +74,14 @@ export const DailyCaloriesBlock: FC<DailyCaloriesBlockProps> = ({ onCaloriesCalc
         return <LoadingIndicator />;
     }
 
-    return null;
-    // (
-    //     <div>
-    //         <div>
-    //             <h1>{calculateDailyCalories().toFixed(0)}</h1>
-    //         </div>
-    //     </div>
-    // );
+    return (
+        <div>
+            <StyledMainCont>
+                <h1>{dailyCalories.toFixed(0)}</h1>
+                <StyledText>осталось</StyledText>
+            </StyledMainCont>
+        </div>
+    );
 };
 
 export default DailyCaloriesBlock;

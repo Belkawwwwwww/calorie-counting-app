@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import React, { FC } from 'react';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
-import { Button } from '@/g - shared/ui/Button';
 
 interface QuestionComponentProps {
     title?: string;
     options?: string[];
     selectedAnswer: string | number | Date | null;
     onAnswer?: (answer: string | number | Date) => void;
-    // onNextQuestion: () => void;
+    // onNextQuestion?: () => void;
     inputValue?: string;
     inputId?: string;
     inputType?: string;
@@ -77,13 +76,13 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
     inputError,
     customOption: CustomOption = StyledOption,
     onAnswer,
+    // onNextQuestion
 }) => {
     const handleOptionClick = (option: string) => {
         onAnswer?.(option);
     };
-    const isNextBtnActive = options
-        ? selectedAnswer !== null
-        : inputValue !== '' && !inputError;
+    // const isNextBtnActive = options ? selectedAnswer !== null : inputValue !== '' && !inputError;
+    // const isNextQuestionAvailable = !!onNextQuestion;
 
     return (
         <StyledContainer>

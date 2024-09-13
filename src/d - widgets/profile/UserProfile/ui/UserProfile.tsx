@@ -4,8 +4,14 @@ import { RouteEnum } from '@/g - shared/model/navigation';
 import { Button } from '@/g - shared/ui/Button';
 import { Layout } from '@/g - shared/ui/layout';
 import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
+import {
+    activityTranslations,
+    genderTranslations,
+    goalTranslations,
+} from '@/g - shared/utils/translation';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 const StyledUserProfile = styled.div`
@@ -23,6 +29,11 @@ const StyledMenu = styled.div`
     border-radius: 0 0 29px 29px;
     width: 100%;
     height: 270px;
+`;
+const StyledLink = styled.div`
+    display: flex;
+    padding-top: 30px;
+    justify-content: space-between;
 `;
 const StyledPhotoContainer = styled.div`
     position: absolute;
@@ -68,23 +79,34 @@ const StyledBtnTest = styled(Link)`
     top: 10px;
     right: -30px;
 `;
+const StyledLinks = styled(Link)`
+    color: black;
+    text-decoration: none;
+`;
 
 export const UserProfile = () => {
-    const router = useRouter();
-    const { data: userData, error, isLoading } = useGetUserDataQuery();
     const {
-        data: userSessionData,
-        isSuccess,
-        isError,
-    } = useFetchUserSessionQuery();
-    if (isLoading || !userSessionData) {
+        data: userData,
+        isLoading,
+        refetch: refetchUserData,
+    } = useGetUserDataQuery();
+    const { data: userSessionData, isSuccess } = useFetchUserSessionQuery();
+
+    useEffect(() => {
+        if (isSuccess && userSessionData) {
+            // Вызываем рефетч данных пользователя когда сессия успешна
+            refetchUserData();
+        }
+    }, [isSuccess, userSessionData]);
+
+    if (isLoading) {
         return <LoadingIndicator />;
     }
     if (!userData) {
         return <p>No user data available.</p>;
     }
 
-    const { response_status, data } = userData;
+    const { response_status } = userData;
 
     if (response_status !== 0) {
         console.log(userData);
@@ -102,13 +124,17 @@ export const UserProfile = () => {
         );
     }
 
-    const { first_name, last_name } = userSessionData.data;
+    const first_name = userSessionData?.data?.first_name;
+    const last_name = userSessionData?.data?.last_name;
 
     return (
         <StyledUserProfile>
             <StyledMenu>
                 <Layout>
-                    <Link href={RouteEnum.MAIN}>Назад</Link>
+                    <StyledLink>
+                        <StyledLinks href={RouteEnum.MAIN}>КАЛЬКУЛЯТОР</StyledLinks>
+                        <StyledLinks href={RouteEnum.HOME}>HOME</StyledLinks>
+                    </StyledLink>
                 </Layout>
             </StyledMenu>
             <Layout>
@@ -135,12 +161,26 @@ export const UserProfile = () => {
                 <StyledMain>
                     {userData ? (
                         <div>
-                            <p>Gender: {userData.data.data.gender}</p>
-                            <p>Target: {userData.data.data.target}</p>
-                            <p>Age: {userData.data.data.age}</p>
-                            <p>Growth: {userData.data.data.growth}</p>
-                            <p>Activity: {userData.data.data.activity}</p>
-                            <p>Weight: {userData.data.data.weight}</p>
+                            <p>
+                                ПОЛ:
+                                {genderTranslations[
+                                    userData.data.data.gender
+                                ] || userData.data.data.gender}
+                            </p>
+                            <p>
+                                ЦЕЛЬ:
+                                {goalTranslations[userData.data.data.target] ||
+                                    userData.data.data.target}
+                            </p>
+                            <p>ВОЗРАСТ: {userData.data.data.age}</p>
+                            <p>РОСТ: {userData.data.data.growth}</p>
+                            <p>
+                                ОБРАЗ ЖИЗНИ:
+                                {activityTranslations[
+                                    userData.data.data.activity
+                                ] || userData.data.data.activity}
+                            </p>
+                            <p>ВЕС: {userData.data.data.weight}</p>
                         </div>
                     ) : (
                         <p>No user data available.</p>

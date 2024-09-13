@@ -10,16 +10,16 @@ const StyledMeal = styled.div`
     height: 50px;
     margin-top: 10px;
     display: flex;
-
-    /* justify-content: center; */
+    padding-left: 10px;
+    align-items: center;
 `;
 export const NutritionBlock = () => {
     return (
         <StyledNutritionBlock>
-            <StyledMeal>Завтрак</StyledMeal>
-            <StyledMeal>Обед</StyledMeal>
-            <StyledMeal>Ужин</StyledMeal>
-            <StyledMeal>Перекус</StyledMeal>
+            <StyledMeal>Завтрак 0/</StyledMeal>
+            <StyledMeal>Обед 0/</StyledMeal>
+            <StyledMeal>Ужин 0/</StyledMeal>
+            <StyledMeal>Перекус 0/</StyledMeal>
         </StyledNutritionBlock>
     );
 };
