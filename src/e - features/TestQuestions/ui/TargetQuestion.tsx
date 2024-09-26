@@ -17,9 +17,8 @@ export const TargetQuestion: FC<GoalQuestionProps> = ({
         );
         onAnswer(englishAnswer || answer.toString());
     };
-    const options = Object.values(goalTranslations)
+    const options = Object.values(goalTranslations);
 
-   
     return (
         <QuestionComponent
             options={options}

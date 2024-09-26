@@ -7,7 +7,6 @@ interface QuestionComponentProps {
     options?: string[];
     selectedAnswer: string | number | Date | null;
     onAnswer?: (answer: string | number | Date) => void;
-    // onNextQuestion?: () => void;
     inputValue?: string;
     inputId?: string;
     inputType?: string;
@@ -54,15 +53,6 @@ const StyledOption = styled.div<{ isSelected: boolean }>`
         background-color: #ebebeb;
     }
 `;
-const StyledBtn = styled.div`
-    &:hover {
-        opacity: 1;
-    }
-    &:disabled {
-        background-color: #cccccc; // Серый цвет для отключенной кнопки
-        cursor: not-allowed;
-    }
-`;
 
 export const QuestionComponent: FC<QuestionComponentProps> = ({
     title,
@@ -76,13 +66,10 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
     inputError,
     customOption: CustomOption = StyledOption,
     onAnswer,
-    // onNextQuestion
 }) => {
     const handleOptionClick = (option: string) => {
         onAnswer?.(option);
     };
-    // const isNextBtnActive = options ? selectedAnswer !== null : inputValue !== '' && !inputError;
-    // const isNextQuestionAvailable = !!onNextQuestion;
 
     return (
         <StyledContainer>
@@ -111,17 +98,6 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
                     onChange={(event) => onInputChange?.(event.target.value)}
                 />
             )}
-            {/* <StyledBtn>
-                <Button
-                    $variant='primary'
-                    $btnWidth='m'
-                    $btnSquareSize='button--square--size-m'
-                    type='submit'
-                    disabled={!isNextBtnActive}
-                >
-                    Следующий вопрос
-                </Button>
-            </StyledBtn> */}
         </StyledContainer>
     );
 };

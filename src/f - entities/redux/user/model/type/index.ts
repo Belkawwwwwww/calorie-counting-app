@@ -4,7 +4,7 @@ interface UserState {
     target: string | null;
     age: number | null;
     growth: number | null;
-    birthday: string| null;
+    birthday: string | null;
     activity: string | null;
     weight: number | null;
 }

@@ -12,6 +12,10 @@ const StyledMeal = styled.div`
     display: flex;
     padding-left: 10px;
     align-items: center;
+    &:hover {
+        background-color: #ebebeb;
+    }
+    cursor: pointer;
 `;
 export const NutritionBlock = () => {
     return (

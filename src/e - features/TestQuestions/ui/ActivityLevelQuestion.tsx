@@ -18,11 +18,13 @@ export const ActivityLevelQuestion: FC<ActivityLevelQuestionProps> = ({
         onAnswer(englishAnswer || answer.toString());
     };
     const options = Object.values(activityTranslations);
-    
+
     return (
         <QuestionComponent
             options={options}
-            selectedAnswer={activityTranslations[selectedAnswer as string] ?? null}
+            selectedAnswer={
+                activityTranslations[selectedAnswer as string] ?? null
+            }
             onAnswer={handleAnswer}
         />
     );

@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface isPendingState {
     pending: boolean;
@@ -12,7 +12,7 @@ export const pendingSlice = createSlice({
     name: 'pending',
     initialState,
     reducers: {
-        setPending(state, {payload}: PayloadAction<boolean>) {
+        setPending(state, { payload }: PayloadAction<boolean>) {
             state.pending = payload;
         },
     },

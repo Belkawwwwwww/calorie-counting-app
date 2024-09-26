@@ -4,9 +4,8 @@ import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation'
 import { FC } from 'react';
 
 interface AgeProps {
-    selectedAnswer?: string | number | Date | null;
+    selectedAnswer?: number | null;
     onAnswer: (answer: string | number | Date) => void;
-    // onNextQuestion: () => void;
 }
 
 export const AgeQuestion: FC<AgeProps> = ({ selectedAnswer, onAnswer }) => {
@@ -14,10 +13,11 @@ export const AgeQuestion: FC<AgeProps> = ({ selectedAnswer, onAnswer }) => {
         dataScheme.shape.age
     );
     const handleAgeChange = (value: string) => {
+        const ageValue = Number(value); // строку в число
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);
-        onAnswer(value);
+        onAnswer(ageValue); // Передаем number
     };
 
     return (
@@ -25,7 +25,6 @@ export const AgeQuestion: FC<AgeProps> = ({ selectedAnswer, onAnswer }) => {
             inputValue={age ? age.toString() : ''}
             onInputChange={handleAgeChange}
             onAnswer={onAnswer}
-            // onNextQuestion={onNextQuestion}
             inputType='number'
             inputName='age'
             inputId='age'

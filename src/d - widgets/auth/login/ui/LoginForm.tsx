@@ -17,7 +17,6 @@ import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { useAuthUserMutation } from '@/g - shared/api/authApi';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
 import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
-import { on } from 'stream';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -84,7 +83,6 @@ export const LoginForm = () => {
                     if (validatedResponse) {
                         dispatch(setAuth(true));
                         dispatch(setUser({ user_id: backendUser_id }));
-                        console.log(authUser);
                         await router.push(RouteEnum.MAIN);
                         console.log('Авторизация успешна');
                     }
@@ -136,7 +134,6 @@ export const LoginForm = () => {
             value: password,
             onChange: handlePasswordChange,
         },
-    
     ];
 
     return (
@@ -147,7 +144,7 @@ export const LoginForm = () => {
                         <StyledLFError>{authError}</StyledLFError>
                     ) : null}
                     {formFields.map(
-                        ({label, error, id, type, name, value, onChange}) => (
+                        ({ label, error, id, type, name, value, onChange }) => (
                             <InputBox
                                 key={id}
                                 label={label}
@@ -160,24 +157,6 @@ export const LoginForm = () => {
                             />
                         )
                     )}
-                    {/* <InputBox
-                        label='Email'
-                        error={validationErrors.username}
-                        id='username'
-                        type='username'
-                        name='username'
-                        value={email}
-                        onChange={handleEmailChange}
-                    />
-                    <InputBox
-                        label='Пароль'
-                        error={validationErrors.password}
-                        id='password'
-                        type='password'
-                        name='password'
-                        value={password}
-                        onChange={handlePasswordChange}
-                    /> */}
                     <StyledLFBtn>
                         <Button
                             $variant='primary'
@@ -185,6 +164,7 @@ export const LoginForm = () => {
                             $btnSquareSize='button--square--size-m'
                             type='submit'
                         >
+                            Войти
                             {isLoading ? <LoadingIndicator /> : 'Войти'}
                         </Button>
                         <StyledPasswordRecovery>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRegisterUserMutation } from '@/g - shared/api/authApi';
-import { Input } from '@/g - shared/ui/Input';
 import { Button } from '@/g - shared/ui/Button';
 import { RouteEnum } from '@/g - shared/model/navigation';
 import Link from 'next/link';
@@ -17,7 +16,6 @@ import { setUser } from '@/f - entities/redux/user/model/action/action';
 import { useRouter } from 'next/router';
 import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
-import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
 
 const StyledRFContainer = styled.div`
     display: flex;
@@ -88,7 +86,7 @@ export const RegisterForm = () => {
                     dispatch(setAuth(true));
                     dispatch(setUser({ user_id: backendUser_id }));
                     console.log(registerUser);
-                    router.push(RouteEnum.MAIN);
+                    router.push(RouteEnum.HOME);
                     console.log('Регистрация успешна');
                 }
             } else {

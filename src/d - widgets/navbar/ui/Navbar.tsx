@@ -16,7 +16,6 @@ const StyledHeader = styled.header`
     padding-left: 100px;
     padding-right: 100px;
 `;
-
 const StyledLinks = styled(Link)`
     color: black;
     text-decoration: none;

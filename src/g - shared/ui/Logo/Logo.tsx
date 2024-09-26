@@ -9,5 +9,5 @@ const StyledLogoLink = styled(Link)`
     cursor: pointer;
 `;
 export const Logo = () => {
-    return <StyledLogoLink href="/">CC</StyledLogoLink>;
+    return <StyledLogoLink href='/'>CC</StyledLogoLink>;
 };

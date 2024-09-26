@@ -56,11 +56,7 @@ export const SummaryBlock = () => {
             </StyledFirstBlock>
             <StyledTwoBlock>
                 <StyledBJU>
-                    Углеводы:{' '}
-                    {dailyCalories !== 0
-                        ? ((dailyCalories * 0.6) / 4).toFixed(0)
-                        : 0}{' '}
-                    г
+                    Углеводы: {((dailyCalories * 0.6) / 4).toFixed(0)} г
                 </StyledBJU>
                 <StyledBJU>
                     Белки:{' '}

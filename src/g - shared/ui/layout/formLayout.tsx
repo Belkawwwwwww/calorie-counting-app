@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import styled, { CSSProperties } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -9,30 +9,38 @@ const StyledContainer = styled.div`
 const StyledLFForm = styled.div`
     width: 450px;
 `;
-const StyledLFTitle = styled.h1<{content?: 'center'}>`
+const StyledLFTitle = styled.h1<{ content?: 'center' }>`
     display: flex;
     font-weight: 200;
     font-size: 30px;
     color: #000000;
     margin-bottom: 22px;
-    ${({ content }) => content && `
+    ${({ content }) =>
+        content &&
+        `
         display: flex;
         justify-content: center;
     `}
-
 `;
+const StyledBtn = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+`;
+
 interface UIFormLayoutProps {
     header?: ReactNode;
     form?: ReactNode;
     title: string;
     content?: 'center';
-    
+    nextButton?: ReactNode;
 }
 export const UIFormLayout: FC<UIFormLayoutProps> = ({
     header,
     form,
     title,
-    content
+    content,
+    nextButton,
 }) => {
     return (
         <StyledContainer>
@@ -40,6 +48,7 @@ export const UIFormLayout: FC<UIFormLayoutProps> = ({
             <StyledLFForm>
                 <StyledLFTitle content={content}>{title}</StyledLFTitle>
                 {form}
+                <StyledBtn>{nextButton}</StyledBtn>
             </StyledLFForm>
         </StyledContainer>
     );

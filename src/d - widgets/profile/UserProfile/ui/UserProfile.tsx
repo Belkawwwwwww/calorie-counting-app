@@ -10,7 +10,6 @@ import {
     goalTranslations,
 } from '@/g - shared/utils/translation';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -83,6 +82,12 @@ const StyledLinks = styled(Link)`
     color: black;
     text-decoration: none;
 `;
+const StyledBlock = styled.div`
+    display: flex;
+    margin-top: 300px;
+    align-items: center;
+    justify-content: center;
+`;
 
 export const UserProfile = () => {
     const {
@@ -111,16 +116,18 @@ export const UserProfile = () => {
     if (response_status !== 0) {
         console.log(userData);
         return (
-            <StyledBtn href={RouteEnum.TEST}>
-                <Button
-                    $variant='primary'
-                    $btnWidth='l'
-                    $btnSquareSize='button--square--size-l'
-                    type='submit'
-                >
-                    СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН
-                </Button>
-            </StyledBtn>
+            <StyledBlock>
+                <StyledBtn href={RouteEnum.TEST}>
+                    <Button
+                        $variant='primary'
+                        $btnWidth='l'
+                        $btnSquareSize='button--square--size-l'
+                        type='submit'
+                    >
+                        СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН
+                    </Button>
+                </StyledBtn>
+            </StyledBlock>
         );
     }
 
@@ -132,7 +139,9 @@ export const UserProfile = () => {
             <StyledMenu>
                 <Layout>
                     <StyledLink>
-                        <StyledLinks href={RouteEnum.MAIN}>КАЛЬКУЛЯТОР</StyledLinks>
+                        <StyledLinks href={RouteEnum.MAIN}>
+                            КАЛЬКУЛЯТОР
+                        </StyledLinks>
                         <StyledLinks href={RouteEnum.HOME}>HOME</StyledLinks>
                     </StyledLink>
                 </Layout>

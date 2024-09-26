@@ -1,5 +1,5 @@
-import {RootState} from '@/app/providers/store-providers/config/store';
-import {createSelector} from '@reduxjs/toolkit';
+import { RootState } from '@/app/providers/store-providers/config/store';
+import { createSelector } from '@reduxjs/toolkit';
 
 const _session = (state: RootState) => state.session;
 export const isAuthSelector = createSelector(

@@ -1,19 +1,16 @@
-import React, { FC, useState } from 'react';
-import styled from 'styled-components';
+import React, { FC } from 'react';
 import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
-import { InputWithRules } from '@/e - features/input-with-rules';
 import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
 import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
 
 interface DateOfBirthQuestionProps {
     selectedAnswer?: string | number | Date | null;
-    onAnswer: (answer: string | number | Date) => void; 
-    // onNextQuestion: () => void;
+    onAnswer: (answer: string | number | Date) => void;
 }
 
 export const DateOfBirthQuestion: FC<DateOfBirthQuestionProps> = ({
     onAnswer,
-    selectedAnswer, 
+    selectedAnswer,
 }) => {
     const { inputValue: birthday, handleInputChange } = useZodInputValidation(
         dataScheme.shape.birthday
@@ -25,18 +22,6 @@ export const DateOfBirthQuestion: FC<DateOfBirthQuestionProps> = ({
         onAnswer(value);
     };
 
-    // const handleSubmit = () => {
-    //     onAnswer(inputValue);
-    //     onNextQuestion();
-    // };
-
-    // const isDateInPast = (value: string): boolean => {
-    //     const date = new Date(value);
-    //     const today = new Date();
-    //     today.setHours(0, 0, 0, 0); // Установить время на начало дня (00:00:00)
-    //     return date < today;
-    // };
-
     return (
         <QuestionComponent
             inputValue={birthday.toString()}
@@ -46,7 +31,6 @@ export const DateOfBirthQuestion: FC<DateOfBirthQuestionProps> = ({
             inputType='date'
             inputName='birthday'
             inputId='birthday'
-            // onNextQuestion={onNextQuestion}
         />
     );
 };

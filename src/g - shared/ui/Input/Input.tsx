@@ -14,8 +14,6 @@ const StyledInput = styled.input`
 
 export const Input: FC<IInputProps> = memo(
     ({ onChange, value, ...otherProps }) => {
-
-        
         return (
             <>
                 <StyledInput

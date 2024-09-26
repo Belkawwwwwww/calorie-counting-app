@@ -1,7 +1,7 @@
-import React, {FC, ReactNode} from 'react';
-import {useAppSelector} from '@/g - shared/lib/store';
-import {isPendingSelector} from '@/f - entities/redux/pending';
-import styled, {keyframes} from 'styled-components';
+import React, { FC, ReactNode } from 'react';
+import { useAppSelector } from '@/g - shared/lib/store';
+import { isPendingSelector } from '@/f - entities/redux/pending';
+import styled, { keyframes } from 'styled-components';
 
 const animloader = keyframes`
   0% {
@@ -44,7 +44,7 @@ interface LoaderOverlayProps {
     children: ReactNode;
 }
 
-export const LoaderOverlay: FC<LoaderOverlayProps> = ({children}) => {
+export const LoaderOverlay: FC<LoaderOverlayProps> = ({ children }) => {
     const pending = useAppSelector(isPendingSelector);
 
     return (

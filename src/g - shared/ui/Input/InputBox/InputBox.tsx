@@ -32,7 +32,9 @@ export const InputBox: FC<InputBoxProps> = ({
     direction = 'column',
     ...inputProps
 }) => {
-    const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (
+        event
+    ) => {
         inputProps.onChange?.(event);
     };
 
