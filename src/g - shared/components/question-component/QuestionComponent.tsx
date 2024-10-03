@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
+import { z, ZodSchema } from 'zod';
 
 interface QuestionComponentProps {
     title?: string;
@@ -14,9 +15,9 @@ interface QuestionComponentProps {
     inputError?: string;
     onInputChange?: (value: string) => void;
     customOption?: React.ComponentType<{ isSelected: boolean }>;
+    validationSchema?: ZodSchema;
+    onValidValue?: (value: string | number | Date) => void
 }
-
-const StyledContainer = styled.div``;
 
 const StyledTitle = styled.h1`
     font-weight: 200;
@@ -66,13 +67,34 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
     inputError,
     customOption: CustomOption = StyledOption,
     onAnswer,
+    validationSchema,
+    onValidValue,
+
+    
 }) => {
+    const [validationError, setValidationError] = useState<string>(''); 
+    const handleInputChange = (value: string) => {
+        if (validationSchema) {
+            try {
+                const parsedValue = inputType === 'number' ? Number(value) : value;
+                validationSchema.parse(parsedValue); // Проверка схемы
+                setValidationError(''); // Ошибки нет
+                onValidValue?.(parsedValue); // Успешная валидация
+            } catch (error) {
+                if (error instanceof z.ZodError) {
+                    setValidationError(error.errors[0].message); // Сохраняем ошибку
+                }
+            }
+        }
+        onInputChange?.(value); // Передаём родительскому компоненту результат
+    };
+
     const handleOptionClick = (option: string) => {
         onAnswer?.(option);
     };
 
     return (
-        <StyledContainer>
+        <>
             <StyledTitle>{title}</StyledTitle>
             {options ? (
                 <>
@@ -93,11 +115,11 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
                     id={inputId}
                     type={inputType}
                     name={inputName}
-                    error={inputError}
+                    error={inputError || validationError}
                     value={inputValue || ''}
-                    onChange={(event) => onInputChange?.(event.target.value)}
+                    onChange={(event) => handleInputChange(event.target.value)}
                 />
             )}
-        </StyledContainer>
+        </>
     );
 };

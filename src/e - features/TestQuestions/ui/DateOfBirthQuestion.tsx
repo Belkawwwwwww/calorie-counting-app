@@ -3,12 +3,7 @@ import { QuestionComponent } from '@/g - shared/components/question-component/Qu
 import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
 import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
 
-interface DateOfBirthQuestionProps {
-    selectedAnswer?: string | number | Date | null;
-    onAnswer: (answer: string | number | Date) => void;
-}
-
-export const DateOfBirthQuestion: FC<DateOfBirthQuestionProps> = ({
+export const DateOfBirthQuestion: FC<TestQuestionProps> = ({
     onAnswer,
     selectedAnswer,
 }) => {

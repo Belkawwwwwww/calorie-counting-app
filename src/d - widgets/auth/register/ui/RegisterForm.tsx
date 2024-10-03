@@ -16,6 +16,8 @@ import { setUser } from '@/f - entities/redux/user/model/action/action';
 import { useRouter } from 'next/router';
 import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
+import { useError } from '@/g - shared/lib/context/ErrorContext';
+import { Error } from '@/g - shared/ui/ErrorDisplay/ErrorDisplay';
 
 const StyledRFContainer = styled.div`
     display: flex;
@@ -52,6 +54,7 @@ export const RegisterForm = () => {
     const [lastName, setLastName] = useState<string>('');
     const dispatch = useAppDispatch();
     const router = useRouter();
+    const { setError } = useError();
 
     const [validationErrors, setValidationErrors] = useState({
         username: '',
@@ -60,7 +63,6 @@ export const RegisterForm = () => {
         firstName: '',
         lastName: '',
     });
-    const [authError, setAuthError] = useState('');
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
@@ -75,7 +77,7 @@ export const RegisterForm = () => {
                 firstName: '',
                 lastName: '',
             });
-            setAuthError('');
+            setError('');
             const validatedData = RegScheme.parse(formData); // Валидация входных данных с помощью RegScheme
             const response = await registerUser(validatedData).unwrap();
             if (response.response_status === 0) {
@@ -90,7 +92,7 @@ export const RegisterForm = () => {
                     console.log('Регистрация успешна');
                 }
             } else {
-                setAuthError('Ошибка при регистрации');
+                setError('Ошибка при регистрации');
                 console.log(response);
             }
         } catch (error: unknown | z.ZodError) {
@@ -107,7 +109,7 @@ export const RegisterForm = () => {
                 console.log('Ошибка валидации:', errors);
             } else {
                 console.error('Registration failed:', error);
-                setAuthError('Произошла ошибка при регистрации');
+                setError('Произошла ошибка при регистрации');
             }
         }
     };
@@ -169,9 +171,7 @@ export const RegisterForm = () => {
         <OpenRoute>
             <StyledRFContainer>
                 <form onSubmit={handleSubmit}>
-                    {authError ? (
-                        <StyledRFError>{authError}</StyledRFError>
-                    ) : null}
+                    <Error />
                     {formFields.map(
                         ({ label, error, id, type, name, value, onChange }) => (
                             <InputBox

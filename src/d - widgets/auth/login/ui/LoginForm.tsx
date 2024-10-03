@@ -17,6 +17,8 @@ import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { useAuthUserMutation } from '@/g - shared/api/authApi';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
 import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
+import { useError } from '@/g - shared/lib/context/ErrorContext';
+import { Error } from '@/g - shared/ui/ErrorDisplay/ErrorDisplay';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -24,9 +26,6 @@ const StyledLFContainer = styled.div`
     justify-content: center;
     position: relative;
     width: 450px;
-`;
-const StyledLFError = styled.div`
-    color: red;
 `;
 const StyledLFBtn = styled.div`
     margin-bottom: 10px;
@@ -58,9 +57,9 @@ export const LoginForm = () => {
         username: '',
         password: '',
     });
-    const [authError, setAuthError] = useState('');
     const dispatch = useAppDispatch();
     const router = useRouter();
+    const { setError } = useError();
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
@@ -72,7 +71,7 @@ export const LoginForm = () => {
                 username: '',
                 password: '',
             });
-            setAuthError('');
+            setError('');
             const validatedData = AuthScheme.parse(formData);
             if (authUser) {
                 const response = await authUser(validatedData).unwrap();
@@ -87,14 +86,14 @@ export const LoginForm = () => {
                         console.log('Авторизация успешна');
                     }
                 } else {
-                    setAuthError('Неправильный логин или пароль');
+                    setError('Неправильный логин или пароль');
                     console.log(response);
                 }
             } else {
                 console.error(
                     'Ошибка регистрации: authUser is null or undefined'
                 );
-                setAuthError('Произошла ошибка при авторизации');
+                setError('Произошла ошибка при авторизации');
             }
         } catch (error: unknown | z.ZodError) {
             if (error instanceof z.ZodError) {
@@ -110,7 +109,7 @@ export const LoginForm = () => {
                 console.log('Ошибки валидации:', errors);
             } else {
                 console.error('Ошибка регистрации:', error);
-                setAuthError('Произошла ошибка при авторизации');
+                setError('Произошла ошибка при авторизации');
             }
         }
     };
@@ -140,9 +139,7 @@ export const LoginForm = () => {
         <OpenRoute>
             <StyledLFContainer>
                 <form onSubmit={handleSubmit}>
-                    {authError ? (
-                        <StyledLFError>{authError}</StyledLFError>
-                    ) : null}
+                    <Error />
                     {formFields.map(
                         ({ label, error, id, type, name, value, onChange }) => (
                             <InputBox
@@ -163,8 +160,8 @@ export const LoginForm = () => {
                             $btnWidth='s'
                             $btnSquareSize='button--square--size-m'
                             type='submit'
+                            disabled={isLoading}
                         >
-                            Войти
                             {isLoading ? <LoadingIndicator /> : 'Войти'}
                         </Button>
                         <StyledPasswordRecovery>

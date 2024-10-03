@@ -2,12 +2,7 @@ import React, { FC } from 'react';
 import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
 import { genderTranslations } from '@/g - shared/utils/translation';
 
-interface GenderQuestionProps {
-    selectedAnswer?: string | null;
-    onAnswer: (answer: string | number | Date) => void;
-}
-
-export const GenderQuestion: FC<GenderQuestionProps> = ({
+export const GenderQuestion: FC<TestQuestionProps> = ({
     selectedAnswer,
     onAnswer,
 }) => {

@@ -2,12 +2,7 @@ import React, { FC } from 'react';
 import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
 import { activityTranslations } from '@/g - shared/utils/translation';
 
-interface ActivityLevelQuestionProps {
-    selectedAnswer?: string | number | Date | null;
-    onAnswer: (answer: string | number | Date) => void;
-}
-
-export const ActivityLevelQuestion: FC<ActivityLevelQuestionProps> = ({
+export const ActivityLevelQuestion: FC<TestQuestionProps> = ({
     selectedAnswer,
     onAnswer,
 }) => {

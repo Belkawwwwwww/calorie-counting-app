@@ -2,12 +2,7 @@ import React, { FC } from 'react';
 import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
 import { goalTranslations } from '@/g - shared/utils/translation';
 
-interface GoalQuestionProps {
-    selectedAnswer?: string | null;
-    onAnswer: (answer: string | number | Date) => void;
-}
-
-export const TargetQuestion: FC<GoalQuestionProps> = ({
+export const TargetQuestion: FC<TestQuestionProps> = ({
     selectedAnswer,
     onAnswer,
 }) => {
