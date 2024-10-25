@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
-import { useCreateSurveyMutation } from '../api/surveyApi';
+import { useCreateSurveyMutation, useGetUserDataQuery } from '../api/surveyApi';
 import styled from 'styled-components';
 import { UIFormLayout } from '@/g - shared/ui/layout';
 import {
@@ -12,11 +12,13 @@ import {
 } from '@/e - features/TestQuestions';
 import { AgeQuestion } from '@/e - features/TestQuestions/ui/AgeQuestion';
 import { WeightQuestion } from '@/e - features/TestQuestions/ui/WeightQuestion';
-import { Button } from '@/g - shared/ui/Button';
-import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { dataScheme } from '../model/createSurvey';
 import { useRouter } from 'next/router';
 import { RouteEnum } from '@/g - shared/model/navigation';
+import { NextBtn } from '../component/NextQuestionBtn';
+import { LoaderTest } from '@/g - shared/ui/Loader/LoaderTest';
+import { useSurvey } from '@/g - shared/hooks/useSurvey';
+
 
 const StyledContainer = styled.div`
     display: flex;
@@ -36,46 +38,21 @@ const StyledQuestions = styled.div`
 `;
 
 export const Test: React.FC = () => {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const [currentQuestionAnswered, setCurrentQuestionAnswered] =
-        useState(false);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const { refetch } = useGetUserDataQuery();
     const [createSurvey, { isLoading }] = useCreateSurveyMutation();
-    const [answers, setAnswers] = useState<{
-        gender: string | null;
-        target: string | null;
-        age: number | null;
-        growth: number | null;
-        birthday: Date | null;
-        activity: string | null;
-        weight: number | null;
-    }>({
-        gender: null,
-        target: null,
-        age: null,
-        growth: null,
-        birthday: null,
-        activity: null,
-        weight: null,
-    });
-
-    const handleAnswer = (
-        key: keyof typeof answers,
-        value: (typeof answers)[keyof typeof answers]
-    ) => {
-        setAnswers((prevAnswers) => ({
-            ...prevAnswers,
-            [key]: value,
-        }));
-        setCurrentQuestionAnswered(true);
-        console.log(currentQuestionIndex);
-    };
-    console.log(answers);
+    const {
+        currentQuestionIndex,
+        currentQuestionAnswered,
+        answers,
+        handleAnswer,
+        handleNext,
+      } = useSurvey();
+      
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // const form = new FormData(e.currentTarget);
-        // const formData = Object.fromEntries(form.entries());
 
         // Преобразовываем данные перед валидацией
         const preparedData = {
@@ -100,7 +77,11 @@ export const Test: React.FC = () => {
         try {
             const validatedData = dataScheme.parse(preparedData);
             await createSurvey(validatedData);
-            router.push(RouteEnum.MAIN);
+            setLoading(true);
+            refetch();
+            setTimeout(() => {
+                router.push(RouteEnum.MAIN);
+            }, 5000);
             console.log(answers);
             console.log('успешно');
         } catch (e) {
@@ -122,7 +103,6 @@ export const Test: React.FC = () => {
                     onAnswer={(answer) => handleAnswer('gender', answer)}
                 />
             ),
-            nextButtonText: 'Следующий вопрос',
         },
         {
             title: 'ВАША ЦЕЛЬ',
@@ -132,7 +112,6 @@ export const Test: React.FC = () => {
                     onAnswer={(answer) => handleAnswer('target', answer)}
                 />
             ),
-            nextButtonText: 'Следующий вопрос',
         },
         {
             title: 'ВВЕДИТЕ ВАШ ВОЗРАСТ',
@@ -141,7 +120,6 @@ export const Test: React.FC = () => {
                     onAnswer={(answer) => handleAnswer('age', answer)}
                 />
             ),
-            nextButtonText: 'Следующий вопрос',
         },
         {
             title: 'ВВЕДИТЕ ВАШ РОСТ',
@@ -150,7 +128,6 @@ export const Test: React.FC = () => {
                     onAnswer={(answer) => handleAnswer('growth', answer)}
                 />
             ),
-            nextButtonText: 'Следующий вопрос',
         },
         {
             title: 'ДАТА РОЖДЕНИЯ',
@@ -159,7 +136,6 @@ export const Test: React.FC = () => {
                     onAnswer={(answer) => handleAnswer('birthday', answer)}
                 />
             ),
-            nextButtonText: 'Следующий вопрос',
         },
         {
             title: 'КАКОЙ У ВАС ОБРАЗ ЖИЗНИ?',
@@ -169,7 +145,6 @@ export const Test: React.FC = () => {
                     onAnswer={(answer) => handleAnswer('activity', answer)}
                 />
             ),
-            nextButtonText: 'Следующий вопрос',
         },
         {
             title: 'ВВЕДИТЕ ВАШЕ ВЕС',
@@ -183,62 +158,42 @@ export const Test: React.FC = () => {
 
     return (
         <StyledContainer>
-            <StyledTitle>СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН</StyledTitle>
-            <StyledQuestions>
-                <form onSubmit={handleSubmit}>
-                    {questions.map((question, index) => (
-                        <div key={question.title}>
-                            {index === currentQuestionIndex && (
-                                <UIFormLayout
-                                    key={question.title}
-                                    content='center'
-                                    title={question.title}
-                                    form={question.component}
-                                    nextButton={
-                                        currentQuestionAnswered &&
-                                        index < questions.length - 1 ? (
-                                            <Button
-                                                $variant='primary'
-                                                $btnWidth='l'
-                                                $btnSquareSize='button--square--size-m'
-                                                type='button'
-                                                onClick={() => {
-                                                    setCurrentQuestionAnswered(
-                                                        false
-                                                    );
-                                                    setCurrentQuestionIndex(
-                                                        index + 1
-                                                    );
-                                                }}
-                                            >
-                                                {
-                                                    questions[index]
-                                                        .nextButtonText
-                                                }
-                                            </Button>
-                                        ) : currentQuestionIndex ===
-                                              questions.length - 1 &&
-                                          answers.weight !== null ? (
-                                            <Button
-                                                $variant='primary'
-                                                $btnWidth='l'
-                                                $btnSquareSize='button--square--size-m'
-                                                type='submit'
-                                            >
-                                                {isLoading ? (
-                                                    <LoadingIndicator />
-                                                ) : (
-                                                    'СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН'
-                                                )}
-                                            </Button>
-                                        ) : null
-                                    }
-                                />
-                            )}
-                        </div>
-                    ))}
-                </form>
-            </StyledQuestions>
+            {loading ? (
+                <LoaderTest />
+            ) : (
+                <>
+                    <StyledTitle>СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН</StyledTitle>
+                    <StyledQuestions>
+                        <form onSubmit={handleSubmit}>
+                            {questions.map((question, index) => (
+                                <div key={question.title}>
+                                    {index === currentQuestionIndex && (
+                                        <UIFormLayout
+                                            key={question.title}
+                                            content='center'
+                                            title={question.title}
+                                            form={question.component}
+                                            nextButton={
+                                                <NextBtn
+                                                    isLastQuestion={
+                                                        index ===
+                                                        questions.length - 1
+                                                    }
+                                                    isAnswered={
+                                                        currentQuestionAnswered
+                                                    }
+                                                    onNext={handleNext}
+                                                    isLoading={isLoading}
+                                                />
+                                            }
+                                        />
+                                    )}
+                                </div>
+                            ))}
+                        </form>
+                    </StyledQuestions>
+                </>
+            )}
         </StyledContainer>
     );
 };

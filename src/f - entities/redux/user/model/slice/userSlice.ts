@@ -18,8 +18,5 @@ export const userSlice = createSlice({
         setUser(state, { payload }: PayloadAction<any | null>) {
             state.user_id = payload;
         },
-        setUserDetails(state, { payload }: PayloadAction<Partial<UserState>>) {
-            Object.assign(state, payload);
-        },
     },
 });

@@ -14,10 +14,10 @@ import { setAuth } from '@/f - entities/redux/session/modele/action/action';
 import { OpenRoute } from '@/c - pages/router-providers';
 import { setUser } from '@/f - entities/redux/user/model/action/action';
 import { useRouter } from 'next/router';
-import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
 import { useError } from '@/g - shared/lib/context/ErrorContext';
 import { Error } from '@/g - shared/ui/ErrorDisplay/ErrorDisplay';
+import { LoadingInBtn } from '@/g - shared/ui/Loader/LoaderInBtn';
 
 const StyledRFContainer = styled.div`
     display: flex;
@@ -113,7 +113,6 @@ export const RegisterForm = () => {
             }
         }
     };
-    if (isLoading) return <LoadingIndicator />;
     const formFields = [
         {
             label: 'Email',
@@ -195,7 +194,7 @@ export const RegisterForm = () => {
                             type='submit'
                         >
                             {isLoading ? (
-                                <LoadingIndicator />
+                                <LoadingInBtn />
                             ) : (
                                 'Зарегистрироваться'
                             )}

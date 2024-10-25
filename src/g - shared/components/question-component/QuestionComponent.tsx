@@ -69,8 +69,6 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
     onAnswer,
     validationSchema,
     onValidValue,
-
-    
 }) => {
     const [validationError, setValidationError] = useState<string>(''); 
     const handleInputChange = (value: string) => {

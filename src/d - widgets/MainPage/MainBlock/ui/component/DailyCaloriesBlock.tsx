@@ -3,7 +3,7 @@ import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 interface DailyCaloriesBlockProps {
-    onCaloriesCalculated: any;
+    onCaloriesCalculated: (calories: number) => void;
 }
 const StyledMainCont = styled.div`
     display: flex;
@@ -19,12 +19,12 @@ export const DailyCaloriesBlock: FC<DailyCaloriesBlockProps> = ({
     const { data: userData, isLoading } = useGetUserDataQuery();
     const [dailyCalories, setDailyCalories] = useState(0);
     useEffect(() => {
-        if (!isLoading) {
+        if (!isLoading && userData?.data) {
             const calories = calculateDailyCalories();
             setDailyCalories(calories);
             onCaloriesCalculated(calories);
         }
-    }, [isLoading]);
+    }, [isLoading, userData]);
 
     const basalMetabolism = () => {
         const { gender, weight, growth, age } = userData?.data?.data || {};
@@ -62,9 +62,11 @@ export const DailyCaloriesBlock: FC<DailyCaloriesBlockProps> = ({
         const basalMetabolismValue = basalMetabolism();
         const dailyCalories = basalMetabolismValue * activityCoefficient;
 
-        if (userData?.data.data.target === 'LOSE_WEIGHT') {
+        const target = userData?.data?.data.target;
+
+        if (target=== 'LOSE_WEIGHT') {
             return dailyCalories - 400;
-        } else if (userData?.data.data.target === 'GAIN_WEIGHT') {
+        } else if (target === 'GAIN_WEIGHT') {
             return dailyCalories + 400;
         } else {
             return dailyCalories;

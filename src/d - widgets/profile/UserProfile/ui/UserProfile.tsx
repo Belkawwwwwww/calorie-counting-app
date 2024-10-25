@@ -171,21 +171,21 @@ export const UserProfile = () => {
                     {userData ? (
                         <div>
                             <p>
-                                ПОЛ:
+                                ПОЛ: 
                                 {genderTranslations[
                                     userData.data.data.gender
                                 ] || userData.data.data.gender}
                             </p>
                             <p>
-                                ЦЕЛЬ:
+                                ЦЕЛЬ: 
                                 {goalTranslations[userData.data.data.target] ||
                                     userData.data.data.target}
                             </p>
                             <p>ВОЗРАСТ: {userData.data.data.age}</p>
                             <p>РОСТ: {userData.data.data.growth}</p>
                             <p>
-                                ОБРАЗ ЖИЗНИ:
-                                {activityTranslations[
+                                ОБРАЗ ЖИЗНИ: 
+                                 {activityTranslations[
                                     userData.data.data.activity
                                 ] || userData.data.data.activity}
                             </p>
