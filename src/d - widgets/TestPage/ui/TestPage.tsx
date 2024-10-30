@@ -81,7 +81,7 @@ export const Test: React.FC = () => {
             refetch();
             setTimeout(() => {
                 router.push(RouteEnum.MAIN);
-            }, 5000);
+            }, 3000);
             console.log(answers);
             console.log('успешно');
         } catch (e) {

@@ -15,16 +15,16 @@ export const WeightQuestion: FC<TestQuestionProps> = ({
 
 
     const handleWeightChange = (value: string) => {
-        const ageValue = Number(value); // строку в число
+        const weightValue = Number(value); // строку в число
 
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);
 
         try {
-            dataScheme.shape.age.parse(ageValue); // проверка значения возраста
+            dataScheme.shape.weight.parse(weightValue); 
             setValidationError('');
-            onAnswer(ageValue); // Передаем number
+            onAnswer(weightValue); // Передаем number
         } catch (error) {
             if (error instanceof z.ZodError) {
                 setValidationError(error.errors[0].message);

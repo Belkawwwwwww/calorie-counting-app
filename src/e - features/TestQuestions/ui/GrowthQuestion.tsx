@@ -14,16 +14,16 @@ export const GrowthQuestion: FC<TestQuestionProps> = ({
     const [validationError, setValidationError] = useState<string>('');
 
     const handleGrowthChange = (value: string) => {
-        const ageValue = Number(value); // строку в число
+        const growthValue = Number(value); // строку в число
 
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);
 
         try {
-            dataScheme.shape.age.parse(ageValue); // проверка значения возраста
+            dataScheme.shape.growth.parse(growthValue);
             setValidationError('');
-            onAnswer(ageValue); // Передаем number
+            onAnswer(growthValue); // Передаем number
         } catch (error) {
             if (error instanceof z.ZodError) {
                 setValidationError(error.errors[0].message);

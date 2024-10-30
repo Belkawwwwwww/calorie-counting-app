@@ -6,21 +6,25 @@ export const dataScheme = z.object({
     age: z
         .number()
         .int()
+        .refine((val) => val <= 100, {
+            message: 'Возраст не может превышать 100',
+        })
         .refine((val) => val >= 0, {
             message: 'Возраст не может быть отрицательным',
         })
         .refine((val) => val > 0, {
-            message: 'Введите корректный возраст', // Эта проверка теперь будет выполнена только если предыдущее сообщение прошло
+            message: 'Введите корректный возраст',
         }),
     growth: z
         .number()
-        .nonnegative()
-        .positive()
+        .refine((val) => val <= 300, {
+            message: 'Рост не может превышать 300 см',
+        })
         .refine((val) => val >= 0, {
             message: 'Рост не может быть отрицательным',
         })
         .refine((val) => val > 0, {
-            message: 'Введите корректный рост', 
+            message: 'Введите корректный рост',
         }),
     birthday: z.date(),
     activity: z.enum([
@@ -31,8 +35,9 @@ export const dataScheme = z.object({
     ]),
     weight: z
         .number()
-        .nonnegative()
-        .positive()
+        .refine((val) => val <= 500, {
+            message: 'Вес не может превышать 500 кг',
+        })
         .refine((val) => val >= 0, {
             message: 'Вес не может быть отрицательным',
         })

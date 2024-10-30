@@ -56,7 +56,7 @@ const StyledImg = styled.div<StyledImgProps>`
 const StyledBtn = styled(Link)`
     margin: 0 auto;
     margin-top: 20px;
-`
+`;
 
 interface ImageProps {
     src: string;
@@ -92,7 +92,6 @@ const menu = [
         imageUrl: '/Personalisation.png',
     },
 ];
-
 
 export const HomePage = () => {
     return (

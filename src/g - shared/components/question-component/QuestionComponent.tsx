@@ -2,22 +2,7 @@ import styled from 'styled-components';
 import React, { FC, useState } from 'react';
 import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
 import { z, ZodSchema } from 'zod';
-
-interface QuestionComponentProps {
-    title?: string;
-    options?: string[];
-    selectedAnswer: string | number | Date | null;
-    onAnswer?: (answer: string | number | Date) => void;
-    inputValue?: string;
-    inputId?: string;
-    inputType?: string;
-    inputName?: string;
-    inputError?: string;
-    onInputChange?: (value: string) => void;
-    customOption?: React.ComponentType<{ isSelected: boolean }>;
-    validationSchema?: ZodSchema;
-    onValidValue?: (value: string | number | Date) => void
-}
+import { QuestionComponentProps } from './types';
 
 const StyledTitle = styled.h1`
     font-weight: 200;
@@ -65,16 +50,16 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
     inputName,
     inputType,
     inputError,
-    customOption: CustomOption = StyledOption,
     onAnswer,
     validationSchema,
     onValidValue,
 }) => {
-    const [validationError, setValidationError] = useState<string>(''); 
+    const [validationError, setValidationError] = useState<string>('');
     const handleInputChange = (value: string) => {
         if (validationSchema) {
             try {
-                const parsedValue = inputType === 'number' ? Number(value) : value;
+                const parsedValue =
+                    inputType === 'number' ? Number(value) : value;
                 validationSchema.parse(parsedValue); // Проверка схемы
                 setValidationError(''); // Ошибки нет
                 onValidValue?.(parsedValue); // Успешная валидация
@@ -98,13 +83,13 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
                 <>
                     <StyledOptions>
                         {options.map((option) => (
-                            <CustomOption
+                            <StyledOption
                                 key={option}
                                 onClick={() => handleOptionClick(option)}
                                 isSelected={selectedAnswer === option}
                             >
                                 {option}
-                            </CustomOption>
+                            </StyledOption>
                         ))}
                     </StyledOptions>
                 </>

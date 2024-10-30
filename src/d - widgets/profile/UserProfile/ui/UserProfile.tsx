@@ -68,6 +68,7 @@ const StyledUsername = styled.div`
 `;
 const StyledMain = styled.div`
     display: flex;
+    flex-direction: column;
 `;
 const StyledBtn = styled(Link)`
     margin: 0 auto;
