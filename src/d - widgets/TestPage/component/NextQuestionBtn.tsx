@@ -17,7 +17,7 @@ export const NextBtn: FC<NextBtnProps> = ({
 }) => {
     return (
         <>
-            {isAnswered && !isLastQuestion  ? (
+            {isAnswered && !isLastQuestion ? (
                 <Button
                     $variant='primary'
                     $btnWidth='l'
@@ -25,7 +25,7 @@ export const NextBtn: FC<NextBtnProps> = ({
                     type='button'
                     onClick={onNext}
                 >
-                    СЛЕДУЮЩИЙ ВОПРОС
+                    ДАЛЕЕ
                 </Button>
             ) : isLastQuestion && isAnswered ? (
                 <Button

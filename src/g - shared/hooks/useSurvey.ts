@@ -1,8 +1,11 @@
-import { useState } from "react"
+import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
+import { useState } from 'react';
+import { z } from 'zod';
 
 export const useSurvey = () => {
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-    const [currentQuestionAnswered, setCurrentQuestionAnswered] = useState(false)
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [currentQuestionAnswered, setCurrentQuestionAnswered] =
+        useState(false);
     const [answers, setAnswers] = useState<{
         gender: string | null;
         target: string | null;
@@ -20,21 +23,44 @@ export const useSurvey = () => {
         activity: null,
         weight: null,
     });
-    const handleAnswer = (
-        key: keyof typeof answers,
-        value: (typeof answers)[keyof typeof answers]
-    ) => {
+
+    const handleAnswer = (key: keyof typeof answers, value: any) => {
         setAnswers((prevAnswers) => ({
             ...prevAnswers,
             [key]: value,
         }));
-        setCurrentQuestionAnswered(true);
+
+        if (key === 'age' || key === 'growth' || key === 'weight') {
+            try {
+                const dataToValidate = { ...answers, [key]: value }; // создаю объект с текущими ответами
+                dataScheme.parse(dataToValidate); // применяю валидацию
+                setCurrentQuestionAnswered(true); // если всё прошло успешно, устанавливаем состояние валидности
+            } catch (e) {
+                if (e instanceof z.ZodError) {
+                    setCurrentQuestionAnswered(false); // если ошибка, сбрасываем состояние валидности
+                }
+            }
+        } else {
+            // Если это вопрос с выбором, просто установим его значение
+            const isValid = !!value; // будет true, если значение не пустое
+            setCurrentQuestionAnswered(isValid); // обновляем состояние, указывающее, что ответ валиден
+        }
     };
+
     const handleNext = () => {
-        setCurrentQuestionAnswered(false);
-        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+        if (currentQuestionAnswered) {
+            setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+            setCurrentQuestionAnswered(false); // сброс для следующего вопроса
+        } else {
+            console.log('Текущий вопрос без ответа');
+        }
     };
     return {
-        currentQuestionIndex, currentQuestionAnswered, answers, handleAnswer, handleNext, setAnswers
-    }
-}
+        currentQuestionIndex,
+        currentQuestionAnswered,
+        answers,
+        handleAnswer,
+        handleNext,
+        setCurrentQuestionAnswered,
+    };
+};

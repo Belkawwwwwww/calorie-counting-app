@@ -7,6 +7,7 @@ import { z } from 'zod';
 export const WeightQuestion: FC<TestQuestionProps> = ({
     onAnswer,
     selectedAnswer,
+    onInputValidation
 }) => {
     const { inputValue: weight, handleInputChange } = useZodInputValidation(
         dataScheme.shape.weight
@@ -25,9 +26,16 @@ export const WeightQuestion: FC<TestQuestionProps> = ({
             dataScheme.shape.weight.parse(weightValue); 
             setValidationError('');
             onAnswer(weightValue); // Передаем number
+            if(onInputValidation){
+                onInputValidation(true)
+            }
         } catch (error) {
             if (error instanceof z.ZodError) {
-                setValidationError(error.errors[0].message);
+                const errorMessage = error.errors[0].message;
+                setValidationError(errorMessage);
+                if (onInputValidation) {
+                    onInputValidation(false); // Устанавливаем неуспешный статус
+                }
             }
         }
     };

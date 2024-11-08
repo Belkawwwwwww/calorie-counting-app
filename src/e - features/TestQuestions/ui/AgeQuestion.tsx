@@ -1,12 +1,13 @@
 import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
 import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
 import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { z } from 'zod';
 
 export const AgeQuestion: FC<TestQuestionProps> = ({
     selectedAnswer,
     onAnswer,
+    onInputValidation,
 }) => {
     const { inputValue: age, handleInputChange } = useZodInputValidation(
         dataScheme.shape.age
@@ -15,7 +16,6 @@ export const AgeQuestion: FC<TestQuestionProps> = ({
 
     const handleAgeChange = (value: string) => {
         const ageValue = Number(value); // строку в число
-
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);
@@ -24,9 +24,16 @@ export const AgeQuestion: FC<TestQuestionProps> = ({
             dataScheme.shape.age.parse(ageValue); // проверка значения возраста
             setValidationError('');
             onAnswer(ageValue); // Передаем number
+            if (onInputValidation) {
+                onInputValidation(true);
+            }
         } catch (error) {
             if (error instanceof z.ZodError) {
-                setValidationError(error.errors[0].message);
+                const errorMessage = error.errors[0].message;
+                setValidationError(errorMessage);
+                if (onInputValidation) {
+                    onInputValidation(false); // Устанавливаем неуспешный статус
+                }
             }
         }
     };
@@ -35,7 +42,7 @@ export const AgeQuestion: FC<TestQuestionProps> = ({
         <QuestionComponent
             inputValue={age ? age.toString() : ''}
             onInputChange={handleAgeChange}
-            onAnswer={onAnswer}
+            // onAnswer={onAnswer}
             inputType='number'
             inputName='age'
             inputId='age'

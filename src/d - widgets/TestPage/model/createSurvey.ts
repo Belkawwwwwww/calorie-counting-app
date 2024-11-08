@@ -26,7 +26,10 @@ export const dataScheme = z.object({
         .refine((val) => val > 0, {
             message: 'Введите корректный рост',
         }),
-    birthday: z.date(),
+    birthday: z.date().refine((val) => val <= new Date(), {
+        message: 'Дата рождения не может быть в будущем',
+    }),
+
     activity: z.enum([
         'SEDENTARY_LIFESTYLE',
         'MODERATE_LIFESTYLE',

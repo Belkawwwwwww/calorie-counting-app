@@ -9,16 +9,15 @@ import {
     GenderQuestion,
     GrowthQuestion,
     TargetQuestion,
+    WeightQuestion,
 } from '@/e - features/TestQuestions';
 import { AgeQuestion } from '@/e - features/TestQuestions/ui/AgeQuestion';
-import { WeightQuestion } from '@/e - features/TestQuestions/ui/WeightQuestion';
 import { dataScheme } from '../model/createSurvey';
 import { useRouter } from 'next/router';
 import { RouteEnum } from '@/g - shared/model/navigation';
 import { NextBtn } from '../component/NextQuestionBtn';
 import { LoaderTest } from '@/g - shared/ui/Loader/LoaderTest';
 import { useSurvey } from '@/g - shared/hooks/useSurvey';
-
 
 const StyledContainer = styled.div`
     display: flex;
@@ -48,8 +47,8 @@ export const Test: React.FC = () => {
         answers,
         handleAnswer,
         handleNext,
-      } = useSurvey();
-      
+        setCurrentQuestionAnswered,
+    } = useSurvey();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -96,6 +95,7 @@ export const Test: React.FC = () => {
 
     const questions = [
         {
+            key: 'gender',
             title: 'ВАШ ПОЛ',
             component: (
                 <GenderQuestion
@@ -105,6 +105,7 @@ export const Test: React.FC = () => {
             ),
         },
         {
+            key: 'target',
             title: 'ВАША ЦЕЛЬ',
             component: (
                 <TargetQuestion
@@ -114,22 +115,29 @@ export const Test: React.FC = () => {
             ),
         },
         {
+            key: 'age',
             title: 'ВВЕДИТЕ ВАШ ВОЗРАСТ',
             component: (
                 <AgeQuestion
+                    selectedAnswer={answers.age}
                     onAnswer={(answer) => handleAnswer('age', answer)}
+                    onInputValidation={setCurrentQuestionAnswered}
                 />
             ),
         },
         {
+            key: 'growth',
             title: 'ВВЕДИТЕ ВАШ РОСТ',
             component: (
                 <GrowthQuestion
+                    selectedAnswer={answers.growth}
                     onAnswer={(answer) => handleAnswer('growth', answer)}
+                    onInputValidation={setCurrentQuestionAnswered}
                 />
             ),
         },
         {
+            key: 'date',
             title: 'ДАТА РОЖДЕНИЯ',
             component: (
                 <DateOfBirthQuestion
@@ -138,6 +146,7 @@ export const Test: React.FC = () => {
             ),
         },
         {
+            ley: 'activity',
             title: 'КАКОЙ У ВАС ОБРАЗ ЖИЗНИ?',
             component: (
                 <ActivityLevelQuestion
@@ -147,10 +156,13 @@ export const Test: React.FC = () => {
             ),
         },
         {
+            key: 'weight',
             title: 'ВВЕДИТЕ ВАШЕ ВЕС',
             component: (
                 <WeightQuestion
+                    selectedAnswer={answers.weight}
                     onAnswer={(answer) => handleAnswer('weight', answer)}
+                    onInputValidation={setCurrentQuestionAnswered}
                 />
             ),
         },
@@ -174,17 +186,19 @@ export const Test: React.FC = () => {
                                             title={question.title}
                                             form={question.component}
                                             nextButton={
-                                                <NextBtn
-                                                    isLastQuestion={
-                                                        index ===
-                                                        questions.length - 1
-                                                    }
-                                                    isAnswered={
-                                                        currentQuestionAnswered
-                                                    }
-                                                    onNext={handleNext}
-                                                    isLoading={isLoading}
-                                                />
+                                                currentQuestionAnswered && (
+                                                    <NextBtn
+                                                        isLastQuestion={
+                                                            index ===
+                                                            questions.length - 1
+                                                        }
+                                                        isAnswered={
+                                                            currentQuestionAnswered
+                                                        }
+                                                        onNext={handleNext}
+                                                        isLoading={isLoading}
+                                                    />
+                                                )
                                             }
                                         />
                                     )}

@@ -7,6 +7,7 @@ import { z } from 'zod';
 export const GrowthQuestion: FC<TestQuestionProps> = ({
     onAnswer,
     selectedAnswer,
+    onInputValidation
 }) => {
     const { inputValue: growth, handleInputChange } = useZodInputValidation(
         dataScheme.shape.growth
@@ -24,13 +25,19 @@ export const GrowthQuestion: FC<TestQuestionProps> = ({
             dataScheme.shape.growth.parse(growthValue);
             setValidationError('');
             onAnswer(growthValue); // Передаем number
+            if(onInputValidation) {
+                onInputValidation(true)
+            }
         } catch (error) {
             if (error instanceof z.ZodError) {
-                setValidationError(error.errors[0].message);
+                const errorMessage = error.errors[0].message;
+                setValidationError(errorMessage);
+                if (onInputValidation) {
+                    onInputValidation(false); // Устанавливаем неуспешный статус
+                }
             }
         }
     };
-
     return (
         <QuestionComponent
             inputValue={growth ? growth.toString() : ''}
