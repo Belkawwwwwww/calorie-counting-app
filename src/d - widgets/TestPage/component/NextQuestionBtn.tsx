@@ -15,32 +15,33 @@ export const NextBtn: FC<NextBtnProps> = ({
     onNext,
     isLoading,
 }) => {
+    const renderNextButton = () => (
+        <Button
+            $variant='primary'
+            $btnWidth='l'
+            $btnSquareSize='button--square--size-m'
+            type='button'
+            onClick={onNext}
+        >
+            ДАЛЕЕ
+        </Button>
+    );
+
+    const renderSubmitButton = () => (
+        <Button
+            $variant='primary'
+            $btnWidth='l'
+            $btnSquareSize='button--square--size-m'
+            type='submit'
+        >
+            {isLoading ? <LoadingInBtn /> : 'СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН'}
+        </Button>
+    );
+
     return (
         <>
-            {isAnswered && !isLastQuestion ? (
-                <Button
-                    $variant='primary'
-                    $btnWidth='l'
-                    $btnSquareSize='button--square--size-m'
-                    type='button'
-                    onClick={onNext}
-                >
-                    ДАЛЕЕ
-                </Button>
-            ) : isLastQuestion && isAnswered ? (
-                <Button
-                    $variant='primary'
-                    $btnWidth='l'
-                    $btnSquareSize='button--square--size-m'
-                    type='submit'
-                >
-                    {isLoading ? (
-                        <LoadingInBtn />
-                    ) : (
-                        'СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН'
-                    )}
-                </Button>
-            ) : null}
+            {isAnswered && !isLastQuestion ? renderNextButton() : null}
+            {isLastQuestion && isAnswered ? renderSubmitButton() : null}
         </>
     );
 };

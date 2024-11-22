@@ -146,7 +146,7 @@ export const Test: React.FC = () => {
             ),
         },
         {
-            ley: 'activity',
+            key: 'activity',
             title: 'КАКОЙ У ВАС ОБРАЗ ЖИЗНИ?',
             component: (
                 <ActivityLevelQuestion
@@ -179,14 +179,14 @@ export const Test: React.FC = () => {
                         <form onSubmit={handleSubmit}>
                             {questions.map((question, index) => (
                                 <div key={question.title}>
-                                    {index === currentQuestionIndex && (
+                                    {index === currentQuestionIndex ? (
                                         <UIFormLayout
                                             key={question.title}
                                             content='center'
                                             title={question.title}
                                             form={question.component}
                                             nextButton={
-                                                currentQuestionAnswered && (
+                                                currentQuestionAnswered ? (
                                                     <NextBtn
                                                         isLastQuestion={
                                                             index ===
@@ -198,10 +198,10 @@ export const Test: React.FC = () => {
                                                         onNext={handleNext}
                                                         isLoading={isLoading}
                                                     />
-                                                )
+                                                ): null
                                             }
                                         />
-                                    )}
+                                    ): null}
                                 </div>
                             ))}
                         </form>

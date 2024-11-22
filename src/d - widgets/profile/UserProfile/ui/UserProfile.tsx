@@ -10,7 +10,7 @@ import {
     goalTranslations,
 } from '@/g - shared/utils/translation';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import styled from 'styled-components';
 
 const StyledUserProfile = styled.div`
@@ -43,13 +43,53 @@ const StyledPhotoContainer = styled.div`
     align-items: center;
     justify-content: space-between;
 `;
-
-const StyledPhoto = styled.div`
-    width: 200px;
-    height: 200px;
-    background: black;
+const PhotoWrapper = styled.div`
+    width: 170px;
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(
+            circle at left top,
+            rgba(0, 255, 0, 1),
+            rgba(0, 255, 0, 0) 60%
+        ),
+        radial-gradient(
+            circle at right top,
+            rgba(255, 0, 255, 1),
+            rgba(255, 0, 255, 0) 30%
+        ),
+        radial-gradient(
+            circle at left bottom,
+            rgba(255, 192, 0, 1),
+            rgba(255, 192, 0, 0) 70%
+        ),
+        radial-gradient(
+            circle at right bottom,
+            rgba(255, 0, 127, 1),
+            rgba(255, 0, 127, 0) 30%
+        ),
+        radial-gradient(
+            circle at left center,
+            rgba(0, 255, 0, 0.5),
+            rgba(255, 0, 255, 0.2) 50%
+        ),
+        radial-gradient(
+            circle at right center,
+            rgba(255, 192, 0, 0.5),
+            rgba(255, 0, 127, 0.2) 50%
+        );
     border-radius: 50%;
+    border: solid 4px white;
 `;
+const StyledPhoto = styled.div<{ src: string }>`
+    width: 120px;
+    height: 120px;
+    background-image: url(${(props) => props.src});
+    background-size: cover;
+    background-position: center;
+`;
+
 const StyledBtnContainer = styled.div`
     display: flex;
     float: right;
@@ -90,7 +130,7 @@ const StyledBlock = styled.div`
     justify-content: center;
 `;
 
-export const UserProfile = () => {
+export const UserProfile: FC = () => {
     const {
         data: userData,
         isLoading,
@@ -113,6 +153,21 @@ export const UserProfile = () => {
     }
 
     const { response_status } = userData;
+    const first_name = userSessionData?.data?.first_name;
+    const last_name = userSessionData?.data?.last_name;
+    const { gender, target, age, growth, activity, weight } =
+        userData.data?.data || {};
+    const imageUrl = gender === 'FEMALE' ? '/icons_girl.png' : '/icons_boy.png';
+    const renderProfileInfo = () => (
+        <div>
+            <p>ПОЛ: {genderTranslations[gender] || gender}</p>
+            <p>ЦЕЛЬ: {goalTranslations[target] || target}</p>
+            <p>ВОЗРАСТ: {age}</p>
+            <p>РОСТ: {growth}</p>
+            <p>ОБРАЗ ЖИЗНИ: {activityTranslations[activity] || activity}</p>
+            <p>ВЕС: {weight}</p>
+        </div>
+    );
 
     if (response_status !== 0) {
         console.log(userData);
@@ -132,9 +187,6 @@ export const UserProfile = () => {
         );
     }
 
-    const first_name = userSessionData?.data?.first_name;
-    const last_name = userSessionData?.data?.last_name;
-
     return (
         <StyledUserProfile>
             <StyledMenu>
@@ -149,7 +201,9 @@ export const UserProfile = () => {
             </StyledMenu>
             <Layout>
                 <StyledPhotoContainer>
-                    <StyledPhoto></StyledPhoto>
+                    <PhotoWrapper>
+                        <StyledPhoto src={imageUrl}></StyledPhoto>
+                    </PhotoWrapper>
                 </StyledPhotoContainer>
                 <StyledBtnContainer>
                     <StyledBtnTest href={RouteEnum.TEST}>
@@ -170,28 +224,7 @@ export const UserProfile = () => {
                 </StyledAboutProfile>
                 <StyledMain>
                     {userData ? (
-                        <div>
-                            <p>
-                                ПОЛ: 
-                                {genderTranslations[
-                                    userData.data.data.gender
-                                ] || userData.data.data.gender}
-                            </p>
-                            <p>
-                                ЦЕЛЬ: 
-                                {goalTranslations[userData.data.data.target] ||
-                                    userData.data.data.target}
-                            </p>
-                            <p>ВОЗРАСТ: {userData.data.data.age}</p>
-                            <p>РОСТ: {userData.data.data.growth}</p>
-                            <p>
-                                ОБРАЗ ЖИЗНИ: 
-                                 {activityTranslations[
-                                    userData.data.data.activity
-                                ] || userData.data.data.activity}
-                            </p>
-                            <p>ВЕС: {userData.data.data.weight}</p>
-                        </div>
+                        renderProfileInfo()
                     ) : (
                         <p>No user data available.</p>
                     )}

@@ -48,7 +48,7 @@ const StyledText = styled.div``;
 
 const StyledImg = styled.div<StyledImgProps>`
     width: 100%;
-    height: 100px;
+    height: 115px;
     background-image: url(${(props) => props.src});
     background-size: cover;
     background-position: center;
