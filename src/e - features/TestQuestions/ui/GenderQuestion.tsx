@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
+import { QuestionComponent } from '@/g - shared/components/question-component';
 import { genderTranslations } from '@/g - shared/utils/translation';
 
 export const GenderQuestion: FC<TestQuestionProps> = ({
@@ -14,14 +14,15 @@ export const GenderQuestion: FC<TestQuestionProps> = ({
         onAnswer(englishAnswer || answer.toString());
     };
     // Используем русские варианты в опциях
-    const options = Object.values(genderTranslations);
+    const options = Object.entries(genderTranslations).map(([key, value]) => ({
+        value: key, // Здесь используется ключ в качестве значения
+        label: value, // Значение будет использоваться как метка
+    }));
 
     return (
         <QuestionComponent
             options={options}
-            selectedAnswer={
-                genderTranslations[selectedAnswer as string] ?? null
-            }
+            selectedAnswer={selectedAnswer ?? null}
             onAnswer={handleAnswer}
         />
     );

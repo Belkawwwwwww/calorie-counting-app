@@ -1,19 +1,19 @@
 import React, { FC, useState } from 'react';
-import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
-import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
-import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
+import { QuestionComponent } from '@/g - shared/components/question-component';
+import { useZodInputValidation } from '@/g - shared/hooks';
+
 import { z } from 'zod';
+import { dataScheme } from '@/d - widgets/TestPage';
 
 export const WeightQuestion: FC<TestQuestionProps> = ({
     onAnswer,
     selectedAnswer,
-    onInputValidation
+    onInputValidation,
 }) => {
     const { inputValue: weight, handleInputChange } = useZodInputValidation(
         dataScheme.shape.weight
     );
     const [validationError, setValidationError] = useState<string>('');
-
 
     const handleWeightChange = (value: string) => {
         const weightValue = Number(value); // строку в число
@@ -23,11 +23,11 @@ export const WeightQuestion: FC<TestQuestionProps> = ({
         } as React.ChangeEvent<HTMLInputElement>);
 
         try {
-            dataScheme.shape.weight.parse(weightValue); 
+            dataScheme.shape.weight.parse(weightValue);
             setValidationError('');
             onAnswer(weightValue); // Передаем number
-            if(onInputValidation){
-                onInputValidation(true)
+            if (onInputValidation) {
+                onInputValidation(true);
             }
         } catch (error) {
             if (error instanceof z.ZodError) {
@@ -42,7 +42,7 @@ export const WeightQuestion: FC<TestQuestionProps> = ({
 
     return (
         <QuestionComponent
-            inputValue={weight.toString()}
+            inputValue={weight ? weight.toString() : ''}
             onInputChange={handleWeightChange}
             onAnswer={onAnswer}
             inputType='number'

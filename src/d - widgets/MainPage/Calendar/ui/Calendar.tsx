@@ -1,7 +1,3 @@
 export const Calendar = () => {
-    return (
-        <div>
-            календарь
-        </div>
-    )
-}
+    return <div>календарь</div>;
+};

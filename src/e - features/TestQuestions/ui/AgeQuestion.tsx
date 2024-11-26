@@ -1,7 +1,7 @@
-import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
-import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
-import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
-import { FC, useEffect, useState } from 'react';
+import { dataScheme } from '@/d - widgets/TestPage';
+import { QuestionComponent } from '@/g - shared/components/question-component';
+import { useZodInputValidation } from '@/g - shared/hooks';
+import { FC, useState } from 'react';
 import { z } from 'zod';
 
 export const AgeQuestion: FC<TestQuestionProps> = ({
@@ -42,7 +42,7 @@ export const AgeQuestion: FC<TestQuestionProps> = ({
         <QuestionComponent
             inputValue={age ? age.toString() : ''}
             onInputChange={handleAgeChange}
-            // onAnswer={onAnswer}
+            onAnswer={onAnswer}
             inputType='number'
             inputName='age'
             inputId='age'

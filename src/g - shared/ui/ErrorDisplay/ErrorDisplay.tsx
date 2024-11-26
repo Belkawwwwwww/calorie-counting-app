@@ -1,4 +1,4 @@
-import { useError } from '@/g - shared/lib/context/ErrorContext';
+import { useError } from '@/g - shared/lib/context';
 import styled from 'styled-components';
 
 const StyledError = styled.div`

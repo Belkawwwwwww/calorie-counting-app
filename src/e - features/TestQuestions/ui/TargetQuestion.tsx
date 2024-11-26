@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
+import { QuestionComponent } from '@/g - shared/components/question-component';
 import { goalTranslations } from '@/g - shared/utils/translation';
 
 export const TargetQuestion: FC<TestQuestionProps> = ({
@@ -12,12 +12,15 @@ export const TargetQuestion: FC<TestQuestionProps> = ({
         );
         onAnswer(englishAnswer || answer.toString());
     };
-    const options = Object.values(goalTranslations);
+    const options = Object.entries(goalTranslations).map(([key, value]) => ({
+        value: key,
+        label: value,
+    }));
 
     return (
         <QuestionComponent
             options={options}
-            selectedAnswer={goalTranslations[selectedAnswer as string] ?? null}
+            selectedAnswer={selectedAnswer ?? null}
             onAnswer={handleAnswer}
         />
     );

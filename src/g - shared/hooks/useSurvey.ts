@@ -1,4 +1,4 @@
-import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
+import { dataScheme } from '@/d - widgets/TestPage';
 import { useState } from 'react';
 import { z } from 'zod';
 

@@ -5,19 +5,19 @@ import styled from 'styled-components';
 import { UIFormLayout } from '@/g - shared/ui/layout';
 import {
     ActivityLevelQuestion,
+    AgeQuestion,
     DateOfBirthQuestion,
     GenderQuestion,
     GrowthQuestion,
     TargetQuestion,
     WeightQuestion,
 } from '@/e - features/TestQuestions';
-import { AgeQuestion } from '@/e - features/TestQuestions/ui/AgeQuestion';
-import { dataScheme } from '../model/createSurvey';
 import { useRouter } from 'next/router';
-import { RouteEnum } from '@/g - shared/model/navigation';
+import { RouteEnum } from '@/g - shared/model';
+import { LoaderTest } from '@/g - shared/ui/Loader';
+import { useSurvey } from '@/g - shared/hooks';
+import { dataScheme } from '../model/createSurvey';
 import { NextBtn } from '../component/NextQuestionBtn';
-import { LoaderTest } from '@/g - shared/ui/Loader/LoaderTest';
-import { useSurvey } from '@/g - shared/hooks/useSurvey';
 
 const StyledContainer = styled.div`
     display: flex;
@@ -68,10 +68,13 @@ export const Test: React.FC = () => {
                 typeof answers.weight === 'string'
                     ? parseInt(answers.weight, 10)
                     : answers.weight,
-            birthday: answers.birthday ? new Date(answers.birthday) : null,
+            birthday:
+                answers.birthday instanceof Date
+                    ? answers.birthday
+                    : answers.birthday
+                      ? new Date(answers.birthday)
+                      : null,
         };
-        console.log(answers);
-        console.log('prepare', preparedData);
 
         try {
             const validatedData = dataScheme.parse(preparedData);
@@ -198,10 +201,10 @@ export const Test: React.FC = () => {
                                                         onNext={handleNext}
                                                         isLoading={isLoading}
                                                     />
-                                                ): null
+                                                ) : null
                                             }
                                         />
-                                    ): null}
+                                    ) : null}
                                 </div>
                             ))}
                         </form>

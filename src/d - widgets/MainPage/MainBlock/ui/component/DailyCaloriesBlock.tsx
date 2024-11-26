@@ -1,5 +1,5 @@
 import { useGetUserDataQuery } from '@/d - widgets/TestPage/api/surveyApi';
-import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
+import { LoadingIndicator } from '@/g - shared/ui/Loader';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 interface DailyCaloriesBlockProps {
@@ -64,7 +64,7 @@ export const DailyCaloriesBlock: FC<DailyCaloriesBlockProps> = ({
 
         const target = userData?.data?.data.target;
 
-        if (target=== 'LOSE_WEIGHT') {
+        if (target === 'LOSE_WEIGHT') {
             return dailyCalories - 400;
         } else if (target === 'GAIN_WEIGHT') {
             return dailyCalories + 400;

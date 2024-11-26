@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRegisterUserMutation } from '@/g - shared/api/authApi';
 import { Button } from '@/g - shared/ui/Button';
-import { RouteEnum } from '@/g - shared/model/navigation';
+import { RouteEnum } from '@/g - shared/model';
 import Link from 'next/link';
 import {
     RegistrationResponseSchema,
@@ -14,20 +14,16 @@ import { setAuth } from '@/f - entities/redux/session/modele/action/action';
 import { OpenRoute } from '@/c - pages/router-providers';
 import { setUser } from '@/f - entities/redux/user/model/action/action';
 import { useRouter } from 'next/router';
-import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
-import { useError } from '@/g - shared/lib/context/ErrorContext';
-import { Error } from '@/g - shared/ui/ErrorDisplay/ErrorDisplay';
-import { LoadingInBtn } from '@/g - shared/ui/Loader/LoaderInBtn';
+import { InputBox } from '@/g - shared/ui/Input';
+import { useError } from '@/g - shared/lib/context';
+import { Error } from '@/g - shared/ui/ErrorDisplay';
+import { LoadingInBtn } from '@/g - shared/ui/Loader';
 
 const StyledRFContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
-`;
-
-const StyledRFError = styled.div`
-    color: red;
 `;
 
 const StyledRFBtn = styled.div`

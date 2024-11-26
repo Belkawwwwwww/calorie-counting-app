@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Logo } from '@/g - shared/ui/Logo';
 import { FC } from 'react';
 import Link from 'next/link';
-import { RouteEnum } from '@/g - shared/model/navigation';
+import { RouteEnum } from '@/g - shared/model';
 import { useRouter } from 'next/router';
 
 const StyledHeader = styled.header`

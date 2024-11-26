@@ -1,4 +1,4 @@
-import { RouteEnum } from '@/g - shared/model/navigation';
+import { RouteEnum } from '@/g - shared/model';
 import { Button } from '@/g - shared/ui/Button';
 import { Layout } from '@/g - shared/ui/layout';
 import Link from 'next/link';

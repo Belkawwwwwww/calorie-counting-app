@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { Layout } from '@/g - shared/ui/layout';
 import { Calendar } from '@/d - widgets/MainPage/Calendar';
 import { SummaryBlock } from '@/d - widgets/MainPage/MainBlock/ui/SummaryBlock';
-import { NutritionBlock } from '@/d - widgets/MainPage/Nutrition/ui/NutritionBlock';
 import { ProtectedRoute } from '@/c - pages/router-providers';
 import { useGetUserDataQuery } from '@/d - widgets/TestPage/api/surveyApi';
 import { Button } from '@/g - shared/ui/Button';
-import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
+import { LoadingIndicator } from '@/g - shared/ui/Loader';
+import { NutritionBlock } from '@/d - widgets/MainPage/Nutrition';
 
 const StyledHeader = styled.header`
     display: flex;

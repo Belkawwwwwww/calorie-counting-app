@@ -1,1 +1,1 @@
-export {LoaderOverlay} from './LoaderOverlay'
+export {MemoizedLoader } from './LoaderOverlay'

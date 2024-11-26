@@ -1,5 +1,5 @@
 import { Button } from '@/g - shared/ui/Button';
-import { LoadingInBtn } from '@/g - shared/ui/Loader/LoaderInBtn';
+import { LoadingInBtn } from '@/g - shared/ui/Loader';
 import { FC } from 'react';
 
 interface NextBtnProps {

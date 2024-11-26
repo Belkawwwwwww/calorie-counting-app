@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { RouteEnum } from '@/g - shared/model/navigation';
+import { RouteEnum } from '@/g - shared/model';
 import Link from 'next/link';
 import { Button } from '@/g - shared/ui/Button';
 import {
@@ -14,11 +14,11 @@ import { setAuth } from '@/f - entities/redux/session/modele/action/action';
 import { setUser } from '@/f - entities/redux/user/model/action/action';
 import { OpenRoute } from '@/c - pages/router-providers';
 import { useAuthUserMutation } from '@/g - shared/api/authApi';
-import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
-import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
-import { useError } from '@/g - shared/lib/context/ErrorContext';
-import { Error } from '@/g - shared/ui/ErrorDisplay/ErrorDisplay';
-import { LoadingInBtn } from '@/g - shared/ui/Loader/LoaderInBtn';
+import { useZodInputValidation } from '@/g - shared/hooks';
+import { LoadingInBtn } from '@/g - shared/ui/Loader';
+import { InputBox } from '@/g - shared/ui/Input';
+import { Error } from '@/g - shared/ui/ErrorDisplay';
+import { useError } from '@/g - shared/lib/context';
 
 const StyledLFContainer = styled.div`
     display: flex;
@@ -121,7 +121,7 @@ export const LoginForm = () => {
             id: 'username',
             type: 'username',
             name: 'username',
-            value: email,
+            value: email || '',
             onChange: handleEmailChange,
         },
         {
@@ -130,7 +130,7 @@ export const LoginForm = () => {
             type: 'password',
             id: 'password',
             name: 'password',
-            value: password,
+            value: password || '',
             onChange: handlePasswordChange,
         },
     ];
@@ -162,7 +162,7 @@ export const LoginForm = () => {
                             type='submit'
                             disabled={isLoading}
                         >
-                            {isLoading ? <LoadingInBtn/> : 'Войти'}
+                            {isLoading ? <LoadingInBtn /> : 'Войти'}
                         </Button>
                         <StyledPasswordRecovery>
                             Восстановление пароля

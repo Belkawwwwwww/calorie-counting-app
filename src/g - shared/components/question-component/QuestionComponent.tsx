@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { FC, useState } from 'react';
-import { InputBox } from '@/g - shared/ui/Input/InputBox/InputBox';
-import { z, ZodSchema } from 'zod';
+import { InputBox } from '@/g - shared/ui/Input';
+import { z } from 'zod';
 import { QuestionComponentProps } from './types';
 
 const StyledTitle = styled.h1`
@@ -72,7 +72,7 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
         onInputChange?.(value); // Передаём родительскому компоненту результат
     };
 
-    const handleOptionClick = (option: string) => {
+    const handleOptionClick = (option: string | number) => {
         onAnswer?.(option);
     };
 
@@ -80,19 +80,17 @@ export const QuestionComponent: FC<QuestionComponentProps> = ({
         <>
             <StyledTitle>{title}</StyledTitle>
             {options ? (
-                <>
-                    <StyledOptions>
-                        {options.map((option) => (
-                            <StyledOption
-                                key={option}
-                                onClick={() => handleOptionClick(option)}
-                                isSelected={selectedAnswer === option}
-                            >
-                                {option}
-                            </StyledOption>
-                        ))}
-                    </StyledOptions>
-                </>
+                <StyledOptions>
+                    {options.map((option) => (
+                        <StyledOption
+                            key={option.value}
+                            onClick={() => handleOptionClick(option.value)}
+                            isSelected={selectedAnswer === option.value}
+                        >
+                            {option.label}
+                        </StyledOption>
+                    ))}
+                </StyledOptions>
             ) : (
                 <InputBox
                     id={inputId}

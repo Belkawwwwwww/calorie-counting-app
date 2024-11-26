@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
-import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
-import { useZodInputValidation } from '@/g - shared/hooks/useZodInputValidation';
-import { dataScheme } from '@/d - widgets/TestPage/model/createSurvey';
+import { QuestionComponent } from '@/g - shared/components/question-component';
+import { useZodInputValidation } from '@/g - shared/hooks';
 import { z } from 'zod';
+import { dataScheme } from '@/d - widgets/TestPage';
 
 export const GrowthQuestion: FC<TestQuestionProps> = ({
     onAnswer,
     selectedAnswer,
-    onInputValidation
+    onInputValidation,
 }) => {
     const { inputValue: growth, handleInputChange } = useZodInputValidation(
         dataScheme.shape.growth
@@ -25,8 +25,8 @@ export const GrowthQuestion: FC<TestQuestionProps> = ({
             dataScheme.shape.growth.parse(growthValue);
             setValidationError('');
             onAnswer(growthValue); // Передаем number
-            if(onInputValidation) {
-                onInputValidation(true)
+            if (onInputValidation) {
+                onInputValidation(true);
             }
         } catch (error) {
             if (error instanceof z.ZodError) {

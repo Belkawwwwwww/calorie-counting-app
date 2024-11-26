@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { QuestionComponent } from '@/g - shared/components/question-component/QuestionComponent';
 import { activityTranslations } from '@/g - shared/utils/translation';
+import { QuestionComponent } from '@/g - shared/components/question-component';
 
 export const ActivityLevelQuestion: FC<TestQuestionProps> = ({
     selectedAnswer,
@@ -12,14 +12,17 @@ export const ActivityLevelQuestion: FC<TestQuestionProps> = ({
         );
         onAnswer(englishAnswer || answer.toString());
     };
-    const options = Object.values(activityTranslations);
+    const options = Object.entries(activityTranslations).map(
+        ([key, value]) => ({
+            value: key,
+            label: value,
+        })
+    );
 
     return (
         <QuestionComponent
             options={options}
-            selectedAnswer={
-                activityTranslations[selectedAnswer as string] ?? null
-            }
+            selectedAnswer={selectedAnswer ?? null}
             onAnswer={handleAnswer}
         />
     );

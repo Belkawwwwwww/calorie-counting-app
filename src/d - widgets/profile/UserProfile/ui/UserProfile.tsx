@@ -1,9 +1,9 @@
 import { useGetUserDataQuery } from '@/d - widgets/TestPage/api/surveyApi';
 import { useFetchUserSessionQuery } from '@/g - shared/api/authApi';
-import { RouteEnum } from '@/g - shared/model/navigation';
+import { RouteEnum } from '@/g - shared/model';
 import { Button } from '@/g - shared/ui/Button';
 import { Layout } from '@/g - shared/ui/layout';
-import { LoadingIndicator } from '@/g - shared/ui/Loader/LoadingIndicator';
+import { LoadingIndicator } from '@/g - shared/ui/Loader';
 import {
     activityTranslations,
     genderTranslations,
@@ -83,8 +83,8 @@ const PhotoWrapper = styled.div`
     border: solid 4px white;
 `;
 const StyledPhoto = styled.div<{ src: string }>`
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     background-image: url(${(props) => props.src});
     background-size: cover;
     background-position: center;
