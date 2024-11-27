@@ -1,4 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Сalorie counting app
+
+## Brief description of the project
+
+Calorie Counting App is a web application designed to track and manage calorie intake. This app allows users to log the foods they consume, as well as track total calories and macronutrients (proteins, fats and carbohydrates) to help them achieve their nutrition goals and maintain a healthy lifestyle.
+
+### Main Functions
+- **User Authorisation/Registration**:.
+- **Calorie Tracking**: The app calculates the total number of calories consumed in a day.
+- **Calculation of Protein, Fat, Carbohydrate**: Users can track their calorie and nutrient intake over time.
+- **Statistics**: The app provides graphs and charts to visualise calorie intake information.
+
+### Technologies used in the project
+- **React**: Java-Script Library for creating user interfaces.
+- **Redux**: For managing application state.
+- **Styled-components**: For styling components in an application.
+- **TypeScript**: A programming language that adds static typing to JavaScript.
+- **NextJS**: A JavaScript framework that uses React to build Server Side Render (SSR) applications and statically generated websites.
+- **RTQ Query**: a powerful tool for fetching and caching data.
+- **FSD**: an architectural methodology that gives a project a clear structure, especially in scalable applications.
+ -**ZOD**: a TypeScript-first library for schema declaration and validation
 
 ## Getting Started
 
