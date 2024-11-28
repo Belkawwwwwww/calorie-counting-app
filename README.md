@@ -10,13 +10,11 @@ Calorie Counting App is a compact and simple web application designed to track a
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![StyledComponents](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 ![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
+![Redux Toolkit](https://img.shields.io/badge/Redux%20Toolkit-68347f?style=for-the-badge)
 ![Zod](https://img.shields.io/badge/Zod-000000?style=for-the-badge&logo=zod&logoColor=3068B7)
 
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-
 ### Features
-* User can **authorise**, **register**;
+* User can **authorisation**, **register**;
 * **Calorie Tracking** : the app calculates the total number of calories consumed for the day;
 * **Protein, Fat, Carbohydrate Calculation**: users can track calorie and nutrient intake over time;
 * **Statistics**: the app provides graphs and charts to visualise calorie intake information.
