@@ -35,7 +35,7 @@ pnpm install
 
 yarn
 ```
-* start local server via Vite
+* getting start
 ```js
 npm run dev
 
