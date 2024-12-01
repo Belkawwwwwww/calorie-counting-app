@@ -9,31 +9,31 @@ const StyledSummaryBlock = styled.div`
     margin: 0 auto;
     color: white;
 `;
-const StyledFirstBlock = styled.div`
+const FirstBlock = styled.div`
     padding-top: 40px;
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
 `;
-const StyledCircle = styled.div`
+const Circle = styled.div`
     border: #f0f0f0 solid 5px;
     border-radius: 50%;
     padding: 13px 20px 13px 20px;
 `;
-const StyledCalories = styled.div`
+const Calories = styled.div`
     display: flex;
 `;
-const StyledTwoBlock = styled.div`
+const TwoBlock = styled.div`
     text-align: center;
     display: flex;
     flex-wrap: wrap;
     padding-top: 40px;
 `;
-const StyledBJU = styled.div`
+const BJU = styled.div`
     flex: 0 0 33.3%;
 `;
-const StyledNorm = styled.div``;
+const Norm = styled.div``;
 export const SummaryBlock = () => {
     const [dailyCalories, setDailyCalories] = useState(0);
     const handleCalories = (calories: number) => {
@@ -42,37 +42,37 @@ export const SummaryBlock = () => {
 
     return (
         <StyledSummaryBlock>
-            <StyledFirstBlock>
-                <StyledNorm>
+            <FirstBlock>
+                <Norm>
                     <>цель</>
-                </StyledNorm>
-                <StyledCircle>
+                </Norm>
+                <Circle>
                     {' '}
                     <DailyCaloriesBlock onCaloriesCalculated={handleCalories} />
-                </StyledCircle>
-                <StyledCalories>
+                </Circle>
+                <Calories>
                     <div>съедено</div>
-                </StyledCalories>
-            </StyledFirstBlock>
-            <StyledTwoBlock>
-                <StyledBJU>
+                </Calories>
+            </FirstBlock>
+            <TwoBlock>
+                <BJU>
                     Углеводы: {((dailyCalories * 0.6) / 4).toFixed(0)} г
-                </StyledBJU>
-                <StyledBJU>
+                </BJU>
+                <BJU>
                     Белки:{' '}
                     {dailyCalories !== 0
                         ? ((dailyCalories * 0.22) / 4).toFixed(0)
                         : 0}{' '}
                     г
-                </StyledBJU>
-                <StyledBJU>
+                </BJU>
+                <BJU>
                     Жиры:{' '}
                     {dailyCalories !== 0
                         ? ((dailyCalories * 0.35) / 9).toFixed(0)
                         : 0}{' '}
                     г
-                </StyledBJU>
-            </StyledTwoBlock>
+                </BJU>
+            </TwoBlock>
         </StyledSummaryBlock>
     );
 };

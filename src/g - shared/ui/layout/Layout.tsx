@@ -5,11 +5,11 @@ type Props = {
     children: ReactNode;
 }
 
-const StyledContainer = styled.div`
+const Container = styled.div`
     margin-left: 100px;
     margin-right: 100px;
     height: 100vh;
 `;
 export const Layout = (props: Props) => {
-    return <StyledContainer>{props.children}</StyledContainer>;
+    return <Container>{props.children}</Container>;
 };

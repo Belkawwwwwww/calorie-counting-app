@@ -6,12 +6,12 @@ import styled from 'styled-components';
 type DailyCaloriesBlockProps ={
     onCaloriesCalculated: (calories: number) => void;
 }
-const StyledMainCont = styled.div`
+const MainCont = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
 `;
-const StyledText = styled.div`
+const Text = styled.div`
     font-size: 10px;
 `;
 export const DailyCaloriesBlock: FC<DailyCaloriesBlockProps> = ({
@@ -79,10 +79,10 @@ export const DailyCaloriesBlock: FC<DailyCaloriesBlockProps> = ({
 
     return (
         <div>
-            <StyledMainCont>
+            <MainCont>
                 <h1>{dailyCalories.toFixed(0)}</h1>
-                <StyledText>осталось</StyledText>
-            </StyledMainCont>
+                <Text>осталось</Text>
+            </MainCont>
         </div>
     );
 };

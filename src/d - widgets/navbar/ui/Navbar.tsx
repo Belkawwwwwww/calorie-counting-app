@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { RouteEnum } from '@/g - shared/model';
 import { useRouter } from 'next/router';
 
-const StyledHeader = styled.header`
+const Header = styled.header`
     position: relative;
     border-bottom: 1px solid #eaeff2;
     align-items: center;
@@ -30,13 +30,13 @@ export const Navbar: FC<{ hideOnPages?: string[] }> = ({
     }
 
     return (
-        <StyledHeader>
+        <Header>
             <Logo />
             {!isAuth ? (
                 <StyledLinks href={RouteEnum.LOGIN}>ВХОД</StyledLinks>
             ) : (
                 <StyledLinks href={RouteEnum.PROFILE}>ПРОФИЛЬ</StyledLinks>
             )}
-        </StyledHeader>
+        </Header>
     );
 };

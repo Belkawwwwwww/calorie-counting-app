@@ -18,7 +18,7 @@ const animloader = keyframes`
   }
 `;
 
-const StyledLoaderContainer = styled.div`
+const Container = styled.div`
     position: fixed;
     top: 0;
     left: 0;
@@ -28,7 +28,7 @@ const StyledLoaderContainer = styled.div`
     justify-content: center;
     align-items: center;
 `;
-const StyledLoader = styled.span`
+const Loader = styled.span`
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -51,9 +51,9 @@ export const LoaderOverlay: FC<Props> = ({ children }) => {
         <>
         
             {pending ? (
-                <StyledLoaderContainer>
-                    <StyledLoader></StyledLoader>
-                </StyledLoaderContainer>
+                <Container>
+                    <Loader></Loader>
+                </Container>
             ) : (
                 children
             )}

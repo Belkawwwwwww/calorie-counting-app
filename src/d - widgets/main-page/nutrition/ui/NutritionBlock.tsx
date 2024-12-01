@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledNutritionBlock = styled.div`
     margin-top: 40px;
 `;
-const StyledMeal = styled.div`
+const Meal = styled.div`
     border: 1px solid var(--color-background1);
     border-radius: 8px;
     width: 100%;
@@ -20,10 +20,10 @@ const StyledMeal = styled.div`
 export const NutritionBlock = () => {
     return (
         <StyledNutritionBlock>
-            <StyledMeal>Завтрак 0/</StyledMeal>
-            <StyledMeal>Обед 0/</StyledMeal>
-            <StyledMeal>Ужин 0/</StyledMeal>
-            <StyledMeal>Перекус 0/</StyledMeal>
+            <Meal>Завтрак 0/</Meal>
+            <Meal>Обед 0/</Meal>
+            <Meal>Ужин 0/</Meal>
+            <Meal>Перекус 0/</Meal>
         </StyledNutritionBlock>
     );
 };

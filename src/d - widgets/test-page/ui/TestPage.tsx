@@ -19,7 +19,7 @@ import { dataScheme } from '../model/createSurvey';
 import { useCreateSurveyMutation, useGetUserDataQuery } from '../api/surveyApi';
 import { NextBtn } from '../component/NextBtn';
 
-const StyledContainer = styled.div`
+const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,11 +27,11 @@ const StyledContainer = styled.div`
     flex-direction: column;
     position: relative;
 `;
-const StyledTitle = styled.h1`
+const Title = styled.h1`
     font-weight: 200;
     font-size: 18px;
 `;
-const StyledQuestions = styled.div`
+const Questions = styled.div`
     display: flex;
     justify-content: center;
 `;
@@ -172,13 +172,13 @@ export const Test: React.FC = () => {
     ];
 
     return (
-        <StyledContainer>
+        <Container>
             {loading ? (
                 <LoaderTest />
             ) : (
                 <>
-                    <StyledTitle>СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН</StyledTitle>
-                    <StyledQuestions>
+                    <Title>СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН</Title>
+                    <Questions>
                         <form onSubmit={handleSubmit}>
                             {questions.map((question, index) => (
                                 <div key={question.title}>
@@ -208,9 +208,9 @@ export const Test: React.FC = () => {
                                 </div>
                             ))}
                         </form>
-                    </StyledQuestions>
+                    </Questions>
                 </>
             )}
-        </StyledContainer>
+        </Container>
     );
 };

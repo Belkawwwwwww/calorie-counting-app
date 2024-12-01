@@ -5,10 +5,10 @@ type ProneNumberProps ={
     phoneNumber: string;
 }
 
-const StyledA = styled.a`
+const A = styled.a`
     color: white;
     text-decoration: none;
 `;
 export const PhoneNumber: FC<ProneNumberProps> = ({ phoneNumber }) => {
-    return <StyledA href={`tel:${phoneNumber}`}>{phoneNumber}</StyledA>;
+    return <A href={`tel:${phoneNumber}`}>{phoneNumber}</A>;
 };

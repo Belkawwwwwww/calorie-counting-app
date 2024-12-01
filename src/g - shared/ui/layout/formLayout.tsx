@@ -1,15 +1,15 @@
 import { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
-const StyledContainer = styled.div`
+const Container = styled.div`
     display: flex;
     margin-top: 60px;
     height: 100vh;
 `;
-const StyledLFForm = styled.div`
+const Form = styled.div`
     width: 450px;
 `;
-const StyledLFTitle = styled.h1<{ content?: 'center' }>`
+const Title = styled.h1<{ content?: 'center' }>`
     display: flex;
     font-weight: 200;
     font-size: 30px;
@@ -22,7 +22,7 @@ const StyledLFTitle = styled.h1<{ content?: 'center' }>`
         justify-content: center;
     `}
 `;
-const StyledBtn = styled.div`
+const Btn = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 24px;
@@ -43,13 +43,13 @@ export const UIFormLayout: FC<Props> = ({
     nextButton,
 }) => {
     return (
-        <StyledContainer>
+        <Container>
             {header}
-            <StyledLFForm>
-                <StyledLFTitle content={content}>{title}</StyledLFTitle>
+            <Form>
+                <Title content={content}>{title}</Title>
                 {form}
-                <StyledBtn>{nextButton}</StyledBtn>
-            </StyledLFForm>
-        </StyledContainer>
+                <Btn>{nextButton}</Btn>
+            </Form>
+        </Container>
     );
 };

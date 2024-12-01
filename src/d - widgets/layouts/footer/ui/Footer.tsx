@@ -10,20 +10,20 @@ const StyledFooter = styled.footer`
     color: white;
     flex-wrap: wrap;
 `;
-const StyledContainerTelephone = styled.div``;
-const StyledTelephone = styled.p``;
-const StyledContainerContacts = styled.div``;
+const ContainerTelephone = styled.div``;
+const Telephone = styled.p``;
+const ContainerContacts = styled.div``;
 
 export const Footer: FC = () => {
     return (
         <StyledFooter>
-            <StyledContainerTelephone>
-                <StyledTelephone>Телефон</StyledTelephone>
+            <ContainerTelephone>
+                <Telephone>Телефон</Telephone>
                 <PhoneNumber phoneNumber='+79826004039' />
-            </StyledContainerTelephone>
-            <StyledContainerContacts>
+            </ContainerTelephone>
+            <ContainerContacts>
                 <SocialMedia />
-            </StyledContainerContacts>
+            </ContainerContacts>
         </StyledFooter>
     );
 };

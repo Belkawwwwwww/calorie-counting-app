@@ -18,7 +18,7 @@ const StyledUserProfile = styled.div`
     flex-direction: column;
     position: relative;
 `;
-const StyledMenu = styled.div`
+const Menu = styled.div`
     background: linear-gradient(
         109.6deg,
         rgb(231, 230, 214) 11.2%,
@@ -34,7 +34,7 @@ const StyledLink = styled.div`
     padding-top: 30px;
     justify-content: space-between;
 `;
-const StyledPhotoContainer = styled.div`
+const PhotoContainer = styled.div`
     position: absolute;
     top: 169px;
     left: 86px;
@@ -82,7 +82,7 @@ const PhotoWrapper = styled.div`
     border-radius: 50%;
     border: solid 4px white;
 `;
-const StyledPhoto = styled.div<{ src: string }>`
+const Photo = styled.div<{ src: string }>`
     width: 100px;
     height: 100px;
     background-image: url(${(props) => props.src});
@@ -90,40 +90,40 @@ const StyledPhoto = styled.div<{ src: string }>`
     background-position: center;
 `;
 
-const StyledBtnContainer = styled.div`
+const BtnContainer = styled.div`
     display: flex;
     float: right;
 `;
 
-const StyledAboutProfile = styled.div`
+const AboutProfile = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 40px;
     margin-top: 130px;
 `;
-const StyledUsername = styled.div`
+const Username = styled.div`
     text-transform: uppercase;
     font-weight: 200;
     font-size: 30px;
 `;
-const StyledMain = styled.div`
+const Main = styled.div`
     display: flex;
     flex-direction: column;
 `;
-const StyledBtn = styled(Link)`
+const Btn = styled(Link)`
     margin: 0 auto;
     margin-top: 20px;
 `;
-const StyledBtnTest = styled(Link)`
+const BtnTest = styled(Link)`
     position: relative;
     top: 10px;
     right: -30px;
 `;
-const StyledLinks = styled(Link)`
+const Links = styled(Link)`
     color: black;
     text-decoration: none;
 `;
-const StyledBlock = styled.div`
+const Block = styled.div`
     display: flex;
     margin-top: 300px;
     align-items: center;
@@ -172,8 +172,8 @@ export const UserProfile: FC = () => {
     if (response_status !== 0) {
         console.log(userData);
         return (
-            <StyledBlock>
-                <StyledBtn href={RouteEnum.TEST}>
+            <Block>
+                <Btn href={RouteEnum.TEST}>
                     <Button
                         $variant='primary'
                         $btnWidth='l'
@@ -182,31 +182,31 @@ export const UserProfile: FC = () => {
                     >
                         СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН
                     </Button>
-                </StyledBtn>
-            </StyledBlock>
+                </Btn>
+            </Block>
         );
     }
 
     return (
         <StyledUserProfile>
-            <StyledMenu>
+            <Menu>
                 <Layout>
                     <StyledLink>
-                        <StyledLinks href={RouteEnum.MAIN}>
+                        <Links href={RouteEnum.MAIN}>
                             КАЛЬКУЛЯТОР
-                        </StyledLinks>
-                        <StyledLinks href={RouteEnum.HOME}>HOME</StyledLinks>
+                        </Links>
+                        <Links href={RouteEnum.HOME}>HOME</Links>
                     </StyledLink>
                 </Layout>
-            </StyledMenu>
+            </Menu>
             <Layout>
-                <StyledPhotoContainer>
+                <PhotoContainer>
                     <PhotoWrapper>
-                        <StyledPhoto src={imageUrl}></StyledPhoto>
+                        <Photo src={imageUrl}></Photo>
                     </PhotoWrapper>
-                </StyledPhotoContainer>
-                <StyledBtnContainer>
-                    <StyledBtnTest href={RouteEnum.TEST}>
+                </PhotoContainer>
+                <BtnContainer>
+                    <BtnTest href={RouteEnum.TEST}>
                         <Button
                             $variant='secondary'
                             $btnWidth='m'
@@ -215,20 +215,20 @@ export const UserProfile: FC = () => {
                         >
                             ОБНОВИТЬ ДАННЫЕ
                         </Button>
-                    </StyledBtnTest>
-                </StyledBtnContainer>
-                <StyledAboutProfile>
-                    <StyledUsername>
+                    </BtnTest>
+                </BtnContainer>
+                <AboutProfile>
+                    <Username>
                         {first_name} {last_name}
-                    </StyledUsername>
-                </StyledAboutProfile>
-                <StyledMain>
+                    </Username>
+                </AboutProfile>
+                <Main>
                     {userData ? (
                         renderProfileInfo()
                     ) : (
                         <p>No user data available.</p>
                     )}
-                </StyledMain>
+                </Main>
             </Layout>
         </StyledUserProfile>
     );

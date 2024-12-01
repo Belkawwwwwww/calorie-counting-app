@@ -16,13 +16,13 @@ const StyledInputBox = styled.div<{ direction: 'column' | 'row' }>`
     box-sizing: border-box;
 `;
 
-const StyledLabel = styled.label`
+const Label = styled.label`
     font-size: 14px;
     color: var(--color-text1);
     margin-top: 20px;
 `;
 
-const StyledError = styled.div`
+const Error = styled.div`
     color: red;
 `;
 
@@ -40,9 +40,9 @@ export const InputBox: FC<InputBoxProps> = ({
 
     return (
         <StyledInputBox direction={direction}>
-            <StyledLabel htmlFor={inputProps.id}>{label}</StyledLabel>
+            <Label htmlFor={inputProps.id}>{label}</Label>
             <Input {...inputProps} onChange={handleInputChange} />
-            {error ? <StyledError>{error}</StyledError> : null}
+            {error ? <Error>{error}</Error> : null}
         </StyledInputBox>
     );
 };

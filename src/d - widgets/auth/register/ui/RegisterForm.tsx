@@ -19,20 +19,20 @@ import { useError } from '@/g - shared/lib/context';
 import { Error } from '@/g - shared/ui/errorDisplay';
 import { LoadingInBtn } from '@/g - shared/ui/loader';
 
-const StyledRFContainer = styled.div`
+const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
 `;
 
-const StyledRFBtn = styled.div`
+const Btn = styled.div`
     margin-bottom: 10px;
     display: flex;
     align-items: center;
 `;
 
-const StyledRFFooter = styled.div`
+const Footer = styled.div`
     margin-left: 10px;
     display: flex;
 `;
@@ -163,7 +163,7 @@ export const RegisterForm = () => {
 
     return (
         <OpenRoute>
-            <StyledRFContainer>
+            <Container>
                 <form onSubmit={handleSubmit}>
                     <Error />
                     {formFields.map(
@@ -181,7 +181,7 @@ export const RegisterForm = () => {
                         )
                     )}
 
-                    <StyledRFBtn>
+                    <Btn>
                         <Button
                             $variant='primary'
                             $btnWidth='m'
@@ -194,13 +194,13 @@ export const RegisterForm = () => {
                                 'Зарегистрироваться'
                             )}
                         </Button>
-                    </StyledRFBtn>
+                    </Btn>
                 </form>
-                <StyledRFFooter>
+                <Footer>
                     <div>Уже есть аккаунт?</div>
                     <StyledLink href={RouteEnum.LOGIN}>Вход</StyledLink>
-                </StyledRFFooter>
-            </StyledRFContainer>
+                </Footer>
+            </Container>
         </OpenRoute>
     );
 };

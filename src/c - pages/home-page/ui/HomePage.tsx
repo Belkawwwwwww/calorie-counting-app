@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { FC } from 'react';
 import styled from 'styled-components';
 
-type StyledImgProps = {
+type Props = {
     src: string;
 };
 
-const StyledLFContainer = styled.div`
+const Container = styled.div`
     margin-top: 60px;
     display: flex;
     flex-direction: column;
@@ -17,12 +17,12 @@ const StyledLFContainer = styled.div`
     height: 100vh;
 `;
 
-const StyledHeader = styled.h1`
+const Header = styled.h1`
     font-weight: 200;
     font-size: 30px;
     text-align: center;
 `;
-const StyledOpportunities = styled.div`
+const Opportunities = styled.div`
     padding-top: 50px;
     padding-bottom: 50px;
     display: flex;
@@ -30,7 +30,7 @@ const StyledOpportunities = styled.div`
     border-bottom: 1px solid var(--color-background1);
 `;
 
-const StyledCounter = styled.div`
+const Counter = styled.div`
     flex: 0 0 24%;
     text-align: center;
     padding-right: 15px;
@@ -40,20 +40,20 @@ const StyledCounter = styled.div`
     }
 `;
 
-const StyledH1 = styled.h1`
+const H1 = styled.h1`
     font-size: 16px;
 `;
 
-const StyledText = styled.div``;
+const Text = styled.div``;
 
-const StyledImg = styled.div<StyledImgProps>`
+const Img = styled.div<Props>`
     width: 100%;
     height: 115px;
     background-image: url(${(props) => props.src});
     background-size: cover;
     background-position: center;
 `;
-const StyledBtn = styled(Link)`
+const Btn = styled(Link)`
     margin: 0 auto;
     margin-top: 20px;
 `;
@@ -63,7 +63,7 @@ type ImageProps = {
 };
 
 const Image: FC<ImageProps> = ({ src }) => {
-    return src ? <StyledImg src={src} /> : null;
+    return src ? <Img src={src} /> : null;
 };
 
 const menu = [
@@ -96,18 +96,18 @@ const menu = [
 export const HomePage = () => {
     return (
         <Layout>
-            <StyledLFContainer>
-                <StyledHeader>Добро пожаловать в здоровую жизнь</StyledHeader>
-                <StyledOpportunities>
+            <Container>
+                <Header>Добро пожаловать в здоровую жизнь</Header>
+                <Opportunities>
                     {menu.map((item) => (
-                        <StyledCounter key={item.id}>
+                        <Counter key={item.id}>
                             <Image src={item.imageUrl} />
-                            <StyledH1>{item.title}</StyledH1>
-                            <StyledText>{item.text}</StyledText>
-                        </StyledCounter>
+                            <H1>{item.title}</H1>
+                            <Text>{item.text}</Text>
+                        </Counter>
                     ))}
-                </StyledOpportunities>
-                <StyledBtn href={RouteEnum.TEST}>
+                </Opportunities>
+                <Btn href={RouteEnum.TEST}>
                     <Button
                         $variant='secondary'
                         $btnWidth='l'
@@ -116,8 +116,8 @@ export const HomePage = () => {
                     >
                         СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН
                     </Button>
-                </StyledBtn>
-            </StyledLFContainer>
+                </Btn>
+            </Container>
         </Layout>
     );
 };

@@ -4,7 +4,7 @@ import { InputBox } from '@/g - shared/ui/input';
 import { z } from 'zod';
 import { Props } from './types';
 
-const StyledTitle = styled.h1`
+const Title = styled.h1`
     font-weight: 200;
     font-size: 30px;
     color: #000000;
@@ -13,14 +13,14 @@ const StyledTitle = styled.h1`
     text-align: center;
 `;
 
-const StyledOptions = styled.div`
+const Options = styled.div`
     display: flex;
     justify-content: center;
     gap: 20px;
     margin-bottom: 20px;
 `;
 
-const StyledOption = styled.div<{ isSelected: boolean }>`
+const Option = styled.div<{ isSelected: boolean }>`
     width: 150px;
     height: 150px;
     border: 1px solid #89ac76;
@@ -78,19 +78,19 @@ export const QuestionComponent: FC<Props> = ({
 
     return (
         <>
-            <StyledTitle>{title}</StyledTitle>
+            <Title>{title}</Title>
             {options ? (
-                <StyledOptions>
+                <Options>
                     {options.map((option) => (
-                        <StyledOption
+                        <Option
                             key={option.value}
                             onClick={() => handleOptionClick(option.value)}
                             isSelected={selectedAnswer === option.value}
                         >
                             {option.label}
-                        </StyledOption>
+                        </Option>
                     ))}
-                </StyledOptions>
+                </Options>
             ) : (
                 <InputBox
                     id={inputId}

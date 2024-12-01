@@ -11,16 +11,16 @@ import { RouteEnum } from '@/g - shared/model';
 import { SummaryBlock } from '@/d - widgets/main-page/main-block';
 import { useGetUserDataQuery } from '@/d - widgets/test-page/api/surveyApi';
 
-const StyledHeader = styled.header`
+const Header = styled.header`
     display: flex;
     justify-content: space-between;
     padding-top: 20px;
     padding-bottom: 20px;
 `;
-const StyledDateNow = styled.div`
+const DateNow = styled.div`
     font-size: 20px;
 `;
-const StyledMessage = styled.div`
+const Message = styled.div`
     margin: 40px;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@ const Text = styled.div`
     font-size: 25px;
     padding-bottom: 50px;
 `;
-const StyledBtn = styled(Link)`
+const Btn = styled(Link)`
     margin: 0 auto;
     margin-top: 20px;
 `;
@@ -43,21 +43,21 @@ export const MainPage: FC = () => {
     return (
         <ProtectedRoute>
             <Layout>
-                <StyledHeader>
-                    <StyledDateNow>Сегодня</StyledDateNow>
+                <Header>
+                    <DateNow>Сегодня</DateNow>
                     <Calendar />
-                </StyledHeader>
+                </Header>
                 {userData?.response_status === 0 ? (
                     <>
                         <SummaryBlock />
                         <NutritionBlock />
                     </>
                 ) : (
-                    <StyledMessage>
+                    <Message>
                         <Text>
                             Пока что тут ничего нет, но мы можем это исправить
                         </Text>
-                        <StyledBtn href={RouteEnum.TEST}>
+                        <Btn href={RouteEnum.TEST}>
                             <Button
                                 $variant='primary'
                                 $btnWidth='l'
@@ -66,8 +66,8 @@ export const MainPage: FC = () => {
                             >
                                 СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН
                             </Button>
-                        </StyledBtn>
-                    </StyledMessage>
+                        </Btn>
+                    </Message>
                 )}
             </Layout>
         </ProtectedRoute>

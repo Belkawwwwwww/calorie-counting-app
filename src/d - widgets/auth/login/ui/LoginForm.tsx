@@ -20,24 +20,24 @@ import { InputBox } from '@/g - shared/ui/input';
 import { Error } from '@/g - shared/ui/errorDisplay';
 import { useError } from '@/g - shared/lib/context';
 
-const StyledLFContainer = styled.div`
+const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
     width: 450px;
 `;
-const StyledLFBtn = styled.div`
+const Btn = styled.div`
     margin-bottom: 10px;
     display: flex;
     align-items: center;
 `;
-const StyledPasswordRecovery = styled.div`
+const PasswordRecovery = styled.div`
     margin-left: 20px;
     color: #4689e8;
     cursor: pointer;
 `;
-const StyledLFFooter = styled.div`
+const Footer = styled.div`
     display: flex;
 `;
 const StyledLink = styled(Link)`
@@ -137,7 +137,7 @@ export const LoginForm = () => {
 
     return (
         <OpenRoute>
-            <StyledLFContainer>
+            <Container>
                 <form onSubmit={handleSubmit}>
                     <Error />
                     {formFields.map(
@@ -154,7 +154,7 @@ export const LoginForm = () => {
                             />
                         )
                     )}
-                    <StyledLFBtn>
+                    <Btn>
                         <Button
                             $variant='primary'
                             $btnWidth='s'
@@ -164,19 +164,19 @@ export const LoginForm = () => {
                         >
                             {isLoading ? <LoadingInBtn /> : 'Войти'}
                         </Button>
-                        <StyledPasswordRecovery>
+                        <PasswordRecovery>
                             Восстановление пароля
-                        </StyledPasswordRecovery>
-                    </StyledLFBtn>
+                        </PasswordRecovery>
+                    </Btn>
                 </form>
 
-                <StyledLFFooter>
+                <Footer>
                     <div>Еще не зарегистрированы?</div>
                     <StyledLink href={RouteEnum.REGISTRATION}>
                         Регистрация
                     </StyledLink>
-                </StyledLFFooter>
-            </StyledLFContainer>
+                </Footer>
+            </Container>
         </OpenRoute>
     );
 };

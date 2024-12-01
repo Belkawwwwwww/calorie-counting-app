@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 
-const StyledLoading = styled.div`
+const Loading = styled.div`
     display: flex;
     align-items: center;
 `;
@@ -20,7 +20,7 @@ const loaderAnimation = keyframes`
   }
 `;
 
-const StyledLoader = styled.span`
+const Loader = styled.span`
     width: 6px;
     height: 6px;
     border-radius: 50%;
@@ -34,8 +34,8 @@ const StyledLoader = styled.span`
 
 export const LoadingIndicator = () => {
     return (
-        <StyledLoading>
-            <StyledLoader></StyledLoader>
-        </StyledLoading>
+        <Loading>
+            <Loader></Loader>
+        </Loading>
     );
 };
