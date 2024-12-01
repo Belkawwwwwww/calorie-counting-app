@@ -40,52 +40,39 @@ const Option = styled.div<{ isSelected: boolean }>`
     }
 `;
 
-export const QuestionComponent: FC<Props> = ({
-    title,
-    options,
-    selectedAnswer,
-    inputValue,
-    onInputChange,
-    inputId,
-    inputName,
-    inputType,
-    inputError,
-    onAnswer,
-    validationSchema,
-    onValidValue,
-}) => {
+export const QuestionComponent: FC<Props> = (props) => {
     const [validationError, setValidationError] = useState<string>('');
     const handleInputChange = (value: string) => {
-        if (validationSchema) {
+        if (props.validationSchema) {
             try {
                 const parsedValue =
-                    inputType === 'number' ? Number(value) : value;
-                validationSchema.parse(parsedValue); // Проверка схемы
+                    props.inputType === 'number' ? Number(value) : value;
+                props.validationSchema.parse(parsedValue); // Проверка схемы
                 setValidationError(''); // Ошибки нет
-                onValidValue?.(parsedValue); // Успешная валидация
+                props.onValidValue?.(parsedValue); // Успешная валидация
             } catch (error) {
                 if (error instanceof z.ZodError) {
                     setValidationError(error.errors[0].message); // Сохраняем ошибку
                 }
             }
         }
-        onInputChange?.(value); // Передаём родительскому компоненту результат
+        props.onInputChange?.(value); // Передаём родительскому компоненту результат
     };
 
     const handleOptionClick = (option: string | number) => {
-        onAnswer?.(option);
+        props.onAnswer?.(option);
     };
 
     return (
         <>
-            <Title>{title}</Title>
-            {options ? (
+            <Title>{props.title}</Title>
+            {props.options ? (
                 <Options>
-                    {options.map((option) => (
+                    {props.options.map((option) => (
                         <Option
                             key={option.value}
                             onClick={() => handleOptionClick(option.value)}
-                            isSelected={selectedAnswer === option.value}
+                            isSelected={props.selectedAnswer === option.value}
                         >
                             {option.label}
                         </Option>
@@ -93,11 +80,11 @@ export const QuestionComponent: FC<Props> = ({
                 </Options>
             ) : (
                 <InputBox
-                    id={inputId}
-                    type={inputType}
-                    name={inputName}
-                    error={inputError || validationError}
-                    value={inputValue || ''}
+                    id={props.inputId}
+                    type={props.inputType}
+                    name={props.inputName}
+                    error={props.inputError || validationError}
+                    value={props.inputValue}
                     onChange={(event) => handleInputChange(event.target.value)}
                 />
             )}

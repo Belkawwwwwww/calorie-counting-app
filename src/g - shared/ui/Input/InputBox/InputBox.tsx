@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { Props } from '../types';
 import { Input } from '../Input';
 
-type InputBoxProps=  {
+type InputBoxProps = {
     label?: string;
     error?: string;
     direction?: 'column' | 'row';
-} & Props
+} & Props;
 
 const StyledInputBox = styled.div<{ direction: 'column' | 'row' }>`
     display: flex;
@@ -30,6 +30,7 @@ export const InputBox: FC<InputBoxProps> = ({
     label,
     error,
     direction = 'column',
+    value = '',
     ...inputProps
 }) => {
     const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (
@@ -41,7 +42,7 @@ export const InputBox: FC<InputBoxProps> = ({
     return (
         <StyledInputBox direction={direction}>
             <Label htmlFor={inputProps.id}>{label}</Label>
-            <Input {...inputProps} onChange={handleInputChange} />
+            <Input value={value} {...inputProps} onChange={handleInputChange} />
             {error ? <Error>{error}</Error> : null}
         </StyledInputBox>
     );

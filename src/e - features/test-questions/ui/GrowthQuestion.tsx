@@ -4,12 +4,7 @@ import { useZodInputValidation } from '@/g - shared/hooks';
 import { z } from 'zod';
 import { dataScheme } from '@/d - widgets/test-page';
 
-
-export const GrowthQuestion: FC<Props> = ({
-    onAnswer,
-    selectedAnswer,
-    onInputValidation,
-}) => {
+export const GrowthQuestion: FC<Props> = (props) => {
     const { inputValue: growth, handleInputChange } = useZodInputValidation(
         dataScheme.shape.growth
     );
@@ -25,16 +20,16 @@ export const GrowthQuestion: FC<Props> = ({
         try {
             dataScheme.shape.growth.parse(growthValue);
             setValidationError('');
-            onAnswer(growthValue); // Передаем number
-            if (onInputValidation) {
-                onInputValidation(true);
+            props.onAnswer(growthValue); // Передаем number
+            if (props.onInputValidation) {
+                props.onInputValidation(true);
             }
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const errorMessage = error.errors[0].message;
                 setValidationError(errorMessage);
-                if (onInputValidation) {
-                    onInputValidation(false); // Устанавливаем неуспешный статус
+                if (props.onInputValidation) {
+                    props.onInputValidation(false); // Устанавливаем неуспешный статус
                 }
             }
         }
@@ -43,8 +38,8 @@ export const GrowthQuestion: FC<Props> = ({
         <QuestionComponent
             inputValue={growth ? growth.toString() : ''}
             onInputChange={handleGrowthChange}
-            selectedAnswer={selectedAnswer ?? null}
-            onAnswer={onAnswer}
+            selectedAnswer={props.selectedAnswer ?? null}
+            onAnswer={props.onAnswer}
             inputType='number'
             inputName='growth'
             inputId='growth'

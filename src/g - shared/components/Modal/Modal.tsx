@@ -1,11 +1,44 @@
 import React, {
+    FC,
     MouseEventHandler,
     useCallback,
     useEffect,
     useRef,
     useState,
 } from 'react';
-import Portal, { createContainer } from './ModalPortal';
+import styled from 'styled-components';
+import { Portal } from '../portal/Portal';
+
+// Создаем стилизованный контейнер для модального окна
+const ModalWrapper = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+`;
+
+const ModalContent = styled.div<{ width?: string; height?: string }>`
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: ${(props) => props.width || 'auto'};
+    height: ${(props) => props.height || 'auto'};
+    position: relative;
+`;
+
+const CloseButton = styled.button`
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+`;
 
 type Props = {
     title?: string;
@@ -17,56 +50,51 @@ type Props = {
         disabled?: boolean;
     }[];
     position?: 'top' | 'bottom' | 'left' | 'right' | 'width';
-    customPosition?: {
-        [key: string]: string | number;
-    };
+    customPosition?: { [key: string]: string | number };
     width?: string;
     height?: string;
     image?: string | undefined;
     imageClassName?: string;
 };
-const MODAL_CONTAINER_ID = 'modal-container-id';
-export const Modal = (props: Props) => {
-    const {
-        title,
-        onClose,
-        children,
-        footerButtons,
-        position,
-        customPosition,
-        width,
-        height,
-        image,
-    } = props;
+
+export const Modal: FC<Props> = (props) => {
     const rootRef = useRef<HTMLDivElement>(null);
     const [isMounted, setIsMounted] = useState(false);
 
     const modalStyle = {
-        top: customPosition?.top || (position === 'top' ? 0 : undefined),
+        top:
+            props.customPosition?.top ||
+            (props.position === 'top' ? 0 : undefined),
         bottom:
-            customPosition?.bottom || (position === 'bottom' ? 0 : undefined),
-        left: customPosition?.left || (position === 'left' ? 0 : undefined),
-        right: customPosition?.right || (position === 'right' ? 0 : undefined),
-        width: width || undefined,
-        height: height || undefined,
+            props.customPosition?.bottom ||
+            (props.position === 'bottom' ? 0 : undefined),
+        left:
+            props.customPosition?.left ||
+            (props.position === 'left' ? 0 : undefined),
+        right:
+            props.customPosition?.right ||
+            (props.position === 'right' ? 0 : undefined),
+        width: props.width || undefined,
+        height: props.height || undefined,
     };
 
     useEffect(() => {
-        createContainer({ id: MODAL_CONTAINER_ID });
+        // Здесь можно создать контейнер, если это необходимо
+        // createContainer({ id: MODAL_CONTAINER_ID });
         setIsMounted(true);
     }, []);
 
     useEffect(() => {
         const handleWrapperClick = (e: MouseEvent) => {
             const { target } = e;
-
             if (target instanceof Node && rootRef.current === target) {
-                onClose?.();
+                props.onClose?.();
             }
         };
+
         const handleEscapePress = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
-                onClose?.();
+                props.onClose?.();
             }
         };
 
@@ -77,38 +105,31 @@ export const Modal = (props: Props) => {
             window.removeEventListener('click', handleWrapperClick);
             window.removeEventListener('keydown', handleEscapePress);
         };
-    }, [onClose]);
+    }, [props.onClose]);
 
     const handleClose: MouseEventHandler<HTMLDivElement | HTMLButtonElement> =
         useCallback(() => {
-            onClose?.();
-        }, [onClose]);
+            props.onClose?.();
+        }, [props.onClose]);
 
     return isMounted ? (
-        <Portal id={MODAL_CONTAINER_ID}>
-            <div ref={rootRef}>
-                <div onClick={handleClose}></div>
-                <div style={modalStyle}>
-                    <button
-                        type='button'
-                        // className={styles.closeButton}
-                        onClick={handleClose}
-                    >
+        <Portal>
+            <ModalWrapper ref={rootRef}>
+                <ModalContent style={modalStyle}>
+                    <CloseButton type='button' onClick={handleClose}>
                         Х
-                    </button>
+                    </CloseButton>
+                    {props.image && (
+                        <img
+                            src={props.image}
+                            alt='Модальное окно'
+                            className={props.imageClassName}
+                        />
+                    )}
+                    <p>{props.title}</p>
+                    <div>{props.children}</div>
                     <div>
-                        {image ? (
-                            <img
-                                src={image}
-                                alt='Модальное окно'
-                                className={props.imageClassName}
-                            />
-                        ) : null}
-                        <p>{title}</p>
-                    </div>
-                    <div>{children}</div>
-                    <div>
-                        {footerButtons?.map((button, index) => (
+                        {props.footerButtons?.map((button, index) => (
                             <button
                                 key={index}
                                 disabled={button.disabled}
@@ -118,8 +139,8 @@ export const Modal = (props: Props) => {
                             </button>
                         ))}
                     </div>
-                </div>
-            </div>
+                </ModalContent>
+            </ModalWrapper>
         </Portal>
     ) : null;
 };

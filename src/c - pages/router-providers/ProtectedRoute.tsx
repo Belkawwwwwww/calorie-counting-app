@@ -6,9 +6,9 @@ import { FC, ReactNode, useEffect } from 'react';
 
 type ProtectedRouteProps = {
     children: ReactNode;
-}
+};
 
-export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
+export const ProtectedRoute: FC<ProtectedRouteProps> = (props) => {
     const router = useRouter();
     const isAuth = useAppSelector(isAuthSelector);
 
@@ -20,5 +20,5 @@ export const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
         }
     }, [isAuth]);
 
-    return isAuth ? children : null;
+    return isAuth ? props.children : null;
 };

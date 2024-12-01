@@ -9,19 +9,14 @@ type Props = {
     isLoading: boolean;
 };
 
-export const NextBtn: FC<Props> = ({
-    isLastQuestion,
-    isAnswered,
-    onNext,
-    isLoading,
-}) => {
+export const NextBtn: FC<Props> = (props) => {
     const renderNextButton = () => (
         <Button
             $variant='primary'
             $btnWidth='l'
             $btnSquareSize='button--square--size-m'
             type='button'
-            onClick={onNext}
+            onClick={props.onNext}
         >
             ДАЛЕЕ
         </Button>
@@ -34,14 +29,22 @@ export const NextBtn: FC<Props> = ({
             $btnSquareSize='button--square--size-m'
             type='submit'
         >
-            {isLoading ? <LoadingInBtn /> : 'СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН'}
+            {props.isLoading ? (
+                <LoadingInBtn />
+            ) : (
+                'СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН'
+            )}
         </Button>
     );
 
     return (
         <>
-            {isAnswered && !isLastQuestion ? renderNextButton() : null}
-            {isLastQuestion && isAnswered ? renderSubmitButton() : null}
+            {props.isAnswered && !props.isLastQuestion
+                ? renderNextButton()
+                : null}
+            {props.isLastQuestion && props.isAnswered
+                ? renderSubmitButton()
+                : null}
         </>
     );
 };

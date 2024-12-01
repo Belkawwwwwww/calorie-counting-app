@@ -19,11 +19,11 @@ type ErrorProviderProps = {
     children: ReactNode;
 }
 
-export const ErrorProvider: FC<ErrorProviderProps> = ({ children }) => {
+export const ErrorProvider: FC<ErrorProviderProps> = (props) => {
     const [error, setError] = useState<string>('');
     return (
         <ErrorContext.Provider value={{ error, setError }}>
-            {children}
+            {props.children}
         </ErrorContext.Provider>
     );
 };

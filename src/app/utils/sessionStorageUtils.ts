@@ -1,4 +1,3 @@
-// sessionStorageUtils.ts
 export const getFromSessionStorage = (key: string) => {
     const value = sessionStorage.getItem(key);
     return value ? JSON.parse(value) : null;

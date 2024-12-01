@@ -8,7 +8,7 @@ type OpenRouteProps = {
     children: ReactNode;
 }
 
-export const OpenRoute: FC<OpenRouteProps> = ({ children }) => {
+export const OpenRoute: FC<OpenRouteProps> = (props) => {
     const router = useRouter();
     const isAuth = useAppSelector(isAuthSelector);
 
@@ -19,5 +19,5 @@ export const OpenRoute: FC<OpenRouteProps> = ({ children }) => {
             }
         }
     }, [isAuth]);
-    return !isAuth ? children : null;
+    return !isAuth ? props.children : null;
 };

@@ -62,8 +62,8 @@ type ImageProps = {
     src: string;
 };
 
-const Image: FC<ImageProps> = ({ src }) => {
-    return src ? <Img src={src} /> : null;
+const Image: FC<ImageProps> = (props) => {
+    return props.src ? <Img src={props.src} /> : null;
 };
 
 const menu = [

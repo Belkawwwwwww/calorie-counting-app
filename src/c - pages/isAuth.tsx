@@ -7,7 +7,7 @@ type AuthLayoutProps = {
     children: ReactNode;
 };
 
-export const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
+export const AuthLayout: FC<AuthLayoutProps> = (props) => {
     const isAuth = useAppSelector(isAuthSelector);
     const sessionId = sessionStorage.getItem('session_id');
     const router = useRouter();
@@ -18,5 +18,5 @@ export const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
         }
     }, []);
 
-    return <>{children}</>;
+    return <>{props.children}</>;
 };

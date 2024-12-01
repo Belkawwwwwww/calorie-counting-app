@@ -4,11 +4,7 @@ import { useZodInputValidation } from '@/g - shared/hooks';
 import { FC, useState } from 'react';
 import { z } from 'zod';
 
-export const AgeQuestion: FC<Props> = ({
-    selectedAnswer,
-    onAnswer,
-    onInputValidation,
-}) => {
+export const AgeQuestion: FC<Props> = (props) => {
     const { inputValue: age, handleInputChange } = useZodInputValidation(
         dataScheme.shape.age
     );
@@ -23,16 +19,16 @@ export const AgeQuestion: FC<Props> = ({
         try {
             dataScheme.shape.age.parse(ageValue); // проверка значения возраста
             setValidationError('');
-            onAnswer(ageValue); // Передаем number
-            if (onInputValidation) {
-                onInputValidation(true);
+            props.onAnswer(ageValue); // Передаем number
+            if (props.onInputValidation) {
+                props.onInputValidation(true);
             }
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const errorMessage = error.errors[0].message;
                 setValidationError(errorMessage);
-                if (onInputValidation) {
-                    onInputValidation(false); // Устанавливаем неуспешный статус
+                if (props.onInputValidation) {
+                    props.onInputValidation(false); // Устанавливаем неуспешный статус
                 }
             }
         }
@@ -42,11 +38,11 @@ export const AgeQuestion: FC<Props> = ({
         <QuestionComponent
             inputValue={age ? age.toString() : ''}
             onInputChange={handleAgeChange}
-            onAnswer={onAnswer}
+            onAnswer={props.onAnswer}
             inputType='number'
             inputName='age'
             inputId='age'
-            selectedAnswer={selectedAnswer ?? null}
+            selectedAnswer={props.selectedAnswer ?? null}
             inputError={validationError}
         />
     );

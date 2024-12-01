@@ -35,20 +35,14 @@ type Props = {
     content?: 'center';
     nextButton?: ReactNode;
 };
-export const UIFormLayout: FC<Props> = ({
-    header,
-    form,
-    title,
-    content,
-    nextButton,
-}) => {
+export const UIFormLayout: FC<Props> = (props) => {
     return (
         <Container>
-            {header}
+            {props.header}
             <Form>
-                <Title content={content}>{title}</Title>
-                {form}
-                <Btn>{nextButton}</Btn>
+                <Title content={props.content}>{props.title}</Title>
+                {props.form}
+                <Btn>{props.nextButton}</Btn>
             </Form>
         </Container>
     );

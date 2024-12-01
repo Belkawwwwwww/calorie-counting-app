@@ -4,11 +4,7 @@ import { useZodInputValidation } from '@/g - shared/hooks';
 import { z } from 'zod';
 import { dataScheme } from '@/d - widgets/test-page';
 
-export const WeightQuestion: FC<Props> = ({
-    onAnswer,
-    selectedAnswer,
-    onInputValidation,
-}) => {
+export const WeightQuestion: FC<Props> = (props) => {
     const { inputValue: weight, handleInputChange } = useZodInputValidation(
         dataScheme.shape.weight
     );
@@ -24,16 +20,16 @@ export const WeightQuestion: FC<Props> = ({
         try {
             dataScheme.shape.weight.parse(weightValue);
             setValidationError('');
-            onAnswer(weightValue); // Передаем number
-            if (onInputValidation) {
-                onInputValidation(true);
+            props.onAnswer(weightValue); // Передаем number
+            if (props.onInputValidation) {
+                props.onInputValidation(true);
             }
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const errorMessage = error.errors[0].message;
                 setValidationError(errorMessage);
-                if (onInputValidation) {
-                    onInputValidation(false); // Устанавливаем неуспешный статус
+                if (props.onInputValidation) {
+                    props.onInputValidation(false); // Устанавливаем неуспешный статус
                 }
             }
         }
@@ -43,11 +39,11 @@ export const WeightQuestion: FC<Props> = ({
         <QuestionComponent
             inputValue={weight ? weight.toString() : ''}
             onInputChange={handleWeightChange}
-            onAnswer={onAnswer}
+            onAnswer={props.onAnswer}
             inputType='number'
             inputName='weight'
             inputId='weight'
-            selectedAnswer={selectedAnswer ?? null}
+            selectedAnswer={props.selectedAnswer ?? null}
             inputError={validationError}
         />
     );

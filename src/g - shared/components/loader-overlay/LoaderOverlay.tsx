@@ -44,18 +44,17 @@ type Props = {
     children: ReactNode;
 };
 
-export const LoaderOverlay: FC<Props> = ({ children }) => {
+export const LoaderOverlay: FC<Props> = (props) => {
     const pending = useAppSelector(isPendingSelector);
 
     return (
         <>
-        
             {pending ? (
                 <Container>
                     <Loader></Loader>
                 </Container>
             ) : (
-                children
+                props.children
             )}
         </>
     );

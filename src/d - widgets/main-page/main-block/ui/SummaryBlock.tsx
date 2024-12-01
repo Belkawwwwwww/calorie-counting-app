@@ -34,6 +34,7 @@ const BJU = styled.div`
     flex: 0 0 33.3%;
 `;
 const Norm = styled.div``;
+
 export const SummaryBlock = () => {
     const [dailyCalories, setDailyCalories] = useState(0);
     const handleCalories = (calories: number) => {

@@ -14,16 +14,14 @@ const MainCont = styled.div`
 const Text = styled.div`
     font-size: 10px;
 `;
-export const DailyCaloriesBlock: FC<DailyCaloriesBlockProps> = ({
-    onCaloriesCalculated,
-}) => {
+export const DailyCaloriesBlock: FC<DailyCaloriesBlockProps> = (props) => {
     const { data: userData, isLoading } = useGetUserDataQuery();
     const [dailyCalories, setDailyCalories] = useState(0);
     useEffect(() => {
         if (!isLoading && userData?.data) {
             const calories = calculateDailyCalories();
             setDailyCalories(calories);
-            onCaloriesCalculated(calories);
+            props.onCaloriesCalculated(calories);
         }
     }, [isLoading, userData]);
 

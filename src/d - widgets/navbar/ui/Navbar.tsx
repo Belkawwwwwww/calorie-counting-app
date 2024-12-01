@@ -5,6 +5,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { RouteEnum } from '@/g - shared/model';
 import { useRouter } from 'next/router';
+import { LogoutBtn } from '@/e - features/auth/components/logout-btn/Logout';
 
 const Header = styled.header`
     position: relative;
@@ -16,6 +17,11 @@ const Header = styled.header`
     padding-left: 100px;
     padding-right: 100px;
 `;
+
+const LinksContainer = styled.div`
+    display: flex;
+`;
+
 const StyledLinks = styled(Link)`
     color: black;
     text-decoration: none;
@@ -32,11 +38,18 @@ export const Navbar: FC<{ hideOnPages?: string[] }> = ({
     return (
         <Header>
             <Logo />
-            {!isAuth ? (
-                <StyledLinks href={RouteEnum.LOGIN}>ВХОД</StyledLinks>
-            ) : (
-                <StyledLinks href={RouteEnum.PROFILE}>ПРОФИЛЬ</StyledLinks>
-            )}
+            <LinksContainer>
+                {!isAuth ? (
+                    <StyledLinks href={RouteEnum.LOGIN}>ВХОД</StyledLinks>
+                ) : (
+                    <>
+                        <StyledLinks href={RouteEnum.PROFILE}>
+                            ПРОФИЛЬ
+                        </StyledLinks>
+                        |<LogoutBtn />
+                    </>
+                )}
+            </LinksContainer>
         </Header>
     );
 };

@@ -10,7 +10,7 @@ type Props = {
     children: ReactNode;
 };
 
-export const UserProvider: FC<Props> = ({ children }) => {
+export const UserProvider: FC<Props> = (props) => {
     const [dailyCalories, setDailyCalories] = useState(0);
 
     const updateDailyCalories = (calories: number) => {
@@ -19,7 +19,7 @@ export const UserProvider: FC<Props> = ({ children }) => {
 
     return (
         <UserContext.Provider value={{ dailyCalories, updateDailyCalories }}>
-            {children}
+            {props.children}
         </UserContext.Provider>
     );
 };

@@ -140,15 +140,6 @@ export const Test: React.FC = () => {
             ),
         },
         {
-            key: 'date',
-            title: 'ДАТА РОЖДЕНИЯ',
-            component: (
-                <DateOfBirthQuestion
-                    onAnswer={(answer) => handleAnswer('birthday', answer)}
-                />
-            ),
-        },
-        {
             key: 'activity',
             title: 'КАКОЙ У ВАС ОБРАЗ ЖИЗНИ?',
             component: (

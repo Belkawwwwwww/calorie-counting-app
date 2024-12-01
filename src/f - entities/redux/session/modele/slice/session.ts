@@ -17,5 +17,11 @@ export const sessionSlice = createSlice({
         setAuth(state, { payload }: PayloadAction<boolean>) {
             state.is_authenticated = payload;
         },
+        logout(state) {
+            state.is_authenticated = false;
+            state.isLoading = false
+        }
     },
 });
+
+export const { setAuth, logout } = sessionSlice.actions;
