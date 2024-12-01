@@ -1,4 +1,4 @@
-import { dataScheme } from '@/d - widgets/TestPage';
+import { dataScheme } from '@/d - widgets/test-page';
 import { useState } from 'react';
 import { z } from 'zod';
 

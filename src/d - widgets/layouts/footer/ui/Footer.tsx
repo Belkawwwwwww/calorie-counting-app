@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { PhoneNumber } from '@/e - features/contacts';
-import { SocialMedia } from '@/e - features/contacts/components/SocialMeadia';
+import { PhoneNumber, SocialMedia } from '@/e - features/contacts';
 
 const StyledFooter = styled.footer`
     position: relative;

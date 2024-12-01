@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/g - shared/lib/store';
 import styled from 'styled-components';
-import { Logo } from '@/g - shared/ui/Logo';
+import { Logo } from '@/g - shared/ui/logo';
 import { FC } from 'react';
 import Link from 'next/link';
 import { RouteEnum } from '@/g - shared/model';

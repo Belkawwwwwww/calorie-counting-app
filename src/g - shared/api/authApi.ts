@@ -7,10 +7,11 @@ import {
     AuthResponseScheme,
     AuthScheme,
 } from '@/f - entities/auth/model/authScheme';
+import { ApiUrls } from '../model';
 
 const authAPI = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://dev-eda.ibell.online/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: ApiUrls.BASE_URL }),
     endpoints: (build) => ({
         registerUser: build.mutation<
             typeof RegistrationResponseSchema._output,

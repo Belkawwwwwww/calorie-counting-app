@@ -1,7 +1,13 @@
-import React, {MouseEventHandler, useCallback, useEffect, useRef, useState,} from 'react';
-import Portal, {createContainer} from './ModalPortal';
+import React, {
+    MouseEventHandler,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
+import Portal, { createContainer } from './ModalPortal';
 
-type IModalProps = {
+type Props = {
     title?: string;
     onClose: () => void;
     children?: React.ReactNode | React.ReactNode[];
@@ -20,7 +26,7 @@ type IModalProps = {
     imageClassName?: string;
 };
 const MODAL_CONTAINER_ID = 'modal-container-id';
-export const Modal = (props: IModalProps) => {
+export const Modal = (props: Props) => {
     const {
         title,
         onClose,
@@ -84,7 +90,7 @@ export const Modal = (props: IModalProps) => {
                 <div onClick={handleClose}></div>
                 <div style={modalStyle}>
                     <button
-                        type="button"
+                        type='button'
                         // className={styles.closeButton}
                         onClick={handleClose}
                     >
@@ -94,7 +100,7 @@ export const Modal = (props: IModalProps) => {
                         {image ? (
                             <img
                                 src={image}
-                                alt="Модальное окно"
+                                alt='Модальное окно'
                                 className={props.imageClassName}
                             />
                         ) : null}

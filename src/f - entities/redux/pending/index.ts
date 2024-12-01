@@ -1,2 +1,2 @@
-export {pendingSlice} from './modele/slice/isPending';
-export {isPendingSelector} from './modele/selector/isPending';
+export { pendingSlice } from './modele/slice/isPending';
+export { isPendingSelector } from './modele/selector/isPending';

@@ -1,4 +1,4 @@
-interface UserState {
+type UserState = {
     user_id: any | null;
     gender: string | null;
     target: string | null;

@@ -40,15 +40,16 @@ const StyledLoader = styled.span`
     animation: ${animloader} 1s linear infinite alternate;
 `;
 
-interface LoaderOverlayProps {
+type Props = {
     children: ReactNode;
-}
+};
 
-export const LoaderOverlay: FC<LoaderOverlayProps> = ({ children }) => {
+export const LoaderOverlay: FC<Props> = ({ children }) => {
     const pending = useAppSelector(isPendingSelector);
 
     return (
         <>
+        
             {pending ? (
                 <StyledLoaderContainer>
                     <StyledLoader></StyledLoader>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRegisterUserMutation } from '@/g - shared/api/authApi';
-import { Button } from '@/g - shared/ui/Button';
+import { Button } from '@/g - shared/ui/button';
 import { RouteEnum } from '@/g - shared/model';
 import Link from 'next/link';
 import {
@@ -14,10 +14,10 @@ import { setAuth } from '@/f - entities/redux/session/modele/action/action';
 import { OpenRoute } from '@/c - pages/router-providers';
 import { setUser } from '@/f - entities/redux/user/model/action/action';
 import { useRouter } from 'next/router';
-import { InputBox } from '@/g - shared/ui/Input';
+import { InputBox } from '@/g - shared/ui/input';
 import { useError } from '@/g - shared/lib/context';
-import { Error } from '@/g - shared/ui/ErrorDisplay';
-import { LoadingInBtn } from '@/g - shared/ui/Loader';
+import { Error } from '@/g - shared/ui/errorDisplay';
+import { LoadingInBtn } from '@/g - shared/ui/loader';
 
 const StyledRFContainer = styled.div`
     display: flex;
@@ -84,7 +84,6 @@ export const RegisterForm = () => {
                     dispatch(setAuth(true));
                     dispatch(setUser({ user_id: backendUser_id }));
                     console.log(registerUser);
-                    router.push(RouteEnum.HOME);
                     console.log('Регистрация успешна');
                 }
             } else {

@@ -1,16 +1,16 @@
 import { createContext, useState, useContext, FC, ReactNode } from 'react';
 
-interface UserContextType {
+type UserContextType = {
     dailyCalories: number;
     updateDailyCalories: (calories: number) => void;
-}
+};
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
-interface UserProviderProps {
+type Props = {
     children: ReactNode;
-}
+};
 
-export const UserProvider: FC<UserProviderProps> = ({ children }) => {
+export const UserProvider: FC<Props> = ({ children }) => {
     const [dailyCalories, setDailyCalories] = useState(0);
 
     const updateDailyCalories = (calories: number) => {

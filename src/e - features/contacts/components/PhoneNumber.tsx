@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-interface ProneNumberProps {
+type ProneNumberProps ={
     phoneNumber: string;
 }
 

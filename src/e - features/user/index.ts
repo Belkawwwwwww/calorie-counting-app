@@ -1,1 +1,1 @@
-export {MemoizedUserSessionLoader} from './UserSessionFetcher'
+export { MemoizedUserSessionLoader } from './UserSessionFetcher';

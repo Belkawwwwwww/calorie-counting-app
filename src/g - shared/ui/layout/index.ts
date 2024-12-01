@@ -1,2 +1,2 @@
 export { Layout } from './Layout';
-export { UIFormLayout } from './formLayout';
+export { UIFormLayout } from './FormLayout';

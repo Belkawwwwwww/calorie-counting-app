@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface SessionState {
+type SessionState = {
     is_authenticated: boolean;
     isLoading: boolean;
 }

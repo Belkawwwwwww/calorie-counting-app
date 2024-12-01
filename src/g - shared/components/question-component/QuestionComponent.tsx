@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import React, { FC, useState } from 'react';
-import { InputBox } from '@/g - shared/ui/Input';
+import { InputBox } from '@/g - shared/ui/input';
 import { z } from 'zod';
-import { QuestionComponentProps } from './types';
+import { Props } from './types';
 
 const StyledTitle = styled.h1`
     font-weight: 200;
@@ -40,7 +40,7 @@ const StyledOption = styled.div<{ isSelected: boolean }>`
     }
 `;
 
-export const QuestionComponent: FC<QuestionComponentProps> = ({
+export const QuestionComponent: FC<Props> = ({
     title,
     options,
     selectedAnswer,

@@ -22,7 +22,7 @@ export const ButtonWidth = {
 };
 export type BtnHeight = (typeof ButtonWidth)[keyof typeof ButtonWidth];
 
-export interface ButtonProps {
+export type Props = {
     $variant?: BtnVariants;
     $btnSquareSize?: BtnSize;
     $btnWidth?: BtnHeight;
@@ -30,4 +30,4 @@ export interface ButtonProps {
     disabled?: boolean;
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     type: string;
-}
+};

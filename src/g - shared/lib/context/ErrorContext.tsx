@@ -1,11 +1,11 @@
 import { createContext, FC, ReactNode, useContext, useState } from 'react';
 
-interface ErrorContextType {
+type Props = {
     error: string;
     setError: (error: string) => void;
-}
+};
 
-const ErrorContext = createContext<ErrorContextType | undefined>(undefined);
+const ErrorContext = createContext<Props | undefined>(undefined);
 
 export const useError = () => {
     const context = useContext(ErrorContext);
@@ -15,7 +15,7 @@ export const useError = () => {
     return context;
 };
 
-interface ErrorProviderProps {
+type ErrorProviderProps = {
     children: ReactNode;
 }
 

@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler } from 'react';
 
-export interface IInputProps {
+export type Props = {
     onChange: ChangeEventHandler<HTMLInputElement>;
     value: string;
     inputRef?: React.LegacyRef<HTMLInputElement>;

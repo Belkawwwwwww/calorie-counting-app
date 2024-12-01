@@ -3,9 +3,9 @@ import { useAppSelector } from '@/g - shared/lib/store';
 import { useRouter } from 'next/router';
 import { isAuthSelector } from '@/f - entities/redux/session';
 
-interface AuthLayoutProps {
+type AuthLayoutProps = {
     children: ReactNode;
-}
+};
 
 export const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
     const isAuth = useAppSelector(isAuthSelector);

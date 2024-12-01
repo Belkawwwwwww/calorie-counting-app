@@ -1,13 +1,13 @@
 import { RouteEnum } from '@/g - shared/model';
-import { Button } from '@/g - shared/ui/Button';
+import { Button } from '@/g - shared/ui/button';
 import { Layout } from '@/g - shared/ui/layout';
 import Link from 'next/link';
 import { FC } from 'react';
 import styled from 'styled-components';
 
-interface StyledImgProps {
+type StyledImgProps = {
     src: string;
-}
+};
 
 const StyledLFContainer = styled.div`
     margin-top: 60px;
@@ -58,9 +58,9 @@ const StyledBtn = styled(Link)`
     margin-top: 20px;
 `;
 
-interface ImageProps {
+type ImageProps = {
     src: string;
-}
+};
 
 const Image: FC<ImageProps> = ({ src }) => {
     return src ? <StyledImg src={src} /> : null;

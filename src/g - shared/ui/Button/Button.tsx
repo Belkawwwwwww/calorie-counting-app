@@ -1,8 +1,8 @@
 import { FC, memo } from 'react';
-import { ButtonProps } from '@/g - shared/ui/Button/types';
+import { Props } from '@/g - shared/ui/button/types';
 import styled from 'styled-components';
 
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.button<Props>`
     padding: 15px 30px;
     border-radius: 10px;
     border: none;
@@ -44,7 +44,7 @@ const StyledButton = styled.button<ButtonProps>`
     }};
 `;
 
-export const Button: FC<ButtonProps> = memo(
+export const Button: FC<Props> = memo(
     ({ children, disabled, onClick, ...otherProps }) => {
         return (
             <StyledButton disabled={disabled} onClick={onClick} {...otherProps}>

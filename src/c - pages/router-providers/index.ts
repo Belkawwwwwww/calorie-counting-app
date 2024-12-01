@@ -1,2 +1,2 @@
-export {ProtectedRoute} from './ProtectedRoute';
-export {OpenRoute} from './OpenRoute';
+export { ProtectedRoute } from './ProtectedRoute';
+export { OpenRoute } from './OpenRoute';

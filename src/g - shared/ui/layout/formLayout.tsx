@@ -28,14 +28,14 @@ const StyledBtn = styled.div`
     margin-top: 24px;
 `;
 
-interface UIFormLayoutProps {
+type Props = {
     header?: ReactNode;
     form?: ReactNode;
     title: string;
     content?: 'center';
     nextButton?: ReactNode;
-}
-export const UIFormLayout: FC<UIFormLayoutProps> = ({
+};
+export const UIFormLayout: FC<Props> = ({
     header,
     form,
     title,

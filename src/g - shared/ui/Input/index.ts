@@ -1,2 +1,2 @@
 export {Input} from './Input'
-export {InputBox} from './InputBox/InputBox'
+export {InputBox} from './inputBox/InputBox'

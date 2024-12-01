@@ -1,13 +1,13 @@
 import { FC } from 'react';
-import { IInputProps } from '../types';
-import { Input } from '../Input';
 import styled from 'styled-components';
+import { Props } from '../types';
+import { Input } from '../Input';
 
-interface InputBoxProps extends IInputProps {
+type InputBoxProps=  {
     label?: string;
     error?: string;
     direction?: 'column' | 'row';
-}
+} & Props
 
 const StyledInputBox = styled.div<{ direction: 'column' | 'row' }>`
     display: flex;

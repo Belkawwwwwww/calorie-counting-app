@@ -1,13 +1,15 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { Layout } from '@/g - shared/ui/layout';
-import { Calendar } from '@/d - widgets/MainPage/Calendar';
-import { SummaryBlock } from '@/d - widgets/MainPage/MainBlock/ui/SummaryBlock';
+import { Calendar } from '@/d - widgets/main-page/calendar';
 import { ProtectedRoute } from '@/c - pages/router-providers';
-import { useGetUserDataQuery } from '@/d - widgets/TestPage/api/surveyApi';
-import { Button } from '@/g - shared/ui/Button';
-import { LoadingIndicator } from '@/g - shared/ui/Loader';
-import { NutritionBlock } from '@/d - widgets/MainPage/Nutrition';
+import { Button } from '@/g - shared/ui/button';
+import { LoadingIndicator } from '@/g - shared/ui/loader';
+import { NutritionBlock } from '@/d - widgets/main-page/nutrition';
+import Link from 'next/link';
+import { RouteEnum } from '@/g - shared/model';
+import { SummaryBlock } from '@/d - widgets/main-page/main-block';
+import { useGetUserDataQuery } from '@/d - widgets/test-page/api/surveyApi';
 
 const StyledHeader = styled.header`
     display: flex;
@@ -27,6 +29,10 @@ const StyledMessage = styled.div`
 const Text = styled.div`
     font-size: 25px;
     padding-bottom: 50px;
+`;
+const StyledBtn = styled(Link)`
+    margin: 0 auto;
+    margin-top: 20px;
 `;
 
 export const MainPage: FC = () => {
@@ -51,15 +57,16 @@ export const MainPage: FC = () => {
                         <Text>
                             Пока что тут ничего нет, но мы можем это исправить
                         </Text>
-
-                        <Button
-                            $variant='primary'
-                            $btnWidth='l'
-                            $btnSquareSize='button--square--size-l'
-                            type='submit'
-                        >
-                            СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН
-                        </Button>
+                        <StyledBtn href={RouteEnum.TEST}>
+                            <Button
+                                $variant='primary'
+                                $btnWidth='l'
+                                $btnSquareSize='button--square--size-l'
+                                type='submit'
+                            >
+                                СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН
+                            </Button>
+                        </StyledBtn>
                     </StyledMessage>
                 )}
             </Layout>

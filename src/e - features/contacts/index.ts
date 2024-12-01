@@ -1,2 +1,2 @@
-export {PhoneNumber} from './components/PhoneNumber'
-export {SocialMedia} from './components/SocialMeadia'
+export { PhoneNumber } from './components/PhoneNumber';
+export { SocialMedia } from './components/SocialMeadia';

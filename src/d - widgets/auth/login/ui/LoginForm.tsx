@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RouteEnum } from '@/g - shared/model';
 import Link from 'next/link';
-import { Button } from '@/g - shared/ui/Button';
+import { Button } from '@/g - shared/ui/button';
 import {
     AuthResponseScheme,
     AuthScheme,
@@ -15,9 +15,9 @@ import { setUser } from '@/f - entities/redux/user/model/action/action';
 import { OpenRoute } from '@/c - pages/router-providers';
 import { useAuthUserMutation } from '@/g - shared/api/authApi';
 import { useZodInputValidation } from '@/g - shared/hooks';
-import { LoadingInBtn } from '@/g - shared/ui/Loader';
-import { InputBox } from '@/g - shared/ui/Input';
-import { Error } from '@/g - shared/ui/ErrorDisplay';
+import { LoadingInBtn } from '@/g - shared/ui/loader';
+import { InputBox } from '@/g - shared/ui/input';
+import { Error } from '@/g - shared/ui/errorDisplay';
 import { useError } from '@/g - shared/lib/context';
 
 const StyledLFContainer = styled.div`
