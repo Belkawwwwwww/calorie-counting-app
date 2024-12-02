@@ -6,7 +6,15 @@ import { Button } from '@/g - shared/ui/button';
 import { RouteEnum } from '@/g - shared/model';
 import { useGetUserDataQuery } from '@/d - widgets/test-page/api/surveyApi';
 import { LoaderTest, LoadingIndicator } from '@/g - shared/ui/loader';
-import { Btn, Container, DateNow, Header, Message, Text } from './Styles';
+import {
+    Btn,
+    Container,
+    DateNow,
+    Header,
+    Message,
+    ResponsiveButton,
+    Text,
+} from '../style/Styles';
 
 export const Main: FC = () => {
     const { data: userData, isLoading } = useGetUserDataQuery();
@@ -36,14 +44,14 @@ export const Main: FC = () => {
                                 исправить
                             </Text>
                             <Btn href={RouteEnum.TEST}>
-                                <Button
+                                <ResponsiveButton
                                     $variant='primary'
                                     $btnWidth='l'
                                     $btnSquareSize='button--square--size-l'
                                     type='submit'
                                 >
                                     СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН
-                                </Button>
+                                </ResponsiveButton>
                             </Btn>
                         </Message>
                     )}

@@ -1,38 +1,7 @@
 import { z } from 'zod';
 import { dataScheme } from '../model/createSurvey';
-
-export type State = {
-    currentQuestionIndex: number;
-    currentQuestionAnswered: boolean;
-    answers: {
-        gender: string | null;
-        target: string | null;
-        age: number | null;
-        growth: number | null;
-        birthday: Date | null;
-        activity: string | null;
-        weight: number | null;
-    };
-};
-
-type Action =
-    | { type: 'SET_ANSWER'; key: keyof State['answers']; value: any }
-    | { type: 'NEXT_QUESTION' }
-    | { type: 'SET_QUESTION_ANSWERED'; value: boolean };
-
-const initialState: State = {
-    currentQuestionIndex: 0,
-    currentQuestionAnswered: false,
-    answers: {
-        gender: null,
-        target: null,
-        age: null,
-        growth: null,
-        birthday: null,
-        activity: null,
-        weight: null,
-    },
-};
+import { State } from './type';
+import { Action } from './action';
 
 const reducer = (state: State, action: Action): State => {
     switch (action.type) {
@@ -75,4 +44,4 @@ const reducer = (state: State, action: Action): State => {
     }
 };
 
-export { initialState, reducer };
+export { reducer };

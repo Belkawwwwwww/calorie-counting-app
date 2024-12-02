@@ -1,1 +1,1 @@
-export {Error} from './ErrorDisplay'
+export { Error } from './ui/ErrorDisplay';

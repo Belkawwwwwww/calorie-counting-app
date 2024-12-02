@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { RouteEnum } from '@/g - shared/model';
 import { useRouter } from 'next/router';
 import { LogoutBtn } from '@/e - features/auth/components/logout-btn/Logout';
-import { Header, LinksContainer, StyledLinks } from './Styles';
+import { Header, LinksContainer, StyledLinks } from '../style/Styles';
 
 export const Navbar: FC<{ hideOnPages?: string[] }> = ({
     hideOnPages = [],

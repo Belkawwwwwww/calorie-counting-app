@@ -2,11 +2,11 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
     RegistrationResponseSchema,
     RegScheme,
-} from '@/f - entities/auth/model/registrationSchema';
+} from '@/d - widgets/auth/register/model/registrationSchema';
 import {
     AuthResponseScheme,
     AuthScheme,
-} from '@/f - entities/auth/model/authScheme';
+} from '@/d - widgets/auth/login/model/authScheme';
 import { ApiUrls } from '../model';
 
 const authAPI = createApi({

@@ -1,4 +1,4 @@
-export { useUserContext } from './UserContext';
-export { UserProvider } from './UserContext';
-export { useError } from './ErrorContext';
-export { ErrorProvider } from './ErrorContext';
+export { useUserContext } from './user-context/UserContext';
+export { UserProvider } from './user-context/UserContext';
+export { useError } from './error-context/ErrorContext';
+export { ErrorProvider } from './error-context/ErrorContext';

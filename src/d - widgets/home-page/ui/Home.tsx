@@ -11,7 +11,7 @@ import {
     Opportunities,
     ResponsiveButton,
     Text,
-} from './Styles';
+} from '../style/Styles';
 
 type ImageProps = {
     src: string;

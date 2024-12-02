@@ -1,5 +1,6 @@
 import { useReducer } from 'react';
-import { initialState, reducer, State } from '../reducers/surveyRuducer';
+import { reducer } from '../reducers/surveyRuducer';
+import { initialState, State } from '../reducers/type';
 
 export const useSurvey = () => {
     const [state, dispatch] = useReducer(reducer, initialState);

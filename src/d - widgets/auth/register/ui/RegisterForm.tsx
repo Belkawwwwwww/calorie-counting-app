@@ -5,7 +5,7 @@ import { RouteEnum } from '@/g - shared/model';
 import {
     RegistrationResponseSchema,
     RegScheme,
-} from '@/f - entities/auth/model/registrationSchema';
+} from '@/d - widgets/auth/register/model/registrationSchema';
 import { z } from 'zod';
 import { useAppDispatch } from '@/g - shared/lib/store';
 import { setAuth } from '@/f - entities/redux/session/modele/action/action';
@@ -16,7 +16,7 @@ import { InputBox } from '@/g - shared/ui/input';
 import { useError } from '@/g - shared/lib/context';
 import { Error } from '@/g - shared/ui/errorDisplay';
 import { LoadingInBtn } from '@/g - shared/ui/loader';
-import { Btn, Container, Footer, StyledLink } from './Styles';
+import { Btn, Container, Footer, StyledLink } from '../style/Styles';
 
 export const RegisterForm = () => {
     const [registerUser, { isLoading }] = useRegisterUserMutation();

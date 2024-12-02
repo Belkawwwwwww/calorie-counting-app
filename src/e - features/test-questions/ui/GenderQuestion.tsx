@@ -2,10 +2,7 @@ import React, { FC } from 'react';
 import { QuestionComponent } from '@/g - shared/components/question-component';
 import { genderTranslations } from '@/g - shared/utils/translation';
 
-export const GenderQuestion: FC<Props> = ({
-    selectedAnswer,
-    onAnswer,
-}) => {
+export const GenderQuestion: FC<Props> = ({ selectedAnswer, onAnswer }) => {
     const handleAnswer = (answer: string | number | Date) => {
         // Находим английское значение, соответствующее выбранному ответу
         const englishAnswer = Object.keys(genderTranslations).find(

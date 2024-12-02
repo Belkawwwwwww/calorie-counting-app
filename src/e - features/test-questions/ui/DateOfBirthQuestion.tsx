@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useZodInputValidation } from '@/g - shared/hooks';
 import { dataScheme } from '@/d - widgets/test-page';
 
-
 const Block = styled.div`
     display: flex;
     justify-content: center;

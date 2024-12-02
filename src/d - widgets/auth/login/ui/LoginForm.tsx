@@ -4,7 +4,7 @@ import { Button } from '@/g - shared/ui/button';
 import {
     AuthResponseScheme,
     AuthScheme,
-} from '@/f - entities/auth/model/authScheme';
+} from '@/d - widgets/auth/login/model/authScheme';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
 import { useAppDispatch } from '@/g - shared/lib/store';
@@ -24,7 +24,7 @@ import {
     PasswordRecovery,
     StyledLink,
     Text,
-} from './Styles';
+} from '../style/Styles';
 
 export const LoginForm = () => {
     const [authUser, { isLoading }] = useAuthUserMutation();

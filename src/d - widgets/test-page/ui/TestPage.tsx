@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import { z } from 'zod';
-import styled from 'styled-components';
 import { UIFormLayout } from '@/g - shared/ui/layout';
 import {
     ActivityLevelQuestion,
@@ -15,25 +14,9 @@ import { RouteEnum } from '@/g - shared/model';
 import { LoaderTest } from '@/g - shared/ui/loader';
 import { dataScheme } from '../model/createSurvey';
 import { useCreateSurveyMutation, useGetUserDataQuery } from '../api/surveyApi';
-import { NextBtn } from '../component/NextBtn';
+import { NextBtn } from '../component/next-btn/ui/NextBtn';
 import { useSurvey } from '../hooks/useSurvey';
-
-const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    flex-direction: column;
-    position: relative;
-`;
-const Title = styled.h1`
-    font-weight: 200;
-    font-size: 18px;
-`;
-const Questions = styled.div`
-    display: flex;
-    justify-content: center;
-`;
+import { Container, Questions, Title } from '../style';
 
 export const Test: FC = () => {
     const [loading, setLoading] = useState(false);

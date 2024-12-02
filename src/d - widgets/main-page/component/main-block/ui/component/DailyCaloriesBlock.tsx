@@ -3,9 +3,9 @@ import { LoadingIndicator } from '@/g - shared/ui/loader';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-type DailyCaloriesBlockProps ={
+type DailyCaloriesBlockProps = {
     onCaloriesCalculated: (calories: number) => void;
-}
+};
 const MainCont = styled.div`
     display: flex;
     align-items: center;

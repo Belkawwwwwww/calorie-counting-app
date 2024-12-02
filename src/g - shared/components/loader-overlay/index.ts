@@ -1,1 +1,1 @@
-export { MemoizedLoader } from './LoaderOverlay';
+export { MemoizedLoader } from './ui/LoaderOverlay';

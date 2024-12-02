@@ -13,7 +13,7 @@ import {
     Still,
     StyledSummaryBlock,
     TwoBlock,
-} from './Styles';
+} from '../style/Styles';
 
 export const SummaryBlock = () => {
     const [dailyCalories, setDailyCalories] = useState(0);

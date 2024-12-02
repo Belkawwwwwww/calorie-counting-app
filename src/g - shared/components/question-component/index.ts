@@ -1,1 +1,1 @@
-export { QuestionComponent } from './QuestionComponent';
+export { QuestionComponent } from './ui/QuestionComponent';
