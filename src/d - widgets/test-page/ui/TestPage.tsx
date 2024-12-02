@@ -5,7 +5,6 @@ import { UIFormLayout } from '@/g - shared/ui/layout';
 import {
     ActivityLevelQuestion,
     AgeQuestion,
-    DateOfBirthQuestion,
     GenderQuestion,
     GrowthQuestion,
     TargetQuestion,
@@ -14,10 +13,10 @@ import {
 import { useRouter } from 'next/router';
 import { RouteEnum } from '@/g - shared/model';
 import { LoaderTest } from '@/g - shared/ui/loader';
-import { useSurvey } from '@/g - shared/hooks';
 import { dataScheme } from '../model/createSurvey';
 import { useCreateSurveyMutation, useGetUserDataQuery } from '../api/surveyApi';
 import { NextBtn } from '../component/NextBtn';
+import { useSurvey } from '../hooks/useSurvey';
 
 const Container = styled.div`
     display: flex;
