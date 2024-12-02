@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { z } from 'zod';
 import styled from 'styled-components';
 import { UIFormLayout } from '@/g - shared/ui/layout';
@@ -35,7 +35,7 @@ const Questions = styled.div`
     justify-content: center;
 `;
 
-export const Test: React.FC = () => {
+export const Test: FC = () => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { refetch } = useGetUserDataQuery();
