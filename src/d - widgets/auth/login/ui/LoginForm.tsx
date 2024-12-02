@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { RouteEnum } from '@/g - shared/model';
-import Link from 'next/link';
 import { Button } from '@/g - shared/ui/button';
 import {
     AuthResponseScheme,
@@ -19,32 +17,14 @@ import { LoadingInBtn } from '@/g - shared/ui/loader';
 import { InputBox } from '@/g - shared/ui/input';
 import { Error } from '@/g - shared/ui/errorDisplay';
 import { useError } from '@/g - shared/lib/context';
-
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    width: 450px;
-`;
-const Btn = styled.div`
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-`;
-const PasswordRecovery = styled.div`
-    margin-left: 20px;
-    color: #4689e8;
-    cursor: pointer;
-`;
-const Footer = styled.div`
-    display: flex;
-`;
-const StyledLink = styled(Link)`
-    color: #4689e8;
-    text-decoration: none;
-    padding-left: 6px;
-`;
+import {
+    Btn,
+    Container,
+    Footer,
+    PasswordRecovery,
+    StyledLink,
+    Text,
+} from './Styles';
 
 export const LoginForm = () => {
     const [authUser, { isLoading }] = useAuthUserMutation();
@@ -171,7 +151,7 @@ export const LoginForm = () => {
                 </form>
 
                 <Footer>
-                    <div>Еще не зарегистрированы?</div>
+                    <Text>Еще не зарегистрированы?</Text>
                     <StyledLink href={RouteEnum.REGISTRATION}>
                         Регистрация
                     </StyledLink>

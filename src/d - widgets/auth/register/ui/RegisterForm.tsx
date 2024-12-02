@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { useRegisterUserMutation } from '@/g - shared/api/authApi';
 import { Button } from '@/g - shared/ui/button';
 import { RouteEnum } from '@/g - shared/model';
-import Link from 'next/link';
 import {
     RegistrationResponseSchema,
     RegScheme,
@@ -18,29 +16,8 @@ import { InputBox } from '@/g - shared/ui/input';
 import { useError } from '@/g - shared/lib/context';
 import { Error } from '@/g - shared/ui/errorDisplay';
 import { LoadingInBtn } from '@/g - shared/ui/loader';
+import { Btn, Container, Footer, StyledLink } from './Styles';
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-`;
-
-const Btn = styled.div`
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-`;
-
-const Footer = styled.div`
-    margin-left: 10px;
-    display: flex;
-`;
-const StyledLink = styled(Link)`
-    color: #4689e8;
-    text-decoration: none;
-    padding-left: 6px;
-`;
 export const RegisterForm = () => {
     const [registerUser, { isLoading }] = useRegisterUserMutation();
     const [email, setEmail] = useState<string>('');
