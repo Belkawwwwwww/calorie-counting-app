@@ -22,7 +22,7 @@ export const NutritionBlock = () => {
         <StyledNutritionBlock>
             {isModalActive ? (
                 <Modal
-                    title='Поиск'
+                    title='ПОИСК'
                     onClose={handleModalClose}
                     width='600px'
                     height='auto'
@@ -34,7 +34,7 @@ export const NutritionBlock = () => {
                         $variant='primary'
                         type='button'
                     >
-                        Добавить
+                        ДОБАВИТЬ
                     </Button>
                 </Modal>
             ) : null}

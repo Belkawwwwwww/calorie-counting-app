@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { Calendar } from '../component/calendar';
 import { SummaryBlock } from '../component/main-block';
 import { NutritionBlock } from '../component/nutrition';
-import { Button } from '@/g - shared/ui/button';
 import { RouteEnum } from '@/g - shared/model';
 import { useGetUserDataQuery } from '@/d - widgets/test-page/api/surveyApi';
 import { LoaderTest, LoadingIndicator } from '@/g - shared/ui/loader';

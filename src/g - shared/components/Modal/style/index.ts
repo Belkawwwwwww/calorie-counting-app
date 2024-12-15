@@ -19,6 +19,14 @@ export const ModalContent = styled.div<{ width?: string; height?: string }>`
     width: ${(props) => props.width || 'auto'};
     height: ${(props) => props.height || 'auto'};
     position: relative;
+    @media (max-width: 768px) {
+        width: 500px !important;
+        height: auto !important;
+    }
+    @media (max-width: 480px) {
+        width: auto !important;
+        height: auto !important;
+    }
 `;
 
 export const CloseButton = styled.button`

@@ -17,6 +17,9 @@ export const Menu = styled.div`
     border-radius: 0 0 29px 29px;
     width: 100%;
     height: 270px;
+    @media (max-width: 480px) {
+        height: 150px;
+    }
 `;
 export const StyledLink = styled.div`
     display: flex;
@@ -27,12 +30,15 @@ export const PhotoContainer = styled.div`
     position: absolute;
     top: 169px;
     left: 86px;
-    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media (max-width: 768px) {
+        top: 207px;
+        left: 13px;
+    }
     @media (max-width: 480px) {
-        top: 231px;
+        top: 119px;
         left: 13px;
     }
 `;
@@ -74,6 +80,10 @@ export const PhotoWrapper = styled.div`
         );
     border-radius: 50%;
     border: solid 4px white;
+    @media (max-width: 768px) {
+        width: 140px;
+        height: 140px;
+    }
     @media (max-width: 480px) {
         width: 80px;
         height: 80px;
@@ -95,9 +105,18 @@ export const BtnContainer = styled.div`
     display: flex;
     float: right;
     justify-content: center;
-    @media (max-width: 480px) {
-        float: none;
+    flex-direction: column;
+    position: relative;
+    left: 30px;
+    @media (max-width: 768px) {
+        left: 0px;
     }
+    @media (max-width: 480px) {
+        left: 0px;
+    }
+`;
+export const ContainerProfile = styled.div`
+    display: flex;
 `;
 
 export const AboutProfile = styled.div`
@@ -109,7 +128,8 @@ export const AboutProfile = styled.div`
         margin-top: 80px;
     }
     @media (max-width: 480px) {
-        margin-top: 50px;
+        margin-top: 46px;
+        margin-bottom: 7px;
     }
 `;
 export const Username = styled.div`
@@ -123,6 +143,7 @@ export const Username = styled.div`
 export const Main = styled.div`
     display: flex;
     flex-direction: column;
+    width: 100%;
 `;
 export const Btn = styled(Link)`
     margin: 0 auto;
@@ -131,8 +152,9 @@ export const Btn = styled(Link)`
 export const BtnTest = styled(Link)`
     text-decoration: none;
     position: relative;
-    top: 0px;
-    right: -30px;
+    top: -29px;
+    padding-right: 10px;
+    margin-bottom: 10px;
     @media (max-width: 768px) {
         display: flex;
         left: 0;
@@ -140,7 +162,7 @@ export const BtnTest = styled(Link)`
     }
     @media (max-width: 480px) {
         display: flex;
-        left: 92px;
+        left: 18px;
         top: -17px;
     }
 `;
@@ -199,4 +221,11 @@ export const CreatePlanButton = styled(Button)`
         width: 300px;
         height: 40px;
     }
+`;
+
+export const ProfileInfo = styled.div`
+    display: grid;
+`;
+export const Criteria = styled.div`
+    padding-top: 15px;
 `;

@@ -15,18 +15,22 @@ import {
     Btn,
     BtnContainer,
     BtnTest,
+    ContainerProfile,
     CreatePlanButton,
+    Criteria,
     Links,
     Main,
     Menu,
     Photo,
     PhotoContainer,
     PhotoWrapper,
+    ProfileInfo,
     ResponsiveButton,
     StyledLink,
     StyledUserProfile,
     Username,
 } from '../style/Style';
+import { BodyMeasurements } from '../../component/bodyZamer/ui/BodyMeasurements';
 
 export const UserProfile: FC = () => {
     const {
@@ -57,14 +61,16 @@ export const UserProfile: FC = () => {
         userData.data?.data || {};
     const imageUrl = gender === 'FEMALE' ? '/icons_girl.png' : '/icons_boy.png';
     const renderProfileInfo = () => (
-        <div>
-            <p>ПОЛ: {genderTranslations[gender] || gender}</p>
-            <p>ЦЕЛЬ: {goalTranslations[target] || target}</p>
-            <p>ВОЗРАСТ: {age}</p>
-            <p>РОСТ: {growth}</p>
-            <p>ОБРАЗ ЖИЗНИ: {activityTranslations[activity] || activity}</p>
-            <p>ВЕС: {weight}</p>
-        </div>
+        <ProfileInfo>
+            <Criteria>ПОЛ: {genderTranslations[gender] || gender}</Criteria>
+            <Criteria>ЦЕЛЬ: {goalTranslations[target] || target}</Criteria>
+            <Criteria>ВОЗРАСТ: {age}</Criteria>
+            <Criteria>РОСТ: {growth}</Criteria>
+            <Criteria>
+                ОБРАЗ ЖИЗНИ: {activityTranslations[activity] || activity}
+            </Criteria>
+            <Criteria>ВЕС: {weight}</Criteria>
+        </ProfileInfo>
     );
 
     if (response_status !== 0) {
@@ -107,12 +113,15 @@ export const UserProfile: FC = () => {
                             ОБНОВИТЬ ДАННЫЕ
                         </ResponsiveButton>
                     </BtnTest>
+                    <BodyMeasurements />
                 </BtnContainer>
-                <AboutProfile>
-                    <Username>
-                        {first_name} {last_name}
-                    </Username>
-                </AboutProfile>
+                <ContainerProfile>
+                    <AboutProfile>
+                        <Username>
+                            {first_name} {last_name}
+                        </Username>
+                    </AboutProfile>
+                </ContainerProfile>
                 <Main>
                     {userData ? (
                         renderProfileInfo()
