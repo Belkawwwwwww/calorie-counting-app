@@ -1,6 +1,6 @@
-import { useFetchUserSessionQuery } from '@/g - shared/api/authApi';
-import { setAuth } from '@/f - entities/redux/session/modele/action/action';
-import { useAppDispatch } from '@/g - shared/lib/store';
+import { useFetchUserSessionQuery } from '@/g_shared/api/authApi';
+import { setAuth } from '@/f_entities/redux/session/modele/action/action';
+import { useAppDispatch } from '@/g_shared/lib/store';
 import { FC, ReactNode, useLayoutEffect, useState } from 'react';
 
 export const AppWrapper: FC<{ children: ReactNode }> = ({ children }) => {

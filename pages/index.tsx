@@ -1,3 +1,3 @@
-import {HomePage} from "@/c - pages/home-page";
+import { HomePage } from '@/c_pages/home_page';
 
 export default HomePage;

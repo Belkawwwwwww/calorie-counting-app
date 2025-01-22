@@ -1,4 +1,3 @@
-import {LoginPage} from "@/c - pages/login";
+import { LoginPage } from '@/c_pages/login';
 
-
-export default LoginPage
+export default LoginPage;

@@ -1,3 +1,3 @@
-import {TestPage} from "@/c - pages/test-page";
+import { TestPage } from '@/c_pages/test_page';
 
-export default TestPage
+export default TestPage;
