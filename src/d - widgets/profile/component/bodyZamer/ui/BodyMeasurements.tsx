@@ -1,5 +1,13 @@
 import { FC, useState } from 'react';
-import { Container, Plus, ContainerImage, Block, Image } from '../style';
+import {
+    Container,
+    Plus,
+    ContainerImage,
+    Block,
+    Image,
+    ImageBlock,
+    ImageText,
+} from '../style';
 import { useModalOpen } from '@/d - widgets/test-page/hooks/useModalOpen';
 import { Modal } from '@/g - shared/components/modal';
 import { Button } from '@/g - shared/ui/button';
@@ -36,19 +44,25 @@ export const BodyMeasurements: FC = () => {
                     height='auto'
                 >
                     <InputBox
+                        // type='number'
                         label='ВЕС'
                         value={measurements.weight}
                         onChange={(e) => handleChange(e, 'weight')}
+                        placeholder='КГ'
                     />
                     <InputBox
+                        // type='number'
                         label='ОБХВАТ ТАЛИИ'
                         value={measurements.waist}
                         onChange={(e) => handleChange(e, 'waist')}
+                        placeholder='СМ'
                     />
                     <InputBox
+                        // type='number'
                         label='ОБХВАТ БЕДЕР'
                         value={measurements.hips}
                         onChange={(e) => handleChange(e, 'hips')}
+                        placeholder='СМ'
                     />
                     <Button
                         $btnSquareSize='button--square--size-s'
@@ -63,9 +77,18 @@ export const BodyMeasurements: FC = () => {
             <Block>
                 <Plus onClick={handleClick} />
                 <ContainerImage>
-                    <Image src={imageScales}></Image>
-                    <Image src={imageWaist}></Image>
-                    <Image src={imageThighs}></Image>
+                    <ImageBlock>
+                        <Image src={imageScales}></Image>
+                        <ImageText>47 кг</ImageText>
+                    </ImageBlock>
+                    <ImageBlock>
+                        <Image src={imageWaist}></Image>
+                        <ImageText>59 см</ImageText>
+                    </ImageBlock>
+                    <ImageBlock>
+                        <Image src={imageThighs}></Image>
+                        <ImageText>90 см</ImageText>
+                    </ImageBlock>
                 </ContainerImage>
             </Block>
         </Container>

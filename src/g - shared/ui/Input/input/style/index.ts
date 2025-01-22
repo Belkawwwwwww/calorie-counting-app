@@ -8,4 +8,11 @@ export const StyledInput = styled.input`
     font-size: 17px;
     margin-top: 6px;
     margin-bottom: 8px;
+
+    &::placeholder {
+        text-align: right;
+        font-size: 14px;
+        opacity: 0.7;
+        color: var(--color-background1);
+    }
 `;

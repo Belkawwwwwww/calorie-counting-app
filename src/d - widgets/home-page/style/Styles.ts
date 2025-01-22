@@ -66,14 +66,14 @@ type Props = {
 
 export const Img = styled.div<Props>`
     width: 100%;
-    height: 115px;
+    height: 150px;
     background-image: url(${(props) => props.src});
     background-size: cover;
     background-position: center;
 
     @media (max-width: 768px) {
-        width: 100%;
-        height: 156px;
+        width: 727px;
+        height: 400px;
     }
     @media (max-width: 480px) {
         width: 100%;

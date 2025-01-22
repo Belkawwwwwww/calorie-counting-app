@@ -78,3 +78,13 @@ export const Image = styled.div<{ src: string }>`
         margin: 0px 5px 0px 5px;
     }
 `;
+export const ImageBlock = styled.div`
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+`;
+export const ImageText = styled.div`
+    font-size: 12px;
+    opacity: 50%;
+`;
