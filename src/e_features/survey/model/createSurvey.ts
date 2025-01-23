@@ -3,18 +3,6 @@ import { z } from 'zod';
 export const dataScheme = z.object({
     gender: z.enum(['MALE', 'FEMALE']),
     target: z.enum(['LOSE_WEIGHT', 'MAINTAIN_WEIGHT', 'GAIN_WEIGHT']),
-    age: z
-        .number()
-        .int()
-        .refine((val) => val <= 100, {
-            message: 'Возраст не может превышать 100',
-        })
-        .refine((val) => val >= 0, {
-            message: 'Возраст не может быть отрицательным',
-        })
-        .refine((val) => val > 0, {
-            message: 'Введите корректный возраст',
-        }),
     growth: z
         .number()
         .refine((val) => val <= 300, {
@@ -43,6 +31,28 @@ export const dataScheme = z.object({
         })
         .refine((val) => val > 0, {
             message: 'Введите корректный вес',
+        }),
+    waist_girth: z
+        .number()
+        .refine((val) => val <= 500, {
+            message: 'Обхват талии не может превышать 300см',
+        })
+        .refine((val) => val >= 0, {
+            message: 'Обхват талии  не может быть отрицательным',
+        })
+        .refine((val) => val > 0, {
+            message: 'Введите корректные значения',
+        }),
+    hip_girth: z
+        .number()
+        .refine((val) => val <= 500, {
+            message: 'Обхват бедер не может превышать 300см',
+        })
+        .refine((val) => val >= 0, {
+            message: 'Обхват бедер  не может быть отрицательным',
+        })
+        .refine((val) => val > 0, {
+            message: 'Введите корректные значения',
         }),
 });
 

@@ -1,22 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { ApiUrls } from '@/g_shared/model';
 import {
-    RegistrationResponseSchema,
-    RegScheme,
-} from '@/e_features/auth/model/registrationSchema';
-import {
-    AuthResponseScheme,
-    AuthScheme,
-} from '@/e_features/auth/model/authScheme';
-import { ApiUrls } from '../model';
+    AuthInput,
+    AuthResponse,
+    RegistrationInput,
+    RegistrationResponse,
+} from '../type/authTypes';
 
 const authAPI = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ baseUrl: ApiUrls.BASE_URL }),
     endpoints: (build) => ({
-        registerUser: build.mutation<
-            typeof RegistrationResponseSchema._output,
-            typeof RegScheme._input
-        >({
+        registerUser: build.mutation<RegistrationResponse, RegistrationInput>({
             query: (body) => ({
                 url: 'api/v1/user/register',
                 method: 'POST',
@@ -24,10 +19,7 @@ const authAPI = createApi({
                 credentials: 'include',
             }),
         }),
-        authUser: build.mutation<
-            typeof AuthResponseScheme._output,
-            typeof AuthScheme._input
-        >({
+        authUser: build.mutation<AuthResponse, AuthInput>({
             query: (body) => ({
                 url: 'api/v1/user/auth',
                 method: 'POST',
@@ -43,7 +35,7 @@ const authAPI = createApi({
             }),
         }),
 
-        fetchUserSession: build.query<typeof AuthResponseScheme._output, void>({
+        fetchUserSession: build.query<AuthResponse, void>({
             query: () => ({
                 url: 'api/v1/user/profile',
                 method: 'GET',

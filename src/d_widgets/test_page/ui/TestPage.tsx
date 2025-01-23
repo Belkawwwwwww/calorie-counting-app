@@ -3,26 +3,29 @@ import { z } from 'zod';
 import { UIFormLayout } from '@/g_shared/ui/layout';
 import {
     ActivityLevelQuestion,
-    AgeQuestion,
+    DateOfBirthQuestion,
     GenderQuestion,
     GrowthQuestion,
+    HipGirth,
     TargetQuestion,
+    WaistGirth,
     WeightQuestion,
-} from '@/e_features/test_questions';
+} from '@/d_widgets/test_page/component/test_questions';
 import { useRouter } from 'next/router';
 import { RouteEnum } from '@/g_shared/model';
 import { LoaderTest } from '@/g_shared/ui/loader';
-import { dataScheme } from '../model/createSurvey';
-import { useCreateSurveyMutation, useGetUserDataQuery } from '../api/surveyApi';
+import { dataScheme } from '../../../e_features/survey/model/createSurvey';
+import { useGetUserDataQuery } from '../../../e_features/survey/api/surveyApi';
 import { NextBtn } from '../component/next_btn/ui/NextBtn';
 import { useSurvey } from '../hooks/useSurvey';
 import { Container, Questions, Title } from '../style';
+import { useCreateSurvey } from '@/e_features/survey/hooks/surveyHooks';
 
 export const Test: FC = () => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { refetch } = useGetUserDataQuery();
-    const [createSurvey, { isLoading }] = useCreateSurveyMutation();
+    const { createSurvey, isLoading } = useCreateSurvey();
     const {
         currentQuestionIndex,
         currentQuestionAnswered,
@@ -34,14 +37,9 @@ export const Test: FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         // Преобразовываем данные перед валидацией
         const preparedData = {
             ...answers,
-            age:
-                typeof answers.age === 'string'
-                    ? parseInt(answers.age, 10)
-                    : answers.age,
             growth:
                 typeof answers.growth === 'string'
                     ? parseInt(answers.growth, 10)
@@ -56,8 +54,17 @@ export const Test: FC = () => {
                     : answers.birthday
                       ? new Date(answers.birthday)
                       : null,
+            waist_girth:
+                typeof answers.waist_girth === 'string'
+                    ? parseInt(answers.waist_girth, 10)
+                    : answers.waist_girth,
+            hip_girth:
+                typeof answers.hip_girth === 'string'
+                    ? parseInt(answers.hip_girth, 10)
+                    : answers.hip_girth,
         };
 
+        console.log('Подготовленные данные для валидации:', preparedData);
         try {
             const validatedData = dataScheme.parse(preparedData);
             await createSurvey(validatedData);
@@ -100,17 +107,6 @@ export const Test: FC = () => {
             ),
         },
         {
-            key: 'age',
-            title: 'ВВЕДИТЕ ВАШ ВОЗРАСТ',
-            component: (
-                <AgeQuestion
-                    selectedAnswer={answers.age}
-                    onAnswer={(answer) => handleAnswer('age', answer)}
-                    onInputValidation={setCurrentQuestionAnswered}
-                />
-            ),
-        },
-        {
             key: 'growth',
             title: 'ВВЕДИТЕ ВАШ РОСТ',
             component: (
@@ -121,6 +117,18 @@ export const Test: FC = () => {
                 />
             ),
         },
+        {
+            key: 'birthday',
+            title: 'ДАТА РОЖДЕНИЯ',
+            component: (
+                <DateOfBirthQuestion
+                    selectedAnswer={answers.birthday}
+                    onAnswer={(answer) => handleAnswer('birthday', answer)}
+                    onInputValidation={setCurrentQuestionAnswered}
+                />
+            ),
+        },
+
         {
             key: 'activity',
             title: 'КАКОЙ У ВАС ОБРАЗ ЖИЗНИ?',
@@ -142,6 +150,28 @@ export const Test: FC = () => {
                 />
             ),
         },
+        {
+            key: 'waist_girth',
+            title: 'ОБХВАТ ТАЛИИ',
+            component: (
+                <WaistGirth
+                    selectedAnswer={answers.waist_girth}
+                    onAnswer={(answer) => handleAnswer('waist_girth', answer)}
+                    onInputValidation={setCurrentQuestionAnswered}
+                />
+            ),
+        },
+        {
+            key: 'hip_girth',
+            title: 'ОБХВАТ БЕДЕР',
+            component: (
+                <HipGirth
+                    selectedAnswer={answers.hip_girth}
+                    onAnswer={(answer) => handleAnswer('hip_girth', answer)}
+                    onInputValidation={setCurrentQuestionAnswered}
+                />
+            ),
+        },
     ];
 
     return (
@@ -154,7 +184,7 @@ export const Test: FC = () => {
                     <Questions>
                         <form onSubmit={handleSubmit}>
                             {questions.map((question, index) => (
-                                <div key={question.title}>
+                                <div key={question.key}>
                                     {index === currentQuestionIndex ? (
                                         <UIFormLayout
                                             key={question.title}

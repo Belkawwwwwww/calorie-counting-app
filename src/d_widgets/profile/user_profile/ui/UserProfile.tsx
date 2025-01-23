@@ -1,5 +1,3 @@
-import { useGetUserDataQuery } from '@/d_widgets/test_page/api/surveyApi';
-import { useFetchUserSessionQuery } from '@/g_shared/api/authApi';
 import { RouteEnum } from '@/g_shared/model';
 import { Layout } from '@/g_shared/ui/layout';
 import { LoadingIndicator } from '@/g_shared/ui/loader';
@@ -15,12 +13,14 @@ import {
     Btn,
     BtnContainer,
     BtnTest,
+    CalculatorLink,
     ContainerProfile,
     CreatePlanButton,
     Criteria,
     Links,
     Main,
     Menu,
+    NavigationWrapper,
     Photo,
     PhotoContainer,
     PhotoWrapper,
@@ -31,14 +31,17 @@ import {
     Username,
 } from '../style';
 import { BodyMeasurements } from '../../component/body_zamer/ui/BodyMeasurements';
+import { useFetchUser } from '@/e_features/auth/hooks/authHooks';
+import { useGetUserSurvey } from '@/e_features/survey/hooks/surveyHooks';
+import { LogoutBtn } from '@/e_features/auth/components/logout_btn/Logout';
 
 export const UserProfile: FC = () => {
     const {
         data: userData,
         isLoading,
         refetch: refetchUserData,
-    } = useGetUserDataQuery();
-    const { data: userSessionData, isSuccess } = useFetchUserSessionQuery();
+    } = useGetUserSurvey();
+    const { data: userSessionData, isSuccess } = useFetchUser();
 
     useEffect(() => {
         if (isSuccess && userSessionData) {
@@ -57,14 +60,14 @@ export const UserProfile: FC = () => {
     const { response_status } = userData;
     const first_name = userSessionData?.data?.first_name;
     const last_name = userSessionData?.data?.last_name;
-    const { gender, target, age, growth, activity, weight } =
+    const { gender, target, growth, activity, weight } =
         userData.data?.data || {};
     const imageUrl = gender === 'FEMALE' ? '/icons_girl.png' : '/icons_boy.png';
     const renderProfileInfo = () => (
         <ProfileInfo>
             <Criteria>ПОЛ: {genderTranslations[gender] || gender}</Criteria>
             <Criteria>ЦЕЛЬ: {goalTranslations[target] || target}</Criteria>
-            <Criteria>ВОЗРАСТ: {age}</Criteria>
+            {/* <Criteria>ВОЗРАСТ: {age}</Criteria> */}
             <Criteria>РОСТ: {growth}</Criteria>
             <Criteria>
                 ОБРАЗ ЖИЗНИ: {activityTranslations[activity] || activity}
@@ -91,8 +94,13 @@ export const UserProfile: FC = () => {
             <Menu>
                 <Layout>
                     <StyledLink>
-                        <Links href={RouteEnum.MAIN}>КАЛЬКУЛЯТОР</Links>
-                        <Links href={RouteEnum.HOME}>HOME</Links>
+                        <CalculatorLink>
+                            <Links href={RouteEnum.MAIN}>КАЛЬКУЛЯТОР</Links>
+                        </CalculatorLink>
+                        <NavigationWrapper>
+                            <Links href={RouteEnum.HOME}>HOME</Links>|
+                            <LogoutBtn />
+                        </NavigationWrapper>
                     </StyledLink>
                 </Layout>
             </Menu>

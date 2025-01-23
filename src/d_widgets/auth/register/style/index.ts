@@ -6,6 +6,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     position: relative;
+    width: 400px;
 `;
 
 export const Btn = styled.div`

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useRegisterUserMutation } from '@/g_shared/api/authApi';
 import { Button } from '@/g_shared/ui/button';
 import { RouteEnum } from '@/g_shared/model';
 import {
     RegistrationResponseSchema,
     RegScheme,
-} from '@/d_widgets/auth/register/model/registrationSchema';
+} from '@/e_features/auth/model/registrationSchema';
 import { z } from 'zod';
 import { useAppDispatch } from '@/g_shared/lib/store';
 import { setAuth } from '@/f_entities/redux/session/modele/action/action';
@@ -17,9 +16,10 @@ import { useError } from '@/g_shared/lib/context';
 import { Error } from '@/g_shared/ui/errorDisplay';
 import { LoadingInBtn } from '@/g_shared/ui/loader';
 import { Btn, Container, Footer, StyledLink } from '../style';
+import { useRegister } from '@/e_features/auth/hooks/authHooks';
 
 export const RegisterForm = () => {
-    const [registerUser, { isLoading }] = useRegisterUserMutation();
+    const { register, isLoading } = useRegister();
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -52,7 +52,7 @@ export const RegisterForm = () => {
             });
             setError('');
             const validatedData = RegScheme.parse(formData); // Валидация входных данных с помощью RegScheme
-            const response = await registerUser(validatedData).unwrap();
+            const response = await register(validatedData).unwrap();
             if (response.response_status === 0) {
                 const validatedResponse =
                     RegistrationResponseSchema.parse(response);
@@ -60,7 +60,7 @@ export const RegisterForm = () => {
                 if (validatedResponse) {
                     dispatch(setAuth(true));
                     dispatch(setUser({ user_id: backendUser_id }));
-                    console.log(registerUser);
+                    console.log(register);
                     console.log('Регистрация успешна');
                 }
             } else {
@@ -162,7 +162,7 @@ export const RegisterForm = () => {
                         <Button
                             $variant='primary'
                             $btnWidth='m'
-                            $btnSquareSize='button--square--size-l'
+                            $btnSquareSize='button--square--size-m'
                             type='submit'
                         >
                             {isLoading ? (

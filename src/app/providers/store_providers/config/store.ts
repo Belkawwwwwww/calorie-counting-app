@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from '@/app/providers/store_providers/config/rootReducer';
-import authAPI from '@/g_shared/api/authApi';
-import surveyAPI from '@/d_widgets/test_page/api/surveyApi';
+import surveyAPI from '@/e_features/survey/api/surveyApi';
+import authAPI from '@/e_features/auth/api/authApi';
+import bzuAPI from '@/e_features/bzu/api/bzuApi';
 
 export const setupStore = () => {
     return configureStore({
@@ -9,7 +10,8 @@ export const setupStore = () => {
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware().concat(
                 authAPI.middleware,
-                surveyAPI.middleware
+                surveyAPI.middleware,
+                bzuAPI.middleware
             ),
     });
 };

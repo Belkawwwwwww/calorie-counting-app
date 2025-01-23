@@ -26,6 +26,16 @@ export const StyledLink = styled.div`
     padding-top: 30px;
     justify-content: space-between;
 `;
+export const CalculatorLink = styled.div`
+    flex: 1;
+    text-align: left;
+`;
+export const NavigationWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+`;
 export const PhotoContainer = styled.div`
     position: absolute;
     top: 169px;
@@ -207,6 +217,7 @@ export const ResponsiveButton = styled(Button)`
 `;
 export const CreatePlanButton = styled(Button)`
     background-color: #89ac76;
+    width: 400px;
 
     @media (max-width: 768px) {
         padding: 10px 20px;

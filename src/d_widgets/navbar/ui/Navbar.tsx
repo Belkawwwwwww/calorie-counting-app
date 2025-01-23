@@ -4,7 +4,12 @@ import { FC } from 'react';
 import { RouteEnum } from '@/g_shared/model';
 import { useRouter } from 'next/router';
 import { LogoutBtn } from '@/e_features/auth/components/logout_btn/Logout';
-import { Header, LinksContainer, StyledLinks } from '../style';
+import {
+    Header,
+    LinksContainer,
+    NavigationWrapper,
+    StyledLinks,
+} from '../style';
 
 export const Navbar: FC<{ hideOnPages?: string[] }> = ({
     hideOnPages = [],
@@ -22,12 +27,12 @@ export const Navbar: FC<{ hideOnPages?: string[] }> = ({
                 {!isAuth ? (
                     <StyledLinks href={RouteEnum.LOGIN}>ВХОД</StyledLinks>
                 ) : (
-                    <>
+                    <NavigationWrapper>
                         <StyledLinks href={RouteEnum.PROFILE}>
                             ПРОФИЛЬ
                         </StyledLinks>
                         |<LogoutBtn />
-                    </>
+                    </NavigationWrapper>
                 )}
             </LinksContainer>
         </Header>

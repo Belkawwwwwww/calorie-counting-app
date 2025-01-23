@@ -8,8 +8,14 @@ const Block = styled.div`
     justify-content: center;
 `;
 const Select = styled.select`
-    width: 100px;
+    width: 133px;
     height: 40px;
+    @media (max-width: 780px) {
+        width: 130px;
+    }
+    @media (max-width: 480px) {
+        width: 100px;
+    }
 `;
 
 export const DateOfBirthQuestion: FC<Props> = ({ onAnswer }) => {

@@ -13,17 +13,23 @@ export const AppWrapper: FC<{ children: ReactNode }> = ({ children }) => {
     useLayoutEffect(() => {
         try {
             if (!isLoading && !error && data) {
-                const sessionId = sessionStorage.getItem('session_id');
-                const userId = data.data.id;
+                const sessionId = sessionStorage.getItem('session_id'); // sessionId string | null
+
                 if (userId) {
-                    if (sessionId !== userId) {
+                    // Преобразование sessionId в число, если он не null
+                    const sessionIdNumber = sessionId
+                        ? Number(sessionId)
+                        : null;
+
+                    if (sessionIdNumber !== userId) {
                         return;
                     }
+
                     if (data.response_status === 0) {
                         dispatch(setAuth(true));
                     }
                 } else {
-                    console.log('response status ne ok');
+                    console.log('response status не ok');
                 }
             }
             setIsSessionChecked(true);

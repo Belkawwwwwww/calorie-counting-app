@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { dataScheme } from '../model/createSurvey';
+import { dataScheme } from '../../../e_features/survey/model/createSurvey';
 import { State } from './type';
 import { Action } from './action';
 
@@ -10,7 +10,12 @@ const reducer = (state: State, action: Action): State => {
             const newAnswers = { ...state.answers, [key]: value };
             let newQuestionAnswered = false;
 
-            if (key === 'age' || key === 'growth' || key === 'weight') {
+            if (
+                key === 'growth' ||
+                key === 'weight' ||
+                key === 'waist_girth' ||
+                key === 'hip_girth'
+            ) {
                 try {
                     // Валидация данных
                     dataScheme.parse(newAnswers);

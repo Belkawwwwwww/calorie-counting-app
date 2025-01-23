@@ -3,7 +3,6 @@ import { Calendar } from '../component/calendar';
 import { SummaryBlock } from '../component/main_block';
 import { NutritionBlock } from '../component/nutrition';
 import { RouteEnum } from '@/g_shared/model';
-import { useGetUserDataQuery } from '@/d_widgets/test_page/api/surveyApi';
 import { LoaderTest, LoadingIndicator } from '@/g_shared/ui/loader';
 import {
     Btn,
@@ -14,9 +13,10 @@ import {
     ResponsiveButton,
     Text,
 } from '../style';
+import { useGetUserSurvey } from '@/e_features/survey/hooks/surveyHooks';
 
 export const Main: FC = () => {
-    const { data: userData, isLoading } = useGetUserDataQuery();
+    const { data: userData, isLoading } = useGetUserSurvey();
 
     if (isLoading) {
         return <LoadingIndicator />;

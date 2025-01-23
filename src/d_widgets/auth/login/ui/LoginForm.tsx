@@ -4,14 +4,13 @@ import { Button } from '@/g_shared/ui/button';
 import {
     AuthResponseScheme,
     AuthScheme,
-} from '@/d_widgets/auth/login/model/authScheme';
+} from '@/e_features/auth/model/authScheme';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
 import { useAppDispatch } from '@/g_shared/lib/store';
 import { setAuth } from '@/f_entities/redux/session/modele/action/action';
 import { setUser } from '@/f_entities/redux/user/model/action/action';
 import { OpenRoute } from '@/c_pages/router_providers';
-import { useAuthUserMutation } from '@/g_shared/api/authApi';
 import { useZodInputValidation } from '@/g_shared/hooks';
 import { LoadingInBtn } from '@/g_shared/ui/loader';
 import { InputBox } from '@/g_shared/ui/input';
@@ -25,9 +24,10 @@ import {
     StyledLink,
     Text,
 } from '../style';
+import { useAuth } from '@/e_features/auth/hooks/authHooks';
 
 export const LoginForm = () => {
-    const [authUser, { isLoading }] = useAuthUserMutation();
+    const { auth, isLoading } = useAuth();
     const { inputValue: email, handleInputChange: handleEmailChange } =
         useZodInputValidation(AuthScheme.shape.username);
     const { inputValue: password, handleInputChange: handlePasswordChange } =
@@ -53,8 +53,8 @@ export const LoginForm = () => {
             });
             setError('');
             const validatedData = AuthScheme.parse(formData);
-            if (authUser) {
-                const response = await authUser(validatedData).unwrap();
+            if (auth) {
+                const response = await auth(validatedData).unwrap();
                 if (response?.response_status === 0) {
                     const validatedResponse =
                         AuthResponseScheme.parse(response);

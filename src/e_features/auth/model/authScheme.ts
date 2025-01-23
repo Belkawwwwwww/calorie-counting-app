@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const AuthResponseScheme = z.object({
     response_status: z.number(),
     data: z.object({
-        id: z.string(),
+        id: z.number(),
         created_at: z.string().datetime(),
         updated_at: z.string().datetime(),
         deleted_at: z.nullable(z.string().datetime()),

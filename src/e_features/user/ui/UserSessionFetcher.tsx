@@ -1,13 +1,14 @@
-import { useFetchUserSessionQuery } from '@/g_shared/api/authApi';
 import { setAuth } from '@/f_entities/redux/session/modele/action/action';
 import { setPending } from '@/f_entities/redux/pending/modele/action/action';
 import { useAppDispatch } from '@/g_shared/lib/store';
 import React, { useEffect, useRef } from 'react';
 import { setUser } from '@/f_entities/redux/user/model/action/action';
+import { useFetchUser } from '../../auth/hooks/authHooks';
 
 const UserSessionLoader: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { data, isSuccess, isError, isLoading } = useFetchUserSessionQuery();
+    const { data, isSuccess, isError, isLoading } = useFetchUser();
+
     const prevData = useRef<typeof data | null>(null);
 
     useEffect(() => {
@@ -17,6 +18,8 @@ const UserSessionLoader: React.FC = () => {
             } else if (isSuccess) {
                 dispatch(setPending(false));
                 if (data?.response_status === 0) {
+                    // dispatch(setAuth(true));
+                    // dispatch(setUser(data.data.id));
                     if (
                         prevData.current === null ||
                         JSON.stringify(prevData.current) !==

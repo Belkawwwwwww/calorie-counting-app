@@ -14,7 +14,12 @@ export const Options = styled.div`
     justify-content: center;
     gap: 20px;
     margin-bottom: 20px;
-    flex-wrap: wrap;
+    @media (max-width: 780px) {
+        flex-wrap: wrap;
+    }
+    @media (max-width: 480px) {
+        flex-wrap: wrap;
+    }
 `;
 
 export const Option = styled.div<{ isSelected: boolean }>`
@@ -45,4 +50,8 @@ export const Option = styled.div<{ isSelected: boolean }>`
         height: 60px;
         font-size: 12px;
     }
+`;
+
+export const Container = styled.div`
+    /* width: 400px; */
 `;

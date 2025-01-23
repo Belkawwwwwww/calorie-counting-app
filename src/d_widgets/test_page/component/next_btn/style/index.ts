@@ -2,9 +2,8 @@ import { Button } from '@/g_shared/ui/button';
 import styled from 'styled-components';
 
 export const ResponsiveButton = styled(Button)`
-    width: auto;
+    width: 320px;
     background-color: #89ac76;
-    $btnWidth: 'l';
     $btnSquareSize: 'button--square--size-l';
 
     @media (max-width: 768px) {

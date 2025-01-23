@@ -1,24 +1,27 @@
-import { useAppDispatch } from '@/g_shared/lib/store';
 import { FC } from 'react';
-import { logout } from '@/f_entities/redux/session/modele/slice/session';
 import styled from 'styled-components';
+import { useAppDispatch } from '@/g_shared/lib/store';
+import { setAuth } from '@/f_entities/redux/session/modele/slice/session';
+import { setUser } from '@/f_entities/redux/user/model/action/action';
+import { useLogout } from '../../hooks/authHooks';
 
 const Container = styled.button`
     border: none;
-    background-color: white;
+    background-color: transparent;
     cursor: pointer;
 `;
 
 export const LogoutBtn: FC = () => {
+    const { logout } = useLogout();
     const dispatch = useAppDispatch();
-    // console.log('Кука до удаления:', Cookies.get('session_id'));
-    const handleLogout = () => {
-        // const sessionId = Cookies.get('session_id');
-        // if (sessionId) {
-        //     Cookies.remove('session_id', { Path: '/' });
-        // }
-
-        dispatch(logout());
+    const handleLogout = async () => {
+        try {
+            await logout().unwrap();
+            dispatch(setAuth(false));
+            dispatch(setUser(null));
+        } catch (error) {
+            console.log('Ошибка при выходе:', error);
+        }
     };
     return <Container onClick={handleLogout}>ВЫХОД</Container>;
 };

@@ -38,3 +38,9 @@ export const StyledLinks = styled(Link)`
     text-decoration: none;
     margin-left: 20px;
 `;
+export const NavigationWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+`;

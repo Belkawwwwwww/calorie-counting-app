@@ -12,8 +12,14 @@ import { useModalOpen } from '@/d_widgets/test_page/hooks/useModalOpen';
 import { Modal } from '@/g_shared/components/modal';
 import { Button } from '@/g_shared/ui/button';
 import { InputBox } from '@/g_shared/ui/input';
+import { useGetUserSurvey } from '@/e_features/survey/hooks/surveyHooks';
 
 export const BodyMeasurements: FC = () => {
+    const {
+        data: userData,
+        isLoading,
+        refetch: refetchUserData,
+    } = useGetUserSurvey();
     const [measurements, setMeasurements] = useState({
         weight: '',
         waist: '',
@@ -44,21 +50,21 @@ export const BodyMeasurements: FC = () => {
                     height='auto'
                 >
                     <InputBox
-                        // type='number'
+                        type='number'
                         label='ВЕС'
                         value={measurements.weight}
                         onChange={(e) => handleChange(e, 'weight')}
                         placeholder='КГ'
                     />
                     <InputBox
-                        // type='number'
+                        type='number'
                         label='ОБХВАТ ТАЛИИ'
                         value={measurements.waist}
                         onChange={(e) => handleChange(e, 'waist')}
                         placeholder='СМ'
                     />
                     <InputBox
-                        // type='number'
+                        type='number'
                         label='ОБХВАТ БЕДЕР'
                         value={measurements.hips}
                         onChange={(e) => handleChange(e, 'hips')}
@@ -79,15 +85,19 @@ export const BodyMeasurements: FC = () => {
                 <ContainerImage>
                     <ImageBlock>
                         <Image src={imageScales}></Image>
-                        <ImageText>47 кг</ImageText>
+                        <ImageText>{userData?.data.data.weight} кг</ImageText>
                     </ImageBlock>
                     <ImageBlock>
                         <Image src={imageWaist}></Image>
-                        <ImageText>59 см</ImageText>
+                        <ImageText>
+                            {userData?.data.data.waist_girth} см
+                        </ImageText>
                     </ImageBlock>
                     <ImageBlock>
                         <Image src={imageThighs}></Image>
-                        <ImageText>90 см</ImageText>
+                        <ImageText>
+                            {userData?.data.data.hip_girth} см
+                        </ImageText>
                     </ImageBlock>
                 </ContainerImage>
             </Block>

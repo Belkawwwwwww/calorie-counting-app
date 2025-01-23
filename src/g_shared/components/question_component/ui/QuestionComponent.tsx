@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { InputBox } from '@/g_shared/ui/input';
 import { z } from 'zod';
 import { Props } from '../type';
-import { Option, Options, Title } from '../style';
+import { Container, Option, Options, Title } from '../style';
 
 export const QuestionComponent: FC<Props> = (props) => {
     const [validationError, setValidationError] = useState<string>('');
@@ -28,7 +28,7 @@ export const QuestionComponent: FC<Props> = (props) => {
     };
 
     return (
-        <>
+        <Container>
             <Title>{props.title}</Title>
             {props.options ? (
                 <Options>
@@ -52,6 +52,6 @@ export const QuestionComponent: FC<Props> = (props) => {
                     onChange={(event) => handleInputChange(event.target.value)}
                 />
             )}
-        </>
+        </Container>
     );
 };

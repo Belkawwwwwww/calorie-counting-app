@@ -2,8 +2,9 @@ import { combineReducers } from 'redux';
 import { userSlice } from '@/f_entities/redux/user';
 import { sessionSlice } from '@/f_entities/redux/session/modele/slice/session';
 import { pendingSlice } from '@/f_entities/redux/pending/modele/slice/isPending';
-import authAPI from '@/g_shared/api/authApi';
-import surveyAPI from '@/d_widgets/test_page/api/surveyApi';
+import surveyAPI from '@/e_features/survey/api/surveyApi';
+import authAPI from '@/e_features/auth/api/authApi';
+import bzuAPI from '@/e_features/bzu/api/bzuApi';
 
 export const rootReducer = combineReducers({
     [pendingSlice.name]: pendingSlice.reducer,
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
     [userSlice.name]: userSlice.reducer,
     [authAPI.reducerPath]: authAPI.reducer,
     [surveyAPI.reducerPath]: surveyAPI.reducer,
+    [bzuAPI.reducerPath]: bzuAPI.reducer,
 });
