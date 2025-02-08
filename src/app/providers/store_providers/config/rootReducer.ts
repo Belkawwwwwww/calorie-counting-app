@@ -5,6 +5,7 @@ import { pendingSlice } from '@/f_entities/redux/pending/modele/slice/isPending'
 import surveyAPI from '@/e_features/survey/api/surveyApi';
 import authAPI from '@/e_features/auth/api/authApi';
 import bzuAPI from '@/e_features/bzu/api/bzuApi';
+import foodAPI from '@/e_features/food/api/foodApi';
 
 export const rootReducer = combineReducers({
     [pendingSlice.name]: pendingSlice.reducer,
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
     [authAPI.reducerPath]: authAPI.reducer,
     [surveyAPI.reducerPath]: surveyAPI.reducer,
     [bzuAPI.reducerPath]: bzuAPI.reducer,
+    [foodAPI.reducerPath]: foodAPI.reducer,
 });

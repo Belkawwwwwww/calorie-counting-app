@@ -8,17 +8,17 @@ const Block = styled.div`
     justify-content: center;
 `;
 const Select = styled.select`
-    width: 133px;
+    width: 120px;
     height: 40px;
     @media (max-width: 780px) {
-        width: 130px;
+        width: 120px;
     }
     @media (max-width: 480px) {
         width: 100px;
     }
 `;
 
-export const DateOfBirthQuestion: FC<Props> = ({ onAnswer }) => {
+export const DateOfBirthQuestion: FC<Props> = (props) => {
     const { handleInputChange } = useZodInputValidation(
         dataScheme.shape.birthday
     );
@@ -59,7 +59,7 @@ export const DateOfBirthQuestion: FC<Props> = ({ onAnswer }) => {
             handleInputChange({
                 target: { value: birthdayDate.toISOString() },
             } as React.ChangeEvent<HTMLInputElement>);
-            onAnswer(birthdayDate.toISOString()); // Передача даты в формате ISO
+            props.onAnswer(birthdayDate.toISOString()); // Передача даты в формате ISO
         }
     };
     // Обновляем состояние при каждом изменении селекторов

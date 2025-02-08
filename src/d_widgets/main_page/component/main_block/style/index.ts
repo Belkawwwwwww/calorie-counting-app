@@ -8,6 +8,7 @@ export const StyledSummaryBlock = styled.div`
     height: 270px;
     margin: 0 auto;
     color: white;
+    padding-bottom: 10px;
 
     @media (max-width: 768px) {
         height: auto;
@@ -23,12 +24,6 @@ export const FirstBlock = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
-`;
-export const Circle = styled.div`
-    border: #f0f0f0 solid 5px;
-    border-radius: 50%;
-    padding: 13px 20px;
-    text-align: center;
 `;
 export const Calories = styled.div`
     display: flex;
@@ -69,11 +64,13 @@ export const Norm = styled.div`
     justify-content: center;
     text-align: center;
 `;
-export const Consumed = styled.div``;
-export const Still = styled.div`
-    font-size: 11px;
+export const Consumed = styled.div`
     opacity: 50%;
+    @media (max-width: 480px) {
+        font-size: 10px;
+    }
 `;
+
 export const Purpose = styled.div`
     font-size: 15px;
     opacity: 50%;

@@ -11,7 +11,7 @@ const surveyAPI = createApi({
                 url: 'api/v1/user/survey',
                 method: 'POST',
                 body,
-                providesTags: ['User'],
+                // providesTags: ['User'],
                 credentials: 'include',
             }),
         }),
@@ -19,24 +19,12 @@ const surveyAPI = createApi({
             query: () => ({
                 url: 'api/v1/user/survey',
                 method: 'GET',
-                providesTags: ['User'],
-                credentials: 'include',
-            }),
-        }),
-        getUserData: build.query<SurveyResponse, void>({
-            query: () => ({
-                url: 'api/v1/user/survey',
-                method: 'GET',
-                providesTags: ['User'],
+                // providesTags: ['User'],
                 credentials: 'include',
             }),
         }),
     }),
 });
 
-export const {
-    useCreateSurveyMutation,
-    useGetSurveyQuery,
-    useGetUserDataQuery,
-} = surveyAPI;
+export const { useCreateSurveyMutation, useGetSurveyQuery } = surveyAPI;
 export default surveyAPI;

@@ -59,7 +59,7 @@ export const dataScheme = z.object({
 export const CreateSurveyResponseSchema = z.object({
     response_status: z.number(),
     data: z.object({
-        id: z.string(),
+        id: z.number(),
         user_id: z.string(),
         created_at: z.string().datetime(),
         updated_at: z.string().datetime(),

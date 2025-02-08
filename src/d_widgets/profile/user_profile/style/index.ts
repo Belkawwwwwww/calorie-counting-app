@@ -24,11 +24,7 @@ export const Menu = styled.div`
 export const StyledLink = styled.div`
     display: flex;
     padding-top: 30px;
-    justify-content: space-between;
-`;
-export const CalculatorLink = styled.div`
-    flex: 1;
-    text-align: left;
+    justify-content: end;
 `;
 export const NavigationWrapper = styled.div`
     display: flex;

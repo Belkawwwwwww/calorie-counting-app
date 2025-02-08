@@ -13,7 +13,6 @@ import {
     Btn,
     BtnContainer,
     BtnTest,
-    CalculatorLink,
     ContainerProfile,
     CreatePlanButton,
     Criteria,
@@ -34,15 +33,22 @@ import { BodyMeasurements } from '../../component/body_zamer/ui/BodyMeasurements
 import { useFetchUser } from '@/e_features/auth/hooks/authHooks';
 import { useGetUserSurvey } from '@/e_features/survey/hooks/surveyHooks';
 import { LogoutBtn } from '@/e_features/auth/components/logout_btn/Logout';
+import { useAppSelector } from '@/g_shared/lib/store';
+import { isPendingSelector } from '@/f_entities/redux/pending';
 
 export const UserProfile: FC = () => {
+    const pending = useAppSelector(isPendingSelector);
+    const { data: userSessionData } = useFetchUser();
     const {
         data: userData,
         isLoading,
         refetch: refetchUserData,
+        isSuccess,
     } = useGetUserSurvey();
-    const { data: userSessionData, isSuccess } = useFetchUser();
+    console.log(isSuccess);
+    console.log(pending);
 
+    console.log('fetchuset', userSessionData);
     useEffect(() => {
         if (isSuccess && userSessionData) {
             // Вызываем рефетч данных пользователя когда сессия успешна
@@ -50,7 +56,7 @@ export const UserProfile: FC = () => {
         }
     }, [isSuccess, userSessionData]);
 
-    if (isLoading) {
+    if (isLoading && !userData && pending) {
         return <LoadingIndicator />;
     }
     if (!userData) {
@@ -94,10 +100,8 @@ export const UserProfile: FC = () => {
             <Menu>
                 <Layout>
                     <StyledLink>
-                        <CalculatorLink>
-                            <Links href={RouteEnum.MAIN}>КАЛЬКУЛЯТОР</Links>
-                        </CalculatorLink>
                         <NavigationWrapper>
+                            <Links href={RouteEnum.MAIN}>КАЛЬКУЛЯТОР</Links>|
                             <Links href={RouteEnum.HOME}>HOME</Links>|
                             <LogoutBtn />
                         </NavigationWrapper>

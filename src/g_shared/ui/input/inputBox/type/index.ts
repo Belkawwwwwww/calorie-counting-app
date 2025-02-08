@@ -4,4 +4,5 @@ export type InputBoxProps = {
     label?: string;
     error?: string;
     direction?: 'column' | 'row';
+    style?: React.CSSProperties;
 } & Props;

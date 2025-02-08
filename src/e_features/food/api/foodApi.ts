@@ -1,23 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ApiUrls } from '@/g_shared/model';
-import { BzuResponse } from '../type/bzuTypes';
-import { GetBzuResponseSchema } from '../model/getBzu';
+import { FoodResponse } from '../type/foodTypes';
+import { FoodResponseSchema } from '../model/getUserMeal';
 
-const bzuAPI = createApi({
-    reducerPath: 'bzuAPI',
+const foodAPI = createApi({
+    reducerPath: 'foodAPI',
     baseQuery: fetchBaseQuery({ baseUrl: ApiUrls.BASE_URL }),
     endpoints: (build) => ({
-        getBzu: build.query<BzuResponse, string>({
+        getUserMeal: build.query<FoodResponse, string>({
             query: (date) => ({
-                url: `api/v1/user/bzu?date=${date}`,
+                url: `api/v1/user/meal?date=${date}`,
                 method: 'GET',
                 credentials: 'include',
             }),
             transformResponse: (response: unknown) => {
-                // Парсим ответ через Zod
-                const parsedResponse = GetBzuResponseSchema.parse(response);
-
-                // Возвращаем полный объект согласно структуре ответа
+                const parsedResponse = FoodResponseSchema.parse(response);
                 return {
                     response_status: parsedResponse.response_status,
                     data: parsedResponse.data,
@@ -28,5 +25,5 @@ const bzuAPI = createApi({
     }),
 });
 
-export const { useGetBzuQuery } = bzuAPI;
-export default bzuAPI;
+export const { useGetUserMealQuery } = foodAPI;
+export default foodAPI;

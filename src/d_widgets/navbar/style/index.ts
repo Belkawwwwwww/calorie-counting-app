@@ -36,7 +36,6 @@ export const LinksContainer = styled.div`
 export const StyledLinks = styled(Link)`
     color: black;
     text-decoration: none;
-    margin-left: 20px;
 `;
 export const NavigationWrapper = styled.div`
     display: flex;

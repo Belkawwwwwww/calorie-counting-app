@@ -50,6 +50,7 @@ export const QuestionComponent: FC<Props> = (props) => {
                     error={props.inputError || validationError}
                     value={props.inputValue}
                     onChange={(event) => handleInputChange(event.target.value)}
+                    style={{ width: '320px' }}
                 />
             )}
         </Container>

@@ -28,6 +28,10 @@ export const Navbar: FC<{ hideOnPages?: string[] }> = ({
                     <StyledLinks href={RouteEnum.LOGIN}>ВХОД</StyledLinks>
                 ) : (
                     <NavigationWrapper>
+                        <StyledLinks href={RouteEnum.MAIN}>
+                            КАЛЬКУЛЯТОР
+                        </StyledLinks>
+                        |
                         <StyledLinks href={RouteEnum.PROFILE}>
                             ПРОФИЛЬ
                         </StyledLinks>

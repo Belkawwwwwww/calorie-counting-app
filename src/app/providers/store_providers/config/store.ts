@@ -3,6 +3,7 @@ import { rootReducer } from '@/app/providers/store_providers/config/rootReducer'
 import surveyAPI from '@/e_features/survey/api/surveyApi';
 import authAPI from '@/e_features/auth/api/authApi';
 import bzuAPI from '@/e_features/bzu/api/bzuApi';
+import foodAPI from '@/e_features/food/api/foodApi';
 
 export const setupStore = () => {
     return configureStore({
@@ -11,7 +12,8 @@ export const setupStore = () => {
             getDefaultMiddleware().concat(
                 authAPI.middleware,
                 surveyAPI.middleware,
-                bzuAPI.middleware
+                bzuAPI.middleware,
+                foodAPI.middleware
             ),
     });
 };

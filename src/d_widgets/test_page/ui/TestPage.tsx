@@ -15,16 +15,18 @@ import { useRouter } from 'next/router';
 import { RouteEnum } from '@/g_shared/model';
 import { LoaderTest } from '@/g_shared/ui/loader';
 import { dataScheme } from '../../../e_features/survey/model/createSurvey';
-import { useGetUserDataQuery } from '../../../e_features/survey/api/surveyApi';
+
 import { NextBtn } from '../component/next_btn/ui/NextBtn';
 import { useSurvey } from '../hooks/useSurvey';
 import { Container, Questions, Title } from '../style';
 import { useCreateSurvey } from '@/e_features/survey/hooks/surveyHooks';
+import { useGetSurveyQuery } from '@/e_features/survey/api/surveyApi';
 
 export const Test: FC = () => {
+    console.log('jn');
     const [loading, setLoading] = useState(false);
     const router = useRouter();
-    const { refetch } = useGetUserDataQuery();
+    // const { refetch, isSuccess } = useGetSurveyQuery();
     const { createSurvey, isLoading } = useCreateSurvey();
     const {
         currentQuestionIndex,
@@ -34,6 +36,7 @@ export const Test: FC = () => {
         handleNext,
         setCurrentQuestionAnswered,
     } = useSurvey();
+    // console.log(isSuccess);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -69,7 +72,7 @@ export const Test: FC = () => {
             const validatedData = dataScheme.parse(preparedData);
             await createSurvey(validatedData);
             setLoading(true);
-            refetch();
+            // refetch();
             setTimeout(() => {
                 router.push(RouteEnum.MAIN);
             }, 3000);

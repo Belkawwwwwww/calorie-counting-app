@@ -2,13 +2,13 @@ import React, { FC } from 'react';
 import { QuestionComponent } from '@/g_shared/components/question_component';
 import { genderTranslations } from '@/g_shared/utils/translation';
 
-export const GenderQuestion: FC<Props> = ({ selectedAnswer, onAnswer }) => {
+export const GenderQuestion: FC<Props> = (props) => {
     const handleAnswer = (answer: string | number | Date) => {
         // Находим английское значение, соответствующее выбранному ответу
         const englishAnswer = Object.keys(genderTranslations).find(
             (key) => genderTranslations[key] === answer.toString()
         );
-        onAnswer(englishAnswer || answer.toString());
+        props.onAnswer(englishAnswer || answer.toString());
     };
     // Используем русские варианты в опциях
     const options = Object.entries(genderTranslations).map(([key, value]) => ({
@@ -19,7 +19,7 @@ export const GenderQuestion: FC<Props> = ({ selectedAnswer, onAnswer }) => {
     return (
         <QuestionComponent
             options={options}
-            selectedAnswer={selectedAnswer ?? null}
+            selectedAnswer={props.selectedAnswer ?? null}
             onAnswer={handleAnswer}
         />
     );
