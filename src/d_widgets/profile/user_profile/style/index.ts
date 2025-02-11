@@ -172,10 +172,7 @@ export const BtnTest = styled(Link)`
         top: -17px;
     }
 `;
-export const Links = styled(Link)`
-    color: black;
-    text-decoration: none;
-`;
+
 export const Block = styled.div`
     display: flex;
     margin-top: 300px;

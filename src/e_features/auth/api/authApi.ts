@@ -3,15 +3,15 @@ import { ApiUrls } from '@/g_shared/model';
 import {
     AuthInput,
     AuthResponse,
+    LogoutResponse,
     RegistrationInput,
-    RegistrationResponse,
 } from '../type/authTypes';
 
 const authAPI = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ baseUrl: ApiUrls.BASE_URL }),
     endpoints: (build) => ({
-        registerUser: build.mutation<RegistrationResponse, RegistrationInput>({
+        registerUser: build.mutation<AuthResponse, RegistrationInput>({
             query: (body) => ({
                 url: 'api/v1/user/register',
                 method: 'POST',
@@ -27,7 +27,7 @@ const authAPI = createApi({
                 credentials: 'include',
             }),
         }),
-        logoutUser: build.mutation<void, void>({
+        logoutUser: build.mutation<LogoutResponse, void>({
             query: () => ({
                 url: '/api/v1/user/logout',
                 method: 'POST',

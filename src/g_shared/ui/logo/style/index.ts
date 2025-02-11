@@ -6,4 +6,7 @@ export const LogoLink = styled(Link)`
     text-decoration: none;
     padding-left: 6px;
     cursor: pointer;
+    @media (max-width: 480px) {
+        font-size: 10px;
+    }
 `;

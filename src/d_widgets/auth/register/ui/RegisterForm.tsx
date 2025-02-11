@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/g_shared/ui/button';
 import { RouteEnum } from '@/g_shared/model';
-import {
-    RegistrationResponseSchema,
-    RegScheme,
-} from '@/e_features/auth/model/registrationSchema';
 import { z } from 'zod';
 import { useAppDispatch } from '@/g_shared/lib/store';
 import { setAuth } from '@/f_entities/redux/session/modele/action/action';
@@ -17,6 +13,10 @@ import { Error } from '@/g_shared/ui/errorDisplay';
 import { LoadingInBtn } from '@/g_shared/ui/loader';
 import { Btn, Container, Footer, StyledLink } from '../style';
 import { useRegister } from '@/e_features/auth/hooks/authHooks';
+import {
+    AuthResponseScheme,
+    RegScheme,
+} from '@/e_features/auth/model/authScheme';
 
 export const RegisterForm = () => {
     const { register, isLoading } = useRegister();
@@ -54,8 +54,7 @@ export const RegisterForm = () => {
             const validatedData = RegScheme.parse(formData); // Валидация входных данных с помощью RegScheme
             const response = await register(validatedData).unwrap();
             if (response.response_status === 0) {
-                const validatedResponse =
-                    RegistrationResponseSchema.parse(response);
+                const validatedResponse = AuthResponseScheme.parse(response);
                 const backendUser_id = response.data.id;
                 if (validatedResponse) {
                     dispatch(setAuth(true));

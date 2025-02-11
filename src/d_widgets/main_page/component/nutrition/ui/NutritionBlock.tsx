@@ -48,9 +48,9 @@ export const NutritionBlock: FC = memo(() => {
         }
     });
 
-    console.log('Breakfast:', mealsByType.breakfast);
-    console.log('Lunch:', mealsByType.lunch);
-    console.log('Dinner:', mealsByType.dinner);
+    // console.log('Breakfast:', mealsByType.breakfast);
+    // console.log('Lunch:', mealsByType.lunch);
+    // console.log('Dinner:', mealsByType.dinner);
 
     return (
         <StyledNutritionBlock>

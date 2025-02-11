@@ -11,7 +11,6 @@ const surveyAPI = createApi({
                 url: 'api/v1/user/survey',
                 method: 'POST',
                 body,
-                // providesTags: ['User'],
                 credentials: 'include',
             }),
         }),
@@ -19,7 +18,6 @@ const surveyAPI = createApi({
             query: () => ({
                 url: 'api/v1/user/survey',
                 method: 'GET',
-                // providesTags: ['User'],
                 credentials: 'include',
             }),
         }),

@@ -16,7 +16,6 @@ import {
     ContainerProfile,
     CreatePlanButton,
     Criteria,
-    Links,
     Main,
     Menu,
     NavigationWrapper,
@@ -35,6 +34,7 @@ import { useGetUserSurvey } from '@/e_features/survey/hooks/surveyHooks';
 import { LogoutBtn } from '@/e_features/auth/components/logout_btn/Logout';
 import { useAppSelector } from '@/g_shared/lib/store';
 import { isPendingSelector } from '@/f_entities/redux/pending';
+import { LinkButton } from '@/g_shared/ui/button';
 
 export const UserProfile: FC = () => {
     const pending = useAppSelector(isPendingSelector);
@@ -101,8 +101,10 @@ export const UserProfile: FC = () => {
                 <Layout>
                     <StyledLink>
                         <NavigationWrapper>
-                            <Links href={RouteEnum.MAIN}>КАЛЬКУЛЯТОР</Links>|
-                            <Links href={RouteEnum.HOME}>HOME</Links>|
+                            <LinkButton to={RouteEnum.MAIN}>
+                                ПАНЕЛЬ ПИТАНИЯ
+                            </LinkButton>
+                            |<LinkButton to={RouteEnum.HOME}>HOME</LinkButton>|
                             <LogoutBtn />
                         </NavigationWrapper>
                     </StyledLink>

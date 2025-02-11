@@ -47,6 +47,7 @@ export const Counter = styled.div`
     }
     @media (max-width: 480px) {
         flex: 0 1 100%;
+        padding-right: 0px;
     }
 `;
 

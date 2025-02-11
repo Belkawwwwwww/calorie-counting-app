@@ -18,6 +18,7 @@ export const SummaryBlock = () => {
     const formattedDate = getFormattedDate();
 
     const { data } = useGetBzu(formattedDate);
+    console.log(data?.data.max);
 
     return (
         <StyledSummaryBlock>
@@ -42,19 +43,19 @@ export const SummaryBlock = () => {
                 <BJU>
                     <BJUName>Углеводы:</BJUName>{' '}
                     <Consumed>
-                        0 / {(((data?.data.max ?? 0) * 0.6) / 4).toFixed(0)} г
+                        0 / {(data?.data.carbs ?? 0).toFixed(0)} г
                     </Consumed>
                 </BJU>
                 <BJU>
                     <BJUName>Белки:</BJUName>{' '}
                     <Consumed>
-                        0 / {(((data?.data.max ?? 0) * 0.2) / 4).toFixed(0)} г
+                        0 / {(data?.data.protein ?? 0).toFixed(0)} г
                     </Consumed>
                 </BJU>
                 <BJU>
                     <BJUName>Жиры:</BJUName>{' '}
                     <Consumed>
-                        0 / {(((data?.data.max ?? 0) * 0.3) / 9).toFixed(0)} г
+                        0 / {(data?.data.fat ?? 0).toFixed(0)} г
                     </Consumed>
                 </BJU>
             </TwoBlock>

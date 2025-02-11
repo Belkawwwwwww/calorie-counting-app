@@ -17,7 +17,7 @@ import { useGetUserSurvey } from '@/e_features/survey/hooks/surveyHooks';
 
 export const Main: FC = () => {
     const { data: userData, isLoading } = useGetUserSurvey();
-    console.log('отработал');
+    // console.log('отработал');
     if (isLoading) {
         return <LoadingIndicator />;
     }

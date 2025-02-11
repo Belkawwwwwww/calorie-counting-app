@@ -60,9 +60,10 @@ export const CreateSurveyResponseSchema = z.object({
     response_status: z.number(),
     data: z.object({
         id: z.number(),
-        user_id: z.string(),
+        user_id: z.number(),
         created_at: z.string().datetime(),
         updated_at: z.string().datetime(),
+        deleted_at: z.string(),
         data: dataScheme,
     }),
     error: z.null().or(z.string()),

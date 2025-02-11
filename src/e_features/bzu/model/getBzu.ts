@@ -10,6 +10,9 @@ export const GetBzuResponseSchema = z.object({
         max: z.number(),
         day: z.string(),
         current: z.number(),
+        carbs: z.number(),
+        fat: z.number(),
+        protein: z.number(),
     }),
     error: z.null().or(z.string()),
 });

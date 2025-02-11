@@ -4,18 +4,17 @@ import { FC } from 'react';
 import { RouteEnum } from '@/g_shared/model';
 import { useRouter } from 'next/router';
 import { LogoutBtn } from '@/e_features/auth/components/logout_btn/Logout';
-import {
-    Header,
-    LinksContainer,
-    NavigationWrapper,
-    StyledLinks,
-} from '../style';
+import { Header, LinksContainer, NavigationWrapper } from '../style';
+import { LinkButton } from '@/g_shared/ui/button';
+import { isAuthSelector } from '@/f_entities/redux/session';
 
 export const Navbar: FC<{ hideOnPages?: string[] }> = ({
     hideOnPages = [],
 }) => {
-    const isAuth = useAppSelector((state) => state.session.is_authenticated);
+    const isAuth = useAppSelector(isAuthSelector);
     const router = useRouter();
+    const isOnNutritionDashboard = router.pathname === RouteEnum.MAIN;
+
     if (hideOnPages.includes(router.pathname)) {
         return null;
     }
@@ -25,16 +24,18 @@ export const Navbar: FC<{ hideOnPages?: string[] }> = ({
             <Logo />
             <LinksContainer>
                 {!isAuth ? (
-                    <StyledLinks href={RouteEnum.LOGIN}>ВХОД</StyledLinks>
+                    <LinkButton to={RouteEnum.LOGIN}>ВХОД</LinkButton>
                 ) : (
                     <NavigationWrapper>
-                        <StyledLinks href={RouteEnum.MAIN}>
-                            КАЛЬКУЛЯТОР
-                        </StyledLinks>
-                        |
-                        <StyledLinks href={RouteEnum.PROFILE}>
-                            ПРОФИЛЬ
-                        </StyledLinks>
+                        {isOnNutritionDashboard ? null : (
+                            <>
+                                <LinkButton to={RouteEnum.MAIN}>
+                                    ПАНЕЛЬ ПИТАНИЯ
+                                </LinkButton>
+                                |
+                            </>
+                        )}
+                        <LinkButton to={RouteEnum.PROFILE}>ПРОФИЛЬ</LinkButton>
                         |<LogoutBtn />
                     </NavigationWrapper>
                 )}

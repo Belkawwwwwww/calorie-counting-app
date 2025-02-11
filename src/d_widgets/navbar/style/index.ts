@@ -33,10 +33,6 @@ export const LinksContainer = styled.div`
     display: flex;
 `;
 
-export const StyledLinks = styled(Link)`
-    color: black;
-    text-decoration: none;
-`;
 export const NavigationWrapper = styled.div`
     display: flex;
     align-items: center;
