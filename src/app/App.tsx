@@ -4,8 +4,8 @@ import { Navbar } from '@/d_widgets/navbar';
 import { AppProviders } from './providers/app_provider/AppProvider';
 import { ErrorProvider } from '@/g_shared/lib/context';
 import { RouteEnum } from '@/g_shared/model';
-import { MemoizedUserSessionLoader } from '@/e_features/user';
-import { MemoizedLoader } from '@/g_shared/components/loader_overlay';
+import { MemoizedLoader } from '@/g_shared/ui/loader';
+import { MemoizedUserSessionLoader } from '@/e_features/auth';
 
 export default function App({ Component, pageProps }: AppProps) {
     return (

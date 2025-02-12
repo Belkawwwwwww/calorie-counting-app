@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { isAuthSelector } from '@/f_entities/redux/session';
 import { useAppSelector } from '@/g_shared/lib/store';
+import { isAuthSelector } from '@/e_features/auth';
 
 const protectedRoutes = ['/main', '/profile'];
 

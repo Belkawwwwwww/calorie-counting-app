@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Props } from '../type';
-import { Btn, Container, Form, Title } from '../style';
+import { Btn, Container, Form, Title } from './style';
 
 export const UIFormLayout: FC<Props> = (props) => {
     return (

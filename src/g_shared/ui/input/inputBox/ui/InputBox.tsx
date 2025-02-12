@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Input } from '../../input/ui/Input';
 import { InputBoxProps } from '../type';
-import { Error, Label, StyledInputBox } from '../style';
+import { Error, Label, StyledInputBox } from './style';
 
 export const InputBox: FC<InputBoxProps> = ({
     label,

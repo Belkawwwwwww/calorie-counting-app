@@ -1,2 +1,2 @@
-import { MainPage } from '@/c_pages/main_page';
-export default MainPage;
+import { NutritionDashboard } from '@/c_pages/nutrition_dashboard ';
+export default NutritionDashboard;

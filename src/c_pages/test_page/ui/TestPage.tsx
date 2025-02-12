@@ -1,14 +1,29 @@
 import React from 'react';
-import { ProtectedRoute } from '@/c_pages/router_providers';
 import { Layout } from '@/g_shared/ui/layout';
-import { Test } from '@/d_widgets/test_page';
+import { ProtectedRoute } from '@/e_features/auth';
+import { Container, Title } from './style';
+import { LoaderTest } from '@/g_shared/ui/loader';
+import { useCreateSurveyHandler, useSurvey } from '@/e_features/survey';
+import { CreateQuestions } from '@/d_widgets/test/ui';
 
 export const TestPage = () => {
+    const { answers } = useSurvey();
+    const { loading } = useCreateSurveyHandler(answers);
+
     return (
         <>
             <ProtectedRoute>
                 <Layout>
-                    <Test />
+                    <Container>
+                        {loading ? (
+                            <LoaderTest />
+                        ) : (
+                            <>
+                                <Title>СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН</Title>
+                                <CreateQuestions />
+                            </>
+                        )}
+                    </Container>
                 </Layout>
             </ProtectedRoute>
         </>

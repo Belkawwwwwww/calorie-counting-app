@@ -1,5 +1,5 @@
-import { useFetchUserSessionQuery } from '@/g_shared/api/authApi';
-import { setAuth } from '@/f_entities/redux/session/modele/action/action';
+import { useFetchUserSessionQuery } from '@/e_features/auth/api/authApi';
+import { setAuth } from '@/e_features/auth/modele/action/action';
 import { useAppDispatch } from '@/g_shared/lib/store';
 import { FC, ReactNode, useLayoutEffect, useState } from 'react';
 

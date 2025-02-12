@@ -3,10 +3,10 @@ import { Logo } from '@/g_shared/ui/logo';
 import { FC } from 'react';
 import { RouteEnum } from '@/g_shared/model';
 import { useRouter } from 'next/router';
-import { LogoutBtn } from '@/e_features/auth/components/logout_btn/Logout';
-import { Header, LinksContainer, NavigationWrapper } from '../style';
+import { LogoutBtn } from '@/d_widgets/navbar/ui/Logout';
+import { Header, LinksContainer, NavigationWrapper } from './style';
 import { LinkButton } from '@/g_shared/ui/button';
-import { isAuthSelector } from '@/f_entities/redux/session';
+import { isAuthSelector } from '@/e_features/auth';
 
 export const Navbar: FC<{ hideOnPages?: string[] }> = ({
     hideOnPages = [],
@@ -27,7 +27,14 @@ export const Navbar: FC<{ hideOnPages?: string[] }> = ({
                     <LinkButton to={RouteEnum.LOGIN}>ВХОД</LinkButton>
                 ) : (
                     <NavigationWrapper>
-                        {isOnNutritionDashboard ? null : (
+                        {isOnNutritionDashboard ? (
+                            <>
+                                <LinkButton to={RouteEnum.HOME}>
+                                    ГЛАВНАЯ СТРАНИЦА
+                                </LinkButton>
+                                |
+                            </>
+                        ) : (
                             <>
                                 <LinkButton to={RouteEnum.MAIN}>
                                     ПАНЕЛЬ ПИТАНИЯ

@@ -1,4 +1,4 @@
-import { Loader } from '../style';
+import { Loader } from './style';
 
 export const LoadingInBtn = () => {
     return <Loader></Loader>;

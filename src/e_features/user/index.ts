@@ -1,1 +1,2 @@
-export { MemoizedUserSessionLoader } from './ui/UserSessionFetcher';
+export { UpdateButton } from './ui/UpdateButton';
+export { useGetUserProfile } from './hooks/useGetUserProfile';

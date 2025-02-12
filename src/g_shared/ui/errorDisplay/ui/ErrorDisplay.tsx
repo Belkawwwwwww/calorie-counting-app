@@ -1,5 +1,5 @@
 import { useError } from '@/g_shared/lib/context';
-import { StyledError } from '../style';
+import { StyledError } from './style';
 
 export const Error = () => {
     const { error } = useError();

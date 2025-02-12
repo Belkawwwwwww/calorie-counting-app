@@ -1,4 +1,4 @@
-import { Loader, Loading } from '../style';
+import { Loader, Loading } from './style';
 
 export const LoadingIndicator = () => {
     return (

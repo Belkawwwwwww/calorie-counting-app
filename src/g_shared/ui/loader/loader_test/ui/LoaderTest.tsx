@@ -1,4 +1,4 @@
-import { LoaderAfter, LoaderBefore, LoaderWrapper } from '../style';
+import { LoaderAfter, LoaderBefore, LoaderWrapper } from './style';
 
 export const LoaderTest = () => {
     return (

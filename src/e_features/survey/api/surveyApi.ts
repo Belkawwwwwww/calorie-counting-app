@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ApiUrls } from '@/g_shared/model';
-import { SurveyInput, SurveyResponse } from '../type/surveyTypes';
+import { SurveyInput, SurveyResponse } from '@/f_entities/survey';
 
 const surveyAPI = createApi({
     reducerPath: 'surveyAPI',
