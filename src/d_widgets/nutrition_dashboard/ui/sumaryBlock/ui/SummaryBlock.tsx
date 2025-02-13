@@ -17,7 +17,6 @@ import { getFormattedDate } from '@/g_shared/lib/utils/dateUtils';
 export const SummaryBlock = () => {
     const formattedDate = getFormattedDate();
     const { data } = useGetBzu(formattedDate);
-    console.log(data);
 
     return (
         <StyledSummaryBlock>

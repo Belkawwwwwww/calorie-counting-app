@@ -25,7 +25,6 @@ export const NutritionBlock: FC = memo(() => {
         setEat(e.target.value);
     };
     const meals = ['Завтрак', 'Обед', 'Ужин'];
-    // console.log('отработал');
     const mealsByType = {
         breakfast: [] as FoodResponse['data'][number][],
         lunch: [] as FoodResponse['data'][number][],
