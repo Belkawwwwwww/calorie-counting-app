@@ -53,23 +53,15 @@ export const RegisterForm = () => {
             setError('');
             const validatedData = RegScheme.parse(formData); // Валидация входных данных с помощью RegScheme
             const response = await register(validatedData).unwrap();
-            if (response.response_status === 0) {
-                const validatedResponse = AuthResponseScheme.parse(response);
-                const backendUser_id = response.data.id;
-                if (validatedResponse) {
-                    dispatch(setAuth(true));
-                    dispatch(setUser({ user_id: backendUser_id }));
-                    console.log(register);
-                    console.log('Регистрация успешна');
-                }
-            } else {
-                setError('Ошибка при регистрации');
-                console.log(response);
-            }
-        } catch (error: unknown | z.ZodError) {
+            const backendUser_id = response.data.id;
+            dispatch(setAuth(true));
+            dispatch(setUser({ user_id: backendUser_id }));
+            console.log(register);
+            console.log('Регистрация успешна');
+        } catch (error) {
             if (error instanceof z.ZodError) {
                 const errors = error.issues.reduce(
-                    (acc: typeof validationErrors, issue: z.ZodIssue) => {
+                    (acc, issue) => {
                         acc[issue.path[0] as keyof typeof validationErrors] =
                             issue.message;
                         return acc;

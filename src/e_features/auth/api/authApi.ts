@@ -6,10 +6,16 @@ import {
     LogoutResponse,
     RegistrationInput,
 } from '../type/authTypes';
+import {
+    AuthResponseScheme,
+    LogoutResponseScheme,
+} from '@/g_shared/lib/validation/authScheme';
+import { handleResponse } from '@/g_shared/lib/utils/responseHandler';
 
 const authAPI = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({ baseUrl: ApiUrls.BASE_URL }),
+    keepUnusedDataFor: 1200,
     endpoints: (build) => ({
         registerUser: build.mutation<AuthResponse, RegistrationInput>({
             query: (body) => ({
@@ -17,7 +23,10 @@ const authAPI = createApi({
                 method: 'POST',
                 body,
                 credentials: 'include',
+                providesTags: ['User'],
             }),
+            transformResponse: (response) =>
+                handleResponse(response, AuthResponseScheme),
         }),
         authUser: build.mutation<AuthResponse, AuthInput>({
             query: (body) => ({
@@ -25,14 +34,20 @@ const authAPI = createApi({
                 method: 'POST',
                 body,
                 credentials: 'include',
+                providesTags: ['User'],
             }),
+            transformResponse: (response) =>
+                handleResponse(response, AuthResponseScheme),
         }),
         logoutUser: build.mutation<LogoutResponse, void>({
             query: () => ({
                 url: '/api/v1/user/logout',
                 method: 'POST',
                 credentials: 'include',
+                providesTags: ['User'],
             }),
+            transformResponse: (response) =>
+                handleResponse(response, LogoutResponseScheme),
         }),
 
         fetchUserSession: build.query<AuthResponse, void>({

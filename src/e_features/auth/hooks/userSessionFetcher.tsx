@@ -23,9 +23,9 @@ const UserSessionLoader: React.FC = () => {
                 ) {
                     prevData.current = data;
                     dispatch(setAuth(true));
-                    dispatch(setUser(data.data.id));
+                    dispatch(setUser(data?.data.id));
                 }
-            } else if (isError) {
+            } else if (isError || data?.response_status !== 0) {
                 dispatch(setAuth(false));
             }
         }

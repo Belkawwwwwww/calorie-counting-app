@@ -1,3 +1,4 @@
+import { SurveyAnswers } from '@/f_entities/survey';
 import {
     ActivityLevelQuestion,
     DateOfBirthQuestion,
@@ -7,34 +8,14 @@ import {
     TargetQuestion,
     WaistGirth,
     WeightQuestion,
-} from '@/d_widgets/test/ui';
-import { RouteEnum } from '@/g_shared/model';
-import { UIFormLayout } from '@/g_shared/ui/layout';
-import { useRouter } from 'next/router';
-import { Questions } from './style';
-import {
-    NextBtn,
-    useCreateSurveyHandler,
-    useSurvey,
-} from '@/e_features/survey';
+} from '../../../../../d_widgets/test/ui';
 
-export const CreateQuestions = () => {
-    const {
-        currentQuestionIndex,
-        currentQuestionAnswered,
-        answers,
-        handleAnswer,
-        handleNext,
-        setCurrentQuestionAnswered,
-    } = useSurvey();
-    const router = useRouter();
-    const { loading, handleSubmit } = useCreateSurveyHandler(answers, () => {
-        setTimeout(() => {
-            router.push(RouteEnum.MAIN);
-        }, 3000);
-    });
-
-    const questions = [
+export const getQuestionsConfig = (
+    answers: SurveyAnswers,
+    handleAnswer: (key: keyof SurveyAnswers, answer: any) => void,
+    setCurrentQuestionAnswered: (isAnswered: boolean) => void
+) => {
+    return [
         {
             key: 'gender',
             title: 'ВАШ ПОЛ',
@@ -122,34 +103,4 @@ export const CreateQuestions = () => {
             ),
         },
     ];
-    return (
-        <Questions>
-            <form onSubmit={handleSubmit}>
-                {questions.map((question, index) => (
-                    <div key={question.key}>
-                        {index === currentQuestionIndex ? (
-                            <UIFormLayout
-                                key={question.title}
-                                content='center'
-                                title={question.title}
-                                form={question.component}
-                                nextButton={
-                                    currentQuestionAnswered ? (
-                                        <NextBtn
-                                            isLastQuestion={
-                                                index === questions.length - 1
-                                            }
-                                            isAnswered={currentQuestionAnswered}
-                                            onNext={handleNext}
-                                            isLoading={loading}
-                                        />
-                                    ) : null
-                                }
-                            />
-                        ) : null}
-                    </div>
-                ))}
-            </form>
-        </Questions>
-    );
 };

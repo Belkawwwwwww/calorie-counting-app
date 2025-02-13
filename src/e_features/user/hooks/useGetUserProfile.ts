@@ -1,5 +1,5 @@
 import { useFetchUser } from '@/e_features/auth/hooks/authHooks';
-import { useGetUserSurvey } from '@/e_features/survey/hooks/useSurveyHooks';
+import { useGetUserSurvey } from '@/e_features/survey';
 import { useEffect } from 'react';
 
 export const useGetUserProfile = () => {

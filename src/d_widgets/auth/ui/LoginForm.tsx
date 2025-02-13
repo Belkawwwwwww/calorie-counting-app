@@ -53,32 +53,16 @@ export const LoginForm = () => {
             });
             setError('');
             const validatedData = AuthScheme.parse(formData);
-            if (auth) {
-                const response = await auth(validatedData).unwrap();
-                if (response?.response_status === 0) {
-                    const validatedResponse =
-                        AuthResponseScheme.parse(response);
-                    const backendUser_id = response?.data?.id;
-                    if (validatedResponse) {
-                        dispatch(setAuth(true));
-                        dispatch(setUser({ user_id: backendUser_id }));
-                        await router.push(RouteEnum.MAIN);
-                        console.log('Авторизация успешна');
-                    }
-                } else {
-                    setError('Неправильный логин или пароль');
-                    console.log(response);
-                }
-            } else {
-                console.error(
-                    'Ошибка регистрации: authUser is null or undefined'
-                );
-                setError('Произошла ошибка при авторизации');
-            }
-        } catch (error: unknown | z.ZodError) {
+            const response = await auth(validatedData).unwrap();
+            const backendUser_id = response?.data?.id;
+            dispatch(setAuth(true));
+            dispatch(setUser({ user_id: backendUser_id }));
+            await router.push(RouteEnum.MAIN);
+            console.log('Авторизация успешна');
+        } catch (error) {
             if (error instanceof z.ZodError) {
                 const errors = error.issues.reduce(
-                    (acc: typeof validationErrors, issue: z.ZodIssue) => {
+                    (acc, issue) => {
                         acc[issue.path[0] as keyof typeof validationErrors] =
                             issue.message;
                         return acc;
@@ -86,9 +70,9 @@ export const LoginForm = () => {
                     {} as typeof validationErrors
                 );
                 setValidationErrors(errors);
-                console.log('Ошибки валидации:', errors);
+                console.log('Ошибка валидации:', errors);
             } else {
-                console.error('Ошибка регистрации:', error);
+                console.error('Authtorization failed:', error);
                 setError('Произошла ошибка при авторизации');
             }
         }

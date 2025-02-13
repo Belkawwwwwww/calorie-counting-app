@@ -6,4 +6,4 @@ export { GrowthQuestion } from './test_questions/ui/GrowthQuestion';
 export { WeightQuestion } from './test_questions/ui/WeightQuestion';
 export { WaistGirth } from './test_questions/ui/WaistGirth';
 export { HipGirth } from './test_questions/ui/HipGirth';
-export { CreateQuestions } from './questions/ui/Question';
+export { QuestionForm } from './questionsForm/ui/QuestionForm';

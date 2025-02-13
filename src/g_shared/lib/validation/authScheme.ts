@@ -13,6 +13,7 @@ export const AuthResponseScheme = z.object({
         first_name: z.string(),
         last_name: z.string(),
     }),
+    error: z.null().or(z.string()),
 });
 export const LogoutResponseScheme = z.object({
     response_status: z.number(),
