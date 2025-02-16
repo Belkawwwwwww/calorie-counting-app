@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ApiUrls } from '@/g_shared/model';
 import { FoodResponse } from '../type/foodTypes';
-import { FoodResponseSchema } from '../model/getUserMeal';
 
 const foodAPI = createApi({
     reducerPath: 'foodAPI',
@@ -12,15 +11,9 @@ const foodAPI = createApi({
                 url: `api/v1/user/meal?date=${date}`,
                 method: 'GET',
                 credentials: 'include',
+                providesTags: ['Food'],
+                keepUnusedDataFor: 120,
             }),
-            transformResponse: (response: unknown) => {
-                const parsedResponse = FoodResponseSchema.parse(response);
-                return {
-                    response_status: parsedResponse.response_status,
-                    data: parsedResponse.data,
-                    error: parsedResponse.error,
-                };
-            },
         }),
     }),
 });

@@ -12,9 +12,22 @@ export const useError = () => {
 };
 
 export const ErrorProvider: FC<ErrorProviderProps> = (props) => {
-    const [error, setError] = useState<string>('');
+    const [errors, setErrors] = useState<Record<string, string>>({}); // Хранит ошибки как объект
+
+    const setError = (key: string, error: string) => {
+        setErrors((prev) => ({ ...prev, [key]: error }));
+    };
+
+    const clearError = (key: string) => {
+        setErrors((prev) => {
+            const newErrors = { ...prev };
+            delete newErrors[key]; // Удаляем ошибку по ключу
+            return newErrors;
+        });
+    };
+
     return (
-        <ErrorContext.Provider value={{ error, setError }}>
+        <ErrorContext.Provider value={{ errors, setError, clearError }}>
             {props.children}
         </ErrorContext.Provider>
     );

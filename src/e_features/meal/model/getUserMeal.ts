@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 // Схема для информации о пище
-const MealFoodInfoSchema = z.object({
+export const MealFoodInfoSchema = z.object({
     protein: z.number(),
     fat: z.number(),
     carbs: z.number(),
@@ -9,8 +9,8 @@ const MealFoodInfoSchema = z.object({
 });
 
 // Схема для каждого продукта в meal_foods
-const MealFoodSchema = z.object({
-    type: z.enum(['product', 'food']), //
+export const MealFoodSchema = z.object({
+    type: z.enum(['product', 'food']),
     id: z.number(),
     weight: z.number(),
     info: MealFoodInfoSchema,
@@ -18,7 +18,7 @@ const MealFoodSchema = z.object({
 });
 
 // Схема для информации о приеме пищи
-const MealSchema = z.object({
+export const MealSchema = z.object({
     id: z.number(),
     created_at: z.string().datetime(),
     updated_at: z.string().datetime(),
@@ -26,13 +26,13 @@ const MealSchema = z.object({
     day: z.string().datetime(),
     user_id: z.number(),
     meal_foods: z.array(MealFoodSchema),
-    meal_type: z.enum(['breakfast', 'lunch', 'dinner']), // Ограничиваем возможные значения
+    meal_type: z.enum(['breakfast', 'lunch', 'dinner']),
     weight: z.number(),
     info: MealFoodInfoSchema,
 });
 
 // Основная схема ответа
-export const FoodResponseSchema = z.object({
+export const MealResponseSchema = z.object({
     response_status: z.number(),
     data: z.array(MealSchema),
     error: z.string().nullable(),

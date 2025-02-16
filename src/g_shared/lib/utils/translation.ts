@@ -16,3 +16,9 @@ export const activityTranslations: { [key: string]: string } = {
     ACTIVE_LIFESTYLE: 'АКТИВНЫЙ',
     HIGHLY_ACTIVE_LIFESTYLE: 'ОЧЕНЬ АКТИВНЫЙ',
 };
+
+export const mealsTranslation: { [key: string]: string } = {
+    breakfast: 'ЗАВТРАК',
+    lunch: 'ОБЕД',
+    dinner: 'УЖИН',
+};

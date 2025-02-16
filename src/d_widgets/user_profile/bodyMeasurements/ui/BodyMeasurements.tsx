@@ -3,8 +3,7 @@ import { Container, Plus, ContainerImage, Block } from './style';
 import { useModalOpen } from '@/g_shared/lib/hooks/useModalOpen/useModalOpen';
 import { Modal } from '@/g_shared/ui/modal';
 import { useGetUserSurvey } from '@/e_features/survey/hooks/useSurveyHooks';
-import { MeasurementForm } from '../../../../e_features/survey/ui/measurement_form/ui/MeasurementForm';
-import { MeasurementDisplay } from '@/e_features/survey/ui/measurement_display/ui/MeasurementDisplay';
+import { MeasurementDisplay, MeasurementForm } from '@/e_features/survey';
 
 export const BodyMeasurements: FC = () => {
     const { data: userData } = useGetUserSurvey();

@@ -49,26 +49,12 @@ export const TwoBlock = styled.div`
         justify-content: space-between;
     }
 `;
-export const BJU = styled.div`
-    flex: 0 0 33.3%;
-    @media (max-width: 480px) {
-        flex: 0 0 27.3%;
-        padding: 5px;
-    }
-`;
-export const BJUName = styled.div``;
 
 export const Norm = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-`;
-export const Consumed = styled.div`
-    opacity: 50%;
-    @media (max-width: 480px) {
-        font-size: 10px;
-    }
 `;
 
 export const Purpose = styled.div`

@@ -30,10 +30,11 @@ export const FooterRegister = styled.div`
     display: flex;
 `;
 export const Text = styled.div``;
-export const StyledLink = styled(Link)`
+export const StyledLink = styled.div`
     color: #4689e8;
     text-decoration: none;
     padding-left: 6px;
+    cursor: pointer;
     @media (max-width: 480px) {
         padding: 0;
     }

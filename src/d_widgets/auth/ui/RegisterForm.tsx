@@ -10,16 +10,15 @@ import { InputBox } from '@/g_shared/ui/input';
 import { useError } from '@/g_shared/lib/context';
 import { Error } from '@/g_shared/ui/errorDisplay';
 import { LoadingInBtn } from '@/g_shared/ui/loader';
-import {
-    AuthResponseScheme,
-    RegScheme,
-} from '@/g_shared/lib/validation/authScheme';
+import { RegScheme } from '@/g_shared/lib/validation/authScheme';
 import { Btn, Container, FooterRegister, StyledLink } from './style';
 import { OpenRoute } from '../../../e_features/auth/ui/OpenRoute';
 import { useRegister } from '@/e_features/auth';
+import { useAuthValidations } from '@/e_features/auth/hooks/useLoginValidation';
 
 export const RegisterForm = () => {
     const { register, isLoading } = useRegister();
+    // const { validationErrors, validate } = useAuthValidations(Re);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -27,7 +26,7 @@ export const RegisterForm = () => {
     const [lastName, setLastName] = useState<string>('');
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const { setError } = useError();
+    const { setError, clearError } = useError();
 
     const [validationErrors, setValidationErrors] = useState({
         username: '',
@@ -39,6 +38,7 @@ export const RegisterForm = () => {
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        clearError('registration');
         const form = new FormData(e.currentTarget);
         const formData = Object.fromEntries(form.entries());
         console.log('Данные формы перед валидацией:', formData);
@@ -50,7 +50,6 @@ export const RegisterForm = () => {
                 firstName: '',
                 lastName: '',
             });
-            setError('');
             const validatedData = RegScheme.parse(formData); // Валидация входных данных с помощью RegScheme
             const response = await register(validatedData).unwrap();
             const backendUser_id = response.data.id;
@@ -72,7 +71,7 @@ export const RegisterForm = () => {
                 console.log('Ошибка валидации:', errors);
             } else {
                 console.error('Registration failed:', error);
-                setError('Произошла ошибка при регистрации');
+                setError('registration', 'Произошла ошибка при регистрации');
             }
         }
     };
@@ -128,12 +127,16 @@ export const RegisterForm = () => {
                 setLastName(e.target.value),
         },
     ];
+    const handleNavigation = () => {
+        clearError('auth');
+        router.push(RouteEnum.LOGIN);
+    };
 
     return (
         <OpenRoute>
             <Container>
                 <form onSubmit={handleSubmit}>
-                    <Error />
+                    <Error keyName='registration' />
                     {formFields.map(
                         ({ label, error, id, type, name, value, onChange }) => (
                             <InputBox
@@ -166,7 +169,7 @@ export const RegisterForm = () => {
                 </form>
                 <FooterRegister>
                     <div>Уже есть аккаунт?</div>
-                    <StyledLink href={RouteEnum.LOGIN}>Вход</StyledLink>
+                    <StyledLink onClick={handleNavigation}>Вход</StyledLink>
                 </FooterRegister>
             </Container>
         </OpenRoute>

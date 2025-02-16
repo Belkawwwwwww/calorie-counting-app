@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { RouteEnum } from '@/g_shared/model';
 import { Button } from '@/g_shared/ui/button';
-import {
-    AuthResponseScheme,
-    AuthScheme,
-} from '@/g_shared/lib/validation/authScheme';
+import { AuthScheme } from '@/g_shared/lib/validation/authScheme';
 import { z } from 'zod';
 import { useRouter } from 'next/router';
 import { useAppDispatch } from '@/g_shared/lib/store';
@@ -39,10 +36,11 @@ export const LoginForm = () => {
     });
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const { setError } = useError();
+    const { setError, clearError } = useError();
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        clearError('auth');
         const form = new FormData(e.currentTarget);
         const formData = Object.fromEntries(form.entries());
         console.log('Данные формы перед валидацией:', formData);
@@ -51,7 +49,6 @@ export const LoginForm = () => {
                 username: '',
                 password: '',
             });
-            setError('');
             const validatedData = AuthScheme.parse(formData);
             const response = await auth(validatedData).unwrap();
             const backendUser_id = response?.data?.id;
@@ -73,7 +70,7 @@ export const LoginForm = () => {
                 console.log('Ошибка валидации:', errors);
             } else {
                 console.error('Authtorization failed:', error);
-                setError('Произошла ошибка при авторизации');
+                setError('auth', 'Произошла ошибка при авторизации');
             }
         }
     };
@@ -98,12 +95,16 @@ export const LoginForm = () => {
             onChange: handlePasswordChange,
         },
     ];
+    const handleNavigation = () => {
+        clearError('auth');
+        router.push(RouteEnum.REGISTRATION);
+    };
 
     return (
         <OpenRoute>
             <Container>
                 <form onSubmit={handleSubmit}>
-                    <Error />
+                    <Error keyName='auth' />
                     {formFields.map(
                         ({ label, error, id, type, name, value, onChange }) => (
                             <InputBox
@@ -136,7 +137,7 @@ export const LoginForm = () => {
 
                 <Footer>
                     <Text>Еще не зарегистрированы?</Text>
-                    <StyledLink href={RouteEnum.REGISTRATION}>
+                    <StyledLink onClick={handleNavigation}>
                         Регистрация
                     </StyledLink>
                 </Footer>

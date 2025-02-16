@@ -1,6 +1,10 @@
-import { NextBtn, useCreateSurvey, useSurvey } from '@/e_features/survey';
+import {
+    getQuestionsConfig,
+    NextBtn,
+    useCreateSurvey,
+    useSurvey,
+} from '@/e_features/survey';
 import { useGetSurveyQuery } from '@/e_features/survey/api/surveyApi';
-import { getQuestionsConfig } from '@/e_features/survey/ui/get_question/ui/getQuestionConfig';
 import { surveyScheme } from '@/f_entities/survey';
 import { prepareAnswers } from '@/g_shared/lib/utils/prepareAnswers';
 import { RouteEnum } from '@/g_shared/model';

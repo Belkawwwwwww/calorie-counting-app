@@ -24,7 +24,6 @@ import {
 import { UpdateButton, useGetUserProfile } from '@/e_features/user';
 
 export const ProfilePage = () => {
-    console.log('отработал профиль пэйдж');
     const { userSessionData, userData, isLoading } = useGetUserProfile();
     const first_name = userSessionData?.data?.first_name;
     const last_name = userSessionData?.data?.last_name;
