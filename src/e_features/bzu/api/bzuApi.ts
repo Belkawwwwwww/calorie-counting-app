@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ApiUrls } from '@/g_shared/model';
-import { BzuResponse } from '../type/bzuTypes';
-import { GetBzuResponseSchema } from '../model/getBzu';
+import { BzuResponse } from '../../../f_entities/bzu/type/bzuTypes';
+import { GetBzuResponseSchema } from '../../../f_entities/bzu/model/getBzu';
 
 const bzuAPI = createApi({
     reducerPath: 'bzuAPI',

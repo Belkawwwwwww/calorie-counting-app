@@ -1,4 +1,4 @@
-import { useFetchUser } from '@/e_features/auth/hooks/authHooks';
+import { useFetchUser } from '@/e_features/auth/hooks/useAuthHooks';
 import { useGetUserSurvey } from '@/e_features/survey';
 import { useEffect } from 'react';
 

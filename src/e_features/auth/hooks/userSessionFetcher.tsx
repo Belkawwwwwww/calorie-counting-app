@@ -3,7 +3,7 @@ import { setPending } from '@/e_features/pending/modele/action/action';
 import { useAppDispatch } from '@/g_shared/lib/store';
 import React, { useEffect, useRef } from 'react';
 import { setUser } from '@/f_entities/user/model/action/action';
-import { useFetchUser } from './authHooks';
+import { useFetchUser } from './useAuthHooks';
 
 const UserSessionLoader: React.FC = () => {
     const dispatch = useAppDispatch();
