@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const Title = styled.p`
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 5px;
+`;
 export const ModalWrapper = styled.div`
     position: fixed;
     top: 0;
@@ -9,7 +14,6 @@ export const ModalWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export const ModalContent = styled.div<{ width?: string; height?: string }>`

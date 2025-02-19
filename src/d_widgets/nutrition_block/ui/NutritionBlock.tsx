@@ -4,9 +4,9 @@ import { useGetUserMeal } from '@/e_features/meal/hooks/useGetUserMeal';
 import { getFormattedDate } from '@/g_shared/lib/utils/dateUtils';
 import { FC, memo, useState } from 'react';
 import { Meal, MealType, mealTypes } from '@/f_entities/meal/type/mealModel';
-import { InputModal } from '@/g_shared/ui/input_processing/ui/InputModal';
 import { calculateCalories } from '@/e_features/meal/utils/calorieCalculator';
 import { MealItem } from '@/g_shared/ui/meal_item/ui/MealItem';
+import { InputModal } from '../components';
 
 export const NutritionBlock: FC = memo(() => {
     const { isModalActive, handleModalOpen, handleModalClose } = useModalOpen();
@@ -26,11 +26,7 @@ export const NutritionBlock: FC = memo(() => {
             (mealItem: Meal) => mealItem.meal_type === meal
         );
 
-        if (foundMeal) {
-            setMealInfo(foundMeal);
-        } else {
-            setMealInfo(null);
-        }
+        setMealInfo(foundMeal || null);
 
         handleModalOpen();
     };
@@ -41,15 +37,15 @@ export const NutritionBlock: FC = memo(() => {
 
     return (
         <StyledNutritionBlock>
-            {isModalActive ? (
+            {isModalActive && (
                 <InputModal
                     title={mealInfo?.meal_type || ''}
                     value={eat}
                     onChange={handleChange}
                     onClose={handleModalClose}
-                    mealInfo={mealInfo ? mealInfo.info : null}
+                    dataMeal={mealInfo}
                 />
-            ) : null}
+            )}
             <>
                 {mealTypes.map((mealType) => (
                     <MealItem

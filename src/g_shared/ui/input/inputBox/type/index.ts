@@ -5,4 +5,5 @@ export type InputBoxProps = {
     error?: string;
     direction?: 'column' | 'row';
     style?: React.CSSProperties;
+    imageSrc?: string;
 } & Props;

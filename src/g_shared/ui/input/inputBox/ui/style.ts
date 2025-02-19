@@ -7,12 +7,19 @@ export const StyledInputBox = styled.div<{ direction: 'column' | 'row' }>`
     box-sizing: border-box;
 `;
 
-export const Label = styled.label`
-    font-size: 14px;
-    color: var(--color-text1);
-    margin-top: 20px;
-`;
-
 export const Error = styled.div`
     color: red;
+`;
+export const InputContainer = styled.div`
+    position: relative;
+    width: 100%;
+`;
+
+export const PlaceholderImage = styled.img`
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
 `;

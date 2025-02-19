@@ -8,7 +8,7 @@ import React, {
 } from 'react';
 import { Portal } from '../../portal/ui/Portal';
 import { Props } from '../type';
-import { CloseButton, ModalContent, ModalWrapper } from './style';
+import { CloseButton, ModalContent, ModalWrapper, Title } from './style';
 
 export const Modal: FC<Props> = (props: Props) => {
     const rootRef = useRef<HTMLDivElement>(null);
@@ -77,7 +77,7 @@ export const Modal: FC<Props> = (props: Props) => {
                             className={props.imageClassName}
                         />
                     )}
-                    <p>{props.title}</p>
+                    <Title>{props.title}</Title>
                     <div>{props.children}</div>
                     <div>
                         {props.footerButtons?.map((button, index) => (

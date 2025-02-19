@@ -8,4 +8,5 @@ export type Props = {
     name?: string;
     id?: string;
     placeholder?: string;
+    style?: React.CSSProperties;
 };
