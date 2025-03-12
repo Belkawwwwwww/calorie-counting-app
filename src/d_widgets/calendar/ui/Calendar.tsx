@@ -42,7 +42,7 @@ export const Calendar = () => {
     return (
         <div>
             <StyleCalendar src={imageUrl} onClick={handleCalendarClick} />
-            {isModalOpen && (
+            {isModalOpen ? (
                 <Modal onClose={handleModalClose} title='Выберите дату'>
                     <div>
                         {/* Элементы выбора даты */}
@@ -69,7 +69,7 @@ export const Calendar = () => {
                     {selectedDate && <p>Выбранная дата: {selectedDate}</p>}{' '}
                     {/* Отображаем выбранную дату */}
                 </Modal>
-            )}
+            ) : null}
         </div>
     );
 };

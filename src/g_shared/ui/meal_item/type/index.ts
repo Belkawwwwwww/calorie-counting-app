@@ -1,4 +1,4 @@
-import { MealType } from '@/f_entities/meal/type/mealModel';
+import { MealType } from '@/g_shared/lib/type/nutritionTypes';
 
 export type Props = {
     mealType: MealType;

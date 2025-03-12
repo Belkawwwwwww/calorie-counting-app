@@ -6,7 +6,9 @@ import { StyledLinkButton } from './style';
 export const LinkButton: FC<LinkButtonProps> = (props) => {
     const router = useRouter();
     const handleClick = () => {
-        router.push(props.to);
+        if (props.to) {
+            router.push(props.to);
+        }
     };
 
     return (

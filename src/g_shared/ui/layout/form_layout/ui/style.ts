@@ -11,7 +11,7 @@ export const Title = styled.h1<{ content?: 'center' }>`
     font-weight: 200;
     font-size: 30px;
     color: #000000;
-    margin-bottom: 22px;
+    margin-bottom: 35px;
     ${({ content }) =>
         content &&
         `

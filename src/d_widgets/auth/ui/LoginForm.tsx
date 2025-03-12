@@ -10,7 +10,7 @@ import { setUser } from '@/f_entities/user/model/action/action';
 import { useZodInputValidation } from '@/g_shared/lib/hooks';
 import { LoadingInBtn } from '@/g_shared/ui/loader';
 import { InputBox } from '@/g_shared/ui/input';
-import { Error } from '@/g_shared/ui/errorDisplay';
+import { Error } from '@/g_shared/ui/error_display';
 import { useError } from '@/g_shared/lib/context';
 import {
     Btn,

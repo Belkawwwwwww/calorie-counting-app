@@ -33,7 +33,7 @@ export const Calories = styled.div`
     flex-direction: column;
     justify-content: center;
 `;
-export const TwoBlock = styled.div`
+export const BZU = styled.div`
     text-align: center;
     display: flex;
     flex-wrap: wrap;

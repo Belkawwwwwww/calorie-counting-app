@@ -70,13 +70,13 @@ export const Modal: FC<Props> = (props: Props) => {
                     <CloseButton type='button' onClick={handleClose}>
                         Х
                     </CloseButton>
-                    {props.image && (
+                    {props.image ? (
                         <img
                             src={props.image}
                             alt='Модальное окно'
                             className={props.imageClassName}
                         />
-                    )}
+                    ) : null}
                     <Title>{props.title}</Title>
                     <div>{props.children}</div>
                     <div>

@@ -5,7 +5,7 @@ import { pendingSlice } from '@/e_features/pending/modele/slice/isPending';
 import surveyAPI from '@/e_features/survey/api/surveyApi';
 import authAPI from '@/e_features/auth/api/authApi';
 import bzuAPI from '@/e_features/bzu/api/bzuApi';
-import foodAPI from '@/e_features/meal/api/mealApi';
+import foodAPI from '@/e_features/food/api/mealApi';
 
 export const rootReducer = combineReducers({
     [pendingSlice.name]: pendingSlice.reducer,

@@ -4,6 +4,7 @@ import { InputBoxProps } from '../type';
 import {
     Error,
     InputContainer,
+    Label,
     PlaceholderImage,
     StyledInputBox,
 } from './style';
@@ -25,9 +26,11 @@ export const InputBox: FC<InputBoxProps> = ({
     return (
         <StyledInputBox direction={direction}>
             <InputContainer>
-                {imageSrc && (
+                <Label htmlFor={inputProps.id}>{label}</Label>
+
+                {imageSrc ? (
                     <PlaceholderImage src={imageSrc} alt='placeholder' />
-                )}{' '}
+                ) : null}
                 <Input
                     value={value}
                     {...inputProps}

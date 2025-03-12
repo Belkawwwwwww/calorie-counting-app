@@ -1,9 +1,9 @@
-import { Meal } from '@/f_entities/meal/type/mealModel';
+import { Meal } from '@/g_shared/lib/type/nutritionTypes';
 
 export const useNutritionData = (dataMeal: Meal | null) => {
     return dataMeal
         ? [
-              { value: dataMeal.info.calories, label: 'Калории' },
+              { value: Math.ceil(dataMeal.info.calories), label: 'Калории' },
               { value: Math.ceil(dataMeal.info.carbs), label: 'Углеводы' },
               { value: Math.ceil(dataMeal.info.protein), label: 'Белки' },
               { value: Math.ceil(dataMeal.info.fat), label: 'Жиры' },

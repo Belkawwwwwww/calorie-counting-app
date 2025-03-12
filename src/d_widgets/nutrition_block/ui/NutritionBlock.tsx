@@ -1,28 +1,39 @@
 import { StyledNutritionBlock } from './style';
 import { useModalOpen } from '@/g_shared/lib/hooks/useModalOpen/useModalOpen';
-import { useGetUserMeal } from '@/e_features/meal/hooks/useGetUserMeal';
+import { useGetUserMeal } from '@/e_features/food/hooks/useGetUserMeal';
 import { getFormattedDate } from '@/g_shared/lib/utils/dateUtils';
 import { FC, memo, useState } from 'react';
-import { Meal, MealType, mealTypes } from '@/f_entities/meal/type/mealModel';
-import { calculateCalories } from '@/e_features/meal/utils/calorieCalculator';
-import { MealItem } from '@/g_shared/ui/meal_item/ui/MealItem';
-import { InputModal } from '../components';
+import {
+    DataMeal,
+    Meal,
+    MealType,
+    mealTypes,
+} from '@/g_shared/lib/type/nutritionTypes';
+import { NutritionModalContainer } from '../components';
+import { MealItem } from '@/g_shared/ui/meal_item';
+import { LoadingIndicator } from '@/g_shared/ui/loader';
+import { calculateCalories } from '@/e_features/food';
 
 export const NutritionBlock: FC = memo(() => {
     const { isModalActive, handleModalOpen, handleModalClose } = useModalOpen();
     const [eat, setEat] = useState('');
     const [mealInfo, setMealInfo] = useState<Meal | null>(null);
     const formattedDate = getFormattedDate();
-    const { data: dataMeal } = useGetUserMeal(formattedDate);
+    const { data: userMealData, isLoading: isMealLoading } =
+        useGetUserMeal(formattedDate);
     const caloriesMap: Record<MealType, number> = {
         breakfast: 0,
         lunch: 0,
         dinner: 0,
     };
-    const updatedCaloriesMap = calculateCalories(dataMeal, caloriesMap);
+
+    const updatedCaloriesMap = calculateCalories(
+        userMealData?.data || [],
+        caloriesMap
+    );
 
     const handleMealClick = (meal: MealType) => {
-        const foundMeal = dataMeal?.data.find(
+        const foundMeal = userMealData?.data.find(
             (mealItem: Meal) => mealItem.meal_type === meal
         );
 
@@ -34,18 +45,22 @@ export const NutritionBlock: FC = memo(() => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEat(e.target.value);
     };
+    if (isMealLoading) {
+        return <LoadingIndicator />;
+    }
 
     return (
         <StyledNutritionBlock>
-            {isModalActive && (
-                <InputModal
+            {isModalActive ? (
+                <NutritionModalContainer
+                    data={formattedDate}
                     title={mealInfo?.meal_type || ''}
                     value={eat}
                     onChange={handleChange}
                     onClose={handleModalClose}
                     dataMeal={mealInfo}
                 />
-            )}
+            ) : null}
             <>
                 {mealTypes.map((mealType) => (
                     <MealItem

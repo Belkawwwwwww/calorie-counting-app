@@ -14,10 +14,7 @@ const bzuAPI = createApi({
                 credentials: 'include',
             }),
             transformResponse: (response: unknown) => {
-                // Парсим ответ через Zod
                 const parsedResponse = GetBzuResponseSchema.parse(response);
-
-                // Возвращаем полный объект согласно структуре ответа
                 return {
                     response_status: parsedResponse.response_status,
                     data: parsedResponse.data,

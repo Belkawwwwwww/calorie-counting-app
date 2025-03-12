@@ -22,3 +22,8 @@ export const mealsTranslation: { [key: string]: string } = {
     lunch: 'ОБЕД',
     dinner: 'УЖИН',
 };
+
+export const typeOfMealTranslation: { [key: string]: string } = {
+    product: 'ПРОДУКТЫ',
+    food: 'БЛЮДА',
+};

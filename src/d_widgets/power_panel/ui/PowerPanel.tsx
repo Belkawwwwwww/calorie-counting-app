@@ -1,4 +1,4 @@
-import { useGetUserMeal } from '@/e_features/meal/hooks/useGetUserMeal';
+import { useGetUserMeal } from '@/e_features/food/hooks/useGetUserMeal';
 import {
     Calories,
     Cel,
@@ -6,24 +6,39 @@ import {
     Norm,
     Purpose,
     StyledSummaryBlock,
-    TwoBlock,
+    BZU,
 } from './style';
-import { useGetBzu } from '@/e_features/bzu/hooks/useGetBzu';
 import { getFormattedDate } from '@/g_shared/lib/utils/dateUtils';
-import { getTotalNutrients } from '@/e_features/meal/utils/getTotalNutrients';
-import { DailyCaloriesBlock } from '@/d_widgets/circle_block';
-import { NutrientProgressBar } from '@/d_widgets/nutrition_progress_bar';
+import { getTotalNutrients } from '@/g_shared/lib/utils/nutritionUtils';
+import { DailyCaloriesBlock } from '@/g_shared/ui/circle_block';
+import { NutrientProgressBar } from '@/g_shared/ui/nutrition_progress_bar';
+import { useGetBzu } from '@/e_features/bzu';
+import { Meal } from '@/g_shared/lib/type/nutritionTypes';
+import { LoadingIndicator } from '@/g_shared/ui/loader';
 
 export const PowerPanel = () => {
     const formattedDate = getFormattedDate();
-    const { data: bzuData, isLoading } = useGetBzu(formattedDate);
-    const { data: UserMealData } = useGetUserMeal(formattedDate);
-    const { totalProtein, totalFat, totalCarbs } = getTotalNutrients(
-        UserMealData?.data || []
-    );
-    const normFat = bzuData?.data.fat ?? 0;
-    const normProtein = bzuData?.data.protein ?? 0;
-    const normCarbs = bzuData?.data.carbs ?? 0;
+    const { data: bzuData, isLoading: isBzuLoading } = useGetBzu(formattedDate);
+    const { data: userMealData, isLoading: isMealLoading } =
+        useGetUserMeal(formattedDate);
+
+    const meals: Meal[] = Array.isArray(userMealData?.data)
+        ? userMealData.data
+        : [];
+    const { totalProtein, totalFat, totalCarbs } = getTotalNutrients(meals);
+    const roundValue = (value: number | undefined) => Math.round(value || 0);
+
+    const norms = {
+        fat: bzuData?.data.fat ?? 0,
+        protein: bzuData?.data.protein ?? 0,
+        carbs: bzuData?.data.carbs ?? 0,
+        current: bzuData?.data.current ?? 0,
+        max: bzuData?.data.max ?? 0,
+    };
+
+    if (isBzuLoading || isMealLoading) {
+        return <LoadingIndicator />;
+    }
 
     return (
         <StyledSummaryBlock>
@@ -32,29 +47,34 @@ export const PowerPanel = () => {
                     <Cel>{Math.round(bzuData?.data.max ?? 0)} ккал</Cel>
                     <Purpose>цель</Purpose>
                 </Norm>
-                <DailyCaloriesBlock date={bzuData} isLoading={isLoading} />
+                <DailyCaloriesBlock date={bzuData} isLoading={isBzuLoading} />
                 <Calories>
-                    <Cel>{Math.round(bzuData?.data.current ?? 0)} ккал</Cel>
+                    <Cel>{roundValue(norms.current)} ккал</Cel>
                     <Purpose>съедено</Purpose>
                 </Calories>
             </FirstBlock>
-            <TwoBlock>
-                <NutrientProgressBar
-                    label='Углеводы'
-                    current={totalCarbs}
-                    max={normCarbs}
-                />
-                <NutrientProgressBar
-                    label='Белки'
-                    current={totalProtein}
-                    max={normProtein}
-                />
-                <NutrientProgressBar
-                    label='Жиры'
-                    current={totalFat}
-                    max={normFat}
-                />
-            </TwoBlock>
+            <BZU>
+                {[
+                    {
+                        label: 'Углеводы',
+                        current: totalCarbs,
+                        max: norms.carbs,
+                    },
+                    {
+                        label: 'Белки',
+                        current: totalProtein,
+                        max: norms.protein,
+                    },
+                    { label: 'Жиры', current: totalFat, max: norms.fat },
+                ].map(({ label, current, max }) => (
+                    <NutrientProgressBar
+                        key={label}
+                        label={label}
+                        current={current}
+                        max={max}
+                    />
+                ))}
+            </BZU>
         </StyledSummaryBlock>
     );
 };

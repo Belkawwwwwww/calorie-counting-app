@@ -36,7 +36,7 @@ export const ModalContent = styled.div<{ width?: string; height?: string }>`
 export const CloseButton = styled.button`
     position: absolute;
     top: 10px;
-    right: 10px;
+    left: 10px;
     background: transparent;
     border: none;
     cursor: pointer;

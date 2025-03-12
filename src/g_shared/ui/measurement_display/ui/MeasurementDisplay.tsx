@@ -14,7 +14,7 @@ export const MeasurementDisplay: FC<Props> = (props) => {
                     <Image src={imageScales} />
                 </ImageContainer>
 
-                <ImageText>{props.userData?.data.data.weight} кг</ImageText>
+                <ImageText>{props.userData?.data?.data?.weight} кг</ImageText>
             </ImageBlock>
             <ImageBlock>
                 <ImageContainer>
@@ -22,7 +22,7 @@ export const MeasurementDisplay: FC<Props> = (props) => {
                 </ImageContainer>
 
                 <ImageText>
-                    {props.userData?.data.data.waist_girth} см
+                    {props.userData?.data?.data?.waist_girth} см
                 </ImageText>
             </ImageBlock>
             <ImageBlock>

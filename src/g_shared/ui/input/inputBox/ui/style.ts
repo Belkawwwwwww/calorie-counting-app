@@ -23,3 +23,8 @@ export const PlaceholderImage = styled.img`
     width: 20px;
     height: 20px;
 `;
+export const Label = styled.label`
+    font-size: 14px;
+    color: var(--color-text1);
+    margin-top: 20px;
+`;

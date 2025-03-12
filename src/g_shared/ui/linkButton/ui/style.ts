@@ -7,17 +7,17 @@ export const StyledLinkButton = styled.button`
     color: black;
     font-size: 14px;
     text-decoration: none;
-    padding: 10px 15px; // Увеличенная область клика
+    padding: 10px 15px;
     transition:
         background 0.3s,
         color 0.3s;
 
-    /* &:hover {
+    &:hover {
         color: #89ac76;
-    } */
+    }
 
     &:focus {
-        outline: none; // Убираем стандартное выделение
+        outline: none;
     }
     @media (max-width: 768px) {
     }

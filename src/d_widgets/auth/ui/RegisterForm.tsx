@@ -8,17 +8,15 @@ import { setUser } from '@/f_entities/user/model/action/action';
 import { useRouter } from 'next/router';
 import { InputBox } from '@/g_shared/ui/input';
 import { useError } from '@/g_shared/lib/context';
-import { Error } from '@/g_shared/ui/errorDisplay';
+import { Error } from '@/g_shared/ui/error_display';
 import { LoadingInBtn } from '@/g_shared/ui/loader';
 import { RegScheme } from '@/g_shared/lib/validation/authScheme';
 import { Btn, Container, FooterRegister, StyledLink } from './style';
 import { OpenRoute } from '../../../e_features/auth/ui/OpenRoute';
 import { useRegister } from '@/e_features/auth';
-import { useAuthValidations } from '@/e_features/auth/hooks/useLoginValidation';
 
 export const RegisterForm = () => {
     const { register, isLoading } = useRegister();
-    // const { validationErrors, validate } = useAuthValidations(Re);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');

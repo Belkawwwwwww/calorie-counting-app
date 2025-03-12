@@ -1,6 +1,5 @@
 import {
     getQuestionsConfig,
-    NextBtn,
     useCreateSurvey,
     useSurvey,
 } from '@/e_features/survey';
@@ -14,6 +13,7 @@ import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
 import { z } from 'zod';
 import { Questions, Title } from './style';
+import { NextBtn } from '@/g_shared/ui/next_btn';
 
 export const QuestionForm: FC = () => {
     const {

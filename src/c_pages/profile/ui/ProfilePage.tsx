@@ -1,6 +1,6 @@
 import { ProtectedRoute } from '@/e_features/auth';
 import React from 'react';
-import { StyledUserProfile } from './style';
+import { BtnContainer, StyledUserProfile } from './style';
 import { Layout } from '@/g_shared/ui/layout';
 import { LoadingIndicator } from '@/g_shared/ui/loader';
 import { RouteEnum } from '@/g_shared/model';
@@ -14,6 +14,8 @@ import { ProfileNavbar } from '@/d_widgets/navbar_profile';
 import { ProfileInfo } from '@/d_widgets/profile_info';
 import { MessageNoResponse } from '@/g_shared/ui/message_no_response';
 import { AboutProfile } from '@/d_widgets/about_profile';
+import { BodyMeasurements } from '@/d_widgets/body_measurements';
+import { UpdateButton } from '@/g_shared/ui/update_button';
 
 export const ProfilePage = () => {
     const { userSessionData, userData, isLoading } = useGetUserProfile();
@@ -26,28 +28,39 @@ export const ProfilePage = () => {
     }
     const { gender, target, growth, activity, weight } =
         userData.data?.data || {};
-    if (userData.response_status !== 0) {
-        console.log(userData);
-        return <MessageNoResponse href={RouteEnum.TEST} />;
-    }
+    const hasErrorResponse = userData.response_status !== 0;
 
     return (
         <ProtectedRoute>
             <StyledUserProfile>
                 <ProfileNavbar />
                 <Layout>
-                    <AboutProfile
-                        gender={gender}
-                        first_name={first_name}
-                        last_name={last_name}
-                    />
-                    <ProfileInfo
-                        gender={genderTranslations[gender] || gender}
-                        target={goalTranslations[target] || target}
-                        growth={growth}
-                        activity={activityTranslations[activity] || activity}
-                        weight={weight}
-                    />
+                    {hasErrorResponse ? (
+                        <>
+                            <MessageNoResponse href={RouteEnum.TEST} />
+                        </>
+                    ) : (
+                        <>
+                            <BtnContainer>
+                                <UpdateButton />
+                                <BodyMeasurements />
+                            </BtnContainer>
+                            <AboutProfile
+                                gender={gender}
+                                first_name={first_name}
+                                last_name={last_name}
+                            />
+                            <ProfileInfo
+                                gender={genderTranslations[gender] || gender}
+                                target={goalTranslations[target] || target}
+                                growth={growth}
+                                activity={
+                                    activityTranslations[activity] || activity
+                                }
+                                weight={weight}
+                            />
+                        </>
+                    )}
                 </Layout>
             </StyledUserProfile>
         </ProtectedRoute>

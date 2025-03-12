@@ -7,16 +7,18 @@ export const NutritionTitle: React.FC<NutritionTitleProps> = ({
 }) => {
     return (
         <TitleContainer>
-            {nutritionData.map((nutrient, index) => (
-                <BZU key={index}>
-                    {' '}
-                    <p>
-                        {nutrient.value}{' '}
-                        {nutrient.label === 'ккал' ? 'ккал' : 'г'}
-                    </p>
-                    <Micronutrient>{nutrient.label}</Micronutrient>
-                </BZU>
-            ))}
+            <>
+                {nutritionData.map((nutrient, index) => (
+                    <BZU key={index}>
+                        {' '}
+                        <p>
+                            {nutrient.value}{' '}
+                            {nutrient.label === 'ккал' ? 'ккал' : 'г'}
+                        </p>
+                        <Micronutrient>{nutrient.label}</Micronutrient>
+                    </BZU>
+                ))}
+            </>
         </TitleContainer>
     );
 };
