@@ -55,7 +55,6 @@ export const LoginForm = () => {
             dispatch(setAuth(true));
             dispatch(setUser({ user_id: backendUser_id }));
             await router.push(RouteEnum.MAIN);
-            console.log('Авторизация успешна');
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const errors = error.issues.reduce(
@@ -67,9 +66,7 @@ export const LoginForm = () => {
                     {} as typeof validationErrors
                 );
                 setValidationErrors(errors);
-                console.log('Ошибка валидации:', errors);
             } else {
-                console.error('Authtorization failed:', error);
                 setError('auth', 'Произошла ошибка при авторизации');
             }
         }

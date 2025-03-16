@@ -8,6 +8,7 @@ import {
     PlaceholderImage,
     StyledInputBox,
 } from './style';
+import { InputUnframed } from '../../input_unframed/ui/InputUnframed';
 
 export const InputBox: FC<InputBoxProps> = ({
     label,
@@ -15,6 +16,9 @@ export const InputBox: FC<InputBoxProps> = ({
     direction = 'column',
     value = '',
     imageSrc,
+    useUnframedInput = false,
+    id,
+    type,
     ...inputProps
 }) => {
     const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (
@@ -26,16 +30,27 @@ export const InputBox: FC<InputBoxProps> = ({
     return (
         <StyledInputBox direction={direction}>
             <InputContainer>
-                <Label htmlFor={inputProps.id}>{label}</Label>
-
+                {useUnframedInput ? null : <Label htmlFor={id}>{label}</Label>}
                 {imageSrc ? (
                     <PlaceholderImage src={imageSrc} alt='placeholder' />
                 ) : null}
-                <Input
-                    value={value}
-                    {...inputProps}
-                    onChange={handleInputChange}
-                />
+                {useUnframedInput ? (
+                    <InputUnframed
+                        id={id ?? ''}
+                        value={value}
+                        label={label}
+                        type={type}
+                        {...inputProps}
+                        onChange={handleInputChange}
+                    />
+                ) : (
+                    <Input
+                        id={id ?? ''}
+                        value={value}
+                        {...inputProps}
+                        onChange={handleInputChange}
+                    />
+                )}
             </InputContainer>
             {error ? <Error>{error}</Error> : null}
         </StyledInputBox>

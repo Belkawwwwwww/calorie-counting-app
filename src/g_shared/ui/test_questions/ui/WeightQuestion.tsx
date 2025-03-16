@@ -12,7 +12,15 @@ export const WeightQuestion: FC<Props> = (props) => {
 
     const handleWeightChange = (value: string) => {
         const weightValue = Number(value); // строку в число
-
+        if (isNaN(weightValue)) {
+            if (isNaN(weightValue)) {
+                setValidationError('Пожалуйста, введите число');
+                if (props.onInputValidation) {
+                    props.onInputValidation(false);
+                }
+                return;
+            }
+        }
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);

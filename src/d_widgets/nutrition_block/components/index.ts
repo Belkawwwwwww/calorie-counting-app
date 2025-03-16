@@ -1,1 +1,1 @@
-export { NutritionModalContainer } from './input_processing/ui/NutritionModal';
+export { NutritionModal } from './nutrition_modal/ui/NutritionModal';

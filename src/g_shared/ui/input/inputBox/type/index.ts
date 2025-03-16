@@ -6,4 +6,5 @@ export type InputBoxProps = {
     direction?: 'column' | 'row';
     style?: React.CSSProperties;
     imageSrc?: string;
+    useUnframedInput?: boolean;
 } & Props;

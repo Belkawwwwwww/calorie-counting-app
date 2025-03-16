@@ -1,12 +1,11 @@
-import React, { ChangeEventHandler } from 'react';
+import { ChangeEventHandler } from 'react';
 
 export type Props = {
     onChange: ChangeEventHandler<HTMLInputElement>;
-    value: string | number | undefined;
+    value?: string | number | undefined;
+    label?: string;
     inputRef?: React.LegacyRef<HTMLInputElement>;
     type?: string;
-    name?: string;
-    id?: string;
     placeholder?: string;
-    style?: React.CSSProperties;
+    id: string;
 };

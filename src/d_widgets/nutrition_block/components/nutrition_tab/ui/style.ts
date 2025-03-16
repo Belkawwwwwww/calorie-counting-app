@@ -1,12 +1,20 @@
 import styled from 'styled-components';
+import { Button } from '../../../../../g_shared/ui/button';
 
 export const MenuContainer = styled.div`
     display: flex;
     flex-direction: column;
 `;
+export const MenuSelection = styled.div`
+    margin-bottom: 20px;
+`;
 export const OptionBlock = styled.div`
     display: flex;
     gap: 20px;
+`;
+export const CreateContainer = styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 export const Option = styled.div<{ isSelected: boolean }>`
     width: 130px;
@@ -25,5 +33,17 @@ export const Option = styled.div<{ isSelected: boolean }>`
     text-align: center;
     &:hover {
         background-color: #ebebeb;
+    }
+`;
+export const ResponsiveButton = styled(Button)`
+    width: auto;
+    background-color: black;
+
+    $btnWidth: 'l';
+    $btnSquareSize: 'button--square--size-l';
+
+    @media (max-width: 768px) {
+        $btnWidth: 's';
+        $btnSquareSize: 'button--square--size-s'; /
     }
 `;

@@ -3,8 +3,14 @@ import { ApiUrls } from '@/g_shared/model';
 import {
     CreateMealResponse,
     CreateOrUpdateMeal,
-} from '@/f_entities/meal/type/mealType';
+} from '@/f_entities/meal/model/mealType';
 import { FoodResponse } from '../type/foodTypes';
+import {
+    CreateFoodInput,
+    CreateFoodResponse,
+} from '@/f_entities/food/model/createFoodTypes';
+import { handleResponse } from '@/g_shared/lib/utils/responseHandler';
+import { CreateFoodResponseSchema } from '@/f_entities/food/model/createFoodSchema';
 
 const foodAPI = createApi({
     reducerPath: 'foodAPI',
@@ -24,15 +30,17 @@ const foodAPI = createApi({
         //         url:
         //     })
         // }),
-        // createFood: build.mutation<any, any>({
-        //     query: (body) => ({
-        //         url: '/api/v1/food',
-        //         method: 'POST',
-        //         body,
-        //         credentials: 'include',
-        //         keepUnusedDataFor: 120,
-        //     }),
-        // }),
+        createFood: build.mutation<CreateFoodResponse, CreateFoodInput>({
+            query: (body) => ({
+                url: '/api/v1/food',
+                method: 'POST',
+                body,
+                credentials: 'include',
+                keepUnusedDataFor: 120,
+            }),
+            transformErrorResponse: (response) =>
+                handleResponse(response, CreateFoodResponseSchema),
+        }),
         // createOrUpdateMeal: build.mutation<
         //     CreateMealResponse,
         //     CreateOrUpdateMeal
@@ -48,5 +56,5 @@ const foodAPI = createApi({
     }),
 });
 
-export const { useGetUserMealQuery } = foodAPI;
+export const { useGetUserMealQuery, useCreateFoodMutation } = foodAPI;
 export default foodAPI;

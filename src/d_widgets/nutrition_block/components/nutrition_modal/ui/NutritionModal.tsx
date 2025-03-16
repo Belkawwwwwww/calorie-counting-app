@@ -5,10 +5,10 @@ import { mealsTranslation } from '@/g_shared/lib/utils/translation';
 import { useNutritionData } from '@/g_shared/lib/hooks';
 import { NutritionTitle } from '@/g_shared/ui/nutrient_title';
 import { FoodEatenList } from '@/g_shared/ui/food_item_list';
-import { ModalFood } from '@/g_shared/ui/dop_modal_food';
+import { FoodDetailModal } from '@/d_widgets/nutrition_block/components/food_detail_modal';
 import { AddMoreButton } from '@/g_shared/ui/add_more_button_meal';
 
-export const NutritionModalContainer: FC<Props> = (props) => {
+export const NutritionModal: FC<Props> = (props) => {
     const [isAdditionalModalActive, setAdditionalModalActive] = useState(false);
     const [activeTab, setActiveTab] = useState('products');
     const nutritionData = useNutritionData(props.dataMeal);
@@ -35,7 +35,7 @@ export const NutritionModalContainer: FC<Props> = (props) => {
                 <FoodEatenList mealFoods={props.dataMeal} />
                 <AddMoreButton onClick={handleAddMoreClick} />
                 {isAdditionalModalActive ? (
-                    <ModalFood
+                    <FoodDetailModal
                         title={props.title}
                         value={props.value}
                         data={props.data}

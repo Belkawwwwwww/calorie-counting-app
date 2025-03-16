@@ -3,15 +3,10 @@ import { useModalOpen } from '@/g_shared/lib/hooks/useModalOpen/useModalOpen';
 import { useGetUserMeal } from '@/e_features/food/hooks/useGetUserMeal';
 import { getFormattedDate } from '@/g_shared/lib/utils/dateUtils';
 import { FC, memo, useState } from 'react';
-import {
-    DataMeal,
-    Meal,
-    MealType,
-    mealTypes,
-} from '@/g_shared/lib/type/nutritionTypes';
-import { NutritionModalContainer } from '../components';
+import { Meal, MealType, mealTypes } from '@/g_shared/lib/type/nutritionTypes';
 import { MealItem } from '@/g_shared/ui/meal_item';
 import { LoadingIndicator } from '@/g_shared/ui/loader';
+import { NutritionModal } from '../components';
 import { calculateCalories } from '@/e_features/food';
 
 export const NutritionBlock: FC = memo(() => {
@@ -52,7 +47,7 @@ export const NutritionBlock: FC = memo(() => {
     return (
         <StyledNutritionBlock>
             {isModalActive ? (
-                <NutritionModalContainer
+                <NutritionModal
                     data={formattedDate}
                     title={mealInfo?.meal_type || ''}
                     value={eat}

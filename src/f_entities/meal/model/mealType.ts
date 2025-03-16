@@ -1,7 +1,7 @@
 import {
     CreateOrUpdateMealResponse,
     MealSchema,
-} from '../model/createOrUpdateMealZod';
+} from './createOrUpdateMealSchema';
 
 export type CreateMealResponse = typeof CreateOrUpdateMealResponse._output;
 export type CreateOrUpdateMeal = typeof MealSchema._input;

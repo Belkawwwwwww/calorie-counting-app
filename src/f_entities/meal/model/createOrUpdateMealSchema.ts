@@ -19,7 +19,14 @@ export const InfoSchema = z.object({
     protein: z.number(),
     fat: z.number(),
     carbs: z.number(),
-    calories: z.number(),
+    calories: z
+        .number()
+        .refine((val) => val >= 0, {
+            message: 'Рост не может быть отрицательным',
+        })
+        .refine((val) => val > 0, {
+            message: 'Введите корректный рост',
+        }),
 });
 const MealFoodSchema = z.object({
     type: FoodTypeSchema,

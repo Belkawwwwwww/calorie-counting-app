@@ -1,18 +1,18 @@
 import { FC } from 'react';
-import { Modal } from '../../modal';
-import { InputBox } from '../../input';
+import { Modal } from '../../../../../g_shared/ui/modal';
+import { InputBox } from '../../../../../g_shared/ui/input';
 import { mealsTranslation } from '@/g_shared/lib/utils/translation';
 import { NutritionTab } from '../../nutrition_tab';
 import { Props } from './type';
 
-export const ModalFood: FC<Props> = (props) => {
+export const FoodDetailModal: FC<Props> = (props) => {
     return (
         <>
             <Modal
                 title={mealsTranslation[props.title]}
                 onClose={props.handleCloseAdditionalModal}
                 width='600px'
-                height='400px'
+                height='auto'
             >
                 <InputBox
                     value={props.value}

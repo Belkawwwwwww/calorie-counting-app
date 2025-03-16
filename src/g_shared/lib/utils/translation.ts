@@ -27,3 +27,14 @@ export const typeOfMealTranslation: { [key: string]: string } = {
     product: 'ПРОДУКТЫ',
     food: 'БЛЮДА',
 };
+
+export const FoodTransition: { [key: string]: string } = {
+    name: 'ОПИСАНИЕ',
+    product_id: 'ID ПРОДУКТА',
+    weight: 'ВЕС',
+    is_public: 'ПУБЛИЧНОЕ',
+    protein: 'БЕЛКИ',
+    fat: 'ЖИРЫ',
+    carbs: 'УГЛЕВОДЫ',
+    calories: 'КАЛОРИИ',
+};
