@@ -6,13 +6,14 @@ export const ProductSchema = z.object({
         .min(1, 'ID продукта обязателен и должен быть больше 0'),
     weight: z
         .number()
-        .min(1, 'Введите корректное значение')
+        // .min(1, 'Введите корректное значение')
         .refine((val) => val >= 0, {
             message: 'Не может быть отрицательным',
         })
-        .refine((val) => val > 0, {
-            message: 'Введите корректное значение',
-        }),
+        // .refine((val) => val > 0, {
+        //     message: 'Введите корректное значение',
+        // })
+        .optional(),
 });
 
 export const InfoSchema = z.object({

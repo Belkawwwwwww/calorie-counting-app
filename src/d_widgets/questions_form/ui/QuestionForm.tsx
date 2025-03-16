@@ -5,7 +5,7 @@ import {
 } from '@/e_features/survey';
 import { useGetSurveyQuery } from '@/e_features/survey/api/surveyApi';
 import { surveyScheme } from '@/f_entities/survey';
-import { prepareAnswers } from '@/g_shared/lib/utils/prepareAnswers';
+import { prepareAnswers } from '@/d_widgets/questions_form/config/prepareAnswers';
 import { RouteEnum } from '@/g_shared/model';
 import { UIFormLayout } from '@/g_shared/ui/layout';
 import { LoaderTest } from '@/g_shared/ui/loader';

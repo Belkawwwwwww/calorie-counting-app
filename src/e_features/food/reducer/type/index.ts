@@ -7,11 +7,11 @@ export type State = {
 export const initialState: State = {
     createFoodInfo: {
         name: '',
-        weight: undefined,
-        product_id: undefined,
-        protein: undefined,
-        fat: undefined,
-        carbs: undefined,
-        calories: undefined,
+        weight: null,
+        product_id: null,
+        protein: null,
+        fat: null,
+        carbs: null,
+        calories: null,
     },
 };

@@ -29,12 +29,12 @@ type InputField = {
 
 export const inputFields = (
     name: string | null,
-    product_id: number | undefined,
-    weight: number | undefined,
-    protein: number | undefined,
-    fat: number | undefined,
-    carbs: number | undefined,
-    calories: number | undefined,
+    product_id: number | null,
+    weight: number | null,
+    protein: number | null,
+    fat: number | null,
+    carbs: number | null,
+    calories: number | null,
     validationErrors: ValidationErrors
 ): InputField[] => [
     {

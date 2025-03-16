@@ -1,4 +1,4 @@
-import { FC, useReducer, useState } from 'react';
+import { FC, useEffect, useReducer, useState } from 'react';
 import { Props } from '../type';
 import {
     CreateContainer,
@@ -20,6 +20,7 @@ import { LoadingInBtn } from '@/g_shared/ui/loader';
 import { reducer } from '@/e_features/food/reducer/createFoodReducer';
 import { initialState } from '@/e_features/food/reducer/type';
 import { CreateFoodInfo } from '@/f_entities/food/type';
+import { createFoodData } from '../config/foodDataHelper';
 
 export const NutritionTab: FC<Props> = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -27,10 +28,9 @@ export const NutritionTab: FC<Props> = (props) => {
     const { createFood, isLoading } = useCreateFood();
     const [isPublic, setIsPublic] = useState<boolean>(false);
     const { setError, clearError } = useError();
-    const [validationErrors, setValidationErrors] = useState<
-        Record<string, string>
-    >({
+    const [validationErrors, setValidationErrors] = useState({
         name: '',
+        // products: {},
         product_id: '',
         weight: '',
         protein: '',
@@ -38,6 +38,9 @@ export const NutritionTab: FC<Props> = (props) => {
         carbs: '',
         calories: '',
     });
+    useEffect(() => {
+        console.log('Текущие ошибки валидации:', validationErrors);
+    }, [validationErrors]);
 
     const handleInputChange = (
         name: keyof CreateFoodInfo,
@@ -73,6 +76,14 @@ export const NutritionTab: FC<Props> = (props) => {
                 }));
                 return;
             }
+            if (name === 'product_id' && numericValue <= 0) {
+                setValidationErrors((prev) => ({
+                    ...prev,
+                    [name]: 'ID продукта обязателен и должен быть больше 0',
+                }));
+                return;
+            }
+
             try {
                 schema.parse(numericValue);
                 setValidationErrors((prev) => ({ ...prev, [name]: '' }));
@@ -97,36 +108,10 @@ export const NutritionTab: FC<Props> = (props) => {
     const handleSubmit = async () => {
         clearError('createFood');
 
-        const foodData = {
-            name: String(createFoodInfo.name),
-            is_public: isPublic,
-            products: [
-                {
-                    product_id: Number(createFoodInfo.product_id),
-                    weight: Number(createFoodInfo.weight),
-                },
-            ],
-            info: {
-                protein: createFoodInfo.protein
-                    ? Number(createFoodInfo.protein)
-                    : undefined,
-                fat: createFoodInfo.fat
-                    ? Number(createFoodInfo.fat)
-                    : undefined,
-                carbs: createFoodInfo.carbs
-                    ? Number(createFoodInfo.carbs)
-                    : undefined,
-                calories: createFoodInfo.calories
-                    ? Number(createFoodInfo.calories)
-                    : undefined,
-            },
-        };
+        const foodData = createFoodData(createFoodInfo, isPublic);
 
+        console.log('данные перед валиадцией:', foodData);
         try {
-            // Проверяем данные с помощью схемы
-            createFoodScheme.parse(foodData);
-            const response = await createFood(foodData).unwrap();
-            console.log(foodData, response);
             setValidationErrors({
                 name: '',
                 product_id: '',
@@ -136,9 +121,12 @@ export const NutritionTab: FC<Props> = (props) => {
                 carbs: '',
                 calories: '',
             });
+
+            createFoodScheme.parse(foodData);
+            const response = await createFood(foodData).unwrap();
+            console.log(response);
         } catch (error) {
             if (error instanceof z.ZodError) {
-                // При наличии ошибок валидации, фиксируем их в validationErrors
                 const errors = error.issues.reduce(
                     (acc, issue) => {
                         acc[issue.path[0] as keyof typeof validationErrors] =
@@ -147,8 +135,10 @@ export const NutritionTab: FC<Props> = (props) => {
                     },
                     {} as typeof validationErrors
                 );
-                setValidationErrors(errors);
+                console.log('Ошибки перед обновлением состояния:', errors);
+                setValidationErrors((prev) => ({ ...prev, ...errors }));
                 console.log('Ошибка валидации:', errors);
+                console.log('validationErrors:', validationErrors);
             } else {
                 console.error('Ошибка:', error);
                 setError('createFood', 'Произошла ошибка при создании.');
@@ -222,7 +212,7 @@ export const NutritionTab: FC<Props> = (props) => {
                                         )
                                     }
                                     useUnframedInput={true}
-                                    error={error}
+                                    error={error || validationErrors[id]}
                                 />
                             )
                         )}
