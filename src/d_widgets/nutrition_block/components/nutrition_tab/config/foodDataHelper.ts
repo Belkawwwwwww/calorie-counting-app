@@ -5,24 +5,24 @@ export const createFoodData = (
     isPublic: boolean
 ) => {
     return {
-        name: String(createFoodInfo.name),
+        name: String(createFoodInfo.name || ''),
         is_public: isPublic,
-        products: [
-            {
-                product_id: Number(createFoodInfo.product_id),
-                weight: Number(createFoodInfo.weight),
-            },
-        ],
+        products: createFoodInfo.products.map((product) => ({
+            product_id: Number(product.product_id),
+            weight: Number(product.weight),
+        })),
         info: {
-            protein: createFoodInfo.protein
-                ? Number(createFoodInfo.protein)
+            protein: createFoodInfo.info.protein
+                ? Number(createFoodInfo.info.protein)
                 : undefined,
-            fat: createFoodInfo.fat ? Number(createFoodInfo.fat) : undefined,
-            carbs: createFoodInfo.carbs
-                ? Number(createFoodInfo.carbs)
+            fat: createFoodInfo.info.fat
+                ? Number(createFoodInfo.info.fat)
                 : undefined,
-            calories: createFoodInfo.calories
-                ? Number(createFoodInfo.calories)
+            carbs: createFoodInfo.info.carbs
+                ? Number(createFoodInfo.info.carbs)
+                : undefined,
+            calories: createFoodInfo.info.calories
+                ? Number(createFoodInfo.info.calories)
                 : undefined,
         },
     };

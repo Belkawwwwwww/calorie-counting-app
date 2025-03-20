@@ -12,15 +12,7 @@ export const HipGirth: FC<Props> = (props) => {
 
     const handleHipChange = (value: string) => {
         const hipValue = Number(value); // строку в число
-        if (isNaN(hipValue)) {
-            if (isNaN(hipValue)) {
-                setValidationError('Пожалуйста, введите число');
-                if (props.onInputValidation) {
-                    props.onInputValidation(false); // Устанавливаем неуспешный статус
-                }
-                return; // Прерываем выполнение функции, так как мы не можем продолжить
-            }
-        }
+
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);

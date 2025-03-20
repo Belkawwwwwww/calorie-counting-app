@@ -7,11 +7,17 @@ export type State = {
 export const initialState: State = {
     createFoodInfo: {
         name: '',
-        weight: null,
-        product_id: null,
-        protein: null,
-        fat: null,
-        carbs: null,
-        calories: null,
+        products: [
+            {
+                weight: null,
+                product_id: null,
+            },
+        ],
+        info: {
+            protein: null,
+            fat: null,
+            carbs: null,
+            calories: null,
+        },
     },
 };

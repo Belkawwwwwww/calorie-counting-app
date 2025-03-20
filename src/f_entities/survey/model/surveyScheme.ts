@@ -4,7 +4,7 @@ export const surveyScheme = z.object({
     gender: z.enum(['MALE', 'FEMALE']),
     target: z.enum(['LOSE_WEIGHT', 'MAINTAIN_WEIGHT', 'GAIN_WEIGHT']),
     growth: z
-        .number()
+        .number({ invalid_type_error: 'Рост должен быть числом' })
         .refine((val) => val <= 300, {
             message: 'Рост не может превышать 300 см',
         })
@@ -22,7 +22,7 @@ export const surveyScheme = z.object({
         'HIGHLY_ACTIVE_LIFESTYLE',
     ]),
     weight: z
-        .number()
+        .number({ invalid_type_error: 'Вес должен быть числом' })
         .refine((val) => val <= 500, {
             message: 'Вес не может превышать 500 кг',
         })
@@ -33,7 +33,7 @@ export const surveyScheme = z.object({
             message: 'Введите корректный вес',
         }),
     waist_girth: z
-        .number()
+        .number({ invalid_type_error: 'Обхват талии должен быть числом' })
         .refine((val) => val <= 500, {
             message: 'Обхват талии не может превышать 300см',
         })
@@ -44,7 +44,7 @@ export const surveyScheme = z.object({
             message: 'Введите корректные значения',
         }),
     hip_girth: z
-        .number()
+        .number({ invalid_type_error: 'Обхват бедер должен быть числом' })
         .refine((val) => val <= 500, {
             message: 'Обхват бедер не может превышать 300см',
         })

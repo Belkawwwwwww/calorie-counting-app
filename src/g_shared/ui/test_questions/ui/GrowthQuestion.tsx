@@ -12,15 +12,7 @@ export const GrowthQuestion: FC<Props> = (props) => {
 
     const handleGrowthChange = (value: string) => {
         const growthValue = Number(value); // строку в число
-        if (isNaN(growthValue)) {
-            if (isNaN(growthValue)) {
-                setValidationError('Пожалуйста, введите число');
-                if (props.onInputValidation) {
-                    props.onInputValidation(false); // Устанавливаем неуспешный статус
-                }
-                return; // Прерываем выполнение функции, так как мы не можем продолжить
-            }
-        }
+
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);

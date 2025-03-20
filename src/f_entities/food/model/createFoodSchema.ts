@@ -2,37 +2,31 @@ import { z } from 'zod';
 
 export const ProductSchema = z.object({
     product_id: z
-        .number()
-        .min(1, 'ID продукта обязателен и должен быть больше 0'),
+        .number({ invalid_type_error: 'ID продукта должен быть числом' })
+        .min(1, { message: 'ID продукта должен быть больше 0' }),
     weight: z
-        .number()
-        // .min(1, 'Введите корректное значение')
-        .refine((val) => val >= 0, {
-            message: 'Не может быть отрицательным',
-        })
-        // .refine((val) => val > 0, {
-        //     message: 'Введите корректное значение',
-        // })
+        .number({ invalid_type_error: 'Вес должен быть числом' })
+        .min(0, { message: 'Вес не может быть отрицательным' })
         .optional(),
 });
 
 export const InfoSchema = z.object({
     protein: z
-        .number()
-        .refine((val) => val >= 0, { message: 'Не может быть отрицательным' })
+        .number({ invalid_type_error: 'Белки должны быть числом' })
+        .min(0, { message: 'Белки не могут быть отрицательными' })
         .optional(),
 
     fat: z
-        .number()
-        .refine((val) => val >= 0, { message: 'Не может быть отрицательным' })
+        .number({ invalid_type_error: 'Жиры должны быть числом' })
+        .min(0, { message: 'Жиры не могут быть отрицательными' })
         .optional(),
     carbs: z
-        .number()
-        .refine((val) => val >= 0, { message: 'Не может быть отрицательным' })
+        .number({ invalid_type_error: 'Углеводы должны быть числом' })
+        .min(0, { message: 'Углеводы не могут быть отрицательными' })
         .optional(),
     calories: z
-        .number()
-        .refine((val) => val >= 0, { message: 'Не может быть отрицательным' })
+        .number({ invalid_type_error: 'Калории должны быть числом' })
+        .min(0, { message: 'Калории не могут быть отрицательными' })
         .optional(),
 });
 
