@@ -3,13 +3,17 @@ import { Modal } from '../../../../../g_shared/ui/modal';
 import { InputBox } from '../../../../../g_shared/ui/input';
 import { mealsTranslation } from '@/g_shared/lib/utils/translation';
 import { NutritionTab } from '../../nutrition_tab';
-import { Props } from './type';
+import { Props } from '../type';
+import { MealType } from '@/g_shared/lib/type/nutritionTypes';
 
 export const FoodDetailModal: FC<Props> = (props) => {
+    const defaultTitle: MealType = props.title;
+    const modalTitle = mealsTranslation[defaultTitle];
+
     return (
         <>
             <Modal
-                title={mealsTranslation[props.title]}
+                title={modalTitle}
                 onClose={props.handleCloseAdditionalModal}
                 width='600px'
                 height='auto'

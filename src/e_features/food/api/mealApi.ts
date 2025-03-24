@@ -4,13 +4,13 @@ import {
     CreateMealResponse,
     CreateOrUpdateMeal,
 } from '@/f_entities/meal/model/mealType';
-import { FoodResponse } from '../type/foodTypes';
+import { FoodResponse } from '../create_or_update_meal/type/foodTypes';
 import {
     CreateFoodInput,
     CreateFoodResponse,
-} from '@/f_entities/food/model/createFoodTypes';
+} from '@/e_features/food/create_food/type/createFoodTypes';
 import { handleResponse } from '@/g_shared/lib/utils/responseHandler';
-import { CreateFoodResponseSchema } from '@/f_entities/food/model/createFoodSchema';
+import { CreateFoodResponseSchema } from '@/e_features/food/create_food/lib/createFoodSchema';
 
 const foodAPI = createApi({
     reducerPath: 'foodAPI',

@@ -1,7 +1,7 @@
 import {
     createFoodScheme,
     ProductSchema,
-} from '@/f_entities/food/model/createFoodSchema';
+} from '@/e_features/food/create_food/lib/createFoodSchema';
 import { FoodTransition } from './translation';
 import { InfoSchema } from '@/f_entities/meal/model/createOrUpdateMealSchema';
 

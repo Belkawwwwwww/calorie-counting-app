@@ -1,16 +1,27 @@
-export type Product = {
-    product_id: number | null;
-    weight: number | null;
+export type ValidationErrors = {
+    name?: string;
+    products?: Array<{
+        product_id?: string;
+        weight?: string;
+    }>;
+    info?: {
+        protein?: string;
+        fat?: string;
+        carbs?: string;
+        calories?: string;
+    };
+};
+export type FoodInfo = {
+    protein: string;
+    fat: string;
+    carbs: string;
+    calories: string;
 };
 
-export type FoodInfo = {
-    protein: number | null;
-    fat: number | null;
-    carbs: number | null;
-    calories: number | null;
-};
-export type CreateFoodInfo = {
+export interface FoodState {
     name: string;
-    products: Product[];
-    info: FoodInfo;
-};
+    isPublic: boolean;
+    products: { product_id: string; weight: string }[];
+    info: { protein: string; fat: string; carbs: string; calories: string };
+    validationErrors: ValidationErrors;
+}

@@ -17,7 +17,10 @@ export const AboutProfile: FC<Props> = (props) => {
             <PhotoContainer>
                 <PhotoWrapper>
                     <Photo>
-                        <Image src={imageUrl} />
+                        <Image
+                            src={imageUrl}
+                            alt={`Profile picture for ${props.first_name} ${props.last_name}`}
+                        />
                     </Photo>
                 </PhotoWrapper>
             </PhotoContainer>

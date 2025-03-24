@@ -1,0 +1,1 @@
+export { FoodTransition } from './translation';

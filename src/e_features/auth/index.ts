@@ -1,10 +1,9 @@
 export { ProtectedRoute } from './ui/ProtectedRoute';
 export { OpenRoute } from './ui/OpenRoute';
-export { sessionSlice } from './modele/slice/session';
-export { isAuthSelector } from './modele/selector/session';
-export { isLoadingSelector } from './modele/selector/session';
-export { useRegister } from './hooks/useAuthHooks';
-export { useAuth } from './hooks/useAuthHooks';
-export { useFetchUser } from './hooks/useAuthHooks';
-export { useLogout } from './hooks/useAuthHooks';
-export { MemoizedUserSessionLoader } from './hooks/userSessionFetcher';
+export { sessionSlice } from './model/slice/session';
+export { isAuthSelector } from './model/selector/session';
+export { isLoadingSelector } from './model/selector/session';
+export { useRegister } from './lib/hooks/useAuthHooks';
+export { useAuth } from './lib/hooks/useAuthHooks';
+export { useFetchUser } from './lib/hooks/useAuthHooks';
+export { useLogout } from './lib/hooks/useAuthHooks';

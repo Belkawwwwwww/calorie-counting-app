@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { userSlice } from '@/f_entities/user';
-import { sessionSlice } from '@/e_features/auth/modele/slice/session';
+import { sessionSlice } from '@/e_features/auth/model/slice/session';
 import { pendingSlice } from '@/e_features/pending/modele/slice/isPending';
 import surveyAPI from '@/e_features/survey/api/surveyApi';
 import authAPI from '@/e_features/auth/api/authApi';

@@ -1,4 +1,4 @@
-import { useGetUserMeal } from '@/e_features/food/hooks/useGetUserMeal';
+import { useGetUserMeal } from '@/e_features/food/get_meal/hooks/useGetUserMeal';
 import {
     Calories,
     Cel,

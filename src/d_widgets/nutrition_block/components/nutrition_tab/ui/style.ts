@@ -12,10 +12,7 @@ export const OptionBlock = styled.div`
     display: flex;
     gap: 20px;
 `;
-export const CreateContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-`;
+
 export const Option = styled.div<{ isSelected: boolean }>`
     width: 130px;
     height: 40px;

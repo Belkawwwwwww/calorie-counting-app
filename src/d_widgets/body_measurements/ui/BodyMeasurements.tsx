@@ -11,9 +11,9 @@ export const BodyMeasurements: FC = () => {
 
     const { isModalActive, handleModalOpen, handleModalClose } = useModalOpen();
 
-    const handleClick = () => {
-        handleModalOpen();
-    };
+    // const handleClick = () => {
+    //     handleModalOpen();
+    // };
 
     return (
         <Container>
@@ -28,7 +28,7 @@ export const BodyMeasurements: FC = () => {
                 </Modal>
             ) : null}
             <Block>
-                <Plus onClick={handleClick} />
+                {/* <Plus onClick={handleClick} /> */}
                 <ContainerImage>
                     <MeasurementDisplay userData={userData} />
                 </ContainerImage>

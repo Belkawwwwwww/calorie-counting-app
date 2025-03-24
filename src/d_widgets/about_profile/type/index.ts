@@ -1,5 +1,5 @@
 export type Props = {
     gender: string;
-    first_name: string | undefined;
-    last_name: string | undefined;
+    first_name: string;
+    last_name: string;
 };

@@ -1,17 +1,8 @@
-import React, { useState } from 'react';
-import { RouteEnum } from '@/g_shared/model';
+import React from 'react';
 import { Button } from '@/g_shared/ui/button';
-import { AuthScheme } from '@/g_shared/lib/validation/authScheme';
-import { z } from 'zod';
-import { useRouter } from 'next/router';
-import { useAppDispatch } from '@/g_shared/lib/store';
-import { setAuth } from '@/e_features/auth/modele/action/action';
-import { setUser } from '@/f_entities/user/model/action/action';
-import { useZodInputValidation } from '@/g_shared/lib/hooks';
 import { LoadingInBtn } from '@/g_shared/ui/loader';
 import { InputBox } from '@/g_shared/ui/input';
 import { Error } from '@/g_shared/ui/error_display';
-import { useError } from '@/g_shared/lib/context';
 import {
     Btn,
     Container,
@@ -21,56 +12,19 @@ import {
     Text,
 } from './style';
 import { OpenRoute } from '../../../e_features/auth/ui/OpenRoute';
-import { useAuth } from '@/e_features/auth';
+import { useLoginForm } from '@/e_features/auth/lib/hooks/useLoginForm';
 
 export const LoginForm = () => {
-    const { auth, isLoading } = useAuth();
-    const { inputValue: email, handleInputChange: handleEmailChange } =
-        useZodInputValidation(AuthScheme.shape.username);
-    const { inputValue: password, handleInputChange: handlePasswordChange } =
-        useZodInputValidation(AuthScheme.shape.password);
-
-    const [validationErrors, setValidationErrors] = useState({
-        username: '',
-        password: '',
-    });
-    const dispatch = useAppDispatch();
-    const router = useRouter();
-    const { setError, clearError } = useError();
-
-    const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
-        e.preventDefault();
-        clearError('auth');
-        const form = new FormData(e.currentTarget);
-        const formData = Object.fromEntries(form.entries());
-        console.log('Данные формы перед валидацией:', formData);
-        try {
-            setValidationErrors({
-                username: '',
-                password: '',
-            });
-            const validatedData = AuthScheme.parse(formData);
-            const response = await auth(validatedData).unwrap();
-            const backendUser_id = response?.data?.id;
-            dispatch(setAuth(true));
-            dispatch(setUser({ user_id: backendUser_id }));
-            await router.push(RouteEnum.MAIN);
-        } catch (error) {
-            if (error instanceof z.ZodError) {
-                const errors = error.issues.reduce(
-                    (acc, issue) => {
-                        acc[issue.path[0] as keyof typeof validationErrors] =
-                            issue.message;
-                        return acc;
-                    },
-                    {} as typeof validationErrors
-                );
-                setValidationErrors(errors);
-            } else {
-                setError('auth', 'Произошла ошибка при авторизации');
-            }
-        }
-    };
+    const {
+        email,
+        password,
+        handleEmailChange,
+        handlePasswordChange,
+        validationErrors,
+        handleSubmit,
+        handleNavigation,
+        isLoading,
+    } = useLoginForm();
 
     const formFields = [
         {
@@ -92,10 +46,6 @@ export const LoginForm = () => {
             onChange: handlePasswordChange,
         },
     ];
-    const handleNavigation = () => {
-        clearError('auth');
-        router.push(RouteEnum.REGISTRATION);
-    };
 
     return (
         <OpenRoute>

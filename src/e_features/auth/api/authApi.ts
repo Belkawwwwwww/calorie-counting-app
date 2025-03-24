@@ -6,11 +6,11 @@ import {
     LogoutResponse,
     RegistrationInput,
 } from '../type/authTypes';
-import {
-    AuthResponseScheme,
-    LogoutResponseScheme,
-} from '@/g_shared/lib/validation/authScheme';
+import { AuthResponseScheme } from '@/e_features/auth/lib/validation/authScheme';
 import { handleResponse } from '@/g_shared/lib/utils/responseHandler';
+import { setAuth } from '../model/slice/session';
+import { setUser } from '@/f_entities/user/model/action/action';
+import { setPending } from '@/e_features/pending/modele/action/action';
 
 const authAPI = createApi({
     reducerPath: 'api',
@@ -27,6 +27,16 @@ const authAPI = createApi({
             }),
             transformResponse: (response) =>
                 handleResponse(response, AuthResponseScheme),
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    const backendUser_id = data?.data.id;
+                    dispatch(setAuth(true));
+                    dispatch(setUser({ user_id: backendUser_id }));
+                } catch (error) {
+                    console.error('Ошибка при авторизации:', error);
+                }
+            },
         }),
         authUser: build.mutation<AuthResponse, AuthInput>({
             query: (body) => ({
@@ -38,6 +48,16 @@ const authAPI = createApi({
             }),
             transformResponse: (response) =>
                 handleResponse(response, AuthResponseScheme),
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    const { data } = await queryFulfilled;
+                    const backendUser_id = data?.data?.id;
+                    dispatch(setAuth(true));
+                    dispatch(setUser({ user_id: backendUser_id }));
+                } catch (error) {
+                    console.error('Ошибка при авторизации:', error);
+                }
+            },
         }),
         logoutUser: build.mutation<LogoutResponse, void>({
             query: () => ({
@@ -46,8 +66,15 @@ const authAPI = createApi({
                 credentials: 'include',
                 providesTags: ['User'],
             }),
-            transformResponse: (response) =>
-                handleResponse(response, LogoutResponseScheme),
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled; // ждем заверш запроса
+                    dispatch(setAuth(false));
+                    dispatch(setUser(null));
+                } catch {
+                    console.log('Ошибка при выходе');
+                }
+            },
         }),
 
         fetchUserSession: build.query<AuthResponse, void>({
@@ -57,6 +84,41 @@ const authAPI = createApi({
                 providesTags: ['User'],
                 credentials: 'include',
             }),
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                dispatch(setPending(true));
+                try {
+                    const { data } = await queryFulfilled;
+                    const userId = data?.data.id;
+
+                    if (userId) {
+                        const sessionId = sessionStorage.getItem('session_id');
+                        const sessionIdNumber = sessionId
+                            ? Number(sessionId)
+                            : null;
+                        if (sessionIdNumber !== userId) {
+                            if (data.response_status === 0) {
+                                dispatch(setAuth(true));
+                                dispatch(setUser({ user_id: userId }));
+                                // dispatch(setPending(false));
+                            } else {
+                                console.log('response status не ok');
+                                dispatch(setAuth(false));
+                            }
+                        } else {
+                            dispatch(setAuth(false));
+                            console.log('Session ID не соответствует User ID');
+                        }
+                    } else {
+                        console.log('User ID не получен');
+                        dispatch(setAuth(false));
+                    }
+                } catch (error) {
+                    console.error('Ошибка при обработке данных:', error);
+                    dispatch(setAuth(false));
+                } finally {
+                    dispatch(setPending(false));
+                }
+            },
         }),
     }),
 });

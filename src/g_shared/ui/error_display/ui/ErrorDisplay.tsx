@@ -1,9 +1,9 @@
 import { useError } from '@/g_shared/lib/context';
 import { StyledError } from './style';
-import { FC } from 'react';
+import { FC, memo } from 'react';
 import { ErrorProps } from '../type';
 
-export const Error: FC<ErrorProps> = (props) => {
+export const Error: FC<ErrorProps> = memo((props) => {
     const { errors } = useError();
 
     return (
@@ -13,4 +13,4 @@ export const Error: FC<ErrorProps> = (props) => {
             ) : null}
         </>
     );
-};
+});

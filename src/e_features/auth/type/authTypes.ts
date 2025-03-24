@@ -3,7 +3,7 @@ import {
     AuthScheme,
     LogoutResponseScheme,
     RegScheme,
-} from '@/g_shared/lib/validation/authScheme';
+} from '@/e_features/auth/lib/validation/authScheme';
 
 export type RegistrationInput = typeof RegScheme._input;
 

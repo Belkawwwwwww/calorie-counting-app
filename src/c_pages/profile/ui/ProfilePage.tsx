@@ -1,34 +1,31 @@
 import { ProtectedRoute } from '@/e_features/auth';
 import React from 'react';
-import { BtnContainer, StyledUserProfile } from './style';
+import { StyledUserProfile } from './style';
 import { Layout } from '@/g_shared/ui/layout';
 import { LoadingIndicator } from '@/g_shared/ui/loader';
 import { RouteEnum } from '@/g_shared/model';
-import {
-    activityTranslations,
-    genderTranslations,
-    goalTranslations,
-} from '@/g_shared/lib/utils/translation';
-import { useGetUserProfile } from '@/e_features/user';
 import { ProfileNavbar } from '@/d_widgets/navbar_profile';
-import { ProfileInfo } from '@/d_widgets/profile_info';
 import { MessageNoResponse } from '@/g_shared/ui/message_no_response';
-import { AboutProfile } from '@/d_widgets/about_profile';
-import { BodyMeasurements } from '@/d_widgets/body_measurements';
-import { UpdateButton } from '@/g_shared/ui/update_button';
+import { useProfileDataHandler } from '@/e_features/profile/hooks/useProfileData';
+import { ProfilePageContent } from '@/d_widgets/profile_page_content/ui/ProfilePageContent';
 
 export const ProfilePage = () => {
-    const { userSessionData, userData, isLoading } = useGetUserProfile();
-    const { first_name, last_name } = userSessionData?.data || {};
+    const {
+        userData,
+        isLoading,
+        hasErrorResponse,
+        first_name,
+        last_name,
+        translatedData,
+    } = useProfileDataHandler();
+
     if (isLoading && !userData) {
         return <LoadingIndicator />;
     }
     if (!userData) {
-        return <p>No user data available.</p>;
+        return <p>Данные о пользователe отсутствуют</p>;
     }
-    const { gender, target, growth, activity, weight } =
-        userData.data?.data || {};
-    const hasErrorResponse = userData.response_status !== 0;
+    const { growth, weight } = userData.data?.data || {};
 
     return (
         <ProtectedRoute>
@@ -41,22 +38,13 @@ export const ProfilePage = () => {
                         </>
                     ) : (
                         <>
-                            <BtnContainer>
-                                <UpdateButton />
-                                <BodyMeasurements />
-                            </BtnContainer>
-                            <AboutProfile
-                                gender={gender}
-                                first_name={first_name}
-                                last_name={last_name}
-                            />
-                            <ProfileInfo
-                                gender={genderTranslations[gender] || gender}
-                                target={goalTranslations[target] || target}
+                            <ProfilePageContent
+                                gender={translatedData.gender}
+                                first_name={first_name ?? ''}
+                                last_name={last_name ?? ''}
+                                target={translatedData.target}
                                 growth={growth}
-                                activity={
-                                    activityTranslations[activity] || activity
-                                }
+                                activity={translatedData.activity}
                                 weight={weight}
                             />
                         </>
