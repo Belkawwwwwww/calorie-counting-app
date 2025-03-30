@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { QuestionComponent } from '@/g_shared/ui/question_component';
-import { goalTranslations } from '@/g_shared/lib/utils/translation';
+import { goalTranslations } from '@/g_shared/lib/utils';
 
 export const TargetQuestion: FC<Props> = (props) => {
     const handleAnswer = (answer: string | number | Date) => {

@@ -1,4 +1,4 @@
-import { DataMeal, Meal } from '../type/nutritionTypes';
+import { Meal } from '../type/nutritionTypes';
 
 export const calculatePercentages = (total: any, norm: any): number => {
     return norm > 0 ? (total / norm) * 100 : 0;

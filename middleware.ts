@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { useAppSelector } from '@/g_shared/lib/store';
-import { isAuthSelector } from '@/e_features/auth';
+import { isAuthSelector } from '@/e_features/auth/model/selector';
 
 const protectedRoutes = ['/main', '/profile'];
 

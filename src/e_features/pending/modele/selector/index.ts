@@ -1,0 +1,1 @@
+export { isPendingSelector } from './isPending';

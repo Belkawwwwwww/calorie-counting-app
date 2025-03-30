@@ -61,7 +61,3 @@ export const RegScheme = z
     })
     .merge(passwordWithConfirm.schema)
     .refine(...passwordWithConfirm.refineTuple);
-
-// export type RegSchemeType = z.infer<typeof RegScheme>;
-// export type AuthSchemeType = z.infer<typeof AuthScheme>;
-// export type AuthResponseSchemeType = z.infer<typeof AuthResponseScheme>;

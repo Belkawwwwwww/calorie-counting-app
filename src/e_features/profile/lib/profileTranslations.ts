@@ -2,7 +2,7 @@ import {
     activityTranslations,
     genderTranslations,
     goalTranslations,
-} from '@/g_shared/lib/utils/translation';
+} from '@/g_shared/lib/utils';
 
 type TranslatedProfileData = {
     gender: string;

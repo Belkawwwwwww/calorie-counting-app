@@ -1,7 +1,7 @@
 import { LoadingIndicator } from '@/g_shared/ui/loader';
 import React, { FC } from 'react';
 import { Props } from '../type';
-import { Circle, Significance, Text } from './style';
+import { BoxCircle, Circle, Significance, Text } from './style';
 
 export const DailyCaloriesBlock: FC<Props> = (props) => {
     const maxCalories = props.date?.data.max || 0;
@@ -17,11 +17,13 @@ export const DailyCaloriesBlock: FC<Props> = (props) => {
     }
 
     return (
-        <Circle $isOverkill={isOverkill}>
-            <Significance $isOverkill={isOverkill}>
-                {displayCalories}
-            </Significance>
-            <Text $isOverkill={isOverkill}>{message}</Text>
-        </Circle>
+        <BoxCircle>
+            <Circle $isOverkill={isOverkill}>
+                <Significance $isOverkill={isOverkill}>
+                    {displayCalories}
+                </Significance>
+                <Text $isOverkill={isOverkill}>{message}</Text>
+            </Circle>
+        </BoxCircle>
     );
 };

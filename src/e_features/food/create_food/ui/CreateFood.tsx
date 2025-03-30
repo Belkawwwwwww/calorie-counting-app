@@ -4,17 +4,25 @@ import { LoadingInBtn } from '@/g_shared/ui/loader';
 import { Button } from '@/g_shared/ui/button';
 import { useFoodForm } from '../hooks/useCreateFoodForm';
 import { useCreateFood } from '../hooks/useCreateFood';
-import { FoodTransition } from '@/g_shared/lib/utils/translation';
+import { FoodTransition } from '@/g_shared/lib/utils';
 import { FC } from 'react';
 import { Error } from '@/g_shared/ui/error_display';
 import { InfoInput } from '@/g_shared/ui/info_input';
 import { ProductInput } from '@/g_shared/ui/product_input';
 import { ToggleButton } from '@/g_shared/ui/toggle_button';
 
-export const CreateFood: FC = () => {
+type PublicOption = boolean;
+const publicOptions: PublicOption[] = [true, false];
+type Props = {
+    handleCloseAdditionalModal?: () => void;
+};
+export const CreateFood: FC<Props> = (props) => {
     const { createFood, isLoading } = useCreateFood();
     const { state, handleIsPublicToggle, handleInputChange, handleSubmit } =
-        useFoodForm({ createFood });
+        useFoodForm({
+            createFood,
+            onSuccess: props.handleCloseAdditionalModal,
+        });
     const { name, isPublic, products, info, validationErrors } = state;
 
     return (
@@ -43,8 +51,13 @@ export const CreateFood: FC = () => {
                 handleInputChange={handleInputChange}
                 validationErrors={validationErrors}
             />
+            <ToggleButton
+                options={publicOptions.map((option) => (option ? 'ДА' : 'НЕТ'))}
+                selectedValue={isPublic ? 'ДА' : 'НЕТ'}
+                onToggle={(value) => handleIsPublicToggle(value === 'ДА')}
+                label={FoodTransition.is_public}
+            />
 
-            <ToggleButton isPublic={isPublic} onToggle={handleIsPublicToggle} />
             <Error keyName='createFood' />
             <Button
                 $variant='primary'

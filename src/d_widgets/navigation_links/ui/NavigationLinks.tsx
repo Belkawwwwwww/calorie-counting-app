@@ -3,7 +3,7 @@ import { Props } from '../type';
 import { RouteEnum } from '@/g_shared/model';
 import { LinkButton } from '@/g_shared/ui/linkButton';
 import { NavigationWrapper } from './style';
-import { LogoutBtn } from '@/d_widgets/navbar_main/component';
+import { LogoutBtn } from '@/e_features/auth/ui';
 
 export const NavigationLinks: FC<Props> = (props) => {
     if (!props.isAuth) {

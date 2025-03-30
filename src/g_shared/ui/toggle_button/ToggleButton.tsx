@@ -1,25 +1,23 @@
 import { FC, memo } from 'react';
 import { Props } from './type';
-import { FoodTransition } from '@/g_shared/lib/utils/translation';
 import { PublicContainer, ToggleButtons } from './style';
 
 export const ToggleButton: FC<Props> = memo((props) => {
+    const { options, selectedValue, onToggle, label } = props;
+
     return (
         <PublicContainer>
-            <>{FoodTransition.is_public}:</>
+            <>{label}:</>
             <div>
-                <ToggleButtons
-                    isActive={props.isPublic}
-                    onClick={() => props.onToggle(true)}
-                >
-                    ДА
-                </ToggleButtons>
-                <ToggleButtons
-                    isActive={!props.isPublic}
-                    onClick={() => props.onToggle(false)}
-                >
-                    НЕТ
-                </ToggleButtons>
+                {options.map((option) => (
+                    <ToggleButtons
+                        key={option}
+                        isActive={selectedValue === option}
+                        onClick={() => onToggle(option)}
+                    >
+                        {option}
+                    </ToggleButtons>
+                ))}
             </div>
         </PublicContainer>
     );

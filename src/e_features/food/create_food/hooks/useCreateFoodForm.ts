@@ -6,11 +6,13 @@ import { z } from 'zod';
 import { CreateFoodInput } from '../type/createFoodTypes';
 import { processZodErrors } from '../lib/processZodErrors';
 import { formatFoodData } from '../lib/foodDataFormatter';
+import { toast } from 'react-toastify';
 
 interface UseFoodFormProps {
     createFood: (data: CreateFoodInput) => any;
+    onSuccess?: () => void;
 }
-export const useFoodForm = ({ createFood }: UseFoodFormProps) => {
+export const useFoodForm = ({ createFood, onSuccess }: UseFoodFormProps) => {
     const [state, dispatch] = useReducer(foodReducer, initialState);
     const { name, isPublic, products, info } = state;
     const handleIsPublicToggle = (value: boolean) => {
@@ -43,7 +45,7 @@ export const useFoodForm = ({ createFood }: UseFoodFormProps) => {
                     dispatch({ type: 'SET_WEIGHT', payload: { index, value } }),
             };
 
-            actionMap[field]?.(); // Вызываем соответствующее действие, если оно существует
+            actionMap[field]?.(); // Вызов соответств действия, если оно существует
         },
         [dispatch]
     );
@@ -53,8 +55,15 @@ export const useFoodForm = ({ createFood }: UseFoodFormProps) => {
         try {
             createFoodScheme.parse(foodData);
             await createFood(foodData).unwrap();
+            if (onSuccess) {
+                onSuccess();
+            }
             console.log('Успешно отправлено:', foodData);
+
             dispatch({ type: 'RESET_VALIDATION_ERRORS' });
+            toast.success('ЕДА УСПЕШНО СОЗДАНА', {
+                autoClose: 3000,
+            });
         } catch (error) {
             if (error instanceof z.ZodError) {
                 processZodErrors(error, products, dispatch);

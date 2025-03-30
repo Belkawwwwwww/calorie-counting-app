@@ -1,0 +1,1 @@
+export { useGetUserMeal } from './useGetUserMeal';

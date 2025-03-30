@@ -1,4 +1,4 @@
-import { FoodTransition } from '@/g_shared/lib/utils/translation';
+import { FoodTransition } from '@/g_shared/lib/utils';
 import { InputBox } from '../input';
 import { FC } from 'react';
 import { Props } from './type';

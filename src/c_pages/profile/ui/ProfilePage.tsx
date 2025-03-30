@@ -1,13 +1,13 @@
-import { ProtectedRoute } from '@/e_features/auth';
 import React from 'react';
 import { StyledUserProfile } from './style';
 import { Layout } from '@/g_shared/ui/layout';
 import { LoadingIndicator } from '@/g_shared/ui/loader';
 import { RouteEnum } from '@/g_shared/model';
-import { ProfileNavbar } from '@/d_widgets/navbar_profile';
 import { MessageNoResponse } from '@/g_shared/ui/message_no_response';
-import { useProfileDataHandler } from '@/e_features/profile/hooks/useProfileData';
-import { ProfilePageContent } from '@/d_widgets/profile_page_content/ui/ProfilePageContent';
+import { ProfilePageContent } from '@/d_widgets/profile_page_content';
+import { useProfileDataHandler } from '@/e_features/profile/hooks';
+import { ProtectedRoute } from '@/e_features/auth/ui';
+import { ProfileNavbar } from '@/e_features/profile/component/navbar_profile';
 
 export const ProfilePage = () => {
     const {

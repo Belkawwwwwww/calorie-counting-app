@@ -9,7 +9,9 @@ export const Error: FC<ErrorProps> = memo((props) => {
     return (
         <>
             {errors[props.keyName] ? (
-                <StyledError>{errors[props.keyName]}</StyledError>
+                <StyledError absolute={props.absolute}>
+                    {errors[props.keyName]}
+                </StyledError>
             ) : null}
         </>
     );

@@ -1,6 +1,5 @@
 import { useError } from '@/g_shared/lib/context';
 import { useCallback, useState } from 'react';
-import { useAppDispatch } from '@/g_shared/lib/store';
 import { useRouter } from 'next/router';
 import { RegScheme } from '../validation/authScheme';
 import { z } from 'zod';
@@ -26,7 +25,6 @@ export const useRegisterForm = () => {
         firstName: '',
         lastName: '',
     });
-    const dispatch = useAppDispatch();
 
     const router = useRouter();
     const handleInputChange = useCallback(

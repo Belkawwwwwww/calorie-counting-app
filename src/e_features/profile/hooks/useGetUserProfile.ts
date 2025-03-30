@@ -1,5 +1,5 @@
 import { useFetchUser } from '@/e_features/auth/lib/hooks/useAuthHooks';
-import { useGetUserSurvey } from '@/e_features/survey';
+import { useGetUserSurvey } from '@/e_features/survey/hooks';
 import { useEffect } from 'react';
 
 export const useGetUserProfile = () => {
@@ -12,7 +12,6 @@ export const useGetUserProfile = () => {
     } = useGetUserSurvey();
     useEffect(() => {
         if (isSuccess && userSessionData) {
-            // Вызываем рефетч данных пользователя когда сессия успешна
             refetchUserData();
         }
     }, [userSessionData]);

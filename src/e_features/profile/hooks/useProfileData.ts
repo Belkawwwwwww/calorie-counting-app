@@ -1,5 +1,5 @@
-import { useGetUserProfile } from '@/e_features/profile';
 import { translateProfileData } from '../lib/profileTranslations';
+import { useGetUserProfile } from './useGetUserProfile';
 
 export const useProfileDataHandler = () => {
     const { userSessionData, userData, isLoading } = useGetUserProfile();

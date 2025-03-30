@@ -1,4 +1,4 @@
-import { mealsTranslation } from '@/g_shared/lib/utils/translation';
+import { mealsTranslation } from '@/g_shared/lib/utils';
 import { FC } from 'react';
 import { Meal } from './style';
 import { Props } from '../type';

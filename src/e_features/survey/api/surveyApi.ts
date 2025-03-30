@@ -2,7 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ApiUrls } from '@/g_shared/model';
 import { SurveyInput, SurveyResponse } from '@/f_entities/survey';
 import { CreateSurveyResponseSchema } from '@/f_entities/survey/model/surveyScheme';
-import { handleResponse } from '@/g_shared/lib/utils/responseHandler';
+import { handleResponse } from '@/g_shared/lib/utils';
+
 type SurveyTag = { type: 'Survey'; id: string | 'LIST' };
 
 const surveyAPI = createApi({

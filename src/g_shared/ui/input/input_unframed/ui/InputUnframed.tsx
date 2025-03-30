@@ -9,10 +9,10 @@ export const InputUnframed: FC<Props> = memo((props) => {
         ) as HTMLInputElement;
         if (inputElement) {
             inputElement.focus();
-        } else {
-            console.log(`Элемент ${props.id} нет`);
         }
     };
+    const showPlaceholder = props.alwaysShowPlaceholder || !props.value;
+
     return (
         <Container onClick={handleFocus}>
             {props.label && <Label>{props.label}</Label>}
@@ -21,7 +21,7 @@ export const InputUnframed: FC<Props> = memo((props) => {
                 value={props.value}
                 onChange={props.onChange}
             />
-            {!props.value && <Placeholder>{props.placeholder}</Placeholder>}
+            {showPlaceholder && <Placeholder>{props.placeholder}</Placeholder>}
         </Container>
     );
 });

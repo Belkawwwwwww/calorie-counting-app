@@ -7,4 +7,5 @@ export type InputBoxProps = {
     style?: React.CSSProperties;
     imageSrc?: string;
     useUnframedInput?: boolean;
+    alwaysShowPlaceholder?: boolean;
 } & Props;

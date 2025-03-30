@@ -4,8 +4,7 @@ import { InputBox } from '@/g_shared/ui/input';
 import { Error } from '@/g_shared/ui/error_display';
 import { LoadingInBtn } from '@/g_shared/ui/loader';
 import { Btn, Container, FooterRegister, StyledLink } from './style';
-import { OpenRoute } from '../../../e_features/auth/ui/OpenRoute';
-import { useRegisterForm } from '@/e_features/auth/lib/hooks/useRegisterForm';
+import { OpenRoute, useRegisterForm } from '@/e_features/auth';
 
 export const RegisterForm = () => {
     const {

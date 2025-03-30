@@ -6,11 +6,12 @@ import {
     LogoutResponse,
     RegistrationInput,
 } from '../type/authTypes';
-import { AuthResponseScheme } from '@/e_features/auth/lib/validation/authScheme';
-import { handleResponse } from '@/g_shared/lib/utils/responseHandler';
-import { setAuth } from '../model/slice/session';
-import { setUser } from '@/f_entities/user/model/action/action';
-import { setPending } from '@/e_features/pending/modele/action/action';
+
+import { setUser } from '@/f_entities/user/model';
+import { AuthResponseScheme } from '../lib/validation';
+import { setAuth } from '../model/action';
+import { setPending } from '@/e_features/pending/modele/action';
+import { handleResponse } from '@/g_shared/lib/utils';
 
 const authAPI = createApi({
     reducerPath: 'api',
@@ -64,7 +65,7 @@ const authAPI = createApi({
                 url: '/api/v1/user/logout',
                 method: 'POST',
                 credentials: 'include',
-                providesTags: ['User'],
+                invalidatesTags: ['User'],
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {

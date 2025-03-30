@@ -20,6 +20,7 @@ export const InputBox: FC<InputBoxProps> = memo(
         useUnframedInput = false,
         id,
         type,
+        alwaysShowPlaceholder,
         ...inputProps
     }) => {
         const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (
@@ -45,6 +46,7 @@ export const InputBox: FC<InputBoxProps> = memo(
                             type={type}
                             {...inputProps}
                             onChange={handleInputChange}
+                            alwaysShowPlaceholder={alwaysShowPlaceholder}
                         />
                     ) : (
                         <Input

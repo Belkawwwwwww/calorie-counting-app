@@ -1,7 +1,7 @@
 import {
     CreateOrUpdateMealResponse,
-    MealSchema,
+    CreateOrUpdateMealSchema,
 } from './createOrUpdateMealSchema';
 
 export type CreateMealResponse = typeof CreateOrUpdateMealResponse._output;
-export type CreateOrUpdateMeal = typeof MealSchema._input;
+export type CreateOrUpdateMealSchema = typeof CreateOrUpdateMealSchema._input;

@@ -24,8 +24,8 @@ export const mealsTranslation: { [key: string]: string } = {
 };
 
 export const typeOfMealTranslation: { [key: string]: string } = {
-    product: 'ПРОДУКТЫ',
-    food: 'БЛЮДА',
+    product: 'ПРОДУКТ',
+    food: 'БЛЮДO',
 };
 
 export const FoodTransition: { [key: string]: string } = {

@@ -2,3 +2,4 @@ export { useZodInputValidation } from './useInputValidation/useZodInputValidatio
 export { useMyHook } from './useDebounce/useDebounce';
 export { useModalOpen } from './useModalOpen/useModalOpen';
 export { useNutritionData } from './useNutritionData/useNutritionData';
+export { useScrollToLastBlock } from './useScrollToLastBlock/useScrollToLastBlock';

@@ -11,8 +11,8 @@ import {
     StyledLink,
     Text,
 } from './style';
-import { OpenRoute } from '../../../e_features/auth/ui/OpenRoute';
-import { useLoginForm } from '@/e_features/auth/lib/hooks/useLoginForm';
+import { OpenRoute } from '@/e_features/auth/ui';
+import { useLoginForm } from '@/e_features/auth/lib/hooks';
 
 export const LoginForm = () => {
     const {

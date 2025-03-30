@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { QuestionComponent } from '@/g_shared/ui/question_component';
-import { genderTranslations } from '@/g_shared/lib/utils/translation';
+import { genderTranslations } from '@/g_shared/lib/utils';
 
 export const GenderQuestion: FC<Props> = (props) => {
     const handleAnswer = (answer: string | number | Date) => {

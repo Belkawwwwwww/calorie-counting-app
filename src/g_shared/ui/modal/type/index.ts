@@ -14,3 +14,13 @@ export type Props = {
     image?: string | undefined;
     imageClassName?: string;
 };
+export type ModalStyle = {
+    top?: number | string;
+    bottom?: number | string;
+    left?: number | string;
+    right?: number | string;
+    width?: string;
+    height?: string;
+    overflowY?: 'auto';
+    maxHeight?: string;
+};

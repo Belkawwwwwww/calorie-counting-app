@@ -8,4 +8,5 @@ export type Props = {
     type?: string;
     placeholder?: string;
     id: string;
+    alwaysShowPlaceholder?: boolean;
 };

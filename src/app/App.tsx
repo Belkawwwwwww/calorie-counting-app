@@ -1,20 +1,35 @@
-import type { AppProps } from 'next/app';
-import './styles/global.scss';
 import { Navbar } from '@/d_widgets/navbar_main';
-import { AppProviders } from './providers/app_provider/AppProvider';
+import { MemoizedLoader } from '@/e_features/pending/ui';
 import { ErrorProvider } from '@/g_shared/lib/context';
 import { RouteEnum } from '@/g_shared/model';
-import { MemoizedLoader } from '@/d_widgets/loader_overlay';
+import type { AppProps } from 'next/app';
+import { Slide, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AppProviders } from './providers/app_provider';
+import './styles/global.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
-    return (
-        <ErrorProvider>
-            <AppProviders>
-                <MemoizedLoader>
-                    <Navbar hideOnPages={[RouteEnum.PROFILE]} />
-                    <Component {...pageProps} />
-                </MemoizedLoader>
-            </AppProviders>
-        </ErrorProvider>
-    );
+	return (
+		<ErrorProvider>
+			<AppProviders>
+				<ToastContainer
+					position='bottom-right'
+					autoClose={2000}
+					hideProgressBar={true}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+					theme='light'
+					transition={Slide}
+				/>
+				<MemoizedLoader>
+					<Navbar hideOnPages={[RouteEnum.PROFILE]} />
+					<Component {...pageProps} />
+				</MemoizedLoader>
+			</AppProviders>
+		</ErrorProvider>
+	);
 }

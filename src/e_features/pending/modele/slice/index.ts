@@ -1,0 +1,1 @@
+export { pendingSlice } from './isPending';

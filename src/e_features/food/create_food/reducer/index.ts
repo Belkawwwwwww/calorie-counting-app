@@ -1,0 +1,1 @@
+export { foodReducer } from './createFoodReducer';

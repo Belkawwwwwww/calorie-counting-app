@@ -31,3 +31,7 @@ export const Significance = styled.div<{ $isOverkill?: boolean }>`
         font-size: 25px;
     }
 `;
+export const BoxCircle = styled.div`
+    flex: 0 0 33.3%;
+    padding-left: 24px;
+`;

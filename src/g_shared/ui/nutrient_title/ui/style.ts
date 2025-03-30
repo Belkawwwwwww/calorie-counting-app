@@ -14,4 +14,7 @@ export const TitleContainer = styled.div`
     align-items: center;
     padding: 16px 14px;
     position: relative;
+    font-size: 15px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 `;

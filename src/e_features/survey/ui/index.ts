@@ -1,0 +1,1 @@
+export { getQuestionsConfig } from './getQuestionConfig';

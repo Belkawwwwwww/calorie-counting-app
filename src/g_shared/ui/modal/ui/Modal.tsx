@@ -7,14 +7,14 @@ import React, {
     useState,
 } from 'react';
 import { Portal } from '../../portal/ui/Portal';
-import { Props } from '../type';
+import { ModalStyle, Props } from '../type';
 import { CloseButton, ModalContent, ModalWrapper, Title } from './style';
 
 export const Modal: FC<Props> = (props: Props) => {
     const rootRef = useRef<HTMLDivElement>(null);
     const [isMounted, setIsMounted] = useState(false);
 
-    const modalStyle = {
+    const modalStyle: ModalStyle = {
         top:
             props.customPosition?.top ||
             (props.position === 'top' ? 0 : undefined),
@@ -29,6 +29,8 @@ export const Modal: FC<Props> = (props: Props) => {
             (props.position === 'right' ? 0 : undefined),
         width: props.width || undefined,
         height: props.height || undefined,
+        overflowY: 'auto',
+        maxHeight: '100vh',
     };
 
     useEffect(() => {

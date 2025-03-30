@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Title = styled.p`
     text-align: center;
-    margin-top: -10px;
+    margin-top: -19px;
     margin-bottom: 5px;
 `;
 export const ModalWrapper = styled.div`
@@ -14,29 +14,39 @@ export const ModalWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: auto;
+    flex-direction: column;
 `;
 
-export const ModalContent = styled.div<{ width?: string; height?: string }>`
+export const ModalContent = styled.div<{
+    width?: string;
+    height?: string;
+    maxHeight?: string;
+}>`
+    position: relative;
     background: white;
     border-radius: 8px;
     padding: 20px;
     width: ${(props) => props.width || 'auto'};
-    height: ${(props) => props.height || 'auto'};
+    height: auto;
+    max-height: ${(props) => props.maxHeight || '80vh'};
     position: relative;
+    overflow-y: auto;
+
     @media (max-width: 768px) {
         width: 500px !important;
-        height: auto !important;
     }
+
     @media (max-width: 480px) {
         width: auto !important;
-        height: auto !important;
     }
 `;
 
 export const CloseButton = styled.button`
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    position: sticky;
+    z-index: 2;
+    top: 0px;
+    left: 0px;
     background: transparent;
     border: none;
     cursor: pointer;

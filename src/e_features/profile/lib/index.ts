@@ -1,0 +1,1 @@
+export { translateProfileData } from './profileTranslations';

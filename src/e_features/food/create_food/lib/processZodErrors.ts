@@ -1,16 +1,16 @@
 import { z } from 'zod';
 
-interface ProductError {
+type ProductError = {
     product_id: string;
     weight: string;
-}
+};
 
-interface InfoError {
+type InfoError = {
     protein: string;
     fat: string;
     carbs: string;
     calories: string;
-}
+};
 
 export const processZodErrors = (
     error: z.ZodError,
@@ -34,7 +34,7 @@ export const processZodErrors = (
             if (!isNaN(productIndex) && productIndex < products.length) {
                 const field = err.path[2];
                 if (field === 'product_id' || field === 'weight') {
-                    (productErrors[productIndex] as any)[field] = err.message; // Используйте as any или более точный тип
+                    (productErrors[productIndex] as any)[field] = err.message;
                 }
             }
         } else if (err.path[0] === 'info' && err.path[1] !== undefined) {

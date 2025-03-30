@@ -4,8 +4,8 @@ import { FC } from 'react';
 import { RouteEnum } from '@/g_shared/model';
 import { useRouter } from 'next/router';
 import { Header, LinksContainer } from './style';
-import { isAuthSelector } from '@/e_features/auth';
-import { NavigationLinks } from '@/d_widgets/navigation_links/ui/NavigationLinks';
+import { NavigationLinks } from '@/d_widgets/navigation_links';
+import { isAuthSelector } from '@/e_features/auth/model/selector';
 
 export const Navbar: FC<{ hideOnPages?: string[] }> = ({
     hideOnPages = [],

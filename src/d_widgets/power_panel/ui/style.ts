@@ -23,12 +23,12 @@ export const FirstBlock = styled.div`
     padding-top: 40px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    flex-wrap: wrap;
 `;
 export const Calories = styled.div`
     display: flex;
     flex-wrap: wrap;
-    flex: 0 0 23%;
+    flex: 0 0 33.3%;
     text-align: center;
     flex-direction: column;
     justify-content: center;
@@ -55,6 +55,7 @@ export const Norm = styled.div`
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    flex: 0 0 33.3%;
 `;
 
 export const Purpose = styled.div`

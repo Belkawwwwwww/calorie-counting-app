@@ -19,7 +19,7 @@ export const AboutProfile: FC<Props> = (props) => {
                     <Photo>
                         <Image
                             src={imageUrl}
-                            alt={`Profile picture for ${props.first_name} ${props.last_name}`}
+                            alt={`Изображение профиля для ${props.first_name} ${props.last_name}`}
                         />
                     </Photo>
                 </PhotoWrapper>

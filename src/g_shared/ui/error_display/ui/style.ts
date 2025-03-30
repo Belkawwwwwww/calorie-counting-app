@@ -1,7 +1,15 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const StyledError = styled.div`
+interface StyledErrorProps {
+    absolute?: boolean;
+}
+
+export const StyledError = styled.div<StyledErrorProps>`
     color: red;
-    position: absolute;
-    margin-top: -20px;
+    ${(props) =>
+        props.absolute !== false &&
+        css`
+            position: absolute;
+            margin-top: -20px;
+        `}
 `;

@@ -2,15 +2,16 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ApiUrls } from '@/g_shared/model';
 import {
     CreateMealResponse,
-    CreateOrUpdateMeal,
+    CreateOrUpdateMealSchema,
 } from '@/f_entities/meal/model/mealType';
-import { FoodResponse } from '../create_or_update_meal/type/foodTypes';
+import { FoodResponse } from '../../meal/create_or_update_meal/type/foodTypesZod';
 import {
     CreateFoodInput,
     CreateFoodResponse,
 } from '@/e_features/food/create_food/type/createFoodTypes';
-import { handleResponse } from '@/g_shared/lib/utils/responseHandler';
+
 import { CreateFoodResponseSchema } from '@/e_features/food/create_food/lib/createFoodSchema';
+import { handleResponse } from '@/g_shared/lib/utils';
 
 const foodAPI = createApi({
     reducerPath: 'foodAPI',
@@ -41,20 +42,24 @@ const foodAPI = createApi({
             transformErrorResponse: (response) =>
                 handleResponse(response, CreateFoodResponseSchema),
         }),
-        // createOrUpdateMeal: build.mutation<
-        //     CreateMealResponse,
-        //     CreateOrUpdateMeal
-        // >({
-        //     query: (body) => ({
-        //         url: '/api/v1/user/meal',
-        //         method: 'POST',
-        //         body,
-        //         credentials: 'include',
-        //         keepUnusedDataFor: 120,
-        //     }),
-        // }),
+        createOrUpdateMeal: build.mutation<
+            CreateMealResponse,
+            CreateOrUpdateMealSchema
+        >({
+            query: (body) => ({
+                url: '/api/v1/user/meal',
+                method: 'POST',
+                body,
+                credentials: 'include',
+                keepUnusedDataFor: 120,
+            }),
+        }),
     }),
 });
 
-export const { useGetUserMealQuery, useCreateFoodMutation } = foodAPI;
+export const {
+    useGetUserMealQuery,
+    useCreateFoodMutation,
+    useCreateOrUpdateMealMutation,
+} = foodAPI;
 export default foodAPI;

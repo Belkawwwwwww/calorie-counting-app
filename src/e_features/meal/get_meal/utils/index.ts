@@ -1,0 +1,1 @@
+export { calculateCalories } from './calorieCalculator';

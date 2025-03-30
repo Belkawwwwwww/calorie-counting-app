@@ -1,7 +1,8 @@
 import { FC } from 'react';
-import { calculatePercentages } from '@/g_shared/lib/utils/nutritionUtils';
+
 import { Props } from '../type';
 import { BJU, Consumed, ProgressBarContainer, ProgressBarFill } from './style';
+import { calculatePercentages } from '@/g_shared/lib/utils';
 
 export const NutrientProgressBar: FC<Props> = (props) => {
     const percentage = calculatePercentages(props.current, props.max);

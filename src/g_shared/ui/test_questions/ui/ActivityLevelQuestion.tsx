@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { activityTranslations } from '@/g_shared/lib/utils/translation';
+import { activityTranslations } from '@/g_shared/lib/utils';
 import { QuestionComponent } from '@/g_shared/ui/question_component';
 
 export const ActivityLevelQuestion: FC<Props> = (props) => {

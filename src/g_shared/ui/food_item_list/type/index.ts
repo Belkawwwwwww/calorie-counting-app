@@ -1,5 +1,5 @@
-import { Meal } from '@/g_shared/lib/type/nutritionTypes';
+import { MealType } from '@/g_shared/lib/type/nutritionTypes';
 
 export type Props = {
-    mealFoods: Meal | null;
+    mealType: MealType;
 };
