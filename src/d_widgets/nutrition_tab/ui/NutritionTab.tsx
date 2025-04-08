@@ -2,18 +2,20 @@ import React, { FC } from 'react';
 import { MenuContainer, MenuSelection } from './style';
 import { LinkButton } from '@/g_shared/ui/linkButton';
 import { Props } from '../type';
-import { CreateOrUpdateMeal } from '@/e_features/meal';
 import { CreateFood } from '@/e_features/food/create_food/ui/CreateFood';
+import { CreateOrUpdateMeal } from '@/d_widgets/create_or_update_content/ui';
 
 export const NutritionTab: FC<Props> = (props) => {
     return (
         <MenuContainer>
             <MenuSelection>
-                <LinkButton onClick={() => props.handleTabChange('product')}>
+                <LinkButton isActive={props.activeTab === 'product'}
+                    onClick={() => props.handleTabChange('product')}>
                     ДОБАВЛЕНИЕ ПРИЕМА ПИЩИ
                 </LinkButton>{' '}
                 |
-                <LinkButton onClick={() => props.handleTabChange('food')}>
+                <LinkButton isActive={props.activeTab === 'food'}
+                    onClick={() => props.handleTabChange('food')}>
                     СОЗДАНИЕ ЕДЫ
                 </LinkButton>
             </MenuSelection>

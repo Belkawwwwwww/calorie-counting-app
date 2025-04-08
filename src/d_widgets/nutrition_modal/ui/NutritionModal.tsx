@@ -10,6 +10,7 @@ import { AddMoreButton } from '@/g_shared/ui/add_more_button_meal';
 export const NutritionModal: FC<Props> = (props) => {
     const [isAdditionalModalActive, setAdditionalModalActive] = useState(false);
     const [activeTab, setActiveTab] = useState('products');
+
     const handleAddMoreClick = () => {
         setAdditionalModalActive(true);
     };
@@ -22,29 +23,27 @@ export const NutritionModal: FC<Props> = (props) => {
     };
 
     return (
-        <>
-            <Modal
-                title={mealsTranslation[props.title]}
-                onClose={props.onClose}
-                width='600px'
-                height='auto'
-            >
-                <NutritionTitle mealType={props.title} />
-                <FoodEatenList mealType={props.title} />
-                <AddMoreButton onClick={handleAddMoreClick} />
-                {isAdditionalModalActive ? (
-                    <FoodDetailModal
-                        title={props.title}
-                        value={props.value}
-                        data={props.data}
-                        handleTabChange={handleTabChange}
-                        activeTab={activeTab}
-                        handleCloseAdditionalModal={handleCloseAdditionalModal}
-                        onChange={props.onChange}
-                        onClose={props.onClose}
-                    />
-                ) : null}
-            </Modal>
-        </>
+        <Modal
+            title={mealsTranslation[props.title]}
+            onClose={props.onClose}
+            width='600px'
+            height='auto'
+        >
+            <NutritionTitle mealType={props.title} />
+            <FoodEatenList mealType={props.title} />
+            <AddMoreButton onClick={handleAddMoreClick} />
+            {isAdditionalModalActive ? (
+                <FoodDetailModal
+                    title={props.title}
+                    value={props.value}
+                    data={props.data}
+                    handleTabChange={handleTabChange}
+                    activeTab={activeTab}
+                    handleCloseAdditionalModal={handleCloseAdditionalModal}
+                    onChange={props.onChange}
+                    onClose={props.onClose}
+                />
+            ) : null}
+        </Modal>
     );
 };

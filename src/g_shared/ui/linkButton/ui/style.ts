@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
-export const StyledLinkButton = styled.button`
+type StyledLinkButtonProps = {
+    isActive?: boolean;
+}
+
+
+export const StyledLinkButton = styled.button<StyledLinkButtonProps>`
+
     background: transparent;
     border: none;
     cursor: pointer;
-    color: black;
+    color: ${props => (props.isActive ? '#89ac76' : 'black')};
     font-size: 14px;
     text-decoration: none;
     padding: 10px 15px;

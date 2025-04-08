@@ -6,7 +6,9 @@ export const MenuContainer = styled.div`
     flex-direction: column;
 `;
 export const MenuSelection = styled.div`
+    margin-left: 70px;
     margin-bottom: 20px;
+    margin-top: 15px;
 `;
 export const OptionBlock = styled.div`
     display: flex;

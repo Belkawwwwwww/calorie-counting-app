@@ -18,7 +18,7 @@ export const InputContainer = styled.div`
 export const PlaceholderImage = styled.img`
     position: absolute;
     right: 20px;
-    top: 50%;
+    top: 54%;
     transform: translateY(-50%);
     width: 20px;
     height: 20px;

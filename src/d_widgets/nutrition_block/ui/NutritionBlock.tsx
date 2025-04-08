@@ -1,7 +1,8 @@
 import { StyledNutritionBlock } from './style';
 
 import { NutritionModal } from '@/d_widgets/nutrition_modal';
-import { calculateCalories } from '@/e_features/meal';
+import { calculateCalories } from '@/e_features/get_meal/utils';
+
 import { useMealDataContext } from '@/g_shared/lib/context';
 import { useModalOpen } from '@/g_shared/lib/hooks';
 import { Meal, MealType, mealTypes } from '@/g_shared/lib/type/nutritionTypes';

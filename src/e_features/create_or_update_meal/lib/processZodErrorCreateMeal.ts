@@ -2,7 +2,7 @@ import { z } from 'zod';
 import {
     FoodBlock,
     MealValidationErrors,
-} from '../../../../g_shared/lib/type/createOrUpdateTypes';
+} from '../../../g_shared/lib/type/createOrUpdateTypes';
 
 export const processMealZodErrors = (
     error: z.ZodError,

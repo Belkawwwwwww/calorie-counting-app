@@ -12,9 +12,9 @@ import { DailyCaloriesBlock } from '@/g_shared/ui/circle_block';
 import { NutrientProgressBar } from '@/g_shared/ui/nutrition_progress_bar';
 import { Meal } from '@/g_shared/lib/type/nutritionTypes';
 import { LoadingIndicator } from '@/g_shared/ui/loader';
-import { useGetUserMeal } from '@/e_features/meal';
 import { useGetBzu } from '@/e_features/bzu/hooks';
 import { getFormattedDate, getTotalNutrients } from '@/g_shared/lib/utils';
+import { useGetUserMeal } from '@/e_features/get_meal/hooks';
 
 export const PowerPanel = () => {
 	const formattedDate = getFormattedDate();

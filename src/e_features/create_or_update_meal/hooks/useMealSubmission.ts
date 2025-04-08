@@ -5,7 +5,7 @@ import { MealType } from '@/g_shared/lib/type/nutritionTypes';
 import {
     FoodBlock,
     MealValidationErrors,
-} from '../../../../g_shared/lib/type/createOrUpdateTypes';
+} from '../../../g_shared/lib/type/createOrUpdateTypes';
 import { useState } from 'react';
 import { useError } from '@/g_shared/lib/context';
 import { formatMealData } from '../lib/createMealDataFormatter';

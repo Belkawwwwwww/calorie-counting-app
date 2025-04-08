@@ -1,5 +1,5 @@
 import { LoadingIndicator } from '@/g_shared/ui/loader';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Props } from '../type';
 import { BoxCircle, Circle, Significance, Text } from './style';
 

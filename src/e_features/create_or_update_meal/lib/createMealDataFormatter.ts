@@ -1,7 +1,7 @@
 import {
     MealData,
     MealDataParams,
-} from '../../../../g_shared/lib/type/createOrUpdateTypes';
+} from '../../../g_shared/lib/type/createOrUpdateTypes';
 
 export const formatMealData = (params: MealDataParams): MealData => {
     const { day, food, meal_type } = params;

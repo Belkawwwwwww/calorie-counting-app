@@ -1,5 +1,5 @@
 import React from 'react';
-import { BZU, Micronutrient, TitleContainer } from './style';
+import { BZU, Micronutrient, TitleContainer, Value } from './style';
 import { NutritionTitleProps } from '../type';
 import { useNutritionData } from '@/g_shared/lib/hooks';
 
@@ -11,9 +11,9 @@ export const NutritionTitle: React.FC<NutritionTitleProps> = (props) => {
                 {nutritionData.map((nutrient, index) => (
                     <BZU key={index}>
                         {' '}
-                        <p>
+                        <Value>
                             {nutrient.value} {index === 0 ? 'ккал' : 'г'}
-                        </p>
+                        </Value>
                         <Micronutrient>{nutrient.label}</Micronutrient>
                     </BZU>
                 ))}

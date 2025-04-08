@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { LinkButtonProps } from '../type';
 import { StyledLinkButton } from './style';
 
+
 export const LinkButton: FC<LinkButtonProps> = (props) => {
     const router = useRouter();
     const handleClick = () => {
@@ -12,7 +13,7 @@ export const LinkButton: FC<LinkButtonProps> = (props) => {
     };
 
     return (
-        <StyledLinkButton onClick={handleClick} {...props}>
+        <StyledLinkButton onClick={handleClick} {...props} isActive={props.isActive}>
             {props.children}
         </StyledLinkButton>
     );

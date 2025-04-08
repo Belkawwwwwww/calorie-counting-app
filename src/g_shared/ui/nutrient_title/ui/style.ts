@@ -18,3 +18,6 @@ export const TitleContainer = styled.div`
     margin-bottom: 10px;
     margin-top: 10px;
 `;
+export const Value = styled.div`
+    font-weight: 600;
+`

@@ -3,31 +3,26 @@ import styled, { keyframes } from 'styled-components';
 export const Loading = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
 `;
 
 export const loaderAnimation = keyframes`
-  0% {
-    box-shadow: -10px 0, 10px 0, 0 -10px;
-  }
-  33% {
-    box-shadow: -10px -10px, 10px 0, 0 10px;
-  }
-  66% {
-    box-shadow: -10px 0, -10px 10px, -10px -10px;
-  }
-  100% {
-    box-shadow: 10px 0, 0 -10px, -10px 0;
-  }
+  20% { background-position: 0% 0%, 50% 50%, 100% 50% }
+  40% { background-position: 0% 100%, 50% 0%, 100% 50% }
+  60% { background-position: 0% 50%, 50% 100%, 100% 0% }
+  80% { background-position: 0% 50%, 50% 50%, 100% 100% }
 `;
 
-export const Loader = styled.span`
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    display: block;
-    margin: 5px auto;
-    position: relative;
-    color: white;
-    box-sizing: border-box;
-    animation: ${loaderAnimation} 1s linear infinite alternate;
+export const Loader = styled.div`
+  margin: auto;
+
+  width: 35px;
+  height: 20px;
+  --_g: no-repeat radial-gradient(circle closest-side, var(--color-background1) 90%, #0000);
+  background:
+    var(--_g) 0%   50%,
+    var(--_g) 50%  50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: ${loaderAnimation} 1s infinite linear;
 `;

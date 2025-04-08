@@ -1,13 +1,29 @@
 {
     "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-    "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-    "files": { "ignoreUnknown": false, "ignore": [] },
-    "formatter": { "enabled": true, "indentStyle": "tab" },
-    "organizeImports": { "enabled": true },
+    "vcs": {
+        "enabled": false,
+        "clientKind": "git",
+        "useIgnoreFile": false
+    },
+    "files": {
+        "ignoreUnknown": false,
+        "ignore": []
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "tab"
+    },
+    "organizeImports": {
+        "enabled": true
+    },
     "linter": {
         "enabled": true,
-        "rules": { "recommended": false },
-        "ignore": ["dist"]
+        "rules": {
+            "recommended": false
+        },
+        "ignore": [
+            "dist"
+        ]
     },
     "javascript": {
         "formatter": {
@@ -21,10 +37,16 @@
             "bracketSpacing": true
         }
     },
-    "json": { "formatter": { "trailingCommas": "none" } },
+    "json": {
+        "formatter": {
+            "trailingCommas": "none"
+        }
+    },
     "overrides": [
         {
-            "include": ["**/*.{ts,tsx}"],
+            "include": [
+                "**/*.{ts,tsx}"
+            ],
             "linter": {
                 "rules": {
                     "complexity": {
@@ -86,9 +108,18 @@
                 }
             }
         },
-        { "include": ["**/*.{ts,tsx}"], "javascript": { "globals": [] } },
         {
-            "include": ["**/*.{ts,tsx}"],
+            "include": [
+                "**/*.{ts,tsx}"
+            ],
+            "javascript": {
+                "globals": []
+            }
+        },
+        {
+            "include": [
+                "**/*.{ts,tsx}"
+            ],
             "linter": {
                 "rules": {
                     "correctness": {
@@ -122,10 +153,14 @@
             }
         },
         {
-            "include": ["**/*.{ts,tsx}"],
+            "include": [
+                "**/*.{ts,tsx}"
+            ],
             "linter": {
                 "rules": {
-                    "complexity": { "noUselessTypeConstraint": "error" },
+                    "complexity": {
+                        "noUselessTypeConstraint": "error"
+                    },
                     "correctness": {
                         "noUnusedVariables": "error",
                         "useArrayLiterals": "off"
@@ -145,7 +180,9 @@
             }
         },
         {
-            "include": ["**/*.{ts,tsx}"],
+            "include": [
+                "**/*.{ts,tsx}"
+            ],
             "javascript": {
                 "globals": [
                     "onscrollend",
@@ -284,7 +321,9 @@
             }
         },
         {
-            "include": ["**/*.{ts,tsx}"],
+            "include": [
+                "**/*.{ts,tsx}"
+            ],
             "linter": {
                 "rules": {
                     "complexity": {
@@ -346,9 +385,18 @@
                 }
             }
         },
-        { "include": ["**/*.{ts,tsx}"], "javascript": { "globals": [] } },
         {
-            "include": ["**/*.{ts,tsx}"],
+            "include": [
+                "**/*.{ts,tsx}"
+            ],
+            "javascript": {
+                "globals": []
+            }
+        },
+        {
+            "include": [
+                "**/*.{ts,tsx}"
+            ],
             "linter": {
                 "rules": {
                     "correctness": {
@@ -382,10 +430,14 @@
             }
         },
         {
-            "include": ["**/*.{ts,tsx}"],
+            "include": [
+                "**/*.{ts,tsx}"
+            ],
             "linter": {
                 "rules": {
-                    "complexity": { "noUselessTypeConstraint": "error" },
+                    "complexity": {
+                        "noUselessTypeConstraint": "error"
+                    },
                     "correctness": {
                         "noUnusedVariables": "error",
                         "useArrayLiterals": "off"
@@ -405,7 +457,9 @@
             }
         },
         {
-            "include": ["**/*.{ts,tsx}"],
+            "include": [
+                "**/*.{ts,tsx}"
+            ],
             "javascript": {
                 "globals": [
                     "onscrollend",

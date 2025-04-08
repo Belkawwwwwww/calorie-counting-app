@@ -6,5 +6,7 @@ export type Nutrient = {
 };
 
 export type NutritionTitleProps = {
+    // nutritionData: { value: number; label: string }[];
     mealType: MealType;
-};
+    // item?: FoodOrProduct | null
+}

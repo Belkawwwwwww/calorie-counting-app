@@ -1,13 +1,12 @@
-import {
-    FoodBlock,
-    MealValidationErrors,
-} from '@/g_shared/lib/type/createOrUpdateTypes';
-import { FoodTransition } from '@/g_shared/lib/utils';
-import { mealTypeOptions } from '@/g_shared/lib/utils';
-import { InputBox } from '@/g_shared/ui/input';
-import { ToggleButton } from '@/g_shared/ui/toggle_button';
+import { FoodBlock, MealValidationErrors } from '@/g_shared/lib/type/createOrUpdateTypes';
+import { FoodOrProduct } from '@/g_shared/lib/type/SearchType';
+
 import { FC } from 'react';
 import styled from 'styled-components';
+import { InputBox } from '../../input';
+import { FoodTransition } from '@/g_shared/lib/utils';
+import { NutritionTitle } from '../../nutrient_title';
+import { MealType } from '@/g_shared/lib/type/nutritionTypes';
 export const Food = styled.div`
     border: 1px solid #89ac76;
     border-radius: 4px;
@@ -18,32 +17,39 @@ export const Remove = styled.div`
     float: right;
 `;
 type Props = {
-    index: number;
-    foodBlock: FoodBlock;
-    updateFoodBlock: (
-        index: number,
-        key: keyof FoodBlock,
-        value: string
-    ) => void;
-    validationErrors?: MealValidationErrors;
-    mealTypeOptions: { value: string; label: string }[];
-    handleRemoveFoodBlock: (index: number) => void;
+    item: FoodOrProduct | null
+    mealType: MealType
+    // index: number;
+    // foodBlock: FoodBlock;
+    // updateFoodBlock: (
+    //     index: number,
+    //     key: keyof FoodBlock,
+    //     value: string
+    // ) => void;
+    // validationErrors?: MealValidationErrors;
+    // mealTypeOptions: { value: string; label: string }[];
+    // handleRemoveFoodBlock: (index: number) => void;
 };
 export const FoodBlocks: FC<Props> = (props) => {
+    const useItemData = () => {
+        return[
+            
+        ]
+    }
     return (
         <>
-            <InputBox
-                type='number'
-                value={props.foodBlock.id}
-                onChange={(e) =>
-                    props.updateFoodBlock(props.index, 'id', e.target.value)
-                }
-                useUnframedInput={true}
-                placeholder='ОБЯЗАТЕЛЬНО'
-                label='ID'
-                error={props.validationErrors?.id}
-            />
-            <InputBox
+            Название: {props.item?.name}
+            {/* <NutritionTitle mealType={props.item} /> */}
+            <div>
+
+
+                Калории: {props.item?.calories}
+                Белки: {props.item?.protein}
+                Углеводы: {props.item?.carbs}
+                Жиры: {props.item?.fat}
+
+            </div>
+            {/* <InputBox
                 type='number'
                 value={props.foodBlock.weight}
                 onChange={(e) =>
@@ -54,8 +60,8 @@ export const FoodBlocks: FC<Props> = (props) => {
                 label={FoodTransition.weight}
                 alwaysShowPlaceholder={true}
                 error={props.validationErrors?.weight}
-            />
-            <ToggleButton
+            /> */}
+            {/* <ToggleButton
                 options={mealTypeOptions.map((option) => option.label)}
                 selectedValue={
                     mealTypeOptions.find(
@@ -71,7 +77,7 @@ export const FoodBlocks: FC<Props> = (props) => {
                     )
                 }
                 label='ТИП ПРИЕМА ПИЩИ'
-            />
+            /> */}
         </>
     );
 };

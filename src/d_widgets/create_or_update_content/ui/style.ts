@@ -7,7 +7,7 @@ export const Data = styled.div`
     display: flex;
     justify-content: space-between;
 `;
-export const Food = styled.div`
+export const Foods = styled.div`
     border: 1px solid #89ac76;
     border-radius: 4px;
     padding: 15px;

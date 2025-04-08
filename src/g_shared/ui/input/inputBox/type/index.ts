@@ -8,4 +8,5 @@ export type InputBoxProps = {
     imageSrc?: string;
     useUnframedInput?: boolean;
     alwaysShowPlaceholder?: boolean;
+    onFocus?: () => void; 
 } & Props;
