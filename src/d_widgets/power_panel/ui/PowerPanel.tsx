@@ -4,7 +4,6 @@ import { useMealDataContext } from '@/g_shared/lib/context';
 import { Meal } from '@/g_shared/lib/type/nutritionTypes';
 import { getTotalNutrients } from '@/g_shared/lib/utils';
 import { DailyCaloriesBlock } from '@/g_shared/ui/circle_block';
-import { LoadingIndicator } from '@/g_shared/ui/loader';
 import { NutrientProgressBar } from '@/g_shared/ui/nutrition_progress_bar';
 import {
 	BZU,
@@ -19,9 +18,7 @@ import {
 export const PowerPanel = () => {
 	const { formattedDate } = useMealDataContext();
 	const { data: bzuData, isLoading: isBzuLoading } = useGetBzu(formattedDate);
-	const { data: userMealData, isLoading: isMealLoading } =
-		useGetUserMeal(formattedDate);
-
+	const { data: userMealData } = useGetUserMeal(formattedDate);
 	const meals: Meal[] = Array.isArray(userMealData?.data)
 		? userMealData.data
 		: [];
@@ -36,11 +33,8 @@ export const PowerPanel = () => {
 		max: bzuData?.data.max ?? 0,
 	};
 
-	if (isBzuLoading || isMealLoading) {
-		return <LoadingIndicator />;
-	}
-
 	return (
+		// <FetchIndicator isLoading={isBzuLoading || isMealLoading}>
 		<StyledSummaryBlock>
 			<FirstBlock>
 				<Norm>
@@ -76,5 +70,7 @@ export const PowerPanel = () => {
 				))}
 			</BZU>
 		</StyledSummaryBlock>
+		// </FetchIndicator>
+
 	);
 };

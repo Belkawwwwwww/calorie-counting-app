@@ -3,7 +3,6 @@ import { calculateCalories } from '@/e_features/get_meal/utils';
 import { useMealDataContext } from '@/g_shared/lib/context';
 import { useModalOpen } from '@/g_shared/lib/hooks';
 import { Meal, MealType, mealTypes } from '@/g_shared/lib/type/nutritionTypes';
-import { LoadingIndicator } from '@/g_shared/ui/loader';
 import { MealItem } from '@/g_shared/ui/meal_item';
 import { FC, memo, useCallback, useState } from 'react';
 import { StyledNutritionBlock } from './style';
@@ -41,9 +40,6 @@ export const NutritionBlock: FC = memo(() => {
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setEat(e.target.value);
 	};
-	if (isLoading) {
-		return <LoadingIndicator />;
-	}
 	if (error) {
 		return <p>Ошибка при загрузке данных о питании.</p>;
 	}

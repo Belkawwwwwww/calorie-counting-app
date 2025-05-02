@@ -24,6 +24,19 @@ export const FirstBlock = styled.div`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    /* @media (max-width: 768px) {
+        height: auto;
+    } */
+
+    @media (max-width: 480px) {
+        padding-top: 20px;
+
+    }
+    @media (max-width: 320px) {
+        padding-top: 25px;
+        flex-wrap: nowrap;
+        width: 217px;
+    }
 `;
 export const Calories = styled.div`
     display: flex;
@@ -32,6 +45,9 @@ export const Calories = styled.div`
     text-align: center;
     flex-direction: column;
     justify-content: center;
+    @media (max-width: 320px) {
+        padding-left: 15px;
+    }
 `;
 export const BZU = styled.div`
     text-align: center;
@@ -46,7 +62,12 @@ export const BZU = styled.div`
     @media (max-width: 480px) {
         padding-top: 10px;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
+        
+    }
+    @media (max-width: 320px) {
+        padding-top: 10px;
+        justify-content: center;
     }
 `;
 

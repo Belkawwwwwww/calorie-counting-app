@@ -57,5 +57,10 @@ export const ContainerImage = styled.div`
     }
     @media (max-width: 480px) {
         padding: 5px;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        position: absolute;
+        left: 35px;
     }
 `;

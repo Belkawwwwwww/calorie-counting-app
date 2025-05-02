@@ -69,9 +69,14 @@ export const Photo = styled.div`
     background-size: cover;
     background-position: center;
     @media (max-width: 480px) {
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
+        img{
+        width: 42px;
+        height: 42px;
     }
+    }
+   
 `;
 export const ContainerUsername = styled.div`
     display: flex;

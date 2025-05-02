@@ -5,6 +5,15 @@ export const AddButtonContainer = styled.div<{ centered?: boolean }>`
     display: flex;
     align-items: center;
     justify-content: ${({ centered }) => (centered ? 'center' : 'flex-start')};
+    @media (max-width: 768px) {
+        /* margin-left: 115px; */
+    }
+    @media (max-width: 480px) {
+        margin-left: 0px;
+    }
+    @media (max-width: 320px) {
+        margin-left: 25px;
+    }
 `;
 export const Plus = styled.div`
     width: 35px;

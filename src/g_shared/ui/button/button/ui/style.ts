@@ -43,4 +43,15 @@ export const StyledButton = styled.button<Props>`
                 return '14px';
         }
     }};
+     @media (max-width: 768px) {
+        /* margin-left: 115px; */
+    }
+    @media (max-width: 480px) {
+        width: 100%;
+        
+    }
+    @media (max-width: 320px) {
+        width: 100%;
+        margin-right: 25px;
+    }
 `;

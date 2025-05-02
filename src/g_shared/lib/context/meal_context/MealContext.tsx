@@ -1,5 +1,5 @@
 import { useGetUserMeal } from '@/e_features/get_meal/hooks/useGetUserMeal';
-import { LoadingIndicator } from '@/g_shared/ui/loader';
+import { FetchIndicator } from '@/g_shared/ui/fetchn_indicator/ui/FetchIndicator';
 import dayjs, { Dayjs } from 'dayjs';
 import { FC, createContext, useCallback, useContext, useState } from 'react';
 import { DataMeal } from '../../type/nutritionTypes';
@@ -31,15 +31,15 @@ export const MealDataProvider: FC<Props> = (props) => {
         formattedDate,
     };
 
-    if (isLoading) {
-        return <LoadingIndicator />
-    }
     return (
-        <MealDataContext.Provider
-            value={value}
-        >
-            {props.children}
-        </MealDataContext.Provider>
+        <FetchIndicator isLoading={isLoading}>
+            <MealDataContext.Provider
+                value={value}
+            >
+                {props.children}
+            </MealDataContext.Provider>
+        </FetchIndicator>
+
     );
 };
 

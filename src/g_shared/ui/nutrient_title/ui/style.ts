@@ -17,6 +17,14 @@ export const TitleContainer = styled.div`
     font-size: 15px;
     margin-bottom: 10px;
     margin-top: 10px;
+    @media (max-width: 480px) {
+        width: 330px;
+        /* padding-left: 20px; */
+    }
+    @media (max-width: 320px) {
+        width: 280px;
+        /* padding-left: 17px; */
+    }
 `;
 export const Value = styled.div`
     font-weight: 600;

@@ -8,7 +8,7 @@ import { mealsTranslation } from "@/g_shared/lib/utils";
 import { CreateOrUpdateMealSchema } from "@/g_shared/schema/createOrUpdateMealSchema";
 import { AddButton } from "@/g_shared/ui/add_meal_button";
 import { Error } from "@/g_shared/ui/error_display";
-import { LoadingIndicator } from "@/g_shared/ui/loader";
+import { FetchIndicator } from "@/g_shared/ui/fetchn_indicator/ui/FetchIndicator";
 import { Modal } from "@/g_shared/ui/modal";
 import { FC } from "react";
 import { toast } from 'react-toastify';
@@ -61,13 +61,9 @@ export const FoodBlockModal: FC<Props> = (props) => {
             }
         }
     };
-    if (isLoading) {
-        return <LoadingIndicator />
-    }
-
 
     return (
-        <>
+        <FetchIndicator isLoading={isLoading}>
             {props.isOpen ? (
                 <Modal title={props.modalTitle} onClose={props.onClose} width='400px' height='auto'>
                     <FoodBlocks
@@ -79,6 +75,6 @@ export const FoodBlockModal: FC<Props> = (props) => {
                 </Modal>
             ) : null}
             <AddButton onClick={handleSubmit} text='ГОТОВО' />
-        </>
+        </FetchIndicator>
     )
 }

@@ -17,12 +17,12 @@ export const ImageContainer = styled.div`
     @media (max-width: 768px) {
         width: 23px;
         height: 23px;
-        margin: 5px 10px 5px 10px;
+        margin: 5px 10px 15px 10px;
     }
     @media (max-width: 480px) {
         width: 20px;
         height: 20px;
-        margin: 0px 5px 0px 5px;
+        margin: 0px 15px 10px 15px;
     }
     img {
         width: 30px;

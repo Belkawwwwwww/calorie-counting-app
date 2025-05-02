@@ -1,5 +1,5 @@
-import { LoadingIndicator } from '@/g_shared/ui/loader';
 import { FC } from 'react';
+import { FetchIndicator } from '../../fetchn_indicator/ui/FetchIndicator';
 import { Props } from '../type';
 import { BoxCircle, Circle, Significance, Text } from './style';
 
@@ -12,18 +12,17 @@ export const DailyCaloriesBlock: FC<Props> = (props) => {
     const message = isOverkill ? 'свыше нормы' : 'осталось';
     const fillPercent = Math.min((currentCalories / maxCalories) * 100, 100); // Процент заполнения
 
-    if (props.isLoading) {
-        return <LoadingIndicator />;
-    }
-
     return (
-        <BoxCircle>
-            <Circle $isOverkill={isOverkill}>
-                <Significance $isOverkill={isOverkill}>
-                    {displayCalories}
-                </Significance>
-                <Text $isOverkill={isOverkill}>{message}</Text>
-            </Circle>
-        </BoxCircle>
+        <FetchIndicator isLoading={props.isLoading}>
+            <BoxCircle>
+                <Circle $isOverkill={isOverkill}>
+                    <Significance $isOverkill={isOverkill}>
+                        {displayCalories}
+                    </Significance>
+                    <Text $isOverkill={isOverkill}>{message}</Text>
+                </Circle>
+            </BoxCircle>
+        </FetchIndicator>
+
     );
 };

@@ -34,4 +34,10 @@ export const Significance = styled.div<{ $isOverkill?: boolean }>`
 export const BoxCircle = styled.div`
     flex: 0 0 33.3%;
     padding-left: 24px;
+    @media (max-width: 480px) {
+        padding-left: 20px;
+    }
+    @media (max-width: 320px) {
+        padding-left: 17px;
+    }
 `;
