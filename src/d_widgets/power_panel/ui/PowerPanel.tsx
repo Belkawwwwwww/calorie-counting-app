@@ -1,23 +1,23 @@
+import { useGetBzu } from '@/e_features/bzu/hooks';
+import { useGetUserMeal } from '@/e_features/get_meal/hooks';
+import { useMealDataContext } from '@/g_shared/lib/context';
+import { Meal } from '@/g_shared/lib/type/nutritionTypes';
+import { getTotalNutrients } from '@/g_shared/lib/utils';
+import { DailyCaloriesBlock } from '@/g_shared/ui/circle_block';
+import { LoadingIndicator } from '@/g_shared/ui/loader';
+import { NutrientProgressBar } from '@/g_shared/ui/nutrition_progress_bar';
 import {
+	BZU,
 	Calories,
 	Cel,
 	FirstBlock,
 	Norm,
 	Purpose,
 	StyledSummaryBlock,
-	BZU,
 } from './style';
 
-import { DailyCaloriesBlock } from '@/g_shared/ui/circle_block';
-import { NutrientProgressBar } from '@/g_shared/ui/nutrition_progress_bar';
-import { Meal } from '@/g_shared/lib/type/nutritionTypes';
-import { LoadingIndicator } from '@/g_shared/ui/loader';
-import { useGetBzu } from '@/e_features/bzu/hooks';
-import { getFormattedDate, getTotalNutrients } from '@/g_shared/lib/utils';
-import { useGetUserMeal } from '@/e_features/get_meal/hooks';
-
 export const PowerPanel = () => {
-	const formattedDate = getFormattedDate();
+	const { formattedDate } = useMealDataContext();
 	const { data: bzuData, isLoading: isBzuLoading } = useGetBzu(formattedDate);
 	const { data: userMealData, isLoading: isMealLoading } =
 		useGetUserMeal(formattedDate);

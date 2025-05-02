@@ -1,4 +1,4 @@
-import { MealType } from '@/g_shared/lib/type/nutritionTypes';
+import { FoodOrProduct } from '@/g_shared/lib/type/SearchType';
 
 export type Nutrient = {
     value: number;
@@ -6,7 +6,6 @@ export type Nutrient = {
 };
 
 export type NutritionTitleProps = {
-    // nutritionData: { value: number; label: string }[];
-    mealType: MealType;
-    // item?: FoodOrProduct | null
+    nutritionData?: { value: number; label: string }[];
+    foodOrProduct?: FoodOrProduct | null
 }

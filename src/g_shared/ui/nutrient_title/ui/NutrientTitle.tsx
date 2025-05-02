@@ -1,14 +1,18 @@
 import React from 'react';
 import { BZU, Micronutrient, TitleContainer, Value } from './style';
 import { NutritionTitleProps } from '../type';
-import { useNutritionData } from '@/g_shared/lib/hooks';
 
 export const NutritionTitle: React.FC<NutritionTitleProps> = (props) => {
-    const nutritionData = useNutritionData(props.mealType);
+    const nutritionItem = props.foodOrProduct ? [
+        { value: Math.ceil(props.foodOrProduct.calories), label: 'Калории' },
+        { value: Math.ceil(props.foodOrProduct.protein), label: 'Белки' },
+        { value: Math.ceil(props.foodOrProduct.carbs), label: 'Углеводы' },
+        { value: Math.ceil(props.foodOrProduct.fat), label: 'Жиры' },
+    ] : props.nutritionData || [{ value: 0, label: 'Нет данных' }]
     return (
         <TitleContainer>
             <>
-                {nutritionData.map((nutrient, index) => (
+                {nutritionItem.map((nutrient, index) => (
                     <BZU key={index}>
                         {' '}
                         <Value>

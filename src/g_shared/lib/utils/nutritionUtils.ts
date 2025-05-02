@@ -16,7 +16,6 @@ export const getTotalNutrients = (
         },
         { protein: 0, fat: 0, carbs: 0 }
     );
-
     return {
         totalProtein: Math.ceil(total.protein),
         totalFat: Math.ceil(total.fat),

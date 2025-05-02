@@ -1,10 +1,10 @@
-import { FC } from 'react';
-import { Container, Plus, ContainerImage, Block } from './style';
-import { Modal } from '@/g_shared/ui/modal';
-import { MeasurementForm } from '@/g_shared/ui/measurement_form';
-import { MeasurementDisplay } from '@/g_shared/ui/measurement_display';
-import { useModalOpen } from '@/g_shared/lib/hooks';
 import { useGetUserSurvey } from '@/e_features/survey/hooks';
+import { useModalOpen } from '@/g_shared/lib/hooks';
+import { MeasurementDisplay } from '@/g_shared/ui/measurement_display';
+import { MeasurementForm } from '@/g_shared/ui/measurement_form';
+import { Modal } from '@/g_shared/ui/modal';
+import { FC } from 'react';
+import { Block, Container, ContainerImage } from './style';
 
 export const BodyMeasurements: FC = () => {
     const { data: userData } = useGetUserSurvey();

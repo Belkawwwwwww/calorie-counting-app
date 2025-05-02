@@ -16,9 +16,7 @@ export const MeasurementForm: FC<Props> = (props) => {
         setMeasurements({ ...measurements, [name]: e.target.value });
     };
     const handleSubmit = () => {
-        // Логика для добавления измерений
-        console.log(measurements);
-        props.onClose(); // Закрыть модальное окно после добавления
+        props.onClose(); 
     };
 
     return (

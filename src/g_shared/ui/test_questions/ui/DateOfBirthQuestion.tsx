@@ -59,7 +59,7 @@ export const DateOfBirthQuestion: FC<Props> = (props) => {
             handleInputChange({
                 target: { value: birthdayDate.toISOString() },
             } as React.ChangeEvent<HTMLInputElement>);
-            props.onAnswer(birthdayDate.toISOString()); // Передача даты в формате ISO
+            props.onAnswer(birthdayDate.toISOString());
         }
     };
     // Обновляем состояние при каждом изменении селекторов

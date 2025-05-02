@@ -1,10 +1,10 @@
-import { useError } from '@/g_shared/lib/context';
 import { AuthScheme } from '@/e_features/auth/lib/validation/authScheme';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import { RouteEnum } from '@/g_shared/model';
-import { z } from 'zod';
+import { useError } from '@/g_shared/lib/context';
 import { useZodInputValidation } from '@/g_shared/lib/hooks';
+import { RouteEnum } from '@/g_shared/model';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { z } from 'zod';
 import { useAuth } from './useAuthHooks';
 
 export const useLoginForm = () => {

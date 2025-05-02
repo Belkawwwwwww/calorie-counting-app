@@ -1,1 +1,1 @@
-export { Calendar } from './ui/Calendar';
+export { MaterialDatePicker } from './ui/Calendar';

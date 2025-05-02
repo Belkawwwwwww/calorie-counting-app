@@ -1,15 +1,19 @@
+import { FoodDetailModal } from '@/d_widgets/food_detail_modal';
+import { clearAddedItemsThunk } from '@/e_features/create_or_update_meal/model/slice/createOrUpdateMealSlice';
+import { useNutritionData } from '@/g_shared/lib/hooks';
+import { useAppDispatch } from '@/g_shared/lib/store';
+import { mealsTranslation } from '@/g_shared/lib/utils';
+import { AddButton } from '@/g_shared/ui/add_meal_button';
+import { FoodEatenList } from '@/g_shared/ui/food_item_list';
 import { Modal } from '@/g_shared/ui/modal';
+import { NutritionTitle } from '@/g_shared/ui/nutrient_title';
 import { FC, useState } from 'react';
 import { Props } from '../type';
-import { mealsTranslation } from '@/g_shared/lib/utils';
-import { NutritionTitle } from '@/g_shared/ui/nutrient_title';
-import { FoodEatenList } from '@/g_shared/ui/food_item_list';
-import { FoodDetailModal } from '@/d_widgets/food_detail_modal';
-import { AddMoreButton } from '@/g_shared/ui/add_more_button_meal';
 
 export const NutritionModal: FC<Props> = (props) => {
     const [isAdditionalModalActive, setAdditionalModalActive] = useState(false);
-    const [activeTab, setActiveTab] = useState('products');
+    const nutritionData = useNutritionData(props.title);
+    const dispatch = useAppDispatch()
 
     const handleAddMoreClick = () => {
         setAdditionalModalActive(true);
@@ -17,9 +21,7 @@ export const NutritionModal: FC<Props> = (props) => {
 
     const handleCloseAdditionalModal = () => {
         setAdditionalModalActive(false);
-    };
-    const handleTabChange = (tab: any) => {
-        setActiveTab(tab);
+        dispatch(clearAddedItemsThunk());
     };
 
     return (
@@ -29,16 +31,13 @@ export const NutritionModal: FC<Props> = (props) => {
             width='600px'
             height='auto'
         >
-            <NutritionTitle mealType={props.title} />
+            <NutritionTitle nutritionData={nutritionData} />
             <FoodEatenList mealType={props.title} />
-            <AddMoreButton onClick={handleAddMoreClick} />
+            <AddButton onClick={handleAddMoreClick} text='ДОБАВИТЬ ЕЩЕ' />
             {isAdditionalModalActive ? (
                 <FoodDetailModal
                     title={props.title}
                     value={props.value}
-                    data={props.data}
-                    handleTabChange={handleTabChange}
-                    activeTab={activeTab}
                     handleCloseAdditionalModal={handleCloseAdditionalModal}
                     onChange={props.onChange}
                     onClose={props.onClose}

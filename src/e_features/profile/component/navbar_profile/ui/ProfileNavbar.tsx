@@ -1,8 +1,8 @@
+import { LogoutBtn } from '@/e_features/auth/components';
 import { RouteEnum } from '@/g_shared/model';
 import { Layout } from '@/g_shared/ui/layout';
-import { Menu, NavigationWrapper, StyledLink } from './style';
 import { LinkButton } from '@/g_shared/ui/linkButton';
-import { LogoutBtn } from '@/e_features/auth/ui';
+import { Menu, NavigationWrapper, StyledLink } from './style';
 
 export const ProfileNavbar = () => {
     return (

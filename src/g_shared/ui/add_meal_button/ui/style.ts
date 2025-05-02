@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export const AddButtonContainer = styled.div`
+export const AddButtonContainer = styled.div<{ centered?: boolean }>`
     margin-top: 10px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: ${({ centered }) => (centered ? 'center' : 'flex-start')};
 `;
 export const Plus = styled.div`
     width: 35px;

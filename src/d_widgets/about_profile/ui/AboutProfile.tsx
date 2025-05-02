@@ -1,4 +1,6 @@
 import { Image } from '@/g_shared/ui/image';
+import { FC } from 'react';
+import { Props } from '../type';
 import {
     ContainerUsername,
     Photo,
@@ -6,8 +8,6 @@ import {
     PhotoWrapper,
     Username,
 } from './style';
-import { FC } from 'react';
-import { Props } from '../type';
 
 export const AboutProfile: FC<Props> = (props) => {
     const imageUrl =

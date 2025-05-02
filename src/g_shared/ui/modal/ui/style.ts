@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Title = styled.p`
     text-align: center;
-    margin-top: -19px;
+    margin-top: -17px;
     margin-bottom: 5px;
 `;
 export const ModalWrapper = styled.div`
@@ -51,3 +51,14 @@ export const CloseButton = styled.button`
     border: none;
     cursor: pointer;
 `;
+export const CloseButtonContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+export const NavbarModal = styled.div`
+    display: flex;
+    align-items: center;
+    
+`
+

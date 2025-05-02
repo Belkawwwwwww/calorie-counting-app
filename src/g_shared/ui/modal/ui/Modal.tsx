@@ -7,10 +7,10 @@ import React, {
     useState,
 } from 'react';
 import { Portal } from '../../portal/ui/Portal';
-import { ModalStyle, Props } from '../type';
-import { CloseButton, ModalContent, ModalWrapper, Title } from './style';
+import { ExtendedProps, ModalStyle } from '../type';
+import { CloseButton, CloseButtonContainer, ModalContent, ModalWrapper, Title } from './style';
 
-export const Modal: FC<Props> = (props: Props) => {
+export const Modal: FC<ExtendedProps> = (props) => {
     const rootRef = useRef<HTMLDivElement>(null);
     const [isMounted, setIsMounted] = useState(false);
 
@@ -69,9 +69,16 @@ export const Modal: FC<Props> = (props: Props) => {
         <Portal>
             <ModalWrapper ref={rootRef}>
                 <ModalContent style={modalStyle}>
-                    <CloseButton type='button' onClick={handleClose}>
-                        Х
-                    </CloseButton>
+                    <CloseButtonContainer>
+                        {props.closeButtonContent ? (
+                            props.closeButtonContent
+                        ) : (
+                            <CloseButton type='button' onClick={handleClose}>
+                                Х
+                            </CloseButton>
+                        )}
+                        {props.rightContent}
+                    </CloseButtonContainer>
                     {props.image ? (
                         <img
                             src={props.image}

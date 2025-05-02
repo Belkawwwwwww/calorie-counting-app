@@ -38,9 +38,9 @@ function makePasswordWithConfirm() {
         check: (data: z.infer<typeof schema>) => boolean,
         message: z.CustomErrorParams,
     ] = [
-        (data) => data.password === data.passwordConfirm,
-        { message: 'Пароли должны совпадать', path: ['passwordConfirm'] },
-    ];
+            (data) => data.password === data.passwordConfirm,
+            { message: 'Пароли должны совпадать', path: ['passwordConfirm'] },
+        ];
     return {
         schema,
         refineTuple,

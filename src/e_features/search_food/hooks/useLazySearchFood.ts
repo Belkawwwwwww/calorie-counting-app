@@ -4,14 +4,27 @@ import { useSearchFood } from "./useSearchFood";
 export const useLazySearchFood = () => {
     const [searchTermLocal, setSearchTermLocal] = useState('');
     const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+    const [hasSearchBeenPerformed, setHasSearchBeenPerformed] = useState(false);
+    const [isDebouncing, setIsDebouncing] = useState(false);
     const { data, isLoading, error } = useSearchFood(debouncedSearchTerm);
 
     useEffect(() => {
+        setIsDebouncing(searchTermLocal.length > 0);
         const timerId = setTimeout(() => {
-            setDebouncedSearchTerm(searchTermLocal)
+            if (searchTermLocal.length > 0) {
+                setDebouncedSearchTerm(searchTermLocal)
+                setHasSearchBeenPerformed(true)
+            } else {
+                setDebouncedSearchTerm('')
+                setHasSearchBeenPerformed(false)
+            }
+            setIsDebouncing(false);
         }, 450);
 
-        return () => clearTimeout(timerId);
+        return () => {
+            clearTimeout(timerId);
+            setIsDebouncing(false)
+        }
     }, [searchTermLocal]);
 
     const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +35,8 @@ export const useLazySearchFood = () => {
     const resetSearch = useCallback(() => {
         setSearchTermLocal('');
         setDebouncedSearchTerm('')
+        setHasSearchBeenPerformed(false);
+        setIsDebouncing(false);
 
     }, []);
 
@@ -31,6 +46,8 @@ export const useLazySearchFood = () => {
         error,
         searchTermLocal,
         resetSearch,
-        handleInputChange
+        handleInputChange,
+        hasSearchBeenPerformed,
+        isDebouncing
     };
 };

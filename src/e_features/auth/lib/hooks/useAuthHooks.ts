@@ -1,8 +1,8 @@
 import {
-    useRegisterUserMutation,
     useAuthUserMutation,
     useFetchUserSessionQuery,
     useLogoutUserMutation,
+    useRegisterUserMutation,
 } from '../../api/authApi';
 
 export const useRegister = () => {

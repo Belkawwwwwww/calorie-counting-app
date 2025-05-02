@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Props } from '../type';
-import { Gram, Meal, MealName } from './style';
+import { BoxCalories, Calories, Gram, Meal, MealName } from './style';
 
 export const MealFoodItem: FC<Props> = (props) => {
     return (
@@ -9,7 +9,10 @@ export const MealFoodItem: FC<Props> = (props) => {
                 <>{props.mealFood.name ? props.mealFood.name : 'Неопределен'}</>
                 <Gram>{props.mealFood.weight} г</Gram>
             </MealName>
-            <div>{Math.ceil(props.mealFood.info.calories)} ккал</div>
+            <BoxCalories>
+                <Calories>{Math.ceil(props.mealFood.info.calories)}</Calories>
+                <>ккал</>
+            </BoxCalories>
         </Meal>
     );
 };

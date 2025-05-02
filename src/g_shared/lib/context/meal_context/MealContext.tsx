@@ -1,15 +1,18 @@
-import { createContext, useContext, FC } from 'react';
-import { MealProps, Props } from './type';
 import { useGetUserMeal } from '@/e_features/get_meal/hooks/useGetUserMeal';
-
+import { LoadingIndicator } from '@/g_shared/ui/loader';
+import dayjs, { Dayjs } from 'dayjs';
+import { FC, createContext, useCallback, useContext, useState } from 'react';
 import { DataMeal } from '../../type/nutritionTypes';
 import { getFormattedDate } from '../../utils';
-import { LoadingIndicator } from '@/g_shared/ui/loader';
+import { MealContextProps, Props } from './type';
 
-const MealDataContext = createContext<MealProps | undefined>(undefined);
+const MealDataContext = createContext<MealContextProps | undefined>(undefined);
+
 
 export const MealDataProvider: FC<Props> = (props) => {
-    const formattedDate = getFormattedDate();
+    const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+    const formattedDate = selectedDate ? selectedDate.format('YYYY-MM-DD') : getFormattedDate();
+
     const {
         data: userMealData,
         isLoading,
@@ -18,12 +21,22 @@ export const MealDataProvider: FC<Props> = (props) => {
     } = useGetUserMeal(formattedDate);
 
     const mealData = userMealData as DataMeal | undefined;
+    const value: MealContextProps = {
+        mealData,
+        isLoading,
+        error,
+        refetch,
+        selectedDate,
+        setSelectedDate: useCallback(setSelectedDate, []),
+        formattedDate,
+    };
+
     if (isLoading) {
         return <LoadingIndicator />
     }
     return (
         <MealDataContext.Provider
-            value={{ mealData, isLoading, error, refetch }}
+            value={value}
         >
             {props.children}
         </MealDataContext.Provider>

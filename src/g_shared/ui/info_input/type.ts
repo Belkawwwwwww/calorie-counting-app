@@ -6,10 +6,10 @@ export type Props = {
     ) => void;
     validationErrors: {
         info?: {
-            protein?: string;
-            fat?: string;
-            carbs?: string;
-            calories?: string;
+            protein?: string ;
+            fat?: string ;
+            carbs?: string ;
+            calories?: string ;
         };
     };
 };

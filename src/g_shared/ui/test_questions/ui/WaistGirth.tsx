@@ -10,18 +10,15 @@ export const WaistGirth: FC<Props> = (props) => {
     const [validationError, setValidationError] = useState<string>('');
 
     const handleWaistChange = (value: string) => {
-        const waistValue = Number(value); // строку в число
+        const waistValue = Number(value); 
 
         handleInputChange({
             target: { value },
         } as React.ChangeEvent<HTMLInputElement>);
-        console.log(value);
         try {
             surveyScheme.shape.waist_girth.parse(waistValue);
             setValidationError('');
-            console.log('Before answering:', waistValue);
-            props.onAnswer(waistValue); // Передаем number
-            console.log('Before answering:', waistValue);
+            props.onAnswer(waistValue);
             if (props.onInputValidation) {
                 props.onInputValidation(true);
             }

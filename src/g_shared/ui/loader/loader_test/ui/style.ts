@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 
-// Анимация для лоадера
 export const panex = keyframes`
   0% { transform: rotate(-5deg); }
   100% { transform: rotate(10deg); }
@@ -13,7 +12,6 @@ export const eggRst = keyframes`
   50% { transform: translate(-55%, -50px) rotate3d(75, -8, 3, 50deg); }
 `;
 
-// Основной контейнер лоадера
 export const LoaderWrapper = styled.div`
     margin-top: 130px;
     position: relative;
@@ -28,7 +26,6 @@ export const LoaderWrapper = styled.div`
     perspective: 300px;
 `;
 
-// Элемент перед лоадером
 export const LoaderBefore = styled.div`
     content: '';
     position: absolute;
@@ -52,7 +49,6 @@ export const LoaderBefore = styled.div`
         0px center;
 `;
 
-// Элемент после лоадера
 export const LoaderAfter = styled.div`
     content: '';
     position: absolute;

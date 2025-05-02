@@ -11,8 +11,8 @@ export const QuestionComponent: FC<Props> = (props) => {
             try {
                 const parsedValue =
                     props.inputType === 'number' ? Number(value) : value;
-                props.validationSchema.parse(parsedValue); // Проверка схемы
-                setValidationError(''); // Ошибки нет
+                props.validationSchema.parse(parsedValue);
+                setValidationError('');
                 props.onValidValue?.(parsedValue); // Успешная валидация
             } catch (error) {
                 if (error instanceof z.ZodError) {

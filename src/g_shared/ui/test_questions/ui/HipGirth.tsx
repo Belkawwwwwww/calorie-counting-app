@@ -11,7 +11,7 @@ export const HipGirth: FC<Props> = (props) => {
     const [validationError, setValidationError] = useState<string>('');
 
     const handleHipChange = (value: string) => {
-        const hipValue = Number(value); // строку в число
+        const hipValue = Number(value); 
 
         handleInputChange({
             target: { value },
@@ -20,7 +20,7 @@ export const HipGirth: FC<Props> = (props) => {
         try {
             surveyScheme.shape.hip_girth.parse(hipValue);
             setValidationError('');
-            props.onAnswer(hipValue); // Передаем number
+            props.onAnswer(hipValue); 
             if (props.onInputValidation) {
                 props.onInputValidation(true);
             }

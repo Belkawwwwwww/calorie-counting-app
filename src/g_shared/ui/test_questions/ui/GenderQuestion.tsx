@@ -12,7 +12,7 @@ export const GenderQuestion: FC<Props> = (props) => {
     };
     // Используем русские варианты в опциях
     const options = Object.entries(genderTranslations).map(([key, value]) => ({
-        value: key, // Здесь используется ключ в качестве значения
+        value: key, // исп ключ в качестве значения
         label: value, // Значение будет использоваться как метка
     }));
 

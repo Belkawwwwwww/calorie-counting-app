@@ -1,45 +1,65 @@
+import { addItemThunk } from '@/e_features/create_or_update_meal/model/slice';
+import { useAppDispatch } from '@/g_shared/lib/store';
+import { AddedItem } from '@/g_shared/lib/type/AddedItemType';
 import { FoodOrProduct } from '@/g_shared/lib/type/SearchType';
-import { MealType } from '@/g_shared/lib/type/nutritionTypes';
-import { Error } from '@/g_shared/ui/error_display';
-import { FC, useState } from 'react';
-import { Modal } from '@/g_shared/ui/modal';
-import { FoodBlocks } from '@/g_shared/ui/create_meal_bocks';
-import { SearchContent } from '../component/SearchContent';
 import { mealsTranslation } from '@/g_shared/lib/utils';
-
-type Props = {
-    data: string;
-    title: MealType;
-    handleCloseAdditionalModal?: () => void;
-};
+import { FC, useState } from 'react';
+import { useModal } from '../../../g_shared/lib/hooks/useModalOpen/useModal';
+import { FoodMenu } from '../component/food_menu';
+import { Props } from '../type';
+import { FoodBlockModal } from '@/e_features/create_or_update_meal/ui/modal';
+import { useLazySearchFood } from '@/e_features/search_food/hooks';
+import { SearchBox } from '@/e_features/search_food/ui';
 
 export const CreateOrUpdateMeal: FC<Props> = (props) => {
-    const [isModalActive, setModalActive] = useState(false);
+    const dispatch = useAppDispatch();
+    const foodBlockModal = useModal();
     const [selectedItem, setSelectedItem] = useState<FoodOrProduct | null>(null);
-    const defaultTitle: MealType = props.title;
-    const modalTitle = mealsTranslation[defaultTitle];
-
+    const { resetSearch, searchTermLocal } = useLazySearchFood();
+    const modalTitle = mealsTranslation[props.title];
+    const [activeTab, setActiveTab] = useState<'frequent' | 'recently'>('frequent');
+    const handleTabChange = (tab: 'frequent' | 'recently') => {
+        setActiveTab(tab);
+    };
     const handleAddMoreClick = (item: FoodOrProduct) => {
         setSelectedItem(item);
-        setModalActive(true);
+        foodBlockModal.openModal();
     };
 
-    const handleCloseModal = () => {
-        setSelectedItem(null);
-        setModalActive(false);
+    const handleItemAdded = (item: FoodOrProduct, weight: number) => {
+        const addedItem: AddedItem = {
+            id: item.id,
+            type: (item as any).category_id !== undefined ? 'product' : 'food', item: item,
+            weight: weight,
+        };
+        dispatch(addItemThunk(addedItem));
+        resetSearch();
+        foodBlockModal.closeModal();
     };
+
 
     return (
         <>
-            <div>
-                <SearchContent onItemClick={handleAddMoreClick} />
-            </div>
-            {isModalActive ? (
-                <Modal title={modalTitle} onClose={handleCloseModal} width='400px' height='auto'>
-                    <FoodBlocks mealType={props.title}item={selectedItem} />
-                    <Error keyName='createOrUpdateMeal' absolute={false} />
-                </Modal>
+            <SearchBox
+                showAddBox={true}
+                onItemClick={handleAddMoreClick}
+            />
+            {searchTermLocal.length === 0 ? (
+                <FoodMenu
+                    activeTab={activeTab}
+                    onTabChange={handleTabChange}
+                />
             ) : null}
+
+            <FoodBlockModal
+                isOpen={foodBlockModal.isOpen}
+                onClose={foodBlockModal.closeModal}
+                mealType={props.title}
+                item={selectedItem}
+                onItemAdded={handleItemAdded}
+                modalTitle={modalTitle}
+                onSuccess={props.handleCloseAdditionalModal}
+            />
         </>
     );
 };

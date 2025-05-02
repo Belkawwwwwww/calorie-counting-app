@@ -11,7 +11,7 @@ export const GrowthQuestion: FC<Props> = (props) => {
     const [validationError, setValidationError] = useState<string>('');
 
     const handleGrowthChange = (value: string) => {
-        const growthValue = Number(value); // строку в число
+        const growthValue = Number(value);
 
         handleInputChange({
             target: { value },
@@ -20,7 +20,7 @@ export const GrowthQuestion: FC<Props> = (props) => {
         try {
             surveyScheme.shape.growth.parse(growthValue);
             setValidationError('');
-            props.onAnswer(growthValue); // Передаем number
+            props.onAnswer(growthValue);
             if (props.onInputValidation) {
                 props.onInputValidation(true);
             }

@@ -1,6 +1,6 @@
+import { menu } from '@/g_shared/lib/utils';
 import { Image } from '@/g_shared/ui/image';
 import { Counter, H1, ImageContainer, Opportunities } from './style';
-import { menu } from '@/g_shared/lib/utils';
 
 export const OpportunityCards = () => {
     return (

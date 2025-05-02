@@ -1,8 +1,9 @@
-import React from 'react';
+import { useLoginForm } from '@/e_features/auth/lib/hooks';
+import { OpenRoute } from '@/e_features/auth/components';
 import { Button } from '@/g_shared/ui/button';
-import { LoadingInBtn } from '@/g_shared/ui/loader';
-import { InputBox } from '@/g_shared/ui/input';
 import { Error } from '@/g_shared/ui/error_display';
+import { InputBox } from '@/g_shared/ui/input';
+import { LoadingInBtn } from '@/g_shared/ui/loader';
 import {
     Btn,
     Container,
@@ -11,8 +12,6 @@ import {
     StyledLink,
     Text,
 } from './style';
-import { OpenRoute } from '@/e_features/auth/ui';
-import { useLoginForm } from '@/e_features/auth/lib/hooks';
 
 export const LoginForm = () => {
     const {

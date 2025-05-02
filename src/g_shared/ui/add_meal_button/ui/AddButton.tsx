@@ -4,24 +4,29 @@ import { LoadingInBtn } from '../../loader';
 import { AddButtonContainer, Plus } from './style';
 
 type Props = {
-    onClick: () => void;
-    canAdd: boolean;
-    isLoading: boolean;
-    addBlock: () => void;
+    onClick?: () => void;
+    canAdd?: boolean;
+    isLoading?: boolean;
+    addBlock?: () => void;
+    text?: string
+    $btnWidth?: 'm' | 'l';
+    centered?: boolean;
 };
 
-export const AddButton: FC<Props> = (props) => (
-    <AddButtonContainer>
+export const AddButton: FC<Props> = ({ $btnWidth = 'm', centered = false, onClick, canAdd, isLoading, addBlock, text }) => (
+    <AddButtonContainer centered={centered}>
         <Button
             $variant='primary'
-            $btnWidth='s'
+            $btnWidth={$btnWidth}
             $btnSquareSize='button--square--size-m'
             type='button'
-            onClick={props.onClick}
+            onClick={onClick}
+
         >
-            {props.isLoading ? <LoadingInBtn /> : 'ДОБАВИТЬ'}
+            {isLoading ? <LoadingInBtn /> : text || 'ДОБАВИТЬ'}
+
         </Button>
-        {props.canAdd && <Plus onClick={props.addBlock} />}
+        {canAdd && <Plus onClick={addBlock} />}
     </AddButtonContainer>
 
 );

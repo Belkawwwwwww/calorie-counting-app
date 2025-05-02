@@ -1,11 +1,11 @@
-import { Calendar } from '@/d_widgets/calendar';
-import { DateNow, Header } from './style';
+import React from 'react';
+import { Header } from './style';
+import { MaterialDatePicker } from '@/d_widgets/calendar';
 
 export const DashboardHeader: React.FC = () => {
     return (
         <Header>
-            <DateNow>Сегодня</DateNow>
-            <Calendar />
+            <MaterialDatePicker />
         </Header>
     );
 };

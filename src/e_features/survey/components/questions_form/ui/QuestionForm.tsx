@@ -1,9 +1,9 @@
+import { useSurveyDataHandler } from '@/e_features/survey/hooks/useSurveyDataHandler';
 import { UIFormLayout } from '@/g_shared/ui/layout';
 import { LoaderTest } from '@/g_shared/ui/loader';
+import { NextBtn } from '@/g_shared/ui/next_btn';
 import { FC } from 'react';
 import { Questions, Title } from './style';
-import { NextBtn } from '@/g_shared/ui/next_btn';
-import { useSurveyDataHandler } from '@/e_features/survey/hooks/useSurveyDataHandler';
 
 export const QuestionForm: FC = () => {
     const {

@@ -1,15 +1,12 @@
-import { StyledNutritionBlock } from './style';
-
 import { NutritionModal } from '@/d_widgets/nutrition_modal';
 import { calculateCalories } from '@/e_features/get_meal/utils';
-
 import { useMealDataContext } from '@/g_shared/lib/context';
 import { useModalOpen } from '@/g_shared/lib/hooks';
 import { Meal, MealType, mealTypes } from '@/g_shared/lib/type/nutritionTypes';
-import { getFormattedDate } from '@/g_shared/lib/utils';
 import { LoadingIndicator } from '@/g_shared/ui/loader';
 import { MealItem } from '@/g_shared/ui/meal_item';
 import { FC, memo, useCallback, useState } from 'react';
+import { StyledNutritionBlock } from './style';
 
 export const NutritionBlock: FC = memo(() => {
 	const { isModalActive, handleModalOpen, handleModalClose } = useModalOpen();
@@ -18,7 +15,6 @@ export const NutritionBlock: FC = memo(() => {
 	const [selectedMealType, setSelectedMealType] = useState<MealType | null>(
 		null,
 	);
-	const formattedDate = getFormattedDate();
 	const { mealData, isLoading, error } = useMealDataContext();
 	const caloriesMap: Record<MealType, number> = {
 		breakfast: 0,
@@ -56,7 +52,6 @@ export const NutritionBlock: FC = memo(() => {
 		<StyledNutritionBlock>
 			{isModalActive ? (
 				<NutritionModal
-					data={formattedDate}
 					title={selectedMealType || 'breakfast' || 'dinner' || 'lunch'}
 					value={eat}
 					onChange={handleChange}

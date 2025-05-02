@@ -1,12 +1,10 @@
-import React from 'react';
+import { useRegisterForm } from '@/e_features/auth/lib/hooks';
+import { OpenRoute } from '@/e_features/auth/components';
 import { Button } from '@/g_shared/ui/button';
-import { InputBox } from '@/g_shared/ui/input';
 import { Error } from '@/g_shared/ui/error_display';
+import { InputBox } from '@/g_shared/ui/input';
 import { LoadingInBtn } from '@/g_shared/ui/loader';
 import { Btn, Container, FooterRegister, StyledLink } from './style';
-import { OpenRoute } from '@/e_features/auth/ui';
-import { useRegisterForm } from '@/e_features/auth/lib/hooks';
-
 
 export const RegisterForm = () => {
     const {

@@ -1,9 +1,9 @@
+import { AboutProfile } from '@/d_widgets/about_profile';
+import { BodyMeasurements } from '@/d_widgets/body_measurements';
+import { ProfileInfo } from '@/d_widgets/profile_info';
+import { UpdateButton } from '@/g_shared/ui/update_button';
 import { FC } from 'react';
 import { Props } from '../type';
-import { UpdateButton } from '@/g_shared/ui/update_button';
-import { BodyMeasurements } from '@/d_widgets/body_measurements';
-import { AboutProfile } from '@/d_widgets/about_profile';
-import { ProfileInfo } from '@/d_widgets/profile_info';
 import { BtnContainer } from './style';
 
 export const ProfilePageContent: FC<Props> = (props) => {

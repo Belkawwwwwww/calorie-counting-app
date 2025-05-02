@@ -1,9 +1,9 @@
 import { useError } from '@/g_shared/lib/context';
-import { useCallback, useState } from 'react';
-import { useRouter } from 'next/router';
-import { RegScheme } from '../validation/authScheme';
-import { z } from 'zod';
 import { RouteEnum } from '@/g_shared/model';
+import { useRouter } from 'next/router';
+import { useCallback, useState } from 'react';
+import { z } from 'zod';
+import { RegScheme } from '../validation/authScheme';
 import { useRegister } from './useAuthHooks';
 
 export const useRegisterForm = () => {
@@ -52,8 +52,6 @@ export const useRegisterForm = () => {
             const validatedData = RegScheme.parse(formState);
             await register(validatedData).unwrap();
             await router.push(RouteEnum.MAIN);
-            console.log(register);
-            console.log('Регистрация успешна');
         } catch (error) {
             if (error instanceof z.ZodError) {
                 const errors = error.issues.reduce(
@@ -65,7 +63,6 @@ export const useRegisterForm = () => {
                     {} as typeof validationErrors
                 );
                 setValidationErrors(errors);
-                console.log('Ошибка валидации:', errors);
             } else {
                 console.error('Registration failed:', error);
                 setError('registration', 'Произошла ошибка при регистрации');

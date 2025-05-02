@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ApiUrls } from '@/g_shared/model';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
     AuthInput,
     AuthResponse,
@@ -7,11 +7,11 @@ import {
     RegistrationInput,
 } from '../type/authTypes';
 
+import { setPending } from '@/e_features/pending/modele/action';
 import { setUser } from '@/f_entities/user/model';
+import { handleResponse } from '@/g_shared/lib/utils';
 import { AuthResponseScheme } from '../lib/validation';
 import { setAuth } from '../model/action';
-import { setPending } from '@/e_features/pending/modele/action';
-import { handleResponse } from '@/g_shared/lib/utils';
 
 const authAPI = createApi({
     reducerPath: 'api',
@@ -69,7 +69,7 @@ const authAPI = createApi({
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {
                 try {
-                    await queryFulfilled; // ждем заверш запроса
+                    await queryFulfilled;
                     dispatch(setAuth(false));
                     dispatch(setUser(null));
                 } catch {
@@ -100,17 +100,13 @@ const authAPI = createApi({
                             if (data.response_status === 0) {
                                 dispatch(setAuth(true));
                                 dispatch(setUser({ user_id: userId }));
-                                // dispatch(setPending(false));
                             } else {
-                                console.log('response status не ok');
                                 dispatch(setAuth(false));
                             }
                         } else {
                             dispatch(setAuth(false));
-                            console.log('Session ID не соответствует User ID');
                         }
                     } else {
-                        console.log('User ID не получен');
                         dispatch(setAuth(false));
                     }
                 } catch (error) {

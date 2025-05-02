@@ -57,7 +57,7 @@ export const InputBox = memo(
                                 value={value}
                                 {...inputProps}
                                 onChange={handleInputChange}
-                            // ref={ref}
+                                ref={ref}
                             />
                         )}
                     </InputContainer>

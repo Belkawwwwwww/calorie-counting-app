@@ -11,7 +11,7 @@ export const WeightQuestion: FC<Props> = (props) => {
     const [validationError, setValidationError] = useState<string>('');
 
     const handleWeightChange = (value: string) => {
-        const weightValue = Number(value); // строку в число
+        const weightValue = Number(value); 
 
         handleInputChange({
             target: { value },
@@ -20,7 +20,7 @@ export const WeightQuestion: FC<Props> = (props) => {
         try {
             surveyScheme.shape.weight.parse(weightValue);
             setValidationError('');
-            props.onAnswer(weightValue); // Передаем number
+            props.onAnswer(weightValue); 
             if (props.onInputValidation) {
                 props.onInputValidation(true);
             }

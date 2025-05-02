@@ -14,6 +14,11 @@ export type Props = {
     image?: string | undefined;
     imageClassName?: string;
 };
+export interface ExtendedProps extends Props {
+    closeButtonContent?: React.ReactNode;
+    rightContent?: React.ReactNode;
+  }
+  
 export type ModalStyle = {
     top?: number | string;
     bottom?: number | string;

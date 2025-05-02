@@ -2,8 +2,8 @@ import { MealType } from '@/g_shared/lib/type/nutritionTypes';
 
 export type FoodBlock = {
     type: 'product' | 'food';
-    id: string;
-    weight: string;
+    id: number;
+    weight: number;
 };
 export type MealDataParams = {
     day: string;

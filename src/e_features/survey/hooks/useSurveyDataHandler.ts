@@ -1,13 +1,13 @@
+import { surveyScheme } from '@/f_entities/survey';
+import { RouteEnum } from '@/g_shared/model';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useSurvey } from './useSurvey';
-import { prepareAnswers } from '../config/prepareAnswers';
-import { surveyScheme } from '@/f_entities/survey';
-import { useCreateSurvey } from './useSurveyHooks';
-import { useGetSurveyQuery } from '../api/surveyApi';
-import { RouteEnum } from '@/g_shared/model';
 import { z } from 'zod';
+import { useGetSurveyQuery } from '../api/surveyApi';
+import { prepareAnswers } from '../config/prepareAnswers';
 import { getQuestionsConfig } from '../ui/getQuestionConfig';
+import { useSurvey } from './useSurvey';
+import { useCreateSurvey } from './useSurveyHooks';
 
 export const useSurveyDataHandler = () => {
     const router = useRouter();
@@ -25,10 +25,7 @@ export const useSurveyDataHandler = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Преобразовываем данные перед валидацией
         const preparedData = prepareAnswers(answers);
-
-        console.log('Подготовленные данные для валидации:', preparedData);
         try {
             const validatedData = surveyScheme.parse(preparedData);
             await createSurvey(validatedData);
@@ -37,12 +34,9 @@ export const useSurveyDataHandler = () => {
             setTimeout(() => {
                 router.push(RouteEnum.MAIN);
             }, 2000);
-            console.log(answers);
-            console.log('успешно');
         } catch (e) {
             if (e instanceof z.ZodError) {
                 console.error('Validation error:', e.issues);
-                console.log(answers);
             } else {
                 console.error('Ошибка:', e);
             }

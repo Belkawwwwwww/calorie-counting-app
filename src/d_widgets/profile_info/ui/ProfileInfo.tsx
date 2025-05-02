@@ -7,7 +7,6 @@ export const ProfileInfo: FC<Props> = (props) => {
 		<Main>
 			<Criteria>ПОЛ: {props.gender}</Criteria>
 			<Criteria>ЦЕЛЬ: {props.target}</Criteria>
-			{/* <Criteria>ВОЗРАСТ: {age}</Criteria> */}
 			<Criteria>РОСТ: {props.growth}</Criteria>
 			<Criteria>ОБРАЗ ЖИЗНИ: {props.activity}</Criteria>
 			<Criteria>ВЕС: {props.weight}</Criteria>

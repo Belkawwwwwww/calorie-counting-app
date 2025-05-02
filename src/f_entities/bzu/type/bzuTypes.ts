@@ -1,3 +1,3 @@
-import { GetBzuResponseSchema } from '../model/getBzuSchema';
+import { GetBzuResponseSchema } from "../model";
 
 export type BzuResponse = typeof GetBzuResponseSchema._output;

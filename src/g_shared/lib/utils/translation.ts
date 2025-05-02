@@ -29,7 +29,7 @@ export const typeOfMealTranslation: { [key: string]: string } = {
 };
 
 export const FoodTransition: { [key: string]: string } = {
-    name: 'ОПИСАНИЕ',
+    name: 'НАЗВАНИЕ БЛЮДА',
     product_id: 'ID ПРОДУКТА',
     weight: 'ВЕС',
     is_public: 'ПУБЛИЧНОЕ',

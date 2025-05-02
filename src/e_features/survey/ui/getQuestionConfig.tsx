@@ -1,3 +1,4 @@
+import { SurveyAnswers } from '@/f_entities/survey';
 import {
     ActivityLevelQuestion,
     DateOfBirthQuestion,
@@ -8,7 +9,6 @@ import {
     WaistGirth,
     WeightQuestion,
 } from '@/g_shared/ui/test_questions';
-import { SurveyAnswers } from '@/f_entities/survey';
 
 export const getQuestionsConfig = (
     answers: SurveyAnswers,

@@ -21,7 +21,7 @@ export const FoodProductList: FC<Props> = (props) => {
                             </Box>
                             <Box>
                                 <div>Блюдо</div>
-                                <CategoryName>{food.calories} ККАЛ</CategoryName>
+                                <CategoryName>{Math.ceil(food.calories)} ККАЛ</CategoryName>
 
                             </Box>
                         </ProductList>

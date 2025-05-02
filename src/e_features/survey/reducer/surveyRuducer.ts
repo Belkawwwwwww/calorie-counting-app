@@ -1,7 +1,7 @@
-import { z } from 'zod';
-import { State } from './type';
-import { Action } from './action';
 import { surveyScheme } from '@/f_entities/survey';
+import { z } from 'zod';
+import { Action } from './action';
+import { State } from './type';
 
 const reducer = (state: State, action: Action): State => {
     switch (action.type) {
@@ -17,12 +17,11 @@ const reducer = (state: State, action: Action): State => {
                 key === 'hip_girth'
             ) {
                 try {
-                    // Валидация данных
                     surveyScheme.parse(newAnswers);
-                    newQuestionAnswered = true; // Если валидация прошла успешно
+                    newQuestionAnswered = true; 
                 } catch (e) {
                     if (e instanceof z.ZodError) {
-                        newQuestionAnswered = false; // Сбрасываем, если была ошибка валидации
+                        newQuestionAnswered = false; // Сбрас, если была ошибка валидации
                     }
                 }
             } else {
