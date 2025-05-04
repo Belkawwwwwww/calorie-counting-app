@@ -3,16 +3,17 @@ import { Props } from '../type/types';
 
 export const StyledButton = styled.button<Props>`
     padding: 15px 30px;
-    border-radius: 10px;
+    border-radius: 50px;
     border: none;
-    color: white;
     cursor: pointer;
     background-color: ${(props) => {
         switch (props.$variant) {
             case 'primary':
-                return '#89AC76';
+                return 'var(--color-text2)';
             case 'secondary':
-                return 'black';
+                return 'var(--color-text1)';
+            case 'green':
+                return 'var(--color-text4)'
             default:
                 return 'gray';
         }
@@ -34,7 +35,7 @@ export const StyledButton = styled.button<Props>`
             case 'xs':
                 return '120px';
             case 's':
-                return '140px';
+                return '150px';
             case 'm':
                 return '232px';
             case 'l':

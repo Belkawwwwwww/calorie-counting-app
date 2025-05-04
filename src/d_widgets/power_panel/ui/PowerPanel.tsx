@@ -11,6 +11,7 @@ import {
 	Cel,
 	FirstBlock,
 	Norm,
+	PowerPanelContainer,
 	Purpose,
 	StyledSummaryBlock,
 } from './style';
@@ -34,43 +35,43 @@ export const PowerPanel = () => {
 	};
 
 	return (
-		// <FetchIndicator isLoading={isBzuLoading || isMealLoading}>
-		<StyledSummaryBlock>
-			<FirstBlock>
-				<Norm>
-					<Cel>{Math.round(bzuData?.data.max ?? 0)} ккал</Cel>
-					<Purpose>цель</Purpose>
-				</Norm>
-				<DailyCaloriesBlock date={bzuData} isLoading={isBzuLoading} />
-				<Calories>
-					<Cel>{roundValue(norms.current)} ккал</Cel>
-					<Purpose>съедено</Purpose>
-				</Calories>
-			</FirstBlock>
-			<BZU>
-				{[
-					{
-						label: 'Углеводы',
-						current: totalCarbs,
-						max: norms.carbs,
-					},
-					{
-						label: 'Белки',
-						current: totalProtein,
-						max: norms.protein,
-					},
-					{ label: 'Жиры', current: totalFat, max: norms.fat },
-				].map(({ label, current, max }) => (
-					<NutrientProgressBar
-						key={label}
-						label={label}
-						current={current}
-						max={max}
-					/>
-				))}
-			</BZU>
-		</StyledSummaryBlock>
-		// </FetchIndicator>
+		<PowerPanelContainer>
+			<StyledSummaryBlock>
+				<FirstBlock>
+					<Norm>
+						<Cel>{Math.round(bzuData?.data.max ?? 0)} ккал</Cel>
+						<Purpose>цель</Purpose>
+					</Norm>
+					<DailyCaloriesBlock date={bzuData} isLoading={isBzuLoading} />
+					<Calories>
+						<Cel>{roundValue(norms.current)} ккал</Cel>
+						<Purpose>съедено</Purpose>
+					</Calories>
+				</FirstBlock>
+				<BZU>
+					{[
+						{
+							label: 'Углеводы',
+							current: totalCarbs,
+							max: norms.carbs,
+						},
+						{
+							label: 'Белки',
+							current: totalProtein,
+							max: norms.protein,
+						},
+						{ label: 'Жиры', current: totalFat, max: norms.fat },
+					].map(({ label, current, max }) => (
+						<NutrientProgressBar
+							key={label}
+							label={label}
+							current={current}
+							max={max}
+						/>
+					))}
+				</BZU>
+			</StyledSummaryBlock>
+		</PowerPanelContainer>
 
 	);
 };

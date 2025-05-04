@@ -32,7 +32,7 @@ export const Loader = styled.span`
     display: block;
     margin: 15px auto;
     position: relative;
-    color: var(--color-background1);
+    color: var(--color-text4);
     box-sizing: border-box;
     animation: ${animloader} 1s linear infinite alternate;
 `;

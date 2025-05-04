@@ -8,9 +8,8 @@ export const Container = styled.div`
 export const Form = styled.div``;
 export const Title = styled.h1<{ content?: 'center' }>`
     display: flex;
-    font-weight: 200;
-    font-size: 30px;
-    color: #000000;
+    font-weight: 400;
+    font-size: 23px;
     margin-bottom: 35px;
     ${({ content }) =>
         content &&

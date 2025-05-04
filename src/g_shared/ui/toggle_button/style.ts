@@ -3,11 +3,14 @@ import { LinkButton } from '../linkButton';
 interface ToggleButtonProps {
     isActive?: boolean;
 }
-export const ToggleButtons = styled(LinkButton)<ToggleButtonProps>`
-    background-color: ${({ isActive }) => (isActive ? 'lightgray' : 'white')};
-    color: ${({ isActive }) => (isActive ? '#89AC76' : 'black')};
+export const ToggleButtons = styled(LinkButton) <ToggleButtonProps>`
+    background-color: ${({ isActive }) => (isActive ? 'var(--color-text1)' : 'white')};
+    color: ${({ isActive }) => (isActive ? 'var(--color-background5)' : 'black')};
     margin: 0 5px;
     border-radius: 10px;
+    &:hover {
+        color: var(--color-background5);
+    }
 `;
 export const PublicContainer = styled.div`
     display: flex;
@@ -16,5 +19,5 @@ export const PublicContainer = styled.div`
     padding-left: 8px;
     padding-bottom: 8px;
     justify-content: space-between;
-    border-bottom: 1px solid #eaeff2;
+    border-bottom: 1px solid var(--color-text3);
 `;

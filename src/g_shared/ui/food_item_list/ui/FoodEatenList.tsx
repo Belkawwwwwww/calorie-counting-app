@@ -3,7 +3,7 @@ import { Meal } from '@/g_shared/lib/type/nutritionTypes';
 import { FC } from 'react';
 import { MealFoodItem } from '../../meal_food_item';
 import { Props } from '../type';
-import { FoodEaten } from './style';
+import { FoodEaten, NoData } from './style';
 
 export const FoodEatenList: FC<Props> = (props) => {
     const { mealData, error } = useMealDataContext();
@@ -22,7 +22,7 @@ export const FoodEatenList: FC<Props> = (props) => {
                     <MealFoodItem key={mealFood.id} mealFood={mealFood} />
                 ))
             ) : (
-                <>Нет данных о приеме пищи</>
+                <NoData>Нет данных о приеме пищи</NoData>
             )}
         </FoodEaten>
     );

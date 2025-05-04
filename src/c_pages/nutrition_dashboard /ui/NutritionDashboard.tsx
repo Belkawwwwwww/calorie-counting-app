@@ -4,7 +4,7 @@ import { ProtectedRoute } from '@/e_features/auth/components';
 import { useGetUserSurvey } from '@/e_features/survey/hooks';
 import { MealDataProvider } from '@/g_shared/lib/context';
 import { Layout } from '@/g_shared/ui/layout';
-import { LoaderTest } from '@/g_shared/ui/loader';
+import { LoadingIndicator } from '@/g_shared/ui/loader';
 import { FC } from 'react';
 import { Container } from './style';
 
@@ -16,7 +16,7 @@ export const NutritionDashboard: FC = () => {
 					<MealDataProvider>
 						<Layout>
 							{isLoading ? (
-								<LoaderTest />
+								<LoadingIndicator />
 							) : (
 								<Container>
 									<DashboardHeader />

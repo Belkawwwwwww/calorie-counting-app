@@ -18,7 +18,6 @@ export const QuestionForm: FC = () => {
         <>
             {loading ? (
                 <>
-                    <Title>УЖЕ ПОЧТИ ВСЕ ГОТОВО</Title>
                     <LoaderTest />
                 </>
             ) : (

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Header = styled.header`
     position: relative;
-    border-bottom: 1px solid #eaeff2;
+    border-bottom: 1px solid var(--color-text3);
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -11,7 +11,7 @@ export const Header = styled.header`
     padding-right: 100px;
 
     @media (max-width: 1200px) {
-        padding-left: 80px;
+        padding-left: 47px;
         padding-right: 80px;
     }
     @media (max-width: 768px) {

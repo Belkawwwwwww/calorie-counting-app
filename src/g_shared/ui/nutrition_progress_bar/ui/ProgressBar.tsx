@@ -6,7 +6,7 @@ import { calculatePercentages } from '@/g_shared/lib/utils';
 
 export const NutrientProgressBar: FC<Props> = (props) => {
     const percentage = calculatePercentages(props.current, props.max);
-    const color = percentage > 100 ? '#b56d5b' : 'white';
+    const color = percentage > 100 ? '#b56d5b' : 'var(--color-text1)';
     return (
         <BJU>
             <>{props.label}</>

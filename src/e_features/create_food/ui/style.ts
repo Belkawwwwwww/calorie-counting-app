@@ -36,7 +36,7 @@ export const AddBox = styled.div`
     cursor: pointer;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #eaeff2;
+    border-bottom: 1px solid var(--color-text3);
     padding: 8px;
     margin-bottom: 15px;
 `

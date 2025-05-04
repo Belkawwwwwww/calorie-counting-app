@@ -19,6 +19,7 @@ export const Box = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* font-size: 11px; */
     
 `
 export const ProductName = styled.div`
@@ -29,7 +30,7 @@ export const Plus = styled.div`
     width: 27px;
     height: 27px;
     cursor: pointer;
-    background: linear-gradient(#89AC76, #89AC76), linear-gradient(#89AC76, #89AC76),
+    background: linear-gradient(var(--color-text1), var(--color-text1)), linear-gradient(var(--color-text1), var(--color-text1)),
         transparent;
     background-position: center;
     background-size:
@@ -37,7 +38,7 @@ export const Plus = styled.div`
         2px 50%;
     background-repeat: no-repeat;
     border-radius: 10px;
-    border: 2px solid #89AC76;
+    border: 2px solid var(--color-text1);
     @media (max-width: 768px) {
         width: 30px;
         height: 30px;

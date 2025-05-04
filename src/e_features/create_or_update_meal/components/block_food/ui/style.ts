@@ -11,7 +11,7 @@ export const Remove = styled.div`
 `;
 export const NameItem = styled.div`
     border-radius: 8px;
-    border: 1px solid var(--color-background1);
+    border: 1px solid var(--color-text1);
     width: 100%;
     height: 100px;
     font-weight: bold;

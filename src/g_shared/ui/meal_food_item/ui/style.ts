@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Meal = styled.div`
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #eaeff2;
+    border-bottom: 1px solid var(--color-text3);
     padding: 7px 7px 7px 0px;
     align-items: center;
 `;

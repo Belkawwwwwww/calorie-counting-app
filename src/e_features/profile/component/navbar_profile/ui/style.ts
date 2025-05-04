@@ -1,22 +1,28 @@
 import styled from 'styled-components';
 export const Menu = styled.div`
-    background: linear-gradient(
-        109.6deg,
-        rgb(231, 230, 214) 11.2%,
-        rgb(206, 240, 185) 47.5%,
-        rgb(100, 163, 111) 100.2%
-    );
-    border-radius: 0 0 29px 29px;
+    background-color: var(--color-text3);
     width: 100%;
-    height: 270px;
+    height: 88px;
     @media (max-width: 480px) {
-        height: 150px;
+        height: 55px;
     }
 `;
 export const StyledLink = styled.div`
     display: flex;
-    padding-top: 30px;
     justify-content: end;
+    align-items: center;
+    height: 100%;
+    margin-right: 68px;
+    @media (max-width: 1200px) {
+        margin-right: 18px;
+    }
+    @media (max-width: 768px) {
+        margin-right: 18px;
+    }
+
+    @media (max-width: 480px) {
+    }
+
 `;
 export const NavigationWrapper = styled.div`
     display: flex;

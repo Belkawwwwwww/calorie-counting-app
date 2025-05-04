@@ -20,8 +20,8 @@ export const FoodProductList: FC<Props> = (props) => {
                                 <Plus />
                             </Box>
                             <Box>
-                                <div>Блюдо</div>
-                                <CategoryName>{Math.ceil(food.calories)} ККАЛ</CategoryName>
+                                <CategoryName>Блюдо</CategoryName>
+                                <CategoryName>{Math.ceil(food.calories)} ккал</CategoryName>
 
                             </Box>
                         </ProductList>
@@ -41,8 +41,8 @@ export const FoodProductList: FC<Props> = (props) => {
                             </Box>
                             <CategoryName>{product.category.name.toUpperCase()}, 100 г</CategoryName>
                             <Box>
-                                <div>Продукт</div>
-                                <CategoryName>{product.calories} ККАЛ</CategoryName>
+                                <CategoryName>Продукт</CategoryName>
+                                <CategoryName>{product.calories} ккал</CategoryName>
 
                             </Box>
                         </ProductList>

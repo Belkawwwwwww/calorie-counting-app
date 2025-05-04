@@ -11,7 +11,7 @@ export const HomePage = () => {
 				<OpportunityCards />
 				<BtnWrapper>
 					<Btn href={RouteEnum.TEST}>
-						<ResponsiveButton $variant='secondary' type='submit'>
+						<ResponsiveButton type='submit'>
 							СОЗДАТЬ СВОЙ ПЕРСОНАЛЬНЫЙ ПЛАН
 						</ResponsiveButton>
 					</Btn>

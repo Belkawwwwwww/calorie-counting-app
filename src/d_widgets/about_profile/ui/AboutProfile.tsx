@@ -10,8 +10,7 @@ import {
 } from './style';
 
 export const AboutProfile: FC<Props> = (props) => {
-    const imageUrl =
-        props.gender === 'FEMALE' ? '/icons_girl.png' : '/icons_boy.png';
+    const imageUrl = props.gender === 'ЖЕНСКИЙ' ? '/icons_girl.png' : '/icons_boy.png';
     return (
         <>
             <PhotoContainer>

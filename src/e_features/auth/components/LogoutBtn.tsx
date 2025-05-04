@@ -14,7 +14,7 @@ export const LogoutBtn: FC = () => {
     };
     return (
         <LinkButton onClick={handleLogout} to={RouteEnum.LOGIN}>
-            ВЫХОД
+            Exit
         </LinkButton>
     );
 };

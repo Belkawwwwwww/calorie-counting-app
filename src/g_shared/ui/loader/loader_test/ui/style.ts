@@ -18,7 +18,7 @@ export const LoaderWrapper = styled.div`
     width: 120px;
     height: 14px;
     border-radius: 0 0 15px 15px;
-    background-color: #3e494d;
+    background-color: var(--color-text2);
     box-shadow: 0 -1px 4px #5d6063 inset;
     animation: ${panex} 0.5s linear alternate infinite;
     transform-origin: 170px 0;
@@ -36,7 +36,7 @@ export const LoaderBefore = styled.div`
     width: 70px;
     border-radius: 0 4px 4px 0;
     background-repeat: no-repeat;
-    background-image: linear-gradient(#89ac76, #4b2d21),
+    background-image: linear-gradient(var(--color-text4), #4b2d21),
         linear-gradient(#4d5457 24px, transparent 0),
         linear-gradient(#9f9e9e 24px, transparent 0);
     background-size:

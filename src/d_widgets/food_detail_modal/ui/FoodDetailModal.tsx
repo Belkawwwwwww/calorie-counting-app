@@ -61,7 +61,7 @@ export const FoodDetailModal: FC<Props> = (props) => {
 			/>
 			{isOptionsMenuOpen ? (
 				<Modal
-					title="СОЗДАТЬ РЕЦЕПТ"
+					title="СОЗДАТЬ БЛЮДО"
 					onClose={handleCloseOptionsMenu}
 					width="600px"
 					height="auto"

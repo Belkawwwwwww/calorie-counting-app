@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const ResponsiveButton = styled(Button)`
     width: 320px;
-    background-color: #89ac76;
+    background-color: var(--color-text2);
     $btnSquareSize: 'button--square--size-l';
 
     @media (max-width: 768px) {

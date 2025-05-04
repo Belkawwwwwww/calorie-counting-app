@@ -36,7 +36,7 @@ export const LoginForm = () => {
             onChange: handleEmailChange,
         },
         {
-            label: 'Пароль',
+            label: 'Password',
             error: validationErrors.password,
             type: 'password',
             id: 'password',

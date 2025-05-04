@@ -7,13 +7,13 @@ export const FoodMenu: FC<Props> = (props) => {
     return (
         <MenuContainer>
             <MenuSelection>
-                <Selection onClick={() => props.onTabChange('frequent')}>
+                <Selection onClick={() => props.onTabChange('frequent')} isActive={props.activeTab === 'frequent'}>
                     <LinkButton isActive={props.activeTab === 'frequent'}>
                         Частые
                     </LinkButton>
                 </Selection>
 
-                <Selection onClick={() => props.onTabChange('recently')}>
+                <Selection onClick={() => props.onTabChange('recently')} isActive={props.activeTab === 'recently'}>
                     <LinkButton isActive={props.activeTab === 'recently'}>
                         Недавние
                     </LinkButton>

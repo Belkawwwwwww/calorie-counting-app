@@ -7,7 +7,7 @@ export const Container = styled.div`
 
 export const InputField = styled.input`
     border: none;
-    border-bottom: 1px solid #eaeff2;
+    border-bottom: 1px solid var(--color-text3);
     padding: 8px 0;
     padding-left: 219px;
     width: 100%;

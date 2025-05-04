@@ -27,7 +27,7 @@ export const RegisterForm = () => {
             onChange: handleInputChange,
         },
         {
-            label: 'Пароль',
+            label: 'Password',
             error: validationErrors.password,
             type: 'password',
             id: 'password',
@@ -36,7 +36,7 @@ export const RegisterForm = () => {
             onChange: handleInputChange,
         },
         {
-            label: 'Повторите пароль',
+            label: 'Password repeat',
             error: validationErrors.passwordConfirm,
             id: 'passwordConfirm',
             type: 'password',
@@ -45,7 +45,7 @@ export const RegisterForm = () => {
             onChange: handleInputChange,
         },
         {
-            label: 'Ваше имя',
+            label: 'First name',
             error: validationErrors.firstName,
             id: 'firstName',
             type: 'firstName',
@@ -54,7 +54,7 @@ export const RegisterForm = () => {
             onChange: handleInputChange,
         },
         {
-            label: 'Ваша фамилия',
+            label: 'Last name',
             error: validationErrors.lastName,
             id: 'lastName',
             type: 'lastName',

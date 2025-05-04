@@ -47,7 +47,7 @@ const SelectionIndicator = styled.div`
   left: 0;
   width: 100%;
   height: 15px;
-  background-color: var(--color-background1);;
+  background-color: var(--color-text4);;
   pointer-events: none;
   opacity: 60%;
 `;

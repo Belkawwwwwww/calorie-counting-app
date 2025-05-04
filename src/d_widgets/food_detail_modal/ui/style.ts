@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const AddBox = styled.div`
-  color: #89ac76;
+  color: var(--color-text1);
   width: 25px;
   height: 25px;
   cursor: pointer;
   border-radius: 50%;
-  padding: 2px;
+  padding: 1px;
   text-align: center;
   font-size: 15px;
   font-weight: bold;
-  border: #89ac76 2px solid;
+  border: var(--color-text1) 2px solid;
 `;
 
 export const ThreeDotsButton = styled.div`
@@ -27,7 +27,7 @@ export const ThreeDotsButton = styled.div`
         width: 4px;
         height: 4px;
         border-radius: 50%;
-        background-color: #89ac76;
-        box-shadow: 8px 0 0 #89ac76, 16px 0 0 #89ac76;
+        background-color: var(--color-text1);
+        box-shadow: 8px 0 0 var(--color-text1), 16px 0 0 var(--color-text1);
 }
 `

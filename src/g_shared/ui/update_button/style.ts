@@ -5,9 +5,8 @@ import Link from 'next/link';
 export const BtnTest = styled(Link)`
     text-decoration: none;
     position: relative;
-    top: -29px;
     padding-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     @media (max-width: 768px) {
         display: flex;
         left: 0;
@@ -16,12 +15,12 @@ export const BtnTest = styled(Link)`
     @media (max-width: 480px) {
         display: flex;
         left: 18px;
-        top: -17px;
+        top: 0px;
     }
 `;
 export const ResponsiveButton = styled(Button)`
-    width: auto;
-    background-color: #89ac76;
+    width: 201px;
+    background-color: var(--color-text2);
     $btnWidth: 'l';
     $btnSquareSize: 'button--square--size-l';
     @media (max-width: 768px) {

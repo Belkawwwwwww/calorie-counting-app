@@ -14,7 +14,7 @@ export const Btn = styled.div`
 `;
 export const PasswordRecovery = styled.div`
     margin-left: 20px;
-    color: #4689e8;
+    color: var(--color-text1);
     cursor: pointer;
 `;
 export const Footer = styled.div`
@@ -30,7 +30,7 @@ export const FooterRegister = styled.div`
 `;
 export const Text = styled.div``;
 export const StyledLink = styled.div`
-    color: #4689e8;
+    color: var(--color-text1);
     text-decoration: none;
     padding-left: 6px;
     cursor: pointer;

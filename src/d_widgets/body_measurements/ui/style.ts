@@ -48,19 +48,18 @@ export const Block = styled.div`
 export const ContainerImage = styled.div`
     display: flex;
     border-radius: 10px;
-    border: 1px solid var(--color-background1);
+    border: 1px solid var(--color-text4);
     width: auto;
     padding: 10px;
     position: relative;
     @media (max-width: 768px) {
-        /* padding: 5px; */
     }
     @media (max-width: 480px) {
         padding: 5px;
-        flex-direction: column;
         text-align: center;
         justify-content: center;
         position: absolute;
-        left: 35px;
+        left: -61px;
+        top: -2px;
     }
 `;

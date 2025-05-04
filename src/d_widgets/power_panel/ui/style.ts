@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-
 export const StyledSummaryBlock = styled.div`
-    background-color: var(--color-background1);
+    background-color: var(--color-text4);
     border-radius: 8px;
     width: 100%;
     max-width: 500px;
@@ -9,7 +8,7 @@ export const StyledSummaryBlock = styled.div`
     margin: 0 auto;
     color: white;
     padding-bottom: 10px;
-
+    border-bottom: 2px solid;
     @media (max-width: 768px) {
         height: auto;
     }
@@ -24,9 +23,6 @@ export const FirstBlock = styled.div`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    /* @media (max-width: 768px) {
-        height: auto;
-    } */
 
     @media (max-width: 480px) {
         padding-top: 20px;
@@ -92,4 +88,17 @@ export const Cel = styled.div`
     @media (max-width: 480px) {
         font-size: 15px;
     }
+`;
+export const PowerPanelContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative; /* Для позиционирования изображения */
+  width: 100%;
+  /* max-width: 700px;  */
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center; /* Центрируем по вертикали в мобильной версии */
+  }
 `;

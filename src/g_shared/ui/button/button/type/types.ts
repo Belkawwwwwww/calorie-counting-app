@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 export const ButtonVariants = {
     PRIMARY: 'primary',
     SECONDARY: 'secondary',
+    GREEN: 'green'
 } as const;
 
 export type BtnVariants = (typeof ButtonVariants)[keyof typeof ButtonVariants];

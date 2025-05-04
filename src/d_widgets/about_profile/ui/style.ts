@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 export const PhotoContainer = styled.div`
-    position: absolute;
-    top: 169px;
-    left: 86px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -22,38 +19,8 @@ export const PhotoWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(
-            circle at left top,
-            rgba(0, 255, 0, 1),
-            rgba(0, 255, 0, 0) 60%
-        ),
-        radial-gradient(
-            circle at right top,
-            rgba(255, 0, 255, 1),
-            rgba(255, 0, 255, 0) 30%
-        ),
-        radial-gradient(
-            circle at left bottom,
-            rgba(255, 192, 0, 1),
-            rgba(255, 192, 0, 0) 70%
-        ),
-        radial-gradient(
-            circle at right bottom,
-            rgba(255, 0, 127, 1),
-            rgba(255, 0, 127, 0) 30%
-        ),
-        radial-gradient(
-            circle at left center,
-            rgba(0, 255, 0, 0.5),
-            rgba(255, 0, 255, 0.2) 50%
-        ),
-        radial-gradient(
-            circle at right center,
-            rgba(255, 192, 0, 0.5),
-            rgba(255, 0, 127, 0.2) 50%
-        );
+    background-color: var(--color-text2);
     border-radius: 50%;
-    border: solid 4px white;
     @media (max-width: 768px) {
         width: 140px;
         height: 140px;

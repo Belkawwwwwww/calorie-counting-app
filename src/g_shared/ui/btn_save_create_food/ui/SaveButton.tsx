@@ -8,7 +8,7 @@ export const SaveButton: FC<Props> = (props) => {
         <Button
             $variant='primary'
             $btnWidth='s'
-            $btnSquareSize='button--square--size-m'
+            $btnSquareSize='button--square--size-s'
             type='button'
             onClick={props.onClick}
         >

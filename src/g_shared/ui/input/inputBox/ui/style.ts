@@ -8,7 +8,7 @@ export const StyledInputBox = styled.div<{ direction: 'column' | 'row' }>`
 `;
 
 export const Error = styled.div`
-    color: red;
+    color: var(--color-background4);
 `;
 export const InputContainer = styled.div`
     position: relative;
@@ -24,7 +24,6 @@ export const PlaceholderImage = styled.img`
     height: 20px;
 `;
 export const Label = styled.label`
-    font-size: 14px;
-    color: var(--color-text1);
+    font-weight: 200;
     margin-top: 20px;
 `;

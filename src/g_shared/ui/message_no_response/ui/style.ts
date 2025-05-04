@@ -22,7 +22,7 @@ export const Btn = styled(Link)`
 `;
 export const ResponsiveButton = styled(Button)`
     width: auto;
-    background-color: #89AC76;
+    background-color: var(--color-background6);
 
     $btnWidth: 'l';
     $btnSquareSize: 'button--square--size-l';

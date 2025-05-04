@@ -25,20 +25,20 @@ export const Options = styled.div`
 export const Option = styled.div<{ isSelected: boolean }>`
     width: 150px;
     height: 150px;
-    border: 1px solid #89ac76;
+    border: 1px solid var(--color-text4);
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
     background-color: ${(props) =>
-        props.isSelected ? '#ebebeb' : 'transparent'};
+        props.isSelected ? 'var(--color-text3)' : 'transparent'};
     text-align: center;
     &:hover {
-        background-color: #ebebeb;
+        background-color: var(--color-text3);
     }
     @media (max-width: 780px) {
         width: 400px;
@@ -50,8 +50,4 @@ export const Option = styled.div<{ isSelected: boolean }>`
         height: 60px;
         font-size: 12px;
     }
-`;
-
-export const Container = styled.div`
-    /* width: 400px; */
 `;

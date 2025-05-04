@@ -22,7 +22,7 @@ export const LogoutResponseScheme = z.object({
 });
 
 export const AuthScheme = z.object({
-    username: z.string().email('Неверный формат email'),
+    username: z.string().email('Неверный формат'),
     password: z.string().min(7, 'Пароль должен содержать не менее 7 символов'),
 });
 function makePasswordWithConfirm() {
@@ -51,7 +51,7 @@ function makePasswordWithConfirm() {
 const passwordWithConfirm = makePasswordWithConfirm();
 export const RegScheme = z
     .object({
-        username: z.string().email('Неверный формат email'),
+        username: z.string().email('Неверный формат'),
         firstName: z
             .string()
             .min(2, 'Имя должно содержать не менее 2 символов'),

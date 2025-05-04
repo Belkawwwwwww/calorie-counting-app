@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Circle = styled.div<{ $isOverkill?: boolean }>`
-    border: ${({ $isOverkill }) => ($isOverkill ? '#b56d5b' : '#f0f0f0')} solid
+    border: ${({ $isOverkill }) => ($isOverkill ? '#b56d5b' : 'var(--color-text2)')} solid
         5px;
     border-radius: 50%;
     padding: 13px 20px;

@@ -7,26 +7,26 @@ import { NavigationWrapper } from './style';
 
 export const NavigationLinks: FC<Props> = (props) => {
     if (!props.isAuth) {
-        return <LinkButton to={RouteEnum.LOGIN}>ВХОД</LinkButton>;
+        return <LinkButton to={RouteEnum.LOGIN}>Вход</LinkButton>;
     } else {
         return (
             <NavigationWrapper>
                 {props.isOnNutritionDashboard ? (
                     <>
                         <LinkButton to={RouteEnum.HOME}>
-                            ГЛАВНАЯ СТРАНИЦА
+                            Home
                         </LinkButton>{' '}
                         |
                     </>
                 ) : (
                     <>
                         <LinkButton to={RouteEnum.MAIN}>
-                            ПАНЕЛЬ ПИТАНИЯ
+                            Power panel
                         </LinkButton>{' '}
                         |
                     </>
                 )}
-                <LinkButton to={RouteEnum.PROFILE}>ПРОФИЛЬ</LinkButton> |
+                <LinkButton to={RouteEnum.PROFILE}>Profile</LinkButton> |
                 <LogoutBtn />
             </NavigationWrapper>
         );

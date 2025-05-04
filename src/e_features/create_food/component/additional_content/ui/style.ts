@@ -4,7 +4,7 @@ export const AddBox = styled.div`
     cursor: pointer;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #eaeff2;
+    border-bottom: 1px solid var(--color-text3);
     padding: 8px;
     margin-bottom: 15px;
 `
@@ -12,7 +12,7 @@ export const Plus = styled.div`
     margin-right: 5px;
     width: 20px;
     height: 20px;
-    background: linear-gradient(#89AC76, #89AC76), linear-gradient(#89AC76, #89AC76),
+    background: linear-gradient(var(--color-text1), var(--color-text1)), linear-gradient(var(--color-text1), var(--color-text1)),
         transparent;
     background-position: center;
     background-size:
@@ -20,7 +20,7 @@ export const Plus = styled.div`
         2px 50%;
     background-repeat: no-repeat;
     border-radius: 10px;
-    border: 2px solid #89AC76;
+    border: 2px solid var(--color-text1);
     @media (max-width: 768px) {
         width: 30px;
         height: 30px;

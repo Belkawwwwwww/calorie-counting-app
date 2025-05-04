@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Meal = styled.div`
-    border: 1px solid var(--color-background1);
+    border: 1px solid rgb(181, 109, 91);
     border-radius: 8px;
     width: 100%;
     height: 50px;
@@ -9,8 +9,9 @@ export const Meal = styled.div`
     display: flex;
     padding-left: 10px;
     align-items: center;
+    font-family: none;
     &:hover {
-        background-color: #ebebeb;
+        background-color: var(--color-text5);
     }
     cursor: pointer;
 `;

@@ -18,7 +18,7 @@ export const Loader = styled.div`
 
   width: 35px;
   height: 20px;
-  --_g: no-repeat radial-gradient(circle closest-side, var(--color-background1) 90%, #0000);
+  --_g: no-repeat radial-gradient(circle closest-side, var(--color-text4) 90%, #0000);
   background:
     var(--_g) 0%   50%,
     var(--_g) 50%  50%,

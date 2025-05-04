@@ -33,9 +33,9 @@ export const Btn = styled(Link)`
 
 export const ResponsiveButton = styled(Button)`
     width: auto;
-    background-color: black;
-
-    $btnWidth: 'l';
+    height: 55px;
+    background-color: var(--color-text4);
+    $btnWidth: 'l'!important;
     $btnSquareSize: 'button--square--size-l';
 
     @media (max-width: 768px) {
