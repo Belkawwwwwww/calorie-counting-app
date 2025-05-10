@@ -1,12 +1,8 @@
+import { Plus } from "@/g_shared/styles/plusStyles";
 import { FC } from "react";
-import { ProductContainer, ProductList, Box, ProductName, Plus, CategoryName } from "./style";
-import { Food, Product } from "@/g_shared/lib/type/SearchType";
+import { Props } from "../type";
+import { Box, CategoryName, ProductContainer, ProductList, ProductName } from "./style";
 
-export type Props = {
-    foodData?: Food[];
-    productData?: Product[];
-    onItemClick: (item: Food | Product) => void;
-}
 export const FoodProductList: FC<Props> = (props) => {
     return (
         <>

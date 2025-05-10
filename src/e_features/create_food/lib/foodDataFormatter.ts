@@ -1,4 +1,4 @@
-import { FoodData, FoodDataParams } from '../type/foodType';
+import { FoodData, FoodDataParams } from '../../../g_shared/lib/type/foodType';
 
 export const formatFoodData = (params: FoodDataParams): FoodData => {
     const { name, isPublic, products, info } = params;

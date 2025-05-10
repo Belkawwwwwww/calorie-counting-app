@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-export const Container = styled.div`
-    display: flex;
-`;
+
 export const Measurements = styled.div`
     padding-right: 30px;
 `;
@@ -50,8 +48,9 @@ export const ContainerImage = styled.div`
     border-radius: 10px;
     border: 1px solid var(--color-text4);
     width: auto;
-    padding: 10px;
     position: relative;
+    margin-top: 10px;
+    justify-content: center;
     @media (max-width: 768px) {
     }
     @media (max-width: 480px) {

@@ -5,6 +5,7 @@ export const ImageBlock = styled.div`
     align-items: center;
     display: flex;
     flex-direction: column;
+    padding: 10px 15px 10px 15px;
 `;
 export const ImageText = styled.div`
     font-size: 12px;
@@ -13,7 +14,6 @@ export const ImageText = styled.div`
 export const ImageContainer = styled.div`
     background-size: cover;
     background-position: center;
-    margin: 10px 15px 10px 15px;
     @media (max-width: 768px) {
         width: 23px;
         height: 23px;

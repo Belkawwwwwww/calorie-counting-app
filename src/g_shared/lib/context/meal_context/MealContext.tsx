@@ -1,10 +1,10 @@
 import { useGetUserMeal } from '@/e_features/get_meal/hooks/useGetUserMeal';
-import { FetchIndicator } from '@/g_shared/ui/fetchn_indicator/ui/FetchIndicator';
 import dayjs, { Dayjs } from 'dayjs';
 import { FC, createContext, useCallback, useContext, useState } from 'react';
 import { DataMeal } from '../../type/nutritionTypes';
 import { getFormattedDate } from '../../utils';
 import { MealContextProps, Props } from './type';
+import { FetchIndicator } from '@/g_shared/ui/fetch_indicator';
 
 const MealDataContext = createContext<MealContextProps | undefined>(undefined);
 

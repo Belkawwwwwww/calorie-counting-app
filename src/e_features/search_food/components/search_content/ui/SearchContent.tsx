@@ -1,11 +1,11 @@
+import { useLazySearchFood } from "@/e_features/search_food/hooks";
 import { Food, Product } from "@/g_shared/lib/type/SearchType";
-import { FoodProductList } from "@/g_shared/ui/food-selection/ui/FoodProductList";
+import { InputBox } from "@/g_shared/ui/input";
 import { LoadingIndicator } from "@/g_shared/ui/loader";
-import { NothingFound } from "@/g_shared/ui/nothing_found/ui/NothingFound";
-import { SearchInput } from "@/g_shared/ui/search_input/ui/SearchInput";
 import { FC, memo } from "react";
 import { Props } from "../type";
-import { useLazySearchFood } from "@/e_features/search_food/hooks";
+import { NothingFound } from "@/g_shared/ui/nothing_found";
+import { FoodProductList } from "@/g_shared/ui/food-selection";
 
 export const SearchContent: FC<Props> = memo((props) => {
     const {
@@ -31,7 +31,12 @@ export const SearchContent: FC<Props> = memo((props) => {
 
     return (
         <>
-            <SearchInput value={searchTermLocal} onChange={handleInputChange} />
+            <InputBox
+                value={searchTermLocal}
+                onChange={handleInputChange}
+                imageSrc='/barcode.png'
+                type='text'
+            />
             {showInitialLoading || isLoading ? (
                 <LoadingIndicator />
             ) : (

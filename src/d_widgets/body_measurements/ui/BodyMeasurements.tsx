@@ -4,7 +4,7 @@ import { MeasurementDisplay } from '@/g_shared/ui/measurement_display';
 import { MeasurementForm } from '@/g_shared/ui/measurement_form';
 import { Modal } from '@/g_shared/ui/modal';
 import { FC } from 'react';
-import { Block, Container, ContainerImage } from './style';
+import { Block, ContainerImage } from './style';
 
 export const BodyMeasurements: FC = () => {
     const { data: userData } = useGetUserSurvey();
@@ -16,7 +16,7 @@ export const BodyMeasurements: FC = () => {
     // };
 
     return (
-        <Container>
+        <>
             {isModalActive ? (
                 <Modal
                     title='ДОБАВИТЬ ЗАМЕР'
@@ -33,6 +33,6 @@ export const BodyMeasurements: FC = () => {
                     <MeasurementDisplay userData={userData} />
                 </ContainerImage>
             </Block>
-        </Container>
+        </>
     );
 };

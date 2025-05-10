@@ -8,8 +8,10 @@ export const Meal = styled.div`
     margin-top: 10px;
     display: flex;
     padding-left: 10px;
+    padding-right: 10px;
     align-items: center;
     font-family: none;
+    justify-content: space-between;
     &:hover {
         background-color: var(--color-text5);
     }

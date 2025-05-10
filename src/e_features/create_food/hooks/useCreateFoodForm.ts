@@ -9,7 +9,7 @@ import { FoodAction } from '../reducer/action/foodAction';
 import { foodReducer } from '../reducer/createFoodReducer';
 import { initialState } from '../reducer/type';
 import { CreateFoodInput } from '../type/createFoodTypes';
-import { AddedItemsCreateFood, Product } from '../type/foodType';
+import { AddedItemsCreateFood, Product } from '../../../g_shared/lib/type/foodType';
 
 interface UseFoodFormProps {
     createFood: (data: CreateFoodInput) => any;

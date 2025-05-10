@@ -1,4 +1,9 @@
+import { AdditionalContent } from '@/e_features/create_food/component/additional_content';
 import { addItemThunk } from '@/e_features/create_or_update_meal/model/slice';
+import { FoodBlockModal } from '@/e_features/create_or_update_meal/ui/modal';
+import { useLazySearchFood } from '@/e_features/search_food/hooks';
+import { useAdditionalContentState } from '@/g_shared/lib/hooks/useAdditionalContentState/useAdditionalContentState';
+import useFoodBlockModal from '@/g_shared/lib/hooks/useFoodBlockModal/useFoodBlockModal';
 import { useAppDispatch } from '@/g_shared/lib/store';
 import { AddedItem } from '@/g_shared/lib/type/AddedItemType';
 import { FoodOrProduct } from '@/g_shared/lib/type/SearchType';
@@ -7,14 +12,12 @@ import { FC, useState } from 'react';
 import { useModal } from '../../../g_shared/lib/hooks/useModalOpen/useModal';
 import { FoodMenu } from '../component/food_menu';
 import { Props } from '../type';
-import { FoodBlockModal } from '@/e_features/create_or_update_meal/ui/modal';
-import { useLazySearchFood } from '@/e_features/search_food/hooks';
-import { SearchBox } from '@/e_features/search_food/ui';
 
 export const CreateOrUpdateMeal: FC<Props> = (props) => {
+    const { modalState, setModalState, resetModalState } = useAdditionalContentState();
     const dispatch = useAppDispatch();
     const foodBlockModal = useModal();
-    const [selectedItem, setSelectedItem] = useState<FoodOrProduct | null>(null);
+    const { openFoodBlockModal, selectedItem } = useFoodBlockModal(foodBlockModal);
     const { resetSearch, searchTermLocal } = useLazySearchFood();
     const modalTitle = mealsTranslation[props.title];
     const [activeTab, setActiveTab] = useState<'frequent' | 'recently'>('frequent');
@@ -22,8 +25,9 @@ export const CreateOrUpdateMeal: FC<Props> = (props) => {
         setActiveTab(tab);
     };
     const handleAddMoreClick = (item: FoodOrProduct) => {
-        setSelectedItem(item);
+        openFoodBlockModal(item);
         foodBlockModal.openModal();
+        resetModalState()
     };
 
     const handleItemAdded = (item: FoodOrProduct, weight: number) => {
@@ -40,9 +44,12 @@ export const CreateOrUpdateMeal: FC<Props> = (props) => {
 
     return (
         <>
-            <SearchBox
-                showAddBox={true}
-                onItemClick={handleAddMoreClick}
+            <AdditionalContent
+                modalState={modalState}
+                handleAddMoreClick={handleAddMoreClick}
+                showInfoInput={false}
+                searchLabel='Добавить блюдо'
+                setModalState={setModalState}
             />
             {searchTermLocal.length === 0 ? (
                 <FoodMenu

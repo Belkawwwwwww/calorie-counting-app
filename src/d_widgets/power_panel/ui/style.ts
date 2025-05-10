@@ -6,9 +6,8 @@ export const StyledSummaryBlock = styled.div`
     max-width: 500px;
     height: 270px;
     margin: 0 auto;
-    color: white;
+    color: black;
     padding-bottom: 10px;
-    border-bottom: 2px solid;
     @media (max-width: 768px) {
         height: auto;
     }
@@ -19,7 +18,7 @@ export const StyledSummaryBlock = styled.div`
 `;
 
 export const FirstBlock = styled.div`
-    padding-top: 40px;
+    margin-top: 30px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;

@@ -6,6 +6,7 @@ import { SearchContent } from "@/e_features/search_food/components/search_conten
 
 
 export const AdditionalContent: FC<Props> = (props) => {
+    const defaultInfo = { protein: '', fat: '', carbs: '', calories: '' };
     const handleOpenSearch = () => {
         props.setModalState({ search: true, info: false })
     }
@@ -19,23 +20,24 @@ export const AdditionalContent: FC<Props> = (props) => {
             ) : (
                 <AddBox onClick={handleOpenSearch}>
                     <Plus />
-                    <>Добавить ингредиент</>
+                    <>{props.searchLabel}</>
                 </AddBox>
 
             )}
-            {props.modalState.info ? (
-                <InfoInput
-                    info={props.info}
-                    handleInputChange={props.handleInputChange}
-                    validationErrors={props.validationErrors}
-                />
-            ) : (
-                <AddBox onClick={handleOpenInfo}>
-                    <Plus />
-                    <>Добавить информацию о блюде</>
-                </AddBox>
-            )
-            }
+            {props.showInfoInput ? (
+                props.modalState.info ? (
+                    <InfoInput
+                        info={props.info || defaultInfo}
+                        handleInputChange={props.handleInputChange}
+                        validationErrors={props.validationErrors}
+                    />
+                ) : (
+                    <AddBox onClick={handleOpenInfo}>
+                        <Plus />
+                        <>Добавить информацию о блюде</>
+                    </AddBox>
+                )
+            ) : null}
         </>
     )
 }

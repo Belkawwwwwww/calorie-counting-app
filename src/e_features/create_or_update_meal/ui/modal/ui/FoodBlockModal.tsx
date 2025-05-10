@@ -8,13 +8,13 @@ import { mealsTranslation } from "@/g_shared/lib/utils";
 import { CreateOrUpdateMealSchema } from "@/g_shared/schema/createOrUpdateMealSchema";
 import { AddButton } from "@/g_shared/ui/add_meal_button";
 import { Error } from "@/g_shared/ui/error_display";
-import { FetchIndicator } from "@/g_shared/ui/fetchn_indicator/ui/FetchIndicator";
 import { Modal } from "@/g_shared/ui/modal";
 import { FC } from "react";
 import { toast } from 'react-toastify';
 import { FoodBlocks } from "../../../components/block_food";
 import { selectAddedItems } from "../../../model/selector";
 import { Props } from "../type";
+import { FetchIndicator } from "@/g_shared/ui/fetch_indicator";
 
 export const FoodBlockModal: FC<Props> = (props) => {
     const { formattedDate } = useMealDataContext();

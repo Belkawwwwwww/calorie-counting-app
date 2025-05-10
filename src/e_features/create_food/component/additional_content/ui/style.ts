@@ -7,6 +7,7 @@ export const AddBox = styled.div`
     border-bottom: 1px solid var(--color-text3);
     padding: 8px;
     margin-bottom: 15px;
+    margin-top: 15px;
 `
 export const Plus = styled.div`
     margin-right: 5px;

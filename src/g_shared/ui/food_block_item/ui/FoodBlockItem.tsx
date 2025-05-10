@@ -1,22 +1,9 @@
-import {
-    FoodBlock,
-    MealValidationErrors,
-} from '@/g_shared/lib/type/createOrUpdateTypes';
 import { FC } from 'react';
 import { InputBox } from '../../input';
+import { LinkButton } from '../../linkButton';
 import { ToggleButton } from '../../toggle_button';
 import { Food, Remove } from './style';
-import { LinkButton } from '../../linkButton';
-type Props = {
-    foodBlock: FoodBlock;
-    index: number;
-    totalBlocks: number;
-    onUpdate: (index: number, key: keyof FoodBlock, value: string) => void;
-    onRemove?: (index: number) => void;
-    validationErrors: MealValidationErrors[];
-    mealTypeOptions: { value: string; label: string }[];
-    lastFoodBlockRef: React.RefObject<HTMLDivElement>;
-};
+import { Props } from '../type';
 
 export const FoodBlockItem: FC<Props> = (props) => (
     <Food

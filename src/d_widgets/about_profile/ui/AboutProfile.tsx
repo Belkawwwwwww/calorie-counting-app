@@ -1,28 +1,16 @@
-import { Image } from '@/g_shared/ui/image';
+import { HeaderProfile } from '@/d_widgets/header_profile';
 import { FC } from 'react';
 import { Props } from '../type';
 import {
     ContainerUsername,
-    Photo,
-    PhotoContainer,
-    PhotoWrapper,
-    Username,
+    Username
 } from './style';
 
+
 export const AboutProfile: FC<Props> = (props) => {
-    const imageUrl = props.gender === 'ЖЕНСКИЙ' ? '/icons_girl.png' : '/icons_boy.png';
     return (
         <>
-            <PhotoContainer>
-                <PhotoWrapper>
-                    <Photo>
-                        <Image
-                            src={imageUrl}
-                            alt={`Изображение профиля для ${props.first_name} ${props.last_name}`}
-                        />
-                    </Photo>
-                </PhotoWrapper>
-            </PhotoContainer>
+            <HeaderProfile />
             <ContainerUsername>
                 <Username>
                     {props.first_name} {props.last_name}

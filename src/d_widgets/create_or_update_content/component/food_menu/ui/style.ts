@@ -5,6 +5,7 @@ type StyledProps = {
 export const MenuSelection = styled.div`
     margin-bottom: 20px;
     display: flex;
+    margin-top: 15px;
 `;
 export const Selection = styled.div<StyledProps>`
     border: var(--color-text1) 1px solid;

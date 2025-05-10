@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { FetchIndicator } from '../../fetchn_indicator/ui/FetchIndicator';
 import { Props } from '../type';
 import { BoxCircle, Circle, Significance, Text } from './style';
+import { FetchIndicator } from '../../fetch_indicator';
 
 export const DailyCaloriesBlock: FC<Props> = (props) => {
     const maxCalories = props.date?.data.max || 0;

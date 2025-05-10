@@ -11,7 +11,6 @@ export const LoaderOverlay: FC<Props> = (props: Props) => {
     if (isError) {
         return <p>Ошибка при загрузке приложения.</p>;
     }
-
     return (
         <>
             {pending && isLoading ? (
