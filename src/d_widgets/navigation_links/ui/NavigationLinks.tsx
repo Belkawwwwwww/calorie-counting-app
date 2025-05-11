@@ -4,29 +4,49 @@ import { LinkButton } from '@/g_shared/ui/linkButton';
 import { FC } from 'react';
 import { Props } from '../type';
 import { NavigationWrapper } from './style';
+import { useRouter } from 'next/router';
 
 export const NavigationLinks: FC<Props> = (props) => {
+    const router = useRouter();
+    const isOnProfilePage = router.pathname === RouteEnum.PROFILE;
     if (!props.isAuth) {
         return <LinkButton to={RouteEnum.LOGIN}>Вход</LinkButton>;
     } else {
         return (
             <NavigationWrapper>
-                {props.isOnNutritionDashboard ? (
+                {(() => { //IIFE для условного рендеринга
+                    if (router.pathname === RouteEnum.MAIN) {
+                        return (
+                            <>
+                                <LinkButton to={RouteEnum.HOME}>Home</LinkButton>
+                                {' | '}
+                            </>
+                        );
+                    } else if (router.pathname === RouteEnum.HOME) {
+                        return (
+                            <>
+                                <LinkButton to={RouteEnum.MAIN}>Power panel</LinkButton>
+                                {' | '}
+                            </>
+                        );
+                    } else if (isOnProfilePage) {
+                        return (
+                            <>
+                                <LinkButton to={RouteEnum.MAIN}>Power panel</LinkButton>
+                                {' | '}
+                                <LinkButton to={RouteEnum.HOME}>Home</LinkButton>
+                                {' | '}
+                            </>
+                        );
+                    }
+                    return null;
+                })()}
+                {!isOnProfilePage ? ( 
                     <>
-                        <LinkButton to={RouteEnum.HOME}>
-                            Home
-                        </LinkButton>{' '}
-                        |
+                        <LinkButton to={RouteEnum.PROFILE}>Profile</LinkButton>
+                        {' | '}
                     </>
-                ) : (
-                    <>
-                        <LinkButton to={RouteEnum.MAIN}>
-                            Power panel
-                        </LinkButton>{' '}
-                        |
-                    </>
-                )}
-                <LinkButton to={RouteEnum.PROFILE}>Profile</LinkButton> |
+                ): null}
                 <LogoutBtn />
             </NavigationWrapper>
         );

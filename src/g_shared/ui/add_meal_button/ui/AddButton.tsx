@@ -17,7 +17,7 @@ export const AddButton: FC<Props> = ({ $btnWidth = 'm', centered = false, onClic
             {isLoading ? <LoadingInBtn /> : text || 'ДОБАВИТЬ'}
 
         </Button>
-        {canAdd && <Plus onClick={addBlock} />}
+        {canAdd ? <Plus onClick={addBlock} /> : null}
     </AddButtonContainer>
 
 );

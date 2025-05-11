@@ -15,13 +15,13 @@ export const InputUnframed: FC<Props> = memo((props) => {
 
     return (
         <Container onClick={handleFocus}>
-            {props.label && <Label>{props.label}</Label>}
+            {props.label ? <Label>{props.label}</Label> : null}
             <InputField
                 id={props.id}
                 value={props.value}
                 onChange={props.onChange}
             />
-            {showPlaceholder && <Placeholder>{props.placeholder}</Placeholder>}
+            {showPlaceholder ? <Placeholder>{props.placeholder}</Placeholder> : null}
         </Container>
     );
 });

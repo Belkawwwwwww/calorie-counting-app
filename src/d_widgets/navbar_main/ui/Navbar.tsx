@@ -7,16 +7,8 @@ import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { Header, LinksContainer } from './style';
 
-export const Navbar: FC<{ hideOnPages?: string[] }> = ({
-    hideOnPages = [],
-}) => {
+export const Navbar: FC = () => {
     const isAuth = useAppSelector(isAuthSelector);
-    const router = useRouter();
-    const isOnNutritionDashboard = router.pathname === RouteEnum.MAIN;
-
-    if (hideOnPages.includes(router.pathname)) {
-        return null;
-    }
 
     return (
         <Header>
@@ -24,7 +16,6 @@ export const Navbar: FC<{ hideOnPages?: string[] }> = ({
             <LinksContainer>
                 <NavigationLinks
                     isAuth={isAuth}
-                    isOnNutritionDashboard={isOnNutritionDashboard}
                 />
             </LinksContainer>
         </Header>

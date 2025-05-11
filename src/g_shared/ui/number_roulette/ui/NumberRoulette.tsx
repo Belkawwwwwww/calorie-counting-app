@@ -10,9 +10,9 @@ export const NumberRoulette = () => {
 
     return (
         <div>
-            {selectedNumber !== null && (
+            {selectedNumber !== null ? (
                 <p>Выбранное число: {selectedNumber}</p>
-            )}
+            ): null}
             <VerticalScroll onNumberSelected={handleNumberSelected} />
         </div>
     );

@@ -1,10 +1,19 @@
 import { RegisterForm } from '@/d_widgets/auth';
+import { isAuthSelector } from '@/e_features/auth/model/selector';
+import { useAppSelector } from '@/g_shared/lib/store';
 import { Layout, UIFormLayout } from '@/g_shared/ui/layout';
+import { LoadingIndicator } from '@/g_shared/ui/loader';
 
 export const RegisterPage = () => {
+	const isAuth = useAppSelector(isAuthSelector);
+
 	return (
 		<Layout>
-			<UIFormLayout title='Регистрация' form={<RegisterForm />} />
+			{isAuth ? (
+				<LoadingIndicator />
+			) : (
+				<UIFormLayout title='Регистрация' form={<RegisterForm />} />
+			)}
 		</Layout>
 	);
 };

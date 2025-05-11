@@ -1,6 +1,5 @@
 import { ProfilePageContent } from '@/d_widgets/profile_page_content';
 import { ProtectedRoute } from '@/e_features/auth/components';
-import { ProfileNavbar } from '@/e_features/profile/component/navbar_profile';
 import { useProfileDataHandler } from '@/e_features/profile/hooks';
 import { RouteEnum } from '@/g_shared/model';
 import { Layout } from '@/g_shared/ui/layout';
@@ -29,7 +28,6 @@ export const ProfilePage = () => {
     return (
         <ProtectedRoute>
             <StyledUserProfile>
-                <ProfileNavbar />
                 <Layout>
                     {hasErrorResponse ? (
                         <>

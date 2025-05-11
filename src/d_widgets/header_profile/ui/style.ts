@@ -19,7 +19,7 @@ export const PhotoWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-text2);
+    border: 1px solid var(--color-text4);
     border-radius: 50%;
     @media (max-width: 768px) {
         width: 140px;

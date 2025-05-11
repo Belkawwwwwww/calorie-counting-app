@@ -9,27 +9,27 @@ import { AppProviders } from './providers/app_provider';
 import './styles/global.scss';
 
 export default function App({ Component, pageProps }: AppProps) {
-	return (
-		<ErrorProvider>
-			<AppProviders>
-				<ToastContainer
-					position='bottom-right'
-					autoClose={2000}
-					hideProgressBar={true}
-					newestOnTop={false}
-					closeOnClick
-					rtl={false}
-					pauseOnFocusLoss
-					draggable
-					pauseOnHover
-					theme='light'
-					transition={Slide}
-				/>
-				<MemoizedLoader>
-					<Navbar hideOnPages={[RouteEnum.PROFILE]} />
-					<Component {...pageProps} />
-				</MemoizedLoader>
-			</AppProviders>
-		</ErrorProvider>
-	);
+    return (
+        <ErrorProvider>
+            <AppProviders>
+                <ToastContainer
+                    position='bottom-right'
+                    autoClose={2000}
+                    hideProgressBar={true}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme='light'
+                    transition={Slide}
+                />
+                <MemoizedLoader>
+                    <Navbar />
+                    <Component {...pageProps} />
+                </MemoizedLoader>
+            </AppProviders>
+        </ErrorProvider>
+    );
 }

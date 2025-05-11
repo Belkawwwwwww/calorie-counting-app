@@ -5,6 +5,7 @@ import { useAppDispatch } from '@/g_shared/lib/store';
 import { mealsTranslation } from '@/g_shared/lib/utils';
 import { AddButton } from '@/g_shared/ui/add_meal_button';
 import { FoodEatenList } from '@/g_shared/ui/food_item_list';
+import { HeaderNutritionModal } from '@/g_shared/ui/header_nutrition_modal/ui/HeaderNutritionModal';
 import { Modal } from '@/g_shared/ui/modal';
 import { NutritionTitle } from '@/g_shared/ui/nutrient_title';
 import { FC, useState } from 'react';
@@ -31,6 +32,7 @@ export const NutritionModal: FC<Props> = (props) => {
             width='600px'
             height='auto'
         >
+            <HeaderNutritionModal title={props.title} />
             <NutritionTitle nutritionData={nutritionData} />
             <FoodEatenList mealType={props.title} />
             <AddButton onClick={handleAddMoreClick} text='ДОБАВИТЬ ЕЩЕ' />

@@ -50,7 +50,7 @@ export const FoodBlocks: FC<Props> = (props) => {
                 alwaysShowPlaceholder={true}
                 error={validationErrors.weight}
             />
-            {isWeightEntered && <AddButton onClick={handleSubmit} centered={true} $btnWidth='l' />}
+            {isWeightEntered ? <AddButton onClick={handleSubmit} centered={true} $btnWidth='l' /> : null}
         </>
     );
 };
