@@ -5,11 +5,11 @@ import { useAppDispatch } from '@/g_shared/lib/store';
 import { mealsTranslation } from '@/g_shared/lib/utils';
 import { AddButton } from '@/g_shared/ui/add_meal_button';
 import { FoodEatenList } from '@/g_shared/ui/food_item_list';
-import { HeaderNutritionModal } from '@/g_shared/ui/header_nutrition_modal/ui/HeaderNutritionModal';
 import { Modal } from '@/g_shared/ui/modal';
 import { NutritionTitle } from '@/g_shared/ui/nutrient_title';
 import { FC, useState } from 'react';
 import { Props } from '../type';
+import { HeaderNutritionModal } from '../component/header_nutrition_modal';
 
 export const NutritionModal: FC<Props> = (props) => {
     const [isAdditionalModalActive, setAdditionalModalActive] = useState(false);

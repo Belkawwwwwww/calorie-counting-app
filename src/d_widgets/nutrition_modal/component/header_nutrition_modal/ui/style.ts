@@ -19,7 +19,6 @@ export const TitleBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin-top: 20px; */
     img{
         width: 60px;
         height: 60px;

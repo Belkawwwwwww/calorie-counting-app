@@ -14,7 +14,7 @@ export const NutritionBlock: FC = memo(() => {
 	const [selectedMealType, setSelectedMealType] = useState<MealType | null>(
 		null,
 	);
-	const { mealData, isLoading, error } = useMealDataContext();
+	const { mealData, error } = useMealDataContext();
 	const caloriesMap: Record<MealType, number> = {
 		breakfast: 0,
 		lunch: 0,
