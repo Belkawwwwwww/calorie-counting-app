@@ -4,7 +4,7 @@ export const StyledSummaryBlock = styled.div`
     border-radius: 8px;
     width: 100%;
     max-width: 500px;
-    height: 270px;
+    height: auto;
     margin: 0 auto;
     color: black;
     padding-bottom: 10px;
