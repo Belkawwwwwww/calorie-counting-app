@@ -53,9 +53,9 @@ export const Circle1 = styled.div<{ $isOverkill?: boolean }>`
 `;
 
 export const Text = styled.text`
-    font-size: 11px;
+    font-size: 13px;
     text-anchor: middle;
-    alignment-baseline: middle;
+    alignment-baseline: before-edge;
 `;
 
 export const Significance = styled.div<{ $isOverkill?: boolean }>`

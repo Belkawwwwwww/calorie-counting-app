@@ -5,8 +5,10 @@ export const MealTypeSchema = z.enum(['breakfast', 'lunch', 'dinner']);
 
 export const WeightSchema = z.object({
     weight: z
-    .number({ invalid_type_error: 'Вес должен быть числом' })
-    .min(1, { message: 'Вес должен быть больше 0' }),
+        .number({ invalid_type_error: 'Вес должен быть числом' })
+        .min(1, { message: 'Вес должен быть больше 0' })
+        .max(400, { message: 'Вес не должен превышать 400 г' }),
+
 })
 export const FoodItemSchema = z.object({
     weight: z

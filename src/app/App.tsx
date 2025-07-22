@@ -1,7 +1,6 @@
 import { Navbar } from '@/d_widgets/navbar_main';
 import { MemoizedLoader } from '@/e_features/pending/ui';
 import { ErrorProvider } from '@/g_shared/lib/context';
-import { RouteEnum } from '@/g_shared/model';
 import type { AppProps } from 'next/app';
 import { Slide, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

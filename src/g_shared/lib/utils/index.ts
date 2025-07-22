@@ -10,3 +10,4 @@ export { mealsTranslation } from './translation';
 export { typeOfMealTranslation } from './translation';
 export { mealTypeOptions } from './mealTypeOptions';
 export { menu } from './menuDate';
+export {calculateCalories} from './calculateCalories'

@@ -15,14 +15,15 @@ import { FoodBlocks } from "../../../components/block_food";
 import { selectAddedItems } from "../../../model/selector";
 import { Props } from "../type";
 import { FetchIndicator } from "@/g_shared/ui/fetch_indicator";
+import { useGetBzu } from "@/e_features/bzu/hooks";
 
 export const FoodBlockModal: FC<Props> = (props) => {
-    const { formattedDate } = useMealDataContext();
+    const { formattedDate, refetch } = useMealDataContext();
+    const { refetch: refetchBzu } = useGetBzu(formattedDate);
     const addedItems = useAppSelector(selectAddedItems);
     const { setError, clearError } = useError();
     const { createOrUpdateMeal, isLoading } = useCreateOrUpdateMeal();
     const dispatch = useAppDispatch();
-    const { refetch } = useMealDataContext();
 
 
     const handleSubmit = async () => {
@@ -51,6 +52,7 @@ export const FoodBlockModal: FC<Props> = (props) => {
                     autoClose: 3000,
                 });
                 refetch();
+                refetchBzu()
                 dispatch(clearAddedItemsThunk());
             } catch (error) {
                 setError('createOrUpdateMeal', 'Произошла ошибка при создании');

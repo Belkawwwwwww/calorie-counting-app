@@ -25,7 +25,6 @@ export const PowerPanel = () => {
 		: [];
 	const { totalProtein, totalFat, totalCarbs } = getTotalNutrients(meals);
 	const roundValue = (value: number | undefined) => Math.round(value || 0);
-
 	const norms = {
 		fat: bzuData?.data.fat ?? 0,
 		protein: bzuData?.data.protein ?? 0,

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const ProductList = styled.div`
     padding: 10px 0px 10px 10px;
     border-bottom: 1px solid var(--color-text3);
-    border-radius: 4px;
     margin-bottom: 5px;
     display: flex;
     justify-content: space-between;

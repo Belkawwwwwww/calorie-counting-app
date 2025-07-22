@@ -1,6 +1,6 @@
 import { useGetBzuQuery } from '../api/bzuApi';
 
 export const useGetBzu = (date: string) => {
-    const { data, isLoading } = useGetBzuQuery(date);
-    return { data, isLoading };
+    const { data, isLoading, refetch } = useGetBzuQuery(date);
+    return { data, isLoading , refetch};
 };

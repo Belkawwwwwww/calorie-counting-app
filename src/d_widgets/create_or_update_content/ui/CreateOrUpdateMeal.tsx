@@ -33,7 +33,8 @@ export const CreateOrUpdateMeal: FC<Props> = (props) => {
     const handleItemAdded = (item: FoodOrProduct, weight: number) => {
         const addedItem: AddedItem = {
             id: item.id,
-            type: (item as any).category_id !== undefined ? 'product' : 'food', item: item,
+            type: (item as any).category_id !== undefined ? 'product' : 'food',
+            item: item,
             weight: weight,
         };
         dispatch(addItemThunk(addedItem));

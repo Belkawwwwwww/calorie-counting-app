@@ -12,6 +12,7 @@ export const LoginPage = () => {
                 <LoadingIndicator />
             ) : (
                 <UIFormLayout title="Авторизация" form={<LoginForm />} />
-            )}        </Layout>
+            )}
+        </Layout>
     );
 };
