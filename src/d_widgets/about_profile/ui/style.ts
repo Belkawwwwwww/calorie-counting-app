@@ -6,10 +6,10 @@ export const ContainerUsername = styled.div`
     margin-bottom: 40px;
     margin-top: 40px;
     @media (max-width: 768px) {
-        margin-top: 80px;
+        /* margin-top: 80px; */
     }
     @media (max-width: 480px) {
-        margin-top: 46px;
+        /* margin-top: 100px; */
         margin-bottom: 7px;
     }
 `;

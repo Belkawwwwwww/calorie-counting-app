@@ -6,6 +6,12 @@ export const Container = styled.div`
     justify-content: center;
     position: relative;
     width: 400px;
+    @media (max-width: 768px) {
+        width: auto;
+    }
+    @media (max-width: 480px) {
+        width: auto;
+    }
 `;
 export const Btn = styled.div`
     margin-bottom: 10px;

@@ -3,12 +3,24 @@ import styled from 'styled-components';
 export const StyledSVG = styled.svg`
     width: 165px; 
     height: 150px;
+    @media (max-width: 768px) {
+        position: static;
+    }
+
+    @media (max-width: 480px) {
+        position: static;
+    }
+    @media (max-width: 320px) {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        margin-top: -220px;
+    }
 `;
 export const Circle = styled.circle`
     fill: transparent;
     stroke-width: 5;
     stroke: rgba(255, 255, 255, 0.5);
-    /* stroke: var(--color-text2); */
 `
 export const ProgressCircle = styled.circle<{ $fillPercent: number; $isOverkill: boolean; radius: number }>`
   fill: transparent;
@@ -33,22 +45,12 @@ export const CaloriesText = styled.text`
   text-anchor: middle;
   alignment-baseline: middle;
   font-weight: bold;
-`;
-export const Circle1 = styled.div<{ $isOverkill?: boolean }>`
-    border: ${({ $isOverkill }) => ($isOverkill ? '#b56d5b' : 'var(--color-text2)')} solid
-        5px;
-    border-radius: 50%;
-    padding: 13px 20px;
-    text-align: center;
-    width: 125px;
-    height: 125px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+    @media (max-width: 768px) {
+        /* font-size: 35px; */
+    }
+
     @media (max-width: 480px) {
-        width: 100px;
-        height: 100px;
+        font-size: 35px;
     }
 `;
 
@@ -56,6 +58,13 @@ export const Text = styled.text`
     font-size: 13px;
     text-anchor: middle;
     alignment-baseline: before-edge;
+    @media (max-width: 768px) {
+
+    }
+
+    @media (max-width: 480px) {
+        font-size: 15px;
+    }
 `;
 
 export const Significance = styled.div<{ $isOverkill?: boolean }>`

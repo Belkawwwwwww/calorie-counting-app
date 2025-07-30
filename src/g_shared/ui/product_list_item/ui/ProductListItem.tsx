@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CategoryName, Delete, ProductList, RightBox } from "./style";
+import { CategoryName, Delete, Name, ProductList, RightBox } from "./style";
 import { Props } from "../type";
 
 
@@ -7,7 +7,7 @@ export const ProductListItem: FC<Props> = (props) => {
     return (
         <ProductList>
             <div>
-                <div>{props.name}</div>
+                <Name>{props.name}</Name>
                 <CategoryName>{props.weight} г</CategoryName>
             </div>
             <RightBox>

@@ -21,16 +21,19 @@ export const FirstBlock = styled.div`
     margin-top: 30px;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-
+    flex-wrap: wrap;    
+    justify-content: center;
+    position: relative;
     @media (max-width: 480px) {
-        padding-top: 20px;
-
+        margin-top: 20px;
+        flex-wrap: nowrap;
     }
     @media (max-width: 320px) {
-        padding-top: 25px;
+        margin-top: 180px;
         flex-wrap: nowrap;
-        width: 217px;
+        /* flex-direction: column; */
+        align-items: center;
+        /* width: 217px; */
     }
 `;
 export const Calories = styled.div`
@@ -40,7 +43,7 @@ export const Calories = styled.div`
     text-align: center;
     flex-direction: column;
     justify-content: center;
-    @media (max-width: 320px) {
+    @media (max-width: 780px) {
         padding-left: 15px;
     }
 `;
@@ -58,11 +61,12 @@ export const BZU = styled.div`
         padding-top: 10px;
         flex-direction: row;
         justify-content: center;
-        
+        /* flex-wrap: nowrap; */
     }
     @media (max-width: 320px) {
         padding-top: 10px;
         justify-content: center;
+        flex-wrap: wrap;
     }
 `;
 
@@ -91,13 +95,13 @@ export const Cel = styled.div`
 export const PowerPanelContainer = styled.div`
   display: flex;
   align-items: center;
-  position: relative; /* Для позиционирования изображения */
+  position: relative; 
   width: 100%;
   /* max-width: 700px;  */
   margin: 0 auto;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    align-items: center; /* Центрируем по вертикали в мобильной версии */
+    align-items: center; 
   }
 `;

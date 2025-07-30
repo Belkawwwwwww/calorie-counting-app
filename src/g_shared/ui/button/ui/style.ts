@@ -53,6 +53,6 @@ export const StyledButton = styled.button<Props>`
     }
     @media (max-width: 320px) {
         width: 100%;
-        margin-right: 25px;
+        /* margin-right: 25px; */
     }
 `;

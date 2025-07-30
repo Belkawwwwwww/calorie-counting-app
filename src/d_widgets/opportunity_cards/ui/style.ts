@@ -33,30 +33,6 @@ export const Counter = styled.div`
         padding-right: 0px;
     }
 `;
-export const ImageContainer = styled.div`
-    width: 200px;
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-    background-color: var(--color-text2);
-
-    @media (max-width: 768px) {
-        /* width: 727px; */
-        /* height: auto; */
-    }
-     /* img {
-        width: 100%;
-        height: 100%;
-    } */
-    @media (max-width: 480px) {
-        /* width: 100%; */
-        /* height: auto; */
-    }
-    img {
-        width: 100%;
-        height: 100%;
-    }
-`;
 export const H1 = styled.h1`
     font-size: 16px;
     margin-top: 25px;

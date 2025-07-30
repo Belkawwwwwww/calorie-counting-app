@@ -54,11 +54,12 @@ export const ContainerImage = styled.div`
     @media (max-width: 768px) {
     }
     @media (max-width: 480px) {
+        /* margin-top: 20px; */
         padding: 5px;
         text-align: center;
         justify-content: center;
         position: absolute;
         left: -61px;
-        top: -2px;
+        top: 230px;
     }
 `;

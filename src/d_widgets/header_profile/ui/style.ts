@@ -21,13 +21,15 @@ export const PhotoWrapper = styled.div`
     align-items: center;
     border: 1px solid var(--color-text4);
     border-radius: 50%;
+    padding-left: 5px;
     @media (max-width: 768px) {
         width: 140px;
         height: 140px;
     }
     @media (max-width: 480px) {
-        width: 80px;
-        height: 80px;
+        width: 75px;
+        height: 70px;
+        margin-right: 7px;
     }
 `;
 export const Photo = styled.div`
@@ -35,8 +37,8 @@ export const Photo = styled.div`
         width: 40px;
         height: 40px;
         img{
-        width: 42px;
-        height: 42px;
+        width: 35px;
+        height: 35px;
     }
     }
    

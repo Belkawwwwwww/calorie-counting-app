@@ -18,6 +18,12 @@ export const ProgressBarContainer = styled.div`
     height: 5px;
     margin-top: 5px;
     margin-bottom: 5px;
+    @media (max-width: 480px) {
+        width: 100px;
+    }
+    @media (max-width: 320px) {
+        width: 80px;
+    }
 `;
 export const ProgressBarFill = styled.div`
     height: 100%;

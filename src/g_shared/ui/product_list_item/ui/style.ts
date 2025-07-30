@@ -12,6 +12,10 @@ export const CategoryName = styled.div`
 `
 export const RightBox = styled.div`
     display: flex;
+    @media (max-width: 480px) {
+        font-size: 12px;
+    }
+    
 `
 export const Delete = styled.div`
     margin-left: 10px;
@@ -33,4 +37,14 @@ export const Void = styled.div`
     height: 170px;
     margin: auto;
     color: var(--color-text1)
+`
+export const Name = styled.div`
+    @media (max-width: 780px) {
+        width: 340px;
+    }
+    @media (max-width: 480px) {
+        font-size: 12px;
+        width: 210px;
+    }
+    
 `
